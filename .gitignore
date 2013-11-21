@@ -213,3 +213,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/JavaApplication8/nbproject/private/
+/Comparacion/nbproject/private/
+/Ejercicios/nbproject/private/

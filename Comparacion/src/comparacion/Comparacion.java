@@ -15,33 +15,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package suma;
-
+package comparacion;
 
 import java.util.Scanner;
+
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Suma {
+public class Comparacion {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     Scanner entrada = new Scanner(System.in);
-     
-     int numero1, numero2, suma;
-     
-        System.out.print("Escriba el primer numero: ");
+        Scanner entrada = new Scanner(System.in);
+        int numero1, numero2;
+
+        System.out.print("Escribe el primer entero: ");
         numero1 = entrada.nextInt();
-        System.out.print("Escriba el segundo numero: ");
+        System.out.print("Escribe el segundo entero: ");
         numero2 = entrada.nextInt();
-        suma = numero1 + numero2;
-        System.out.printf("La suma es %d\n", suma);
-     
-     
-    }
-    
+        
+        if (numero1 > numero2) 
+        {
+            System.out.printf("%d > %d\n", numero1, numero2);
+        }
+        else 
+            if (numero1 < numero2)
+            {
+                System.out.printf("%d < %d\n", numero1, numero2);
+            }
+            else
+            {
+                System.out.printf("%d = %d\n", numero1, numero2);
+            }
+        }
 }
