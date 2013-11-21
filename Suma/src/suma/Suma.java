@@ -30,7 +30,16 @@ public class Suma {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+     Scanner entrada = new Scanner(System.in);
+     
+     int numero1, numero2, suma;
+     
+        System.out.print("Escriba el primer numero: ");
+        numero1 = entrada.nextInt();
+        System.out.print("Escriba el segundo numero: ");
+        numero2 = entrada.nextInt();
+     
+     
     }
     
 }
