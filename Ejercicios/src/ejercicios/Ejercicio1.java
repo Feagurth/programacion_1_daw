@@ -40,9 +40,7 @@ public class Ejercicio1
         valor1 = entrada.nextInt();
         System.out.print("Introduzca el valor2: ");
         valor2 = entrada.nextInt();
-       
-        resto = 0;        
-        
+                
         while (valor1 % valor2 != 0) 
         {            
             resto = valor1 % valor2;
