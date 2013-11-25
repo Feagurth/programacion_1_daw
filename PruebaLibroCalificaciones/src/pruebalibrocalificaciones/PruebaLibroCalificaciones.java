@@ -20,7 +20,7 @@ package pruebalibrocalificaciones;
 import java.util.Scanner;
 
 /**
- *
+ * Clase para probar LibroCalificacioes
  * @author Luis Cabrerizo Gómez
  */
 public class PruebaLibroCalificaciones {

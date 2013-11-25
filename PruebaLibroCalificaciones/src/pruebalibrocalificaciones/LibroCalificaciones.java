@@ -23,6 +23,19 @@ package pruebalibrocalificaciones;
  */
 public class LibroCalificaciones 
 {
+    private String nombreCruso;
+    
+    public void establecerNombreCurso(String nombre)
+    {
+        nombreCruso = nombre;
+    }
+
+    public String obtenerNombreCurso()
+    {
+        return nombreCruso;
+    }
+    
+    
     public void mensajeDeSalida(String Curso)
     {
         System.out.println("Bienvenido al libro de calificaciones para " + Curso);
