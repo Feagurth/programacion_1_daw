@@ -15,35 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ejercicios;
-
-import java.util.Scanner;
+package pruebalibrocalificaciones;
 
 /**
- * Escribir un algoritmo para determinar el máximo común divisor usando el 
- * algoritmo de Euclides
+ *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio1 
+public class LibroCalificaciones 
 {
-    public void ejercicio1()
+    public void mensajeDeSalida(String Curso)
     {
-        int valor1, valor2, resto;
-        
-        Scanner entrada = new Scanner(System.in);
-        
-        System.out.print("Introduzca el valor1: ");
-        valor1 = entrada.nextInt();
-        System.out.print("Introduzca el valor2: ");
-        valor2 = entrada.nextInt();
-       
-        while (valor1 % valor2 != 0) 
-        {            
-            resto = valor1 % valor2;
-            valor1 = valor2;
-            valor2 = resto;
-        }
-        
-        System.out.printf("El maximo común divisor es: %d", valor1);
-     }
+        System.out.println("Bienvenido al libro de calificaciones para " + Curso);
+    }
+    
 }

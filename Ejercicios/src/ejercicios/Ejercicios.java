@@ -27,7 +27,10 @@ public class Ejercicios {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Ejercicio1.ejercicio1();
+        // TODO code application logic here
+        Ejercicio4 ej = new Ejercicio4();
+        
+        ej.ejercicio4();
     }
     
 }

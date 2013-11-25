@@ -17,33 +17,21 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
- * Escribir un algoritmo para determinar el máximo común divisor usando el 
- * algoritmo de Euclides
+ * Diseñar un algoritmo que imprima y sume la serie de 
+ * números 3, 6, 9, 12, …, 99
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio1 
+public class Ejercicio3 
 {
-    public void ejercicio1()
+    public void ejercicio3()
     {
-        int valor1, valor2, resto;
+        int numero = 3;
         
-        Scanner entrada = new Scanner(System.in);
-        
-        System.out.print("Introduzca el valor1: ");
-        valor1 = entrada.nextInt();
-        System.out.print("Introduzca el valor2: ");
-        valor2 = entrada.nextInt();
-       
-        while (valor1 % valor2 != 0) 
+        while (numero <=99) 
         {            
-            resto = valor1 % valor2;
-            valor1 = valor2;
-            valor2 = resto;
-        }
-        
-        System.out.printf("El maximo común divisor es: %d", valor1);
-     }
+            System.out.println(numero);
+            numero = numero +3;
+        }       
+    }
 }
