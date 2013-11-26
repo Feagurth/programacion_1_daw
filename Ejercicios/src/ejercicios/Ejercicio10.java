@@ -17,20 +17,28 @@
 
 package ejercicios;
 
+import java.util.Scanner;
+
 /**
- *
+ * Diseñar un programa que lea el peso de un hombre en libras y nos devuelva su peso 
+ * en kilogramos y gramos (Nota: una libra equivale a 0,453592 kilogramos)
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Ejercicio10 ej = new Ejercicio10();
+public class Ejercicio10 {
+    
+    public void ejercicio()
+    {
+        final double LIBRA = 0.453592;
+    
+        double peso;
+        Scanner entrada = new Scanner(System.in);
         
-        ej.ejercicio();
+        System.out.print("Introduzca el peso en libras: ");
+        peso = entrada.nextDouble();
+        
+        peso = peso * LIBRA;
+        System.out.println("El peso en kgs es: " + peso);
+        System.out.println("El peso en gramos es: " + peso * 1000);        
     }
     
 }

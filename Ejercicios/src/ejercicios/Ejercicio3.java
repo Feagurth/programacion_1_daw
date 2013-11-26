@@ -24,7 +24,7 @@ package ejercicios;
  */
 public class Ejercicio3 
 {
-    public void ejercicio3()
+    public void ejercicio()
     {
         int numero = 3;
         

@@ -31,41 +31,41 @@ import java.util.Scanner;
  */
 public class Ejercicio5 
 {
-    public void ejercicio5()
+    public void ejercicio()
     {
         int RECORRIDO = 1500;
         String nombre;
         int minutos, segundos;
-        float media;
-        Scanner entrada = new Scanner(System.in);
+        double media;
+        Scanner entrada;
         
+        entrada = new Scanner(System.in);
         System.out.print("Introduzca el nombre del corredor: ");
         nombre = entrada.nextLine();
-        System.out.print("Introduzca la cantidad de minutPacoos para el corredor: ");
+        System.out.print("Introduzca la cantidad de minutos para el corredor: ");
         minutos = entrada.nextInt();
         System.out.print("Introduzca la cantidad de segundos para el corredor: ");
         segundos = entrada.nextInt();
         
-        while (segundos != 0 && minutos != 0) 
+        while (segundos != 0 || minutos != 0) 
         {            
             System.out.println(nombre);
             System.out.println(minutos);
             System.out.println(segundos);
             
             segundos = segundos + (minutos * 60);
-            media = RECORRIDO / segundos;
+            media = (RECORRIDO / (double)segundos);
             
-            System.out.println(media);
+            System.out.println("Su media es de : " + media);
+            
+            entrada = new Scanner(System.in);
             
             System.out.print("Introduzca el nombre del corredor: ");
             nombre = entrada.nextLine();
             System.out.print("Introduzca la cantidad de minutos para el corredor: ");
-            minutos = entrada.nextInt();
+            minutos = (int)entrada.nextInt();
             System.out.print("Introduzca la cantidad de segundos para el corredor: ");
-            segundos = entrada.nextInt();
+            segundos = (int)entrada.nextInt();
         }
-        
-    
     }
-    
 }

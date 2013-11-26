@@ -28,7 +28,7 @@ import java.util.Scanner;
  */
 public class Ejercicio2 
 {
-    public void ejercicio2()
+    public void ejercicio()
     {
         int contador = 0;
         int numero = -1;

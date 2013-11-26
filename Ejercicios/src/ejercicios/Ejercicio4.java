@@ -25,7 +25,7 @@ import java.util.Scanner;
  */
 public class Ejercicio4 
 {
-    public void ejercicio4()
+    public void ejercicio()
     {
         int numero1, numero2, numero3, numero4;
         Scanner entrada = new Scanner(System.in);

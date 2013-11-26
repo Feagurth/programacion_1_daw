@@ -20,30 +20,29 @@ package ejercicios;
 import java.util.Scanner;
 
 /**
- * Escribir un algoritmo para determinar el máximo común divisor usando el 
- * algoritmo de Euclides
+ * Diseñar un algoritmo que lea cuatro variables y calcule e imprima su 
+ * producto, su suma y su media aritmética
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio1 
-{
+public class Ejercicio9 {
+    
     public void ejercicio()
     {
-        int valor1, valor2, resto;
-        
+        int a, b, c, d;
         Scanner entrada = new Scanner(System.in);
         
-        System.out.print("Introduzca el valor1: ");
-        valor1 = entrada.nextInt();
-        System.out.print("Introduzca el valor2: ");
-        valor2 = entrada.nextInt();
-       
-        while (valor1 % valor2 != 0) 
-        {            
-            resto = valor1 % valor2;
-            valor1 = valor2;
-            valor2 = resto;
-        }
+        System.out.print("Introduzca el valor para a: ");
+        a = entrada.nextInt();
+        System.out.print("Introduzca el valor para b: ");
+        b = entrada.nextInt();
+        System.out.print("Introduzca el valor para c: ");
+        c = entrada.nextInt();
+        System.out.print("Introduzca el valor para d: ");
+        d = entrada.nextInt();
         
-        System.out.printf("El maximo común divisor es: %d", valor1);
-     }
+        System.out.println("El producto de las variables es: " + (a * b * c * d));
+        System.out.println("La suma de las variables es: " + (a + b + c + d));
+        System.out.println("Su media arimética es: " + ((a + b + c + d)/(float)4));
+    
+    }
 }

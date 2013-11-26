@@ -17,20 +17,36 @@
 
 package ejercicios;
 
-/**
- *
+import java.util.Scanner;
+
+/** 
+ * Diseñar un algoritmo para determinar si un número n es primo. 
+ * (Un número primo sólo es divisible por el mismo y por la unidad).
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Ejercicio10 ej = new Ejercicio10();
+public class Ejercicio6 {
+    
+    public void ejercicio()
+    {
+        int numero, contador = 2;
+        Scanner entrada = new Scanner(System.in);
         
-        ej.ejercicio();
+        System.out.print("Introduzca un número para saber si es primo: ");
+        numero = entrada.nextInt();
+        
+        while((numero % contador) != 0) 
+        {            
+            contador++;
+        }
+        
+        if (contador < numero) 
+        {
+            System.out.println(numero + " no es primo");
+        }
+        else
+        {
+            System.out.println(numero + " es primo");
+        }        
     }
     
 }

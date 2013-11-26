@@ -17,20 +17,28 @@
 
 package ejercicios;
 
+import java.util.Scanner;
+
 /**
- *
+ * Escribir un algoritmo que lea un valor entero, lo doble, se multiplique 
+ * por 25 y  * visualice el resultado
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Ejercicio10 ej = new Ejercicio10();
+public class Ejercicio8 {
+    
+    public void ejercicio()
+    {
+        int numero;
+        Scanner entrada = new Scanner(System.in);
         
-        ej.ejercicio();
+        System.out.print("Introduce un número: ");
+        numero = entrada.nextInt();
+        
+        System.out.println("El resultado de doblar el número " + numero +
+                " y multiplicarlo por 25 es: " + numero * 50);
+        
+        
+    
     }
     
 }
