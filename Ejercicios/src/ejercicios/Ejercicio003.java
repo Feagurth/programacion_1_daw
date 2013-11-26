@@ -22,7 +22,7 @@ package ejercicios;
  * números 3, 6, 9, 12, …, 99
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio3 
+public class Ejercicio003 
 {
     public void ejercicio()
     {

@@ -23,7 +23,7 @@ import java.util.Scanner;
  * Escribir un algoritmo que lea cuatro números y, a continuación, escriba el mayor de los cuatro.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio4 
+public class Ejercicio004 
 {
     public void ejercicio()
     {

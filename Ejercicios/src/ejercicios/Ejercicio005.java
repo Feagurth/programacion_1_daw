@@ -29,7 +29,7 @@ import java.util.Scanner;
  * corredor.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio5 
+public class Ejercicio005 
 {
     public void ejercicio()
     {

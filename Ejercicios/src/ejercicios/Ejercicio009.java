@@ -20,25 +20,29 @@ package ejercicios;
 import java.util.Scanner;
 
 /**
- * Diseñar un programa que lea el peso de un hombre en libras y nos devuelva su peso 
- * en kilogramos y gramos (Nota: una libra equivale a 0,453592 kilogramos)
+ * Diseñar un algoritmo que lea cuatro variables y calcule e imprima su 
+ * producto, su suma y su media aritmética
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio10 {
+public class Ejercicio009 {
     
     public void ejercicio()
     {
-        final double LIBRA = 0.453592;
-    
-        double peso;
+        int a, b, c, d;
         Scanner entrada = new Scanner(System.in);
         
-        System.out.print("Introduzca el peso en libras: ");
-        peso = entrada.nextDouble();
+        System.out.print("Introduzca el valor para a: ");
+        a = entrada.nextInt();
+        System.out.print("Introduzca el valor para b: ");
+        b = entrada.nextInt();
+        System.out.print("Introduzca el valor para c: ");
+        c = entrada.nextInt();
+        System.out.print("Introduzca el valor para d: ");
+        d = entrada.nextInt();
         
-        peso = peso * LIBRA;
-        System.out.println("El peso en kgs es: " + peso);
-        System.out.println("El peso en gramos es: " + peso * 1000);        
-    }
+        System.out.println("El producto de las variables es: " + (a * b * c * d));
+        System.out.println("La suma de las variables es: " + (a + b + c + d));
+        System.out.println("Su media arimética es: " + ((a + b + c + d)/(float)4));
     
+    }
 }

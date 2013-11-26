@@ -20,30 +20,24 @@ package ejercicios;
 import java.util.Scanner;
 
 /**
- * Escribir un algoritmo para determinar el máximo común divisor usando el 
- * algoritmo de Euclides
+ * Escribir un algoritmo que calcule la superficie de un triángulo en función 
+ * de la base y la altura.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio1 
-{
+public class Ejercicio007 {
+    
     public void ejercicio()
     {
-        int valor1, valor2, resto;
-        
+        double base, altura;
         Scanner entrada = new Scanner(System.in);
         
-        System.out.print("Introduzca el valor1: ");
-        valor1 = entrada.nextInt();
-        System.out.print("Introduzca el valor2: ");
-        valor2 = entrada.nextInt();
-       
-        while (valor1 % valor2 != 0) 
-        {            
-            resto = valor1 % valor2;
-            valor1 = valor2;
-            valor2 = resto;
-        }
+        System.out.print("Introduzca la base del triangulo: ");
+        base = entrada.nextDouble();
+        System.out.print("Introduzca la altura del triangulo: ");
+        altura = entrada.nextDouble();
         
-        System.out.printf("El maximo común divisor es: %d", valor1);
-     }
+        System.out.println("La superficie es: " + ((base * altura)/2));
+        
+    }
+    
 }

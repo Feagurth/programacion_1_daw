@@ -20,26 +20,30 @@ package ejercicios;
 import java.util.Scanner;
 
 /**
- * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0. 
- * El algoritmo debe terminar con un valor cero que no se debe imprimir. 
- * Finalmente se desea obtener la cantidad de valores leídos distintos de 0
- * 
+ * Escribir un algoritmo para determinar el máximo común divisor usando el 
+ * algoritmo de Euclides
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio2 
+public class Ejercicio001 
 {
     public void ejercicio()
     {
-        int contador = 0;
-        int numero = -1;
+        int valor1, valor2, resto;
+        
         Scanner entrada = new Scanner(System.in);
-    
-        while (numero != 0) 
+        
+        System.out.print("Introduzca el valor1: ");
+        valor1 = entrada.nextInt();
+        System.out.print("Introduzca el valor2: ");
+        valor2 = entrada.nextInt();
+       
+        while (valor1 % valor2 != 0) 
         {            
-            numero = entrada.nextInt();
-            System.out.println(numero);
-            contador++;
+            resto = valor1 % valor2;
+            valor1 = valor2;
+            valor2 = resto;
         }
-        System.out.println(contador);        
-    }
+        
+        System.out.printf("El maximo común divisor es: %d", valor1);
+     }
 }

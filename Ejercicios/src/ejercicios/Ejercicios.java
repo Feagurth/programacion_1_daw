@@ -28,7 +28,7 @@ public class Ejercicios {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Ejercicio10 ej = new Ejercicio10();
+        Ejercicio010 ej = new Ejercicio010();
         
         ej.ejercicio();
     }

@@ -19,26 +19,34 @@ package ejercicios;
 
 import java.util.Scanner;
 
-/**
- * Escribir un algoritmo que lea un valor entero, lo doble, se multiplique 
- * por 25 y  * visualice el resultado
+/** 
+ * Diseñar un algoritmo para determinar si un número n es primo. 
+ * (Un número primo sólo es divisible por el mismo y por la unidad).
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio8 {
+public class Ejercicio006 {
     
     public void ejercicio()
     {
-        int numero;
+        int numero, contador = 2;
         Scanner entrada = new Scanner(System.in);
         
-        System.out.print("Introduce un número: ");
+        System.out.print("Introduzca un número para saber si es primo: ");
         numero = entrada.nextInt();
         
-        System.out.println("El resultado de doblar el número " + numero +
-                " y multiplicarlo por 25 es: " + numero * 50);
+        while((numero % contador) != 0) 
+        {            
+            contador++;
+        }
         
-        
-    
+        if (contador < numero) 
+        {
+            System.out.println(numero + " no es primo");
+        }
+        else
+        {
+            System.out.println(numero + " es primo");
+        }        
     }
     
 }

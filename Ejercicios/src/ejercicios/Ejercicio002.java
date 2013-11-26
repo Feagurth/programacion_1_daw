@@ -20,24 +20,26 @@ package ejercicios;
 import java.util.Scanner;
 
 /**
- * Escribir un algoritmo que calcule la superficie de un triángulo en función 
- * de la base y la altura.
+ * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0. 
+ * El algoritmo debe terminar con un valor cero que no se debe imprimir. 
+ * Finalmente se desea obtener la cantidad de valores leídos distintos de 0
+ * 
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio7 {
-    
+public class Ejercicio002 
+{
     public void ejercicio()
     {
-        double base, altura;
+        int contador = 0;
+        int numero = -1;
         Scanner entrada = new Scanner(System.in);
-        
-        System.out.print("Introduzca la base del triangulo: ");
-        base = entrada.nextDouble();
-        System.out.print("Introduzca la altura del triangulo: ");
-        altura = entrada.nextDouble();
-        
-        System.out.println("La superficie es: " + ((base * altura)/2));
-        
-    }
     
+        while (numero != 0) 
+        {            
+            numero = entrada.nextInt();
+            System.out.println(numero);
+            contador++;
+        }
+        System.out.println(contador);        
+    }
 }
