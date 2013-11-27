@@ -15,34 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pruebalibrocalificaciones;
+package ejercicios;
 
 /**
- *
+ * Realiza un algoritmo que calcule la suma de los enteros entre 1 y 10, 
+ * es decir 1+2+3+ … +10
  * @author Luis Cabrerizo Gómez
  */
-public class LibroCalificaciones 
-{
-    private String nombreCruso;
-
-    public LibroCalificaciones(String nombre)
-    {
-        this.nombreCruso = nombre;
-    }
-    
-    public void establecerNombreCurso(String nombre)
-    {
-        nombreCruso = nombre;
-    }
-
-    public String obtenerNombreCurso()
-    {
-        return nombreCruso;
-    }
-    
-    public void mensajeDeSalida(String Curso)
-    {
-        System.out.printf("Bienvenido al libro de calificaciones para\n%s!\n", 
-                obtenerNombreCurso());
-    }    
+public class Ejercicio012 {
+   public void ejercicio()
+   {
+       int numero;
+       
+       numero = 0;
+       
+       for (int control = 0; control < 10; control++) {
+           numero = numero + control;
+       }
+       
+       System.out.println("La suma de los 10 primeros enteros es: " + numero);
+   }
 }

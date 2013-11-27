@@ -17,8 +17,6 @@
 
 package pruebalibrocalificaciones;
 
-import java.util.Scanner;
-
 /**
  * Clase para probar LibroCalificacioes
  * @author Luis Cabrerizo Gómez
@@ -29,14 +27,18 @@ public class PruebaLibroCalificaciones {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LibroCalificaciones miLibroCalificaciones = new LibroCalificaciones();
-        Scanner entrada = new Scanner(System.in);
+        LibroCalificaciones miLibroCalificaciones1 = new LibroCalificaciones(
+                            "CS01 Introducción a la programación en Java");
         
-        System.out.print("Introduzca el nombre del curso: ");
-        String nombreCurso = entrada.nextLine();
+        LibroCalificaciones miLibroCalificaciones2 = new LibroCalificaciones(
+                            "CS02 Estructuras de datos en Java");
+
+
+        System.out.printf("El nombre del curso de libro de calificaciones1"
+                + "es : %s\n", miLibroCalificaciones1.obtenerNombreCurso());
         
-        miLibroCalificaciones.mensajeDeSalida(nombreCurso);
-        
+        System.out.printf("El nombre del curso de libro de calificaciones2"
+                + "es : %s\n", miLibroCalificaciones2.obtenerNombreCurso());
     }
     
 }

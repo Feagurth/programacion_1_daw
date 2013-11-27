@@ -40,6 +40,7 @@ public class Ejercicio005
         Scanner entrada;
         
         entrada = new Scanner(System.in);
+        
         System.out.print("Introduzca el nombre del corredor: ");
         nombre = entrada.nextLine();
         System.out.print("Introduzca la cantidad de minutos para el corredor: ");

@@ -15,34 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pruebalibrocalificaciones;
+package ejercicios;
 
 /**
- *
+ * Realizar un algoritmo que calcule y visualice las potencias de 2 entre 0 y 10
  * @author Luis Cabrerizo Gómez
  */
-public class LibroCalificaciones 
-{
-    private String nombreCruso;
-
-    public LibroCalificaciones(String nombre)
-    {
-        this.nombreCruso = nombre;
+public class Ejercicio013 {
+    
+    public void ejercicio(){
+        for (int i = 0; i < 11; i++) {
+            System.out.println("La potencia de dos de " + i + " es :" + 
+                    (int)Math.pow(2,i));
+        }
+        
     }
     
-    public void establecerNombreCurso(String nombre)
-    {
-        nombreCruso = nombre;
-    }
-
-    public String obtenerNombreCurso()
-    {
-        return nombreCruso;
-    }
-    
-    public void mensajeDeSalida(String Curso)
-    {
-        System.out.printf("Bienvenido al libro de calificaciones para\n%s!\n", 
-                obtenerNombreCurso());
-    }    
 }

@@ -15,34 +15,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pruebalibrocalificaciones;
+package dialogo2;
+
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class LibroCalificaciones 
-{
-    private String nombreCruso;
+public class Dialogo2 {
 
-    public LibroCalificaciones(String nombre)
-    {
-        this.nombreCruso = nombre;
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        String nombre = JOptionPane.showInputDialog("¿Cual es tu nombre?");
+        
+        String mensaje = String.format("Biencenido, %s, a la programación"
+                + " en Java!", nombre);
+        
+        JOptionPane.showMessageDialog(null, mensaje);
     }
     
-    public void establecerNombreCurso(String nombre)
-    {
-        nombreCruso = nombre;
-    }
-
-    public String obtenerNombreCurso()
-    {
-        return nombreCruso;
-    }
-    
-    public void mensajeDeSalida(String Curso)
-    {
-        System.out.printf("Bienvenido al libro de calificaciones para\n%s!\n", 
-                obtenerNombreCurso());
-    }    
 }

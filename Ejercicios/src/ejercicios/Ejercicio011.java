@@ -15,34 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pruebalibrocalificaciones;
+package ejercicios;
+
+import java.util.Scanner;
 
 /**
- *
+ * Escribir un algoritmo que calcule y escriba el cuadrado de un número.
  * @author Luis Cabrerizo Gómez
  */
-public class LibroCalificaciones 
-{
-    private String nombreCruso;
-
-    public LibroCalificaciones(String nombre)
+public class Ejercicio011 {
+    
+    public void ejercicio()
     {
-        this.nombreCruso = nombre;
+        int numero;
+        Scanner entrada = new Scanner(System.in);
+        
+        System.out.print("Introduzca un número: ");
+        numero = entrada.nextInt();
+        
+        System.out.println("El cuadrado del número es: " + numero * numero);
     }
     
-    public void establecerNombreCurso(String nombre)
-    {
-        nombreCruso = nombre;
-    }
-
-    public String obtenerNombreCurso()
-    {
-        return nombreCruso;
-    }
-    
-    public void mensajeDeSalida(String Curso)
-    {
-        System.out.printf("Bienvenido al libro de calificaciones para\n%s!\n", 
-                obtenerNombreCurso());
-    }    
 }
