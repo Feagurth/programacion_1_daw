@@ -39,6 +39,8 @@ public class PruebaLibroCalificaciones {
         
         System.out.printf("El nombre del curso de libro de calificaciones2"
                 + "es : %s\n", miLibroCalificaciones2.obtenerNombreCurso());
+        
+        miLibroCalificaciones1.CalcularPromedios();
     }
     
 }

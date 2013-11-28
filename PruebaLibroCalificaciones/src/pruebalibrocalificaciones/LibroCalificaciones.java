@@ -17,6 +17,8 @@
 
 package pruebalibrocalificaciones;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Luis Cabrerizo Gómez
@@ -45,4 +47,55 @@ public class LibroCalificaciones
         System.out.printf("Bienvenido al libro de calificaciones para\n%s!\n", 
                 obtenerNombreCurso());
     }    
+    
+    public void CalcularPromedios()
+    {
+        Scanner entrada = new Scanner(System.in);
+        
+        int total, contadorCalif, calificacion, suspensos, aprobados;
+        double promedio;
+        
+        total = 0;
+        suspensos = 0;
+        aprobados = 0;
+        contadorCalif = 1;
+        
+        
+        System.out.print("Escribe la calificación: ");
+        calificacion = entrada.nextInt();
+        
+        while (calificacion != -1) 
+        {            
+            total = total + calificacion;
+            contadorCalif++;
+
+            if(calificacion < 5)
+            {
+                suspensos++;
+            }
+            else
+            {
+                aprobados++;
+            }
+            
+            
+            System.out.print("Escribe la calificación: ");
+            calificacion = entrada.nextInt();
+        }
+
+        
+        if(contadorCalif!=0)
+        {
+            promedio = (double)total / 10;
+        
+            System.out.println("El total de las 10 calificaciones es: " + total);
+            System.out.println("El promedio de las 10 calificaciones es: " + promedio);
+            System.out.println("El número de aprobados es de: " + aprobados);
+            System.out.println("El número de suspensos es de: " + suspensos);
+        }
+    }
+
+    
+
+
 }

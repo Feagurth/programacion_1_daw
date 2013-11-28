@@ -17,20 +17,32 @@
 
 package ejercicios;
 
+import java.util.Scanner;
+
 /**
- *
+ * Leer 500 números enteros y obtener cuántos son positivos
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Ejercicio019 ej = new Ejercicio019();
+public class Ejercicio020 {
+    
+    public void ejercicio()
+    {
+        int entero, contador = 0, numPositivos = 0;
+        Scanner entrada = new Scanner(System.in);
         
-        ej.ejercicio();
+        do {
+            contador++;
+            System.out.print("Introduzca un número: ");
+            entero = entrada.nextInt();
+            
+            if(entero > 0)
+            {
+                numPositivos++;
+            }
+        } while (contador < 500);
+        
+        System.out.println("La cantidad de números positivos es: " + numPositivos);
+    
     }
     
 }
