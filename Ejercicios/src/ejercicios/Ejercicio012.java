@@ -25,14 +25,20 @@ package ejercicios;
 public class Ejercicio012 {
    public void ejercicio()
    {
-       int numero;
+       // Objeto para mensajes y recogida de datos
+       Mensajes msg = new Mensajes();
        
-       numero = 0;
+       int numero = 0;
        
+       // Iteramos y sumamos los numeros
        for (int control = 0; control < 10; control++) {
            numero = numero + control;
        }
        
-       System.out.println("La suma de los 10 primeros enteros es: " + numero);
+       // Muestra de resultados al usuario
+       msg.MostrarMensaje("La suma de los 10 primeros enteros es: " + numero, 
+               "Resultado", Mensajes.TipoMensaje.INFORMACION);
+
+       
    }
 }

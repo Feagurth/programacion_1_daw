@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Escribir un algoritmo que calcule y escriba el cuadrado de un número.
  * @author Luis Cabrerizo Gómez
@@ -27,13 +25,20 @@ public class Ejercicio011 {
     
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables
         int numero;
-        Scanner entrada = new Scanner(System.in);
+
+        // Petición de datos al usuario
+        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
         
-        System.out.print("Introduzca un número: ");
-        numero = entrada.nextInt();
-        
-        System.out.println("El cuadrado del número es: " + numero * numero);
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("El cuadrado del número es: " + numero * numero, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
+
     }
     
 }

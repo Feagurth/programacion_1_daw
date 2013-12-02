@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Ejercicio 15: Leer dos caracteres y deducir si están en orden alfabético
  * @author Luis Cabrerizo Gómez
@@ -29,41 +27,60 @@ public class Ejercicio015
     public void ejercicio()
     {
     
+        // Definición de array de las letras del abecedario
         char[] vector = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
         'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-        char letra1, letra2;
-        int control, posLetra1 = 0, posLetra2 = 0;
-        Scanner entrada = new Scanner(System.in);
         
-        System.out.print("Introduzca la primera letra: ");
-        letra1 = entrada.nextLine().charAt(0);
+        // Variables para almacenar las letras introducidas
+        char letra1, letra2;
+        
+        // Variables de control
+        int control, posLetra1 = 0, posLetra2 = 0;
+        
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Petición de datos al usuario
+        letra1 = msg.PedirDatos("Introduzca la primera letra", 
+                "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA).charAt(0);
 
-        System.out.print("Introduzca la segunda letra: ");
-        letra2 = entrada.nextLine().charAt(0);
-
+        letra2 = msg.PedirDatos("Introduzca la segunda letra", 
+                "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA).charAt(0);
         control = 0;
         
+        // Recorremos el array de las letras del abecedario y cuando encontremos
+        // una de la letras que ha introducido el usuario, guardamos su posición
         while (control <27) 
         {            
+            // Primera letra encontrada
             if(vector[control] == letra1)
             {
+                // Valor de la letra almacenado
                 posLetra1 = control;
             }
             
+            // Segunda letra encontrada
             if(vector[control] == letra2)
             {
+                // Valor de la letra almcenado
                 posLetra2 = control;
             }
             control++;
         }
         
+        // Si la posición de la primera letra es inferior al de la segunda,
+        // están ordenadas
         if(posLetra1 < posLetra2)
         {
-            System.out.println("Están ordenadas alfabeticamente");
+            msg.MostrarMensaje("Están ordenadas alfabeticamente", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            System.out.println("No están ordenadas alfabeticamente");
+            msg.MostrarMensaje("No están ordenadas alfabeticamente", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
 
         

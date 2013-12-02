@@ -26,34 +26,42 @@ public class Ejercicio017 {
     
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos        
+        Mensajes msg = new Mensajes();
+        
+        // Variables de control
         int contador, sumaPar, sumaImpar;
         
         contador = 0;
         sumaPar = 0;
         sumaImpar = 0;
         
+        // Iteramos por los 200 primeros números
         do {
             contador++;
             
+            // Si el módulo del número entre 2 es cero, es par
             if(contador % 2 == 0)
             {
+                // Se aumenta el contador de los pares
                 sumaPar++;
             }
-            else
+            else // Si no, es impar
             {
+                // Se aumenta el contador de los impares
                 sumaImpar++;
             }
             
         } while (contador != 200);
         
-        System.out.println("La suma de los pares de los 200 primeros números es: "
-                + sumaPar);
         
-        System.out.println("La suma de los impares de los 200 primeros números es: "
-                + sumaImpar);        
+        // Se muestran los resultados al usuario
+        msg.MostrarMensaje("La suma de los pares de los 200 primeros números es: "
+                + sumaPar, "Información", Mensajes.TipoMensaje.INFORMACION);
         
+        msg.MostrarMensaje("La suma de los impares de los 200 primeros números es: "
+                + sumaImpar, "Información", Mensajes.TipoMensaje.INFORMACION);
         
-    
     }
     
 }

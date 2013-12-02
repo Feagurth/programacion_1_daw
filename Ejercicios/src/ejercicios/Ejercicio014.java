@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Leer un carácter y deducir si está situado antes o después de 
  * la ‘m’ en orden alfabético
@@ -27,30 +25,45 @@ import java.util.Scanner;
 public class Ejercicio014 {
     
     public void ejercicio(){
+        
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Array que contiene las letras del abecedario de la a la m ordenadas
         char[] vector = new char[]{
             'a','b','c','d','e','f','g','h','i','j','k','l','m'
             };
+        
+        // Variables
         int control = 0;
         char letra;
         boolean encontradaLetra = false;
-        Scanner entrada = new Scanner(System.in);
         
-        System.out.print("Introduzca la letra a localizar: ");
-        letra = entrada.next().charAt(0);
+        // Petición de datos al usuario
+        letra = msg.PedirDatos("Introduzca la letra a localizar", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA).charAt(0);
+
+        // Mientras la letra no se encuentre y no se haya recorrido todo el
+        // array
         while (control <= 13 && !encontradaLetra)
         {
+            // Si se localiza la letra
             if (vector[control] == letra) 
             {
+                // Cambiamos el control de la variable centinela
                 encontradaLetra = true;
             }
         }
         
+        // Mostramos información al usuario dependiendo del resultado
         if (!encontradaLetra) {
-            System.out.printf("La letra %c va depues de la m", letra);
+            msg.MostrarMensaje("La letra " + letra + " va depues de la m", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            System.out.printf("La letra %c va antes de la m", letra);
+            msg.MostrarMensaje("La letra " + letra + " va antes de la m", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);            
         }
     }
 }

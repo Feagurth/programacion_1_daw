@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Diseñar un algoritmo que lea cuatro variables y calcule e imprima su 
  * producto, su suma y su media aritmética
@@ -28,21 +26,33 @@ public class Ejercicio009 {
     
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();        
+        
+        // Variables
         int a, b, c, d;
-        Scanner entrada = new Scanner(System.in);
+        String cadena;
+
+        // Petición de datos al usuario
+        a = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para a", "Pedir datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+  
+        b = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para b", "Pedir datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+  
+        c = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para c", "Pedir datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+  
+        d = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para d", "Pedir datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+  
+        // Creación de la cadena de resultados
+        cadena = "El producto de las variables es: " + (a * b * c * d) + "\n";
+        cadena += "La suma de las variables es: " + (a + b + c + d) + "\n";
+        cadena += "Su media arimética es: " + ((a + b + c + d)/(float)4);
         
-        System.out.print("Introduzca el valor para a: ");
-        a = entrada.nextInt();
-        System.out.print("Introduzca el valor para b: ");
-        b = entrada.nextInt();
-        System.out.print("Introduzca el valor para c: ");
-        c = entrada.nextInt();
-        System.out.print("Introduzca el valor para d: ");
-        d = entrada.nextInt();
-        
-        System.out.println("El producto de las variables es: " + (a * b * c * d));
-        System.out.println("La suma de las variables es: " + (a + b + c + d));
-        System.out.println("Su media arimética es: " + ((a + b + c + d)/(float)4));
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     
     }
 }

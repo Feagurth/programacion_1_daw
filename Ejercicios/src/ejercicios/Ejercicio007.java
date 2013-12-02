@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Escribir un algoritmo que calcule la superficie de un triángulo en función 
  * de la base y la altura.
@@ -28,15 +26,21 @@ public class Ejercicio007 {
     
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables
         double base, altura;
-        Scanner entrada = new Scanner(System.in);
+
+        // Petición de datos al usuario
+        base = Double.parseDouble(msg.PedirDatos("Introduzca la base del triangulo", 
+                "Pedir datos", Mensajes.TipoMensaje.PREGUNTA));
+        altura = Double.parseDouble(msg.PedirDatos("Introduzca la altura del triangulo", 
+                "Pedir datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        System.out.print("Introduzca la base del triangulo: ");
-        base = entrada.nextDouble();
-        System.out.print("Introduzca la altura del triangulo: ");
-        altura = entrada.nextDouble();
-        
-        System.out.println("La superficie es: " + ((base * altura)/2));
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("La superficie es: " + ((base * altura)/2), 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
         
     }
     

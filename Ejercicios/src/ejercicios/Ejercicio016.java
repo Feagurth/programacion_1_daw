@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  *  Leer un carácter y deducir si está o no comprendido entre las 
  *  letras I y M ambas inclusive
@@ -28,32 +26,47 @@ public class Ejercicio016 {
     
     public void ejercicio()
     {
-        char letra1;
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Array con las letras del alfabeto de la i a la m
         char[] vector = new char[]{'i', 'j', 'k', 'l', 'm'};
+        
+        // Variables de control
+        char letra1;        
         boolean encontrado = false;
         int control;
         
-        Scanner entrada = new Scanner(System.in);
-        
         control = 0;
         
-        System.out.print("Introduzca la primera letra: ");
-        letra1 = entrada.nextLine().charAt(control);
+        // Petición de datos al usuario
+        letra1 = msg.PedirDatos("Introduzca la primera letra", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA).charAt(control);
         
+        // Iteramos por el array para comprobar si la letra introducida está
+        // dentro de él
         while ((control <= 4) && (!encontrado)) {            
+            
+            // Letra encontrada
             if (vector[control] == letra1) {
+                
+                // Ponemos la variable de control a verdadero
                 encontrado = true;
             }
             control++;
         }
         
+        // Mostramos resultado dependiendo del valor de la variable de control
         if (encontrado) 
         {
-            System.out.println("La letra introducida esta entre i y m");
+            msg.MostrarMensaje("La letra introducida está entre i y m", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            System.out.println("La letra introducida no está entre i y m");
+            msg.MostrarMensaje("La letra introducida no está entre i y m", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
+
         }
         
     }

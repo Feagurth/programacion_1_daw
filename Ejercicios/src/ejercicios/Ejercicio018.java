@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Leer una serie de números enteros positivos distintos de 0 (el último de la 
  * serie debe ser el -99) obtener el número mayor.
@@ -28,27 +26,43 @@ public class Ejercicio018 {
     
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables de controls
         int numero, mayor = 0;
         boolean salir = false;
-        Scanner entrada = new Scanner(System.in);
+
         
+        // Iteramos mientras no se cumpla la condición de salida
         do {            
-            System.out.print("Introduzca un número (-99 para salir): ");
-            numero = entrada.nextInt();
             
+            // Petición de datos al usuario
+            numero = Integer.parseInt(msg.PedirDatos("Introduzca un número (-99 para salir)"
+                    , "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
+
+            // Si el número introducido es mayor que cero
             if (numero > 0) 
             {
+                // Si el numero introducido es mayor que el número mayor actual
+                // el número se convierte en el nuevo mayor
                 if (mayor < numero) {
                     mayor = numero;                    
                 }
             }
+            
+            // Comprobamos si el numero introducido es el de la condición de
+            // salida
             if(numero == -99)
             {
+                // De ser así cambiamos el valor del centinela
                 salir = true;
             }
         } while (!salir);
 
-        System.out.println("De los números introducidos el mayor es: " + mayor);
+        // Mostramos resultados al usuario
+        msg.MostrarMensaje("De los números introducidos el mayor es: " + mayor, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
     
     }
     

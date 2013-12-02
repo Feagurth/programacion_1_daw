@@ -26,13 +26,22 @@ public class Ejercicio019 {
    
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables
         int suma = 0;
         double producto = 1;
         boolean desbordeDouble = false;
+
         
+        // Iteramos desde el 20 al 400 de dos en dos
         for (int i = 20; i < 400; i = i + 2) {
             
+            // Sumamos el número actual a los sumados anteriormente
             suma = suma + i;
+            
+            // Multiplicamos el número actual por los multiplicados anteriormente
             producto = producto * i;
             
             // Comparación para verificar que la variable double no se desborde
@@ -42,12 +51,14 @@ public class Ejercicio019 {
                 // condicional a verdadero y mostramos un mensaje de error por 
                 // consola
                 desbordeDouble = true;
+
                 System.err.println("El valor de la multiplicación desborda la "
-                        + "variables doble en la iteración " + i );
+                        + "variable doble en la iteración " + i );
             }
         }
-   
-        System.out.println("Suma: " + suma);
-        System.out.println("Multiplicación: " + producto);
+        msg.MostrarMensaje("Suma: " + suma, "Atención", 
+                Mensajes.TipoMensaje.INFORMACION);
+        msg.MostrarMensaje("Multiplicación: " + producto, "Atención", 
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

@@ -24,11 +24,20 @@ package ejercicios;
 public class Ejercicio013 {
     
     public void ejercicio(){
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variable para concatenar los resultados
+        String resultado = "";
+        
         for (int i = 0; i < 11; i++) {
-            System.out.println("La potencia de dos de " + i + " es :" + 
-                    (int)Math.pow(2,i));
+            resultado += "La potencia de dos de " + i + " es :" + 
+                    (int)Math.pow(2,i) + "\n";
         }
         
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION);
     }
     
 }

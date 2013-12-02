@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Leer 500 números enteros y obtener cuántos son positivos
  * @author Luis Cabrerizo Gómez
@@ -27,21 +25,32 @@ public class Ejercicio020 {
     
     public void ejercicio()
     {
-        int entero, contador = 0, numPositivos = 0;
-        Scanner entrada = new Scanner(System.in);
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
         
+        // Variables
+        int entero, contador = 0, numPositivos = 0;
+
+        // Iteramos hasta que se cumpla la condición de salida
         do {
             contador++;
-            System.out.print("Introduzca un número: ");
-            entero = entrada.nextInt();
             
+            // Petición de datos al usuario
+            entero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+                    "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
+            
+            // Comprobamos si el número es maypr de cero
             if(entero > 0)
             {
+                // Aumentamos la cuenta de positivos
                 numPositivos++;
             }
         } while (contador < 500);
         
-        System.out.println("La cantidad de números positivos es: " + numPositivos);
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("La cantidad de números positivos es: " + numPositivos, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        
     
     }
     
