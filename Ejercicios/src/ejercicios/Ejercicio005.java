@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Diseñar un algoritmo para calcular la velocidad (en metros/segundo) de 
  * los corredores de una carrera de 1500m. La entrada serán las parejas 
@@ -33,40 +31,55 @@ public class Ejercicio005
 {
     public void ejercicio()
     {
+        // Variable con el valor del recorrido
         int RECORRIDO = 1500;
+
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables
         String nombre;
         int minutos, segundos;
         double media;
-        Scanner entrada;
+        String cadena;
+
+        // Petición de datos al usuario
+        nombre = msg.PedirDatos("Introduzca el nombre del corredor", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+
+        minutos = Integer.parseInt(msg.PedirDatos("Introduzca "
+                + "la cantidad de minutos para el corredor", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
+
+        segundos = Integer.parseInt(msg.PedirDatos("Introduzca la cantidad de "
+                + "segundos para el corredor: ", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
         
-        entrada = new Scanner(System.in);
         
-        System.out.print("Introduzca el nombre del corredor: ");
-        nombre = entrada.nextLine();
-        System.out.print("Introduzca la cantidad de minutos para el corredor: ");
-        minutos = entrada.nextInt();
-        System.out.print("Introduzca la cantidad de segundos para el corredor: ");
-        segundos = entrada.nextInt();
-        
-        while (segundos != 0 || minutos != 0) 
+        // Mientras que los minutos y los segundos sean distintos de cero
+        while (segundos != 0 && minutos != 0) 
         {            
-            System.out.println(nombre);
-            System.out.println(minutos);
-            System.out.println(segundos);
+            cadena = nombre + " -> " + minutos + ":" + segundos + "\n";
             
+            // Calulo de media
             segundos = segundos + (minutos * 60);
             media = (RECORRIDO / (double)segundos);
             
-            System.out.println("Su media es de : " + media);
+            cadena += "Su media es de : " + media;
             
-            entrada = new Scanner(System.in);
+            msg.MostrarMensaje(cadena, "Resultados", 
+                    Mensajes.TipoMensaje.INFORMACION);
             
-            System.out.print("Introduzca el nombre del corredor: ");
-            nombre = entrada.nextLine();
-            System.out.print("Introduzca la cantidad de minutos para el corredor: ");
-            minutos = (int)entrada.nextInt();
-            System.out.print("Introduzca la cantidad de segundos para el corredor: ");
-            segundos = (int)entrada.nextInt();
-        }
+        // Petición de datos al usuario
+        nombre = msg.PedirDatos("Introduzca el nombre del corredor", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+
+        minutos = Integer.parseInt(msg.PedirDatos("Introduzca "
+                + "la cantidad de minutos para el corredor", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
+
+        segundos = Integer.parseInt(msg.PedirDatos("Introduzca la cantidad de "
+                + "segundos para el corredor: ", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));        }
     }
 }

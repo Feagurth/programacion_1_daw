@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Escribir un algoritmo para determinar el máximo común divisor usando el 
  * algoritmo de Euclides
@@ -28,22 +26,34 @@ public class Ejercicio001
 {
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables
         int valor1, valor2, resto;
         
-        Scanner entrada = new Scanner(System.in);
+        // Petición de datos al usuario
+        valor1 = Integer.parseInt(msg.PedirDatos("Introduzca el valor1", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        System.out.print("Introduzca el valor1: ");
-        valor1 = entrada.nextInt();
-        System.out.print("Introduzca el valor2: ");
-        valor2 = entrada.nextInt();
-       
+        valor2 = Integer.parseInt(msg.PedirDatos("Introduzca el valor2", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
+        
+        // Mientras que el modulo de los dos valores sea distinto de cero
+        // seguimos iterando
         while (valor1 % valor2 != 0) 
         {            
+            // Calculamos el resto de la división de los dos números
             resto = valor1 % valor2;
+            
+            // El valor del divisor pasa a ser el del dividendo
             valor1 = valor2;
+            // El resto pasa a ser el valor divisor
             valor2 = resto;
         }
         
-        System.out.printf("El maximo común divisor es: %d", valor1);
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("El maximo común divisor es: " + valor1, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
      }
 }

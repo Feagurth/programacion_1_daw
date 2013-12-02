@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /**
  * Escribir un algoritmo que lea cuatro números y, a continuación, escriba el mayor de los cuatro.
  * @author Luis Cabrerizo Gómez
@@ -27,40 +25,50 @@ public class Ejercicio004
 {
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        // Variables
         int numero1, numero2, numero3, numero4;
-        Scanner entrada = new Scanner(System.in);
+        String cadena;
+
+        numero1 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+                + "el número 1", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+        numero2 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+                + "el número 2", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+        numero3 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+                + "el número 3", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+        numero4 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+                + "el número 4", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+
         
-        System.out.print("Introduzca un valor para el número 1: ");
-        numero1 = entrada.nextInt();
-        System.out.print("Introduzca un valor para el número 2: ");
-        numero2 = entrada.nextInt();
-        System.out.print("Introduzca un valor para el número 3: ");
-        numero3 = entrada.nextInt();
-        System.out.print("Introduzca un valor para el número 4: ");
-        numero4 = entrada.nextInt();
-        
+        // Verificación del número mayor
         if (numero1 > numero2) 
         {
             if (numero1 > numero3) 
             {
                 if(numero1 > numero4)
                 {
-                    System.out.println("El numero mayor es: " + numero1);
+                    cadena = "El numero mayor es: " + numero1;
                 }
                 else
                 {
-                    System.out.println("El numero mayor es: " + numero4);
+                    cadena = "El numero mayor es: " + numero4;
                 }
             }
             else
             {
                 if (numero3 > numero4) 
                 {
-                    System.out.println("El numero mayor es: " + numero3);
+                    cadena = "El numero mayor es: " + numero3;
                 }
                 else
                 {
-                    System.out.println("El numero mayor es: " + numero4);
+                    cadena = "El numero mayor es: " + numero4;
                 }
             }
         }
@@ -70,24 +78,28 @@ public class Ejercicio004
             {
                 if(numero2 > numero4)
                 {
-                    System.out.println("El numero mayor es: " + numero2);
+                    cadena = "El numero mayor es: " + numero2;
                 }
                 else
                 {
-                    System.out.println("El numero mayor es: " + numero4);
+                    cadena = "El numero mayor es: " + numero4;
                 }
             }
             else
             {
                 if(numero3 > numero4)
                 {
-                    System.out.println("El numero mayor es: " + numero3);
+                    cadena = "El numero mayor es: " + numero3;
                 }
                 else
                 {
-                    System.out.println("El numero mayor es: " + numero4);
+                    cadena = "El numero mayor es: " + numero4;
                 }
             }               
         }
+        
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
+        
     }
 }

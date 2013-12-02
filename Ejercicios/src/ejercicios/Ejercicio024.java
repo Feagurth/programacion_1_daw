@@ -18,37 +18,32 @@
 package ejercicios;
 
 /**
- * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0. 
- * El algoritmo debe terminar con un valor cero que no se debe imprimir. 
- * Finalmente se desea obtener la cantidad de valores leídos distintos de 0
- * 
+ * Sumar los 10 números introducidos por teclado.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio002 
-{
+public class Ejercicio024 {
+   
     public void ejercicio()
     {
         // Objeto para mensajes y recogida de datos
         Mensajes msg = new Mensajes();
         
         // Variables
-        int contador = 0;
-        int numero = -1;
-        String cadena = "";
-    
-        // Comprobamos que el número introducido es distinto de cero
-        while (numero != 0) 
-        {            
+        int numero, suma = 0, contador = 0;
+        
+        while (contador <= 10) {            
+            contador++;
+
+            // Petición de datos al usuario
             numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
             
-            cadena += numero + " ";
-            contador++;
+            // Sumamos el número introducido a la suma existente
+            suma += numero;
         }
-        cadena += "\n" + "Número de valores introducidos: " + contador;
         
-        msg.MostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
-        
-        
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("El resultado es: " + suma, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

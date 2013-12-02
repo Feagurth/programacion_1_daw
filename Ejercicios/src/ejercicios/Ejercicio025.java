@@ -18,37 +18,36 @@
 package ejercicios;
 
 /**
- * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0. 
- * El algoritmo debe terminar con un valor cero que no se debe imprimir. 
- * Finalmente se desea obtener la cantidad de valores leídos distintos de 0
- * 
+ * Calcular la media de 50 números introducidos por teclado y 
+ * visualizar su resultado.        
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio002 
-{
-    public void ejercicio()
-    {
+public class Ejercicio025 {
+    
+    public void ejercicio(){
         // Objeto para mensajes y recogida de datos
         Mensajes msg = new Mensajes();
         
         // Variables
-        int contador = 0;
-        int numero = -1;
-        String cadena = "";
+        int numero, suma = 0, contador = 0;
     
-        // Comprobamos que el número introducido es distinto de cero
-        while (numero != 0) 
-        {            
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+        
+        // Iteramos 
+        while (contador < 50) {            
+            contador++;
+            
+            // Petición de datos al usuario
+            numero = Integer.parseInt(msg.PedirDatos("Introduzca el número " + contador, 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
             
-            cadena += numero + " ";
-            contador++;
+            // Acumulamos el número introducido a la suma existente
+            suma += numero;
+            
         }
-        cadena += "\n" + "Número de valores introducidos: " + contador;
-        
-        msg.MostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
-        
-        
+                
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("El resultado es: " + suma, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
+    
 }

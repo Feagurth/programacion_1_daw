@@ -18,30 +18,26 @@
 package ejercicios;
 
 /**
- * Diseñar un algoritmo que imprima y sume la serie de 
- * números 3, 6, 9, 12, …, 99
+ * Calcular la suma de los cuadrados de los 100 primeros números naturales.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio003 
-{
-    public void ejercicio()
-    {
+public class Ejercicio022 {
+    
+    public void ejercicio(){
+        int sumaCuadrados = 0;
+        
         // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();        
+        Mensajes msg = new Mensajes();
         
-        // Variables
-        int numero = 3;
-        String cadena = "";
         
-        // Iteramos añadiendo los nuevos numeros a la variable cadena que 
-        // mostrará los resultados
-        while (numero <=99) 
-        {            
-            cadena += numero + " ";
-            numero = numero +3;
-        }       
+        // Iteramos y acumulamos el cuadrado de el contador
+        for (int i = 0; i < 100; i++) 
+        {
+            sumaCuadrados += Math.pow(i, 2);
+        }
         
-        // Muestra de resultados al usuario
-        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
-    }
+        // Mostramos el resultado al usuario
+        msg.MostrarMensaje("El resultado es: " + sumaCuadrados, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
+    }   
 }

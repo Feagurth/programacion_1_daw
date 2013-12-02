@@ -18,37 +18,26 @@
 package ejercicios;
 
 /**
- * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0. 
- * El algoritmo debe terminar con un valor cero que no se debe imprimir. 
- * Finalmente se desea obtener la cantidad de valores leídos distintos de 0
- * 
+ * Sumar los números pares de 2 al 100 e imprimir su valor.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio002 
-{
-    public void ejercicio()
-    {
+public class Ejercicio023 {
+    
+    public void ejercicio(){
         // Objeto para mensajes y recogida de datos
         Mensajes msg = new Mensajes();
         
         // Variables
-        int contador = 0;
-        int numero = -1;
-        String cadena = "";
+        int sumaPares = 0;
     
-        // Comprobamos que el número introducido es distinto de cero
-        while (numero != 0) 
-        {            
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
-                    "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
-            
-            cadena += numero + " ";
-            contador++;
+        // Iteramos sumando los pares
+        for (int i = 2; i < 100; i++) {
+            sumaPares += i;
         }
-        cadena += "\n" + "Número de valores introducidos: " + contador;
         
-        msg.MostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
-        
-        
+        // Muestra de resultados para el usuario
+        msg.MostrarMensaje("El resultado es: " + sumaPares, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION);
+    
     }
 }

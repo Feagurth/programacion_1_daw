@@ -17,8 +17,6 @@
 
 package ejercicios;
 
-import java.util.Scanner;
-
 /** 
  * Diseñar un algoritmo para determinar si un número n es primo. 
  * (Un número primo sólo es divisible por el mismo y por la unidad).
@@ -28,24 +26,35 @@ public class Ejercicio006 {
     
     public void ejercicio()
     {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+
+        // Variables
         int numero, contador = 2;
-        Scanner entrada = new Scanner(System.in);
+
+        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número para saber si es primo", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        System.out.print("Introduzca un número para saber si es primo: ");
-        numero = entrada.nextInt();
-        
+
+        // Iteramos por todos los números desde el 2 hasta el mismo número
+        // comprobando si el modulo del número y el contador es distinto de 0
         while((numero % contador) != 0) 
         {            
             contador++;
         }
         
+        // Si al encontrarse un valor por el cual el número modulo el valor es 0
+        // verificamos que el número es mayor que el contador es primo, si no 
+        // es así, no lo es
         if (contador < numero) 
         {
-            System.out.println(numero + " no es primo");
+            msg.MostrarMensaje(numero + " no es primo", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            System.out.println(numero + " es primo");
+            msg.MostrarMensaje(numero + " es primo", 
+                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }        
     }
     
