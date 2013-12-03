@@ -23,6 +23,9 @@ package ejercicios;
  */
 public class Ejercicio022 {
     
+    /**
+     * Ejercicio principal
+     */
     public void ejercicio(){
         int sumaCuadrados = 0;
         

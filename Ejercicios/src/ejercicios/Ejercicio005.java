@@ -28,7 +28,10 @@ package ejercicios;
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio005 
-{
+{    
+    /**
+    * Ejercicio principal
+    */
     public void ejercicio()
     {
         // Variable con el valor del recorrido

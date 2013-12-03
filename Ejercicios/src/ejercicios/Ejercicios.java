@@ -27,7 +27,7 @@ public class Ejercicios {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Ejercicio025 ej = new Ejercicio025();
+        Ejercicio062 ej = new Ejercicio062();
         
         ej.ejercicio();
     }

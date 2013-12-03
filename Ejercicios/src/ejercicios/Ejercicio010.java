@@ -24,6 +24,9 @@ package ejercicios;
  */
 public class Ejercicio010 {
     
+    /**
+    * Ejercicio principal
+    */
     public void ejercicio()
     {
         // Valor en kgs de una libra

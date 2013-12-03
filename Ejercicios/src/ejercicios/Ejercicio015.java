@@ -23,7 +23,9 @@ package ejercicios;
  */
 public class Ejercicio015 
 {
-    
+    /**
+    * Ejercicio principal
+    */    
     public void ejercicio()
     {
     

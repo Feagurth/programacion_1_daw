@@ -23,6 +23,9 @@ package ejercicios;
  */
 public class Ejercicio011 {
     
+    /**
+    * Ejercicio principal
+    */
     public void ejercicio()
     {
         // Objeto para mensajes y recogida de datos

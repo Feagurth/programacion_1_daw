@@ -23,6 +23,10 @@ package ejercicios;
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio012 {
+    
+   /**
+   * Ejercicio principal
+   */    
    public void ejercicio()
    {
        // Objeto para mensajes y recogida de datos

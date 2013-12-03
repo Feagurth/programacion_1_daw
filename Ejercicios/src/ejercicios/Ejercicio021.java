@@ -26,6 +26,10 @@ package ejercicios;
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio021 {
+    
+    /**
+    * Ejercicio principal
+    */
     public void ejercicio()
     {
         
