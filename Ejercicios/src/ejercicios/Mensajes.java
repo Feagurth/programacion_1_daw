@@ -56,7 +56,7 @@ public class Mensajes {
                 resultado = 3;
                 break;
             case PLANO:
-                resultado = 4;
+                resultado = -1;
                 break;
             }        
                 

@@ -52,7 +52,6 @@ public class Ejercicio062 {
 
                 msg.MostrarMensaje("El resultado es " + resultado, 
                         "Resultado", Mensajes.TipoMensaje.INFORMACION);
-
             }
             else
             {
