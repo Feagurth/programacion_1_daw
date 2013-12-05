@@ -86,7 +86,7 @@ public class Ejercicio099 {
     
     /**
      * Función para calcular las ventas de un representante
-     * @param valores Matriz con los valores de ventas por representante, zona y dia
+     * @param valores Matriz con los valores de ventas por representante, zona y día
      * @param nombreRepresentantes Array con los nombre de un representante
      */
     private void VentasXRepresentante(Double[][][] valores, String[] nombreRepresentantes){
