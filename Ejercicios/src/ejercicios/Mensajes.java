@@ -31,8 +31,7 @@ public class Mensajes {
     public enum TipoMensaje{
         ERROR, INFORMACION, AVISO, PREGUNTA, PLANO
     }
-    
-    
+
     /**
      * Función para parsear los datos de TipoMensaje a entero
      * @param valor Tipo de mensaje a parsear
@@ -92,6 +91,5 @@ public class Mensajes {
         }while(cadena == null);
         
         return cadena;
-        
     }
 }
