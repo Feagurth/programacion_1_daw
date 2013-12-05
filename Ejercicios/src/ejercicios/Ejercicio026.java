@@ -18,18 +18,33 @@
 package ejercicios;
 
 /**
- *
+ * Visualizar los múltiplos de 4 comprendidos entre 4 y N, donde N es un 
+ * número introducido por teclado
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
+public class Ejercicio026 {
+    
     /**
-     * @param args argumentos por linea de comandos
+     * Ejercicio principal
      */
-    public static void main(String[] args) {
-      
-        Ejercicio033 ej = new Ejercicio033();
+    public void ejercicio(){
+    
+        // Objeto para mostrar y tomar datos del usuario
+        Mensajes msg = new Mensajes();
         
-        ej.ejercicio();
-    }    
+        // Variables
+        int numero;
+        String cadena = "";
+        
+        numero = Integer.parseInt(msg.PedirDatos("Introduzca el limite de la secuencia", 
+                "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
+        
+        for (int i = 4; i <= numero; i += 4) {
+            cadena += i + " ";
+        }
+        
+        
+        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+    }
+    
 }

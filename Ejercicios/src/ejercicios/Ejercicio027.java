@@ -18,18 +18,30 @@
 package ejercicios;
 
 /**
- *
+ * Realizar un diagrama que permita realizar un contador e imprimir 
+ * los 100 primeros números enteros
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
+public class Ejercicio027 {
+    
     /**
-     * @param args argumentos por linea de comandos
+     * Ejercicio principal
      */
-    public static void main(String[] args) {
-      
-        Ejercicio033 ej = new Ejercicio033();
+    public void ejercicio(){
         
-        ej.ejercicio();
-    }    
+        // Objeto para mostrar y pedir información al usuario
+        Mensajes msg = new Mensajes();
+    
+        // Variables
+        String resultado = "";
+        
+        for (int i = 1; i <= 100; i++) {
+            resultado += i + " ";
+        }
+
+        // Muestra de resultados
+        msg.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+    
+    }
+    
 }

@@ -15,21 +15,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ejercicios;
+package pruebabreak;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
+public class Pruebabreak {
 
     /**
-     * @param args argumentos por linea de comandos
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
-      
-        Ejercicio033 ej = new Ejercicio033();
+        // TODO code application logic here
+        int i;
         
-        ej.ejercicio();
-    }    
+        for (i = 0; i < 10; i++) {
+            if(i==5)
+            {break;}
+        }
+        
+        System.out.printf("%d", i);
+        
+        
+    }
+    
 }

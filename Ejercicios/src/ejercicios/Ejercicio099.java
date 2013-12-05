@@ -53,7 +53,6 @@ public class Ejercicio099 {
 
         // Array para almacenar el nombre de los representantes
         String[] arrayRepresentantes;
-        //arrayRepresentantes = new String[N_REPRE];
         
         // Variable para almacenar las opciones en el menú
         int opcionMenu;
