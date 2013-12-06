@@ -15,23 +15,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ejercicios;
+package Trimestre.Primero;
 
-import Trimestre.Primero.Ejercicio040;
+import ejercicios.Mensajes;
 
 /**
- *
+ * Realiza un algoritmo que calcule la suma de los enteros entre 1 y 10, 
+ * es decir 1+2+3+ … +10
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
+public class Ejercicio012 {
+    
+   /**
+   * Ejercicio principal
+   */    
+   public void ejercicio()
+   {
+       // Objeto para mensajes y recogida de datos
+       Mensajes msg = new Mensajes();
+       
+       int numero = 0;
+       
+       // Iteramos y sumamos los numeros
+       for (int control = 0; control < 10; control++) {
+           numero = numero + control;
+       }
+       
+       // Muestra de resultados al usuario
+       msg.MostrarMensaje("La suma de los 10 primeros enteros es: " + numero, 
+               "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
-    /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-      
-        Ejercicio040 ej = new Ejercicio040();
-        
-        ej.ejercicio();
-    }    
+       
+   }
 }

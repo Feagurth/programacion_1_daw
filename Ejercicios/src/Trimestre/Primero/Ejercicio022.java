@@ -15,23 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ejercicios;
+package Trimestre.Primero;
 
-import Trimestre.Primero.Ejercicio040;
+import ejercicios.Mensajes;
 
 /**
- *
+ * Calcular la suma de los cuadrados de los 100 primeros números naturales.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
+public class Ejercicio022 {
+    
     /**
-     * @param args argumentos por linea de comandos
+     * Ejercicio principal
      */
-    public static void main(String[] args) {
-      
-        Ejercicio040 ej = new Ejercicio040();
+    public void ejercicio(){
+        int sumaCuadrados = 0;
         
-        ej.ejercicio();
-    }    
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+        
+        
+        // Iteramos y acumulamos el cuadrado de el contador
+        for (int i = 0; i < 100; i++) 
+        {
+            sumaCuadrados += Math.pow(i, 2);
+        }
+        
+        // Mostramos el resultado al usuario
+        msg.MostrarMensaje("El resultado es: " + sumaCuadrados, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
+    }   
 }

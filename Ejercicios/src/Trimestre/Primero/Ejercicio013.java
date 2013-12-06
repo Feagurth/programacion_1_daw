@@ -15,23 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ejercicios;
+package Trimestre.Primero;
 
-import Trimestre.Primero.Ejercicio040;
+import ejercicios.Mensajes;
 
 /**
- *
+ * Realizar un algoritmo que calcule y visualice las potencias de 2 entre 0 y 10
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
+public class Ejercicio013 {
+    
     /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-      
-        Ejercicio040 ej = new Ejercicio040();
+    * Ejercicio principal
+    */
+    public void ejercicio(){
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
         
-        ej.ejercicio();
-    }    
+        // Variable para concatenar los resultados
+        String resultado = "";
+        
+        for (int i = 0; i < 11; i++) {
+            resultado += "La potencia de dos de " + i + " es :" + 
+                    (int)Math.pow(2,i) + "\n";
+        }
+        
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION);
+    }
+    
 }

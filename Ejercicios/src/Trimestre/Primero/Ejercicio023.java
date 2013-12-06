@@ -14,24 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package Trimestre.Primero;
 
-package ejercicios;
-
-import Trimestre.Primero.Ejercicio040;
+import ejercicios.Mensajes;
 
 /**
+ * Sumar los números pares de 2 al 100 e imprimir su valor.
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
+public class Ejercicio023 {
 
     /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-      
-        Ejercicio040 ej = new Ejercicio040();
-        
-        ej.ejercicio();
-    }    
+    * Ejercicio principal
+    */
+    public void ejercicio() {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
+
+        // Variables
+        int sumaPares = 0;
+
+        // Iteramos sumando los pares
+        for (int i = 2; i < 100; i++) {
+            sumaPares += i;
+        }
+
+        // Muestra de resultados para el usuario
+        msg.MostrarMensaje("El resultado es: " + sumaPares, "Resultado",
+                Mensajes.TipoMensaje.INFORMACION);
+
+    }
 }

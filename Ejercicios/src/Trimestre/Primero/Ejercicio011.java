@@ -15,23 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ejercicios;
+package Trimestre.Primero;
 
-import Trimestre.Primero.Ejercicio040;
+import ejercicios.Mensajes;
 
 /**
- *
+ * Escribir un algoritmo que calcule y escriba el cuadrado de un número.
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicios {
-
+public class Ejercicio011 {
+    
     /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-      
-        Ejercicio040 ej = new Ejercicio040();
+    * Ejercicio principal
+    */
+    public void ejercicio()
+    {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
         
-        ej.ejercicio();
-    }    
+        // Variables
+        int numero;
+
+        // Petición de datos al usuario
+        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+        
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("El cuadrado del número es: " + numero * numero, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
+
+    }
+    
 }
