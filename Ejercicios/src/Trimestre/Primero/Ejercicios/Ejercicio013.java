@@ -14,23 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio4_29;
+package Trimestre.Primero.Ejercicios;
+
+import Utiles.Mensajes;
 
 /**
- *
+ * Realizar un algoritmo que calcule y visualice las potencias de 2 entre 0 y 10
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
-
+public class Ejercicio013 {
+    
     /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-        Ejercicio4_29 ejercicio = new Ejercicio4_29();
+    * Ejercicio principal
+    */
+    public void ejercicio(){
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
         
-        ejercicio.Ejercicio();
-
+        // Variable para concatenar los resultados
+        String resultado = "";
+        
+        for (int i = 0; i < 11; i++) {
+            resultado += "La potencia de dos de " + i + " es :" + 
+                    (int)Math.pow(2,i) + "\n";
+        }
+        
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION);
     }
+    
 }

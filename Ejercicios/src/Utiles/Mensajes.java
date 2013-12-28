@@ -18,6 +18,7 @@
 package Utiles;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  * Clase de ayuda para peticiones y muestra de datos con ventanas
@@ -68,12 +69,31 @@ public class Mensajes {
      * @param mensaje Mensaje que se le muestra al usuario
      * @param titulo Título de la ventana
      * @param tipoMensaje Tipo de mensaje que se mostrará
+     * @param newTextArea Permite indicar si se creará un JTextArea al crear el mensaje 
      */
-    public void MostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje ){
-        JOptionPane.showMessageDialog(null, mensaje, titulo, 
-                parseTipoMensaje(tipoMensaje));
+    public void MostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje, boolean newTextArea){
+        if(!newTextArea)
+        {
+            JOptionPane.showMessageDialog(null, mensaje, titulo, 
+                    parseTipoMensaje(tipoMensaje));
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, new JTextArea(mensaje), titulo, 
+                    parseTipoMensaje(tipoMensaje));        
+        }
     }
 
+    
+    /**
+     * Función para mostrar información al usuario
+     * @param mensaje Mensaje que se le muestra al usuario
+     * @param titulo Título de la ventana
+     * @param tipoMensaje Tipo de mensaje que se mostrará
+     */ 
+    public void MostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje){
+         MostrarMensaje(mensaje, titulo, tipoMensaje, false);
+    }
     /**
      * Función para pedir datos al usuario
      * @param mensaje Mensaje que se le muestra al usuario

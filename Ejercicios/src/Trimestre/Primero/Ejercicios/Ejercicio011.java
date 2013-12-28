@@ -14,23 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio4_29;
+package Trimestre.Primero.Ejercicios;
+
+import Utiles.Mensajes;
 
 /**
- *
+ * Escribir un algoritmo que calcule y escriba el cuadrado de un número.
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
-
+public class Ejercicio011 {
+    
     /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-        Ejercicio4_29 ejercicio = new Ejercicio4_29();
+    * Ejercicio principal
+    */
+    public void ejercicio()
+    {
+        // Objeto para mensajes y recogida de datos
+        Mensajes msg = new Mensajes();
         
-        ejercicio.Ejercicio();
+        // Variables
+        int numero;
+
+        // Petición de datos al usuario
+        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", "Petición de datos", 
+                Mensajes.TipoMensaje.PREGUNTA));
+        
+        // Muestra de resultados al usuario
+        msg.MostrarMensaje("El cuadrado del número es: " + numero * numero, 
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
     }
+    
 }

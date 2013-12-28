@@ -14,23 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio4_29;
+package Trimestre.Primero.Ejercicios.LibroPdf;
+
+import Utiles.Mensajes;
 
 /**
- *
+ * Clase para realizar el ejercicio 4.22 del libro de texto
+ * Como Programar en Java 7ed Deitel
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
-
-    /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-        Ejercicio4_29 ejercicio = new Ejercicio4_29();
+public class Ejercicio4_22 {
+    
+    public void Ejercicio()
+    {
+        // Objeto para petición y muestra de información al usuario
+        Mensajes mensaje = new Mensajes();
         
-        ejercicio.Ejercicio();
+        String resultado = "N\t\t10 * N\t\t100 * N\t\t1000 * N\n";
+        
+        for (int i = 1; i < 6; i++) {
+            resultado += i + "\t\t" + 10 * i  + "\t\t" + 100 * i + "\t\t" + 1000 * i + "\n";
+        }
 
-    }
+        mensaje.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true);
+    }    
 }

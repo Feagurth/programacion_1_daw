@@ -14,23 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio4_29;
+package Trimestre.Primero.Ejercicios;
+
+import Utiles.Mensajes;
 
 /**
- *
+ * Realizar un diagrama que permita realizar un contador e imprimir 
+ * los 100 primeros números enteros
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
-
+public class Ejercicio027 {
+    
     /**
-     * @param args argumentos por linea de comandos
+     * Ejercicio principal
      */
-    public static void main(String[] args) {
-        Ejercicio4_29 ejercicio = new Ejercicio4_29();
+    public void ejercicio(){
         
-        ejercicio.Ejercicio();
+        // Objeto para mostrar y pedir información al usuario
+        Mensajes msg = new Mensajes();
+    
+        // Variables
+        String resultado = "";
+        
+        for (int i = 1; i <= 100; i++) {
+            resultado += i + " ";
+        }
 
+        // Muestra de resultados
+        msg.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+    
     }
+    
 }
