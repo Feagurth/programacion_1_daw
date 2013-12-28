@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio4_29;
+import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio4_38;
 
 /**
  *
@@ -28,7 +28,8 @@ public class Lanzador {
      * @param args argumentos por linea de comandos
      */
     public static void main(String[] args) {
-        Ejercicio4_29 ejercicio = new Ejercicio4_29();
+        
+        Ejercicio4_38 ejercicio = new Ejercicio4_38();
         
         ejercicio.Ejercicio();
 
