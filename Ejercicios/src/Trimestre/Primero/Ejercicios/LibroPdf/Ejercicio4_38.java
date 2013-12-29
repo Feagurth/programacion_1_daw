@@ -19,7 +19,8 @@ package Trimestre.Primero.Ejercicios.LibroPdf;
 import Utiles.Mensajes;
 
 /**
- *
+ * Clase para realizar el ejercicio 4.38 del libro de texto Como Programar en
+ * Java 7ed Deitel
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_38 {
