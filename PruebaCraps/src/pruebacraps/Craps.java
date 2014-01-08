@@ -79,50 +79,65 @@ public class Craps {
         int sumaDados;
         Estado estadoJuego;
 
+        // Tiramos los dados
         sumaDados = tirarDados();
 
+        // Comprobamos la tirada de dados
         switch (sumaDados) {
+            // Si la suma es 7 u 11 el jugador gana
             case SIETE:
             case ONCE: {
+                // Establecemos el estado del juego como ganado
                 estadoJuego = Estado.GANO;
                 break;
             }
+            // Si la suma es 2, 3 o 11, el jugador pierde
             case DOS_UNOS:
             case TRES:
             case DOCE: {
+                // Establecemos el estado del juego como perdido
                 estadoJuego = Estado.PIERDO;
                 break;
             }
+            // Si no, guardamos la puntuación
             default: {
+
+                // Establecemos el estado del juego como continuar
                 estadoJuego = Estado.CONTINUA;
                 miPunto = sumaDados;
                 System.out.println("La puntuación es: " + miPunto);
             }
         }
-        while (estadoJuego == Estado.CONTINUA) {            
+
+        // Mientras no se gane o pierda el juego, realizamos el bucle
+        while (estadoJuego == Estado.CONTINUA) {
+
+            // Tiramos los dados de nuevo
             sumaDados = tirarDados();
-            
-            if(sumaDados == miPunto)
-            {
-                estadoJuego = Estado.GANO;            
-            }
-            else
-            {
-                if(sumaDados == SIETE)
-                {
+
+            // Si la tirada de dados es igual a la puntuación de la primera
+            // tirada se gana el juego
+            if (sumaDados == miPunto) {
+                // Establecemos el estado del juego como ganado
+                estadoJuego = Estado.GANO;
+            } else {
+                // Si no, tenemos que comprobar que la tirada no sea 7
+                // en cuyo caso se pierde el juego
+                if (sumaDados == SIETE) {
+                    // Establecemos el estado del juego como perdido
                     estadoJuego = Estado.PIERDO;
                 }
             }
-            
-            if(estadoJuego == Estado.GANO)
-            {
-                System.out.println("Gano");
-            }
-            else
-            {
-                System.out.println("Pierdo");
-            }
         }
+
+        // Una vez acabadas las jugadas y teniendo el juego ganado o perdido
+        // mostramos el resultado al usuario dependiendo del estado del juego
+        if (estadoJuego == Estado.GANO) {
+            System.out.println("El jugador ha ganado");
+        } else {
+            System.out.println("El jugador ha perdido");
+        }
+
     }
 
 }

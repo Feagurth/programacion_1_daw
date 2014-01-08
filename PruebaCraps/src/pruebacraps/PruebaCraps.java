@@ -28,6 +28,10 @@ public class PruebaCraps {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Craps myCraps = new Craps();
+        
+        myCraps.Jugar();
     }
     
 }
