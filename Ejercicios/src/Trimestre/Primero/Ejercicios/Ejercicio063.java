@@ -52,14 +52,14 @@ public class Ejercicio063 {
      * @param valor Valor del exponente de e
      * @return Resultado de e^ valor
      */
-    private float CalcularEx(int valor) {
+    private float CalcularEx(double valor, int iteraciones) {
         // Variables        
         float resultado = 0;
 
         // Iteramos desde el segundo dígito hasta el valor del número
         // dividiendo por el factorial del valor de la iteración el 
         // número elevado al valor de la iteración
-        for (int i = 2; i <= valor; i++) {
+        for (int i = 2; i <= iteraciones; i++) {
             resultado += Math.pow(valor, i) / Factorial(i).floatValue();
         }
 
@@ -76,12 +76,12 @@ public class Ejercicio063 {
      * @param valor Valor al que calcular el coseno
      * @return Coseno del valor
      */
-    private float CalcularCoseno(int valor) {
+    private float CalcularCoseno(double valor, int iteraciones) {
         // Variables
         float resultado = 1;
 
         // Iteramos desde el 1 hasta el valor
-        for (int i = 1; i <= valor; i++) {
+        for (int i = 1; i <= iteraciones; i++) {
             // Si la iteración es par, sumamos, si no, restamos
             if (i % 2 == 0) {
                 resultado += (Math.pow(valor, (2 * i))
@@ -101,12 +101,12 @@ public class Ejercicio063 {
      * @param valor Valor al que calcular el seno
      * @return Seno del valor
      */
-    private float CalcularSeno(int valor) {
+    private float CalcularSeno(double valor, int iteraciones) {
         // Variables
-        float resultado = 1;
+        float resultado = (float)valor;
 
         // Iteramos desde 1 hasta el valor
-        for (int i = 1; i <= valor; i++) {
+        for (int i = 1; i <= iteraciones; i++) {
 
             // Si la iteración es par sumamos, si es impar, restamos
             if (i % 2 == 0) {
@@ -117,7 +117,7 @@ public class Ejercicio063 {
                         / Factorial((2 * i) + 1).floatValue();
             }
         }
-
+        
         // Devolvemos el resultado
         return resultado;
     }
@@ -127,21 +127,29 @@ public class Ejercicio063 {
         // Objeto para pedir y mostrar información al usuario
         Mensajes mensaje = new Mensajes();
 
-        // Variable
-        int numero;
+        // Variables
+        Double numero;
+        int iterac;
         
         // Petición de datos al usuario
-        numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un número", 
+        numero = Double.parseDouble(mensaje.PedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
+        
+        iterac = Integer.parseInt(mensaje.PedirDatos("Introduzca el número de "
+                + "iteraciones para calcular los valores", "Petición de Datos", 
+                Mensajes.TipoMensaje.ERROR));
     
         // Muestra de resultados al usuario
-        mensaje.MostrarMensaje("e^" + numero + ": " + CalcularEx(numero), 
+        mensaje.MostrarMensaje("e^" + numero + ": " + 
+                CalcularEx(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
-        mensaje.MostrarMensaje("Cos(" + numero + "): " + CalcularCoseno(numero), 
+        mensaje.MostrarMensaje("Cos(" + numero + "): " + 
+                CalcularCoseno(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
-        mensaje.MostrarMensaje("Sen(" + numero + "): " + CalcularSeno(numero), 
+        mensaje.MostrarMensaje("Sen(" + numero + "): " + 
+                CalcularSeno(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }
