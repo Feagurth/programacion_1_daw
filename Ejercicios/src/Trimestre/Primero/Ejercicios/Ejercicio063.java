@@ -80,7 +80,7 @@ public class Ejercicio063 {
         // Variables
         float resultado = 1;
 
-        // Iteramos desde el 1 hasta el valor
+        // Iteramos desde el 1 hasta el valor de las iteraciones
         for (int i = 1; i <= iteraciones; i++) {
             // Si la iteración es par, sumamos, si no, restamos
             if (i % 2 == 0) {
@@ -105,7 +105,7 @@ public class Ejercicio063 {
         // Variables
         float resultado = (float)valor;
 
-        // Iteramos desde 1 hasta el valor
+        // Iteramos desde 1 hasta el valor de las iteraciones
         for (int i = 1; i <= iteraciones; i++) {
 
             // Si la iteración es par sumamos, si es impar, restamos
