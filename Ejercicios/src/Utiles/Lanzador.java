@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Segundo.Ejercicios.Ejercicio065;
+import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio2_32;
 
 /**
  *
@@ -29,7 +29,7 @@ public class Lanzador {
      */
     public static void main(String[] args) {
         
-        Ejercicio065 ejercicio = new Ejercicio065();
+        Ejercicio2_32 ejercicio = new Ejercicio2_32();
         
         ejercicio.Ejercicio();
     }
