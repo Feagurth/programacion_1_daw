@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,23 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import Trimestre.Primero.Ejercicios.LibroPdf.Ejercicio3_15;
+package iniciararray;
 
 /**
- *
+ * Clase para probar arrays
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
+public class Iniciararray {
 
     /**
-     * @param args argumentos por linea de comandos
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
+        int array[];
         
-        Ejercicio3_15 ejercicio = new Ejercicio3_15();
+        array = new int[10];
+        System.out.println("Indice\tValor");
         
-        ejercicio.Ejercicio();
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("%6d\t%5d\n", i, array[i]);
+        }
     }
+    
+    
+    
 }
