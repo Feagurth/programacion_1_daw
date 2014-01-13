@@ -14,23 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import Trimestre.Segundo.Ejercicios.LibroPdf.Ejercicio3_15;
+package Trimestre.Segundo.Ejercicios.LibroPdf;
 
 /**
- *
+ * Clase para calcular las comisiones de un vendedor
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
+public class Ejercicio4_19 {
+    
+    private final double PAGA_SEMANAL = 200f;
+    
+    // Variables que necesita la clase
+    private final double paga;
+    private final double valorVentas;
 
     /**
-     * @param args argumentos por linea de comandos
+     * Devuelve el valor de la paga del comercial
+     * @return El valor de la paga del comercial
      */
-    public static void main(String[] args) {
-        
-        Ejercicio3_15 ejercicio = new Ejercicio3_15();
-        
-        ejercicio.Ejercicio();
+    public double getPaga() {
+        return paga;
+    }
+
+    /**
+     * Constuctor de la clase
+     * @param valorVentas Valor total de las ventas del comercial
+     */
+    public Ejercicio4_19(double valorVentas) {
+        this.valorVentas = valorVentas;
+        this.paga = (this.valorVentas * 0.09) + this.PAGA_SEMANAL;
     }
 }
