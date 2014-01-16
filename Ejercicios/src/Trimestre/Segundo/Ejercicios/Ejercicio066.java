@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,23 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import RelacionesDeEjercicios.Relacion1.Ejercicio002;
+package Trimestre.Segundo.Ejercicios;
 
 /**
- *
+ * Escribir una función, INTEGRAL, que devuelva el área del recinto formado por 
+ * el eje de las X, las rectas x=a y x=b y el arco de curva correspondiente a 
+ * una función continua, recibida como parámetro, con valores positivos en el 
+ * intervalo considerado.
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
-
-    /**
-     * @param args argumentos por linea de comandos
-     */
-    public static void main(String[] args) {
-        
-        Ejercicio002 ejercicio = new Ejercicio002();
-        
-        ejercicio.Ejercicio();
+public class Ejercicio066 {
+    
+    public void Ejercicio()
+    {
+    
+    
     }
+    
 }
