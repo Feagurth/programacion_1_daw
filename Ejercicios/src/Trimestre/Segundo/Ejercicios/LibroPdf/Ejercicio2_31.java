@@ -17,7 +17,11 @@
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
 /**
- *
+ * Utilizando sólo las técnicas de programación que aprendió en este capítulo, 
+ * escriba una aplicación que calcule los cuadrados y cubos de los números 
+ * del 0 al 10, y que imprima los valores resultantes en formato de tabla, 
+ * como se muestra a continuación. [Nota: Este programa no requiere de ningún 
+ * tipo de entrada por parte del usuario].
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio2_31 {

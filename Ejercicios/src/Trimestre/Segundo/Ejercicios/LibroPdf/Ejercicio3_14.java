@@ -32,6 +32,9 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio3_14 {
 
+    /**
+     * Clase para tratar con los empleados
+     */
     public class Empleado {
 
         // Variables
