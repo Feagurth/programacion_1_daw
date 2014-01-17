@@ -17,8 +17,10 @@
 package RelacionesDeEjercicios.Relacion1;
 
 /**
- * Crear la clase Triangulo cuya interfaz nos permita a) Saber el área b)
- * Conocer el lado mayor c) Saber si es equilátero
+ * Crear la clase Triángulo cuya interfaz nos permita
+ *  a) Saber el área 
+ *  b) Conocer el lado mayor 
+ *  c) Saber si es equilátero
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -27,9 +29,9 @@ public class Ejercicio002 {
     public class Triangulo {
 
         // Variables de instancia
-        int lado1;
-        int lado2;
-        int lado3;
+        double lado1;
+        double lado2;
+        double lado3;
         boolean valido;
 
         /**
@@ -37,7 +39,7 @@ public class Ejercicio002 {
          *
          * @return El valor del lado1
          */
-        public int getLado1() {
+        public double getLado1() {
             return lado1;
         }
 
@@ -46,7 +48,7 @@ public class Ejercicio002 {
          *
          * @return El valor del lado2
          */
-        public int getLado2() {
+        public double getLado2() {
             return lado2;
         }
 
@@ -55,12 +57,12 @@ public class Ejercicio002 {
          *
          * @return El valor del lado3
          */
-        public int getLado3() {
+        public double getLado3() {
             return lado3;
         }
 
         /**
-         * Función para comprobar si un triangulo está bien definido
+         * Función para comprobar si un triángulo está bien definido
          *
          * @return
          */
@@ -71,11 +73,11 @@ public class Ejercicio002 {
         /**
          * Constructor de la clase
          *
-         * @param lado1 Lado 1 del triangulo
-         * @param lado2 Lado 2 del triangulo
-         * @param lado3 Lado 3 del triangulo
+         * @param lado1 Lado 1 del triángulo
+         * @param lado2 Lado 2 del triángulo
+         * @param lado3 Lado 3 del triángulo
          */
-        public Triangulo(int lado1, int lado2, int lado3) {
+        public Triangulo(double lado1, double lado2, double lado3) {
             this.lado1 = lado1;
             this.lado2 = lado2;
             this.lado3 = lado3;
@@ -91,13 +93,13 @@ public class Ejercicio002 {
         }
 
         /**
-         * Función para averiguar que lado del triangulo es el mayor
+         * Función para averiguar que lado del triángulo es el mayor
          *
          * @return
          */
-        public int ladoMayor() {
+        public double ladoMayor() {
             // Inicializamos la varable
-            int resultado = -0;
+            double resultado = -0;
 
             // Comprobamos si el primer lado es mayor que el resultado
             if (lado1 > resultado) {
@@ -120,7 +122,7 @@ public class Ejercicio002 {
         }
 
         /**
-         * Función que comprueba si el triangulo es equilatero
+         * Función que comprueba si el triángulo es equilátero
          *
          * @return
          */
@@ -130,31 +132,34 @@ public class Ejercicio002 {
         }
 
         /**
-         * Función para calcular el area del triangulo usando la formula 
-         * de Heron
-         * @return El valor del area del triangulo
+         * Función para calcular el área del triángulo usando la fórmula de
+         * Heron
+         *
+         * @return El valor del área del triángulo
          */
         public double valorArea() {
             double resultado;
 
             // Calculamos el area usando la formula de Heron
-            resultado = (lado1 + lado2 + lado3) / (float)2;
+            resultado = (lado1 + lado2 + lado3) / (float) 2;
 
             resultado = resultado * (resultado - lado1) * (resultado - lado2) * (resultado - lado3);
-            
+
             resultado = Math.sqrt(resultado);
-            
+
             return resultado;
         }
     }
 
     public void Ejercicio() {
 
-        Triangulo triangulo = new Triangulo(1, 1, 1);
+        Triangulo triangulo = new Triangulo(39.12, 33, 21);
 
-        System.out.print(triangulo.isValido());
+        System.out.print(triangulo.isValido() + "\n");
         
-        System.out.print(triangulo.valorArea());
+        System.out.print("El lado mayor mide: " + triangulo.ladoMayor()+ "\n");
+
+        System.out.print(triangulo.valorArea() + "\n");
 
     }
 
