@@ -17,6 +17,8 @@
 
 package RelacionesDeEjercicios.Relacion1;
 
+import java.util.Scanner;
+
 /**
  * Confeccionar una clase que represente un empleado. Nos interesa recoger su 
  * nombre, sueldo y  turno (mañana o tarde). Confeccionar una interfaz que 
@@ -94,7 +96,7 @@ public class Ejercicio004 {
 
             // Devolvemos el resultado
             return resultado;
-        }
+        } 
     
         /**
          * Función que nos indica si el empleado debe pagar impuestos
@@ -110,17 +112,57 @@ public class Ejercicio004 {
     
     public void Ejercicio()
     {
-        Empleado empleado1 = new Empleado("Manolo", 2500, 'M');
-        Empleado empleado2 = new Empleado("Jose", 3500, 't');
+
+        // Objeto para leer datos del usuario
+        Scanner scanner = new Scanner(System.in);
         
-        System.out.println(empleado1.imprimirDatos());
-        System.out.println(empleado1.pagaImpuestos() == true 
-                ? "Paga Impuestos" : "No Paga Impuestos");
+        // Array para almacenar los empleados
+        Empleado[] arrayEmpleados = new Empleado[8];
+        
+        String nombre;
+        float sueldo;
+        
+        // Iteramos para preguntar los datos de los empleados y almacenarlos
+        for(int i = 0; i < 8; i++)
+        {
+            // Los 4 primeros empleados serán los del turno de mañana
+            // y los siguientes los de la tarde
+            System.out.print("\nIntroduzca el nombre del trabajador "
+                    + "para el turno de " + ((i>3) ? "mañana" : "tarde") + ": ");
+                    
+            nombre = scanner.nextLine();
+
+            System.out.print("\nIntroduzca el sueldo del trabajador "
+                    + "para el turno de " + ((i>3) ? "mañana" : "tarde") + ": ");
+
+            sueldo = scanner.nextFloat();
+            
+            // Creamos el empleado y lo almacenamos en el array
+            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i>3 ? 'm' : 't'));
+        }
+
+        // Creamos los acumuladores y los inicializamos
+        float sueldoMañana = 0, sueldoTarde = 0;
         
         
-        System.out.println(empleado2.imprimirDatos());
-        System.out.println(empleado2.pagaImpuestos() == true 
-                ? "Paga Impuestos" : "No Paga Impuestos");
+        // Iteramos por el arrray y almacenamos los valores de lo sueldos
+        // en sus correspondientes acumuladores
+        for (int i = 0; i < 8; i++) {
+            if(arrayEmpleados[i].getTurno() == 'm')
+            {
+                sueldoMañana += arrayEmpleados[i].getSueldo();            
+            }
+            else
+            {
+                sueldoTarde += arrayEmpleados[i].getSueldo();            
+            }
+        }
+        
+        // Mostramos resultados
+        System.out.println("El total del sueldo de la mañana es: " + sueldoMañana);
+        System.out.println("El total del sueldo de la tarde es: " + sueldoTarde);
+        
+        
         
     }
 }
