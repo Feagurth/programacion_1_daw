@@ -14,19 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package RelacionesDeEjercicios.Relacion1;
 
 import java.util.Scanner;
 
 /**
- * Crear un programa en Java que convierta un número natural (menor a 4000) en 
+ * Crear un programa en Java que convierta un número natural (menor a 4000) en
  * romano (construido como una cadena de caracteres).
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio006 {
 
-  /**
+    /**
      * Función para pasar un número arábigo a romano
      *
      * @param numero Número a convertir
@@ -201,29 +201,22 @@ public class Ejercicio006 {
 
         // Devolvemos el resultado
         return resultado;
-    }    
-    
-    public void Ejercicio()
-    {
+    }
+
+    public void Ejercicio() {
         // Objeto para leer datos desde el teclado
         Scanner scanner = new Scanner(System.in);
-        
+
         // Variable para almacenar el número introducido por el usuario
         int numero;
-        
+
         // Pedimos al usuario un número y lo almacenamos en la variable
         // destinada a ello
         System.out.print("Introduzca un número natural: ");
         numero = scanner.nextInt();
-        
+
         // Mostramos el resultado
         System.out.printf("El valor de %d en números romanos es %s\n",
                 numero, ArabigoARomano(numero));
-        
-        
-        
-    
-    
     }
-    
 }

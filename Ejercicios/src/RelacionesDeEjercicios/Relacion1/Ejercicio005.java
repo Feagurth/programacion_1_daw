@@ -49,6 +49,7 @@ public class Ejercicio005 {
 
         /**
          * Función que devuelve el valor de un número en la tabla
+         *
          * @param valor Valor del número
          * @return Resultado del multiplicar el número por el valor de la tabla
          */
@@ -57,30 +58,25 @@ public class Ejercicio005 {
 
         }
 
-        public String generarTabla(int numMaximo)
-        {
+        public String generarTabla(int numMaximo) {
             // Creamos un acumulador y lo inicializamos
             String resultado = "";
-        
+
             // Iteramos creando el resultado
             for (int i = 0; i <= numMaximo; i++) {
-                resultado += i + " x " + this.numero + 
-                        " = " +  (i * this.numero) + "\n";
+                resultado += i + " x " + this.numero
+                        + " = " + (i * this.numero) + "\n";
             }
-            
+
             // Devolvemos el resultado
             return resultado;
         }
-        
-        
     }
 
     public void Ejercicio() {
 
         TablaDeMultiplicar tabla = new TablaDeMultiplicar(7);
-        
+
         System.out.println(tabla.generarTabla(100));
-        
-        
     }
 }

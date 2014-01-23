@@ -16,7 +16,6 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import Utiles.Mensajes;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -162,7 +161,5 @@ public class Ejercicio010 {
 
         // Mostramos el resultado
         System.out.print("Cos(" + numero + "): " + CalcularCoseno(numero, iterac));
-
     }
-
 }

@@ -75,8 +75,6 @@ public class Ejercicio007 {
         System.out.print(resultado);
         System.out.print("\nCantidad de vocales: " + vocales);
         System.out.print("\nCantidad de consonantes: " + consonantes);
-        System.out.println("");
-        
+        System.out.println("");        
     }
-
 }

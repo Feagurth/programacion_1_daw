@@ -16,7 +16,6 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.awt.Point;
 import java.util.Random;
 
 /**
@@ -76,6 +75,7 @@ public class Ejercicio008 {
 
         /**
          * Función para calcular la varianza de X
+         *
          * @return Varianza de X
          */
         private double varianzaX() {
@@ -100,6 +100,7 @@ public class Ejercicio008 {
 
         /**
          * Función para calcular la varianza de Y
+         *
          * @return Varianza de Y
          */
         private double varianzaY() {
@@ -121,7 +122,7 @@ public class Ejercicio008 {
             // Devolvemos el resultado
             return resultado;
         }
-        
+
         /**
          * Constructor para la clase
          *
@@ -247,10 +248,10 @@ public class Ejercicio008 {
 
         /**
          * Función que nos permite calcular la covarianza de la distribución
+         *
          * @return La covarianza de la distribución
          */
-        public double valorCovarianza()
-        {
+        public double valorCovarianza() {
             // Declaramos e inicializamos la variable acumulador
             double resultado = 0;
 
@@ -258,46 +259,45 @@ public class Ejercicio008 {
             for (double[] distribucion1 : this.distribucion) {
                 resultado += distribucion1[0] * distribucion1[1];
             }
-            
+
             // Dividimos por el tamaño de la distribución
             resultado /= distribucion.length;
-            
+
             // Le restamos la multiplicación de las medias de X y de Y, 
             // dando como resultado la covarianza
             resultado -= (mediaX() * mediaY());
-            
+
             // Devolvemos el resultado
             return resultado;
         }
-        
+
         /**
-         * Función que devuelve el valor del coeficiente de correlación de la 
+         * Función que devuelve el valor del coeficiente de correlación de la
          * distribución
+         *
          * @return Valor del coeficiente de correlación
          */
-        public double valorCoeficienteCorrelacion()
-        {
+        public double valorCoeficienteCorrelacion() {
             // Devolvemos el cociente entre la covarianza y el producto de la
             // desviación típica de X e Y
-            return valorCovarianza() / 
-                    (valorDesviacionTipicaX() * valorDesviacionTipicaY());
+            return valorCovarianza()
+                    / (valorDesviacionTipicaX() * valorDesviacionTipicaY());
         }
-        
+
         /**
-         * Función para interpretar el coeficiente de correlación de 
-         * la distribución
+         * Función para interpretar el coeficiente de correlación de la
+         * distribución
+         *
          * @return Cadena de texto con la interpretación de la correlación
          */
-        public String interpretarCoeficienteCorrelacion()
-        {
+        public String interpretarCoeficienteCorrelacion() {
             // Definimos una variable para devolver el resultado
             String resultado;
 
             // Redondeamos el valor del coeficiente de correlación
             // y lo pasamos a entero
-            switch((int) Math.round(valorCoeficienteCorrelacion()))
-            {
-                
+            switch ((int) Math.round(valorCoeficienteCorrelacion())) {
+
                 case 0: // Si es cero, la correlación es debil
                     resultado = "La correlación es debil";
                     break;
@@ -308,13 +308,13 @@ public class Ejercicio008 {
                     resultado = "La correlación es fuerte e inversa";
                     break;
                 default: // Si sale cualquier otra cosa es un error
-                   resultado = "Error al interpretar el Coeficiente de "
-                           + "Correlación";
+                    resultado = "Error al interpretar el Coeficiente de "
+                            + "Correlación";
             }
-            
+
             // Devolvemos el resultado
             return resultado;
-        }        
+        }
     }
 
     public void Ejercicio() {
@@ -338,7 +338,5 @@ public class Ejercicio008 {
                 + distro.valorCoeficienteCorrelacion());
 
         System.out.print("\n" + distro.interpretarCoeficienteCorrelacion());
-        
-        
     }
 }

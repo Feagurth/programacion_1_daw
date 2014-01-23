@@ -28,8 +28,8 @@ import java.util.Scanner;
  * c) Saber si debe pagar impuestos (si el sueldo supera a 3000) 
  * Suponer que hay una empresa que tiene 8 trabajadores, realizar además 
  * un programa que permita saber el gasto en el sueldo por turnos, sabiendo que:
- *  Hay dos turnos: Mañana y Tarde
- *  La empresa tiene 4 trabajadores por la mañana y 4 por la tarde
+ * Hay dos turnos: Mañana y Tarde
+ * La empresa tiene 4 trabajadores por la mañana y 4 por la tarde
 
  * @author Luis Cabrerizo Gómez
  */
@@ -106,7 +106,6 @@ public class Ejercicio004 {
         {
             return this.sueldo > 3000;
         }
-
     }
     
     
@@ -161,8 +160,5 @@ public class Ejercicio004 {
         // Mostramos resultados
         System.out.println("El total del sueldo de la mañana es: " + sueldoMañana);
         System.out.println("El total del sueldo de la tarde es: " + sueldoTarde);
-        
-        
-        
     }
 }

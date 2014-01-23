@@ -101,7 +101,7 @@ public class Ejercicio001 {
         public NivelEstudios getNivelEstudios() {
             return nivelEstudios;
         }
-                
+
         /**
          * Función para verificar si una persona es mayor de edad
          *
@@ -137,6 +137,7 @@ public class Ejercicio001 {
 
         /**
          * Función para mostrar los datos de la persona
+         *
          * @return Una cadena que contiene la información de la persona
          */
         public String MostrarDatosPersona() {
@@ -182,15 +183,13 @@ public class Ejercicio001 {
                 "Información", Mensajes.TipoMensaje.INFORMACION);
 
         // Mostramos si es mayor de edad
-        mensaje.MostrarMensaje((persona.EsMayorDeEdad() 
-                            ? "Es mayor de edad" : "No es mayor de edad"),
+        mensaje.MostrarMensaje((persona.EsMayorDeEdad()
+                ? "Es mayor de edad" : "No es mayor de edad"),
                 "Información", Mensajes.TipoMensaje.INFORMACION);
 
         // Mostramos si es JASP
         mensaje.MostrarMensaje((persona.EsJASP()
-                            ? "Es JASP" : "No es JASP"),
+                ? "Es JASP" : "No es JASP"),
                 "Información", Mensajes.TipoMensaje.INFORMACION);
-        
-        
     }
 }
