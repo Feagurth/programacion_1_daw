@@ -146,18 +146,18 @@ public class Ejercicio010 {
         // Mostramos resultados
         System.out.print("\ne^" + numero + ": " + CalcularEx(numero, iterac));
 
-        // Pedimos al usuario el angulo oara calcular el seno
-        System.out.print("\nIntroduzca el valor del angulo para calcular "
+        // Pedimos al usuario el angulo para calcular el seno
+        System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
                 + "sen(x): ");
-        numero = scanner.nextDouble();
+        numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
         System.out.print("Sen(" + numero + "): " + CalcularSeno(numero, iterac));
 
-        // Pedimos al usuario el angulo oara calcular el coseno
-        System.out.print("\nIntroduzca el valor del angulo para calcular "
+        // Pedimos al usuario el angulo para calcular el coseno
+        System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
                 + "cos(x): ");
-        numero = scanner.nextDouble();
+        numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
         System.out.print("Cos(" + numero + "): " + CalcularCoseno(numero, iterac));

@@ -17,6 +17,7 @@
 package RelacionesDeEjercicios.Relacion1;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Distribuciones bidimendional
@@ -44,13 +45,13 @@ public class Ejercicio008 {
 
             // Iteramos para calcular la suma de todos los valores 
             // para la fila 0
-            for (double[] distribucion1 : this.distribucion) {
-                valorX += distribucion1[0];
+            for (int i = 0; i < distribucion[0].length; i++) {
+                valorX += distribucion[0][i];
             }
 
             // Devolvemos la suma de todos los valores divididos
             // entre la longitud de la distribución
-            return valorX / this.distribucion.length;
+            return valorX / this.distribucion[0].length;
         }
 
         /**
@@ -64,13 +65,13 @@ public class Ejercicio008 {
 
             // Iteramos para calcular la suma de todos los valores 
             // para la fila 1
-            for (double[] distribucion1 : this.distribucion) {
-                valorY += distribucion1[1];
+            for (int i = 0; i < distribucion[1].length; i++) {
+                valorY += distribucion[1][i];
             }
 
             // Devolvemos la suma de todos los valores divididos
             // entre la longitud de la distribución
-            return valorY / this.distribucion.length;
+            return valorY / this.distribucion[1].length;
         }
 
         /**
@@ -84,12 +85,12 @@ public class Ejercicio008 {
 
             // Iteramos por la primera fila de la distribución
             // sumando el cuadrado de los valores al acumulador
-            for (double[] distribucion1 : distribucion) {
-                resultado += Math.pow(distribucion1[0], 2);
+            for (int i = 0; i < distribucion[0].length; i++) {
+                resultado += Math.pow(distribucion[0][i], 2);
             }
 
             // Dividimos el resultado por el tamaño de la distribución
-            resultado /= distribucion.length;
+            resultado /= distribucion[0].length;
 
             // Y le restamos el cuadrado de la media de esa misma fila
             resultado -= Math.pow(mediaX(), 2);
@@ -109,12 +110,12 @@ public class Ejercicio008 {
 
             // Iteramos por la segunda fila de la distribución
             // sumando el cuadrado de los valores al acumulador
-            for (double[] distribucion1 : distribucion) {
-                resultado += Math.pow(distribucion1[1], 2);
+            for (int i = 0; i < distribucion[1].length; i++) {
+                resultado += Math.pow(distribucion[1][i], 2);
             }
 
             // Dividimos el resultado por el tamaño de la distribución
-            resultado /= distribucion.length;
+            resultado /= distribucion[1].length;
 
             // Y le restamos el cuadrado de la media de esa misma fila
             resultado -= Math.pow(mediaY(), 2);
@@ -127,8 +128,10 @@ public class Ejercicio008 {
          * Constructor para la clase
          *
          * @param longitud Tamaño de la distribución bidimensional
+         * @param aleatorio Si genera una matriz bidimensional aleatoria o 
+         * usa la establecida en el ejercicio
          */
-        public DistribucionBidimensional(int longitud) {
+        public DistribucionBidimensional(int longitud, Boolean aleatorio ) {
 
             // Objeto para generar números aleatorios
             Random random = new Random();
@@ -138,14 +141,18 @@ public class Ejercicio008 {
 
             // Creamos una matriz de tamaño longitud x 2 para 
             // almacenar los datos
-            distribucion = new double[this.longitud][2];
+            if (aleatorio) {
+                distribucion = new double[this.longitud][2];
 
             // Iteramos por toda la matriz y generamos numeros aleatorios para
-            // rellenarla
-            for (double[] distribucion1 : distribucion) {
-                for (int j = 0; j < 2; j++) {
-                    distribucion1[j] = random.nextInt(100);
+                // rellenarla
+                for (double[] distribucion1 : distribucion) {
+                    for (int j = 0; j < 2; j++) {
+                        distribucion1[j] = random.nextInt(100) +1;
+                    }
                 }
+            } else {
+                distribucion = new double[][]{{156, 165, 170, 175, 165, 172, 178, 160}, {56, 65, 70, 75, 65, 72, 78, 60}};
             }
         }
 
@@ -215,16 +222,16 @@ public class Ejercicio008 {
                         resultado += "y";
                         break;
                 }
-                for (int j = 0; j < distribucion.length; j++) {
+                for (int j = 0; j < distribucion[0].length; j++) {
                     switch (i) {
                         case 0:
                             resultado += "\t" + j;
                             break;
                         case 1:
-                            resultado += "\t" + distribucion[j][0];
+                            resultado += "\t" + distribucion[0][j];
                             break;
                         case 2:
-                            resultado += "\t" + distribucion[j][1];
+                            resultado += "\t" + distribucion[1][j];
                             break;
                     }
                 }
@@ -256,12 +263,12 @@ public class Ejercicio008 {
             double resultado = 0;
 
             // Iteramos por la distribución multiplicando los elementos
-            for (double[] distribucion1 : this.distribucion) {
-                resultado += distribucion1[0] * distribucion1[1];
+            for (int i = 0; i < distribucion[0].length; i++) {
+                resultado += distribucion[0][i] * distribucion[1][i];
             }
 
             // Dividimos por el tamaño de la distribución
-            resultado /= distribucion.length;
+            resultado /= distribucion[0].length;
 
             // Le restamos la multiplicación de las medias de X y de Y, 
             // dando como resultado la covarianza
@@ -315,10 +322,30 @@ public class Ejercicio008 {
             // Devolvemos el resultado
             return resultado;
         }
+        
+        /**
+         * Función para estimar el peso a partir de una altura
+         * @param altura Altura para la que se quiere estimar el peso
+         * @return Peso estimado para la altura introducida
+         */
+        private Double estimarPeso(Double altura)
+        {
+            // Calculado según la siguiente formula
+            // MediaY + valorCoeficienteCorrelacion(altura - MediaX)
+            return (mediaY() + 
+                    valorCoeficienteCorrelacion() * (altura - mediaX()));
+        }
+        
+        
     }
 
     public void Ejercicio() {
-        DistribucionBidimensional distro = new DistribucionBidimensional(10);
+        
+        Scanner entrada = new Scanner(System.in);
+        
+        double valorAltura;
+        
+        DistribucionBidimensional distro = new DistribucionBidimensional(8, false);
 
         System.out.print(distro.imprimirMatriz());
 
@@ -338,5 +365,14 @@ public class Ejercicio008 {
                 + distro.valorCoeficienteCorrelacion());
 
         System.out.print("\n" + distro.interpretarCoeficienteCorrelacion());
+
+        System.out.print("Introduzca una altura para estimar el peso: ");
+        valorAltura = entrada.nextDouble();
+        
+        System.out.print("El peso estimado es: " + distro.estimarPeso(valorAltura));
+        
+        System.out.println("");
+        
+        
     }
 }
