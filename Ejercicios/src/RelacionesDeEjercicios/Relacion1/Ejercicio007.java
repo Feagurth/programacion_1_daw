@@ -49,7 +49,7 @@ public class Ejercicio007 {
                 // de o a 24 y sumando 97, lo que nos da un rango de 97 a 122
                 // que corresponde a las letras de a la z en minúscula en la 
                 // tabla de caracteres
-                char caracter = (char) ((char) generador.nextInt(25) + 97);
+                char caracter = (char) ((char) generador.nextInt(26) + 97);
 
                 // Comprobamos si el caracter generado es una vocal
                 if ("aeiou".indexOf(caracter) != -1) {

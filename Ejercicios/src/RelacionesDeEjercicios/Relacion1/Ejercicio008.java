@@ -335,8 +335,6 @@ public class Ejercicio008 {
             return (mediaY() + 
                     valorCoeficienteCorrelacion() * (altura - mediaX()));
         }
-        
-        
     }
 
     public void Ejercicio() {
