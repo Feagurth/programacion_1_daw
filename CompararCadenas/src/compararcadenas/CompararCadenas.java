@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package compararcadenas;
 
 /**
@@ -33,63 +32,60 @@ public class CompararCadenas {
         String s4 = "feliz cumpleaños";
         String s5 = new String(s1);
         String s6 = s1;
-        
+
         System.out.printf("s1 = %s\n", s1);
         System.out.printf("s2 = %s\n", s2);
         System.out.printf("s3 = %s\n", s3);
         System.out.printf("s4 = %s\n", s4);
         System.out.printf("s5 = %s\n", s5);
         System.out.printf("s6 = %s\n", s6);
-        
-        if(s1.equals("hola"))
-        {
+
+        if (s1.equals("hola")) {
             System.out.println("S1 es igual a \"hola\"");
-        }
-        else
-        {
+        } else {
             System.out.println("S1 no es igual a \"hola\"");
         }
-        
-        if(s1 == "hola")
-        {
+
+        if (s1 == "hola") {
             System.out.println("S1 es igual al objeto \"hola\"");
-        }
-        else
-        {
+        } else {
             System.out.println("S1 no es igual al objeto \"hola\"");
         }
 
-        if(s1 == s5)
-        {
+        if (s1 == s5) {
             System.out.println("S1 es igual al objeto S5");
-        }
-        else
-        {
+        } else {
             System.out.println("S1 no es igual al objeto S5");
         }
-        
-        if(s1 == s6)
-        {
+
+        if (s1 == s6) {
             System.out.println("S1 es igual al objeto S6");
-        }
-        else
-        {
+        } else {
             System.out.println("S1 no es igual al objeto S6");
         }
-        
-        if(s3.equalsIgnoreCase(s4))
-        {
+
+        if (s3.equalsIgnoreCase(s4)) {
             System.out.println("S3 es igual a s4 si se ignoran las mayúsculas");
-        }
-        else
-        {
+        } else {
             System.out.println("S3 no es igual a S4");
         }
-        
+
         System.out.printf("s1.compareTo(s2) es %d\n", s1.compareTo(s2));
         System.out.printf("s3.compareTo(s4) es %d\n", s3.compareTo(s4));
-        
-        
+        System.out.printf("s4.compareTo(s3) es %d\n", s4.compareTo(s3));
+
+        if (s3.regionMatches(0, s4, 0, 5)) {
+            System.out.println("Los primeros 5 caracteres de s3 y de s4 coinciden");
+        } else {
+            System.out.println("Los primeros 5 caracteres de s3 y de s4 no coinciden");
+        }
+
+        if (s3.regionMatches(true, 0, s4, 0, 5)) {
+            System.out.println("Los primeros 5 caracteres de s3 y de s4 coinciden obviando mayúsculas");
+        } else {
+            System.out.println("Los primeros 5 caracteres de s3 y de s4 no coinciden obviando mayúsculas");
+        }
+
     }
-    
+
 }
