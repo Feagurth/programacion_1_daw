@@ -99,13 +99,13 @@ public class Ejercicio048 {
         // correspondiente a los dias de la semana
         switch(temporal)
         {
+            case 0: resultado  = "Domingo"; break;
             case 1: resultado  = "Lunes"; break;
             case 2: resultado  = "Martes"; break;
             case 3: resultado  = "Miercoles"; break;
             case 4: resultado  = "Jueves"; break;
             case 5: resultado  = "Viernes"; break;
-            case 6: resultado  = "Sabado"; break;
-            case 7: resultado  = "Domingo"; break;
+            case 6: resultado  = "Sabado"; break;            
         }
         
         // Devolvemos el resultado

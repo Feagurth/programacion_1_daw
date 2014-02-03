@@ -116,62 +116,6 @@ public class Ejercicio034 {
         
         // Muestra de resultados
         msg.MostrarMensaje("El dia siguiente es " + dia + "/" + mes + "/" + anyo, 
-                "Resultado", Mensajes.TipoMensaje.INFORMACION);
-                
-        
-/*
-        
-entero : dia, mes, año, apoyoBisiesto
-
-inicio
-
-	leer (dia)
-	leer (mes)
-	leer (año)
-
-	según sea mes hacer
-		 1, 3, 5, 7, 8, 10:
-			si dia = 31 entonces
-				dia ← 1
-				mes ← mes + 1
-			si_no
-				dia ← dia + 1
-			fin_si
-		4, 6, 9, 11:
-			si dia = 30 entonces
-				dia ← 1
-				mes ← mes +1
-			si_no
-				dia ← dia + 1
-			fin_si
-		12:
-			si dia = 31 entonces
-				dia ← 1
-				mes ← 1
-				año ← año + 1
-			si_no
-				dia ← dia + 1
-			fin_si
-		2: 
-			si año Mod 4 = 0 y (año Mod 100 <> 0 o año Mod 400 = 0) entonces
-				apoyoBisiesto ←  0
-			si_no
-				apoyoBisiesto ←  1
-			fin_si
-
-			si dia = 29 – apoyoBisiesto entonces
-				dia ← 1
-				mes ← mes + 1
-			si_no 
-				dia ← dia + 1				
-			fin_si
-	fin_segun
-	
-	escribir (“El dia siguiente es: “ + dia + “/” + mes + “/” + año)
-fin        
-        */        
-        
-    
-    }
-    
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);                      
+    }    
 }
