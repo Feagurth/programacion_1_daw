@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,34 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Trimestre.Segundo.Ejercicios.LibroPdf;
-
-import Utiles.Mensajes;
+package RelacionesDeEjercicios.Relacion2;
 
 /**
- * Clase para realizar el ejercicio 5.21 del libro de texto Como Programar en
- * Java 7ed Deitel
+ * Triples Pitágoras. Un triángulo recto puede tener lados cuyas longitudes sean
+ * valores enteros. El conjunto de tres valores enteros para las longitudes de
+ * los lados de un triángulo recto se conoce como triple de Pitágoras. Las
+ * longitudes de los tres lados deben satisfacer la relación que establece que
+ * la suma de los cuadrados de dos lados es igual al cuadrado de la hipotenusa.
+ * Escribe una aplicación para encontrar todos los triples de Pitágoras para
+ * lado1, lado2 y la hipotenusa, que no sean mayores de 500. Utiliza un ciclo
+ * for triplemente anidado para probar todas las posibilidades. Este método es
+ * un ejemplo de “fuerza bruta”.
+ *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio5_21 {
+public class Ejercicio006 {
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
 
         // Variables 
-        int tamanyo;
+        int tamanyo = 500;
         String resultado = "";
-
-        // Petición de datos al usuario
-        tamanyo = Integer.parseInt(mensaje.PedirDatos("Introduzca el número "
-                + "de iteraciones", "Petición de Datos",
-                Mensajes.TipoMensaje.PREGUNTA));
 
         // Iteramos tantas veces como sea necesario
         for (int i = 1; i <= tamanyo; i++) {
             for (int j = 1; j <= tamanyo; j++) {
-                for (int k = 1; k <= tamanyo; k++) {     
+                for (int k = 1; k <= tamanyo; k++) {
                     
                     // Verificamos si se cumple que la suma del cuadrado de los
                     // catetos es igual al cuadrado de la hipotenusa
@@ -53,8 +52,9 @@ public class Ejercicio5_21 {
                 }
             }
         }
-        
+
         // Muestra de resultados
         System.out.print(resultado);
     }
+
 }
