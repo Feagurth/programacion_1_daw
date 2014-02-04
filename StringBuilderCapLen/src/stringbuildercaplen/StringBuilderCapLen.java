@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,23 +14,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import RelacionesDeEjercicios.Relacion2.Ejercicio004;
+package stringbuildercaplen;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
+public class StringBuilderCapLen {
 
     /**
-     * @param args argumentos por linea de comandos
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
         
-        Ejercicio004 ejercicio = new Ejercicio004();
+        StringBuilder buffer = new StringBuilder("Programación en Java");
         
-        ejercicio.Ejercicio();
+        System.out.printf("Buffer = %s\n", buffer.toString());
+        System.out.printf("Longitud = %s\n", buffer.length());
+        System.out.printf("Capacidad = %s\n", buffer.capacity());
+        buffer.ensureCapacity(75);
+        System.out.printf("Nueva Capacidad = %s\n", buffer.capacity());
+        buffer.setLength(10);
+        System.out.printf("Nueva Longitud = %s\n", buffer.length());
+        System.out.printf("Buffer = %s\n", buffer.toString());        
+            
     }
+    
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,23 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Utiles;
 
-import RelacionesDeEjercicios.Relacion2.Ejercicio004;
+package stringbuilderappend;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Lanzador {
+public class StringBuilderAppend {
 
     /**
-     * @param args argumentos por linea de comandos
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
+        StringBuilder buffer = new StringBuilder("hola ");
         
-        Ejercicio004 ejercicio = new Ejercicio004();
+        Object refObjeto = "adios";
+
+        System.out.println("Antes: " + buffer.toString());
+        buffer.append(refObjeto);        
+        System.out.println("Despues: " + buffer.toString());
         
-        ejercicio.Ejercicio();
+        
     }
+    
 }
