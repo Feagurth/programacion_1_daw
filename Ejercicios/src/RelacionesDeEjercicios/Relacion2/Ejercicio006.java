@@ -56,5 +56,4 @@ public class Ejercicio006 {
         // Muestra de resultados
         System.out.print(resultado);
     }
-
 }

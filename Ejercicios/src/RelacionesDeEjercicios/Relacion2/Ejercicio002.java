@@ -16,9 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
-import Utiles.Mensajes;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * Elaborar un programa que reciba una fecha por teclado –dd, mm, aaaa-, así
