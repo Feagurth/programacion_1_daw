@@ -16,7 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import Utiles.Mensajes;
+import java.util.Scanner;
 
 /**
  * Crear la clase Persona cuya interfaz nos permita: a) Almacenar el nombre, la
@@ -171,25 +171,23 @@ public class Ejercicio001 {
     }
 
     public void Ejercicio() {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
+        // Objeto para pedir datos al usuario
+        Scanner entrada = new Scanner(System.in);
 
         // Creamos el objeto
         Persona persona = new Persona(
                 "Manolo", 15, 28000, Persona.NivelEstudios.ESO);
 
         // Mostramos la información
-        mensaje.MostrarMensaje(persona.MostrarDatosPersona(),
-                "Información", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("Datos de la persona: " + persona.MostrarDatosPersona());
 
         // Mostramos si es mayor de edad
-        mensaje.MostrarMensaje((persona.EsMayorDeEdad()
-                ? "Es mayor de edad" : "No es mayor de edad"),
-                "Información", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println((persona.EsMayorDeEdad()
+                ? "Es mayor de edad" : "No es mayor de edad"));
 
         // Mostramos si es JASP
-        mensaje.MostrarMensaje((persona.EsJASP()
-                ? "Es JASP" : "No es JASP"),
-                "Información", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println(persona.EsJASP()
+                ? "Es JASP" : "No es JASP");
+
     }
 }
