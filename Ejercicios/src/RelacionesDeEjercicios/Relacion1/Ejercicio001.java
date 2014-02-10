@@ -174,9 +174,38 @@ public class Ejercicio001 {
         // Objeto para pedir datos al usuario
         Scanner entrada = new Scanner(System.in);
 
+        // Petición de datos al usuario
+        System.out.print("Nombre: ");
+        String nombre = entrada.nextLine();
+        
+        System.out.print("Edad: ");
+        int edad = entrada.nextInt();
+
+        System.out.print("Sueldo: ");
+        float sueldo = entrada.nextFloat();
+
+        System.out.print("Nivel de Estudios [ESO(1), BACHILLERATO(2), UNIVERSIDAD(3), DOCTORADO(4)]: ");
+        Persona.NivelEstudios nivelEstudios = null;
+        
+        switch(entrada.nextInt())
+        {
+            case 1:
+                nivelEstudios = Persona.NivelEstudios.ESO;
+                break;
+            case 2:
+                nivelEstudios = Persona.NivelEstudios.BACHILLERATO;
+                break;
+            case 3:
+                nivelEstudios = Persona.NivelEstudios.UNIVERSIDAD;
+                break;
+            case 4:
+                nivelEstudios = Persona.NivelEstudios.DOCTORADO;
+                break;                      
+        }
+        
         // Creamos el objeto
         Persona persona = new Persona(
-                "Manolo", 15, 28000, Persona.NivelEstudios.ESO);
+                nombre, edad, sueldo, nivelEstudios);
 
         // Mostramos la información
         System.out.println("Datos de la persona: " + persona.MostrarDatosPersona());

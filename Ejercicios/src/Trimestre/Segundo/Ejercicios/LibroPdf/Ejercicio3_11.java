@@ -77,7 +77,9 @@ public class Ejercicio3_11 {
     public void Ejercicio() {
 
         LibroCalificaciones libro = new LibroCalificaciones("1º Desarrollo de Aplicaciones Web", "Alberto Goñi");
+        LibroCalificaciones libro2 = new LibroCalificaciones("Pollas en vinagre", "Bartolo el del bombo");
 
         libro.mostrarMensaje();
+        libro2.mostrarMensaje();
     }
 }

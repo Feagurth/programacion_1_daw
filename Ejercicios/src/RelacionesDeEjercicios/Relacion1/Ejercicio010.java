@@ -36,7 +36,7 @@ public class Ejercicio010 {
     private BigDecimal Factorial(int valor) {
 
         // Inicializamos la variable
-        BigDecimal resultado = BigDecimal.ONE;
+        BigDecimal resultado = BigDecimal.ONE;       
 
         // Ireramos multiplicando el resultado por el valor anterior
         for (int i = valor; i > 1; i--) {
@@ -53,9 +53,9 @@ public class Ejercicio010 {
      * @param valor Valor del exponente de e
      * @return Resultado de e^ valor
      */
-    private float CalcularEx(double valor, int iteraciones) {
+    private double CalcularEx(double valor, int iteraciones) {
         // Variables        
-        float resultado = 0;
+        double resultado = 0;
 
         // Iteramos desde el segundo dígito hasta el valor del número
         // dividiendo por el factorial del valor de la iteración el 
@@ -77,19 +77,19 @@ public class Ejercicio010 {
      * @param valor Valor al que calcular el coseno
      * @return Coseno del valor
      */
-    private float CalcularCoseno(double valor, int iteraciones) {
+    private double CalcularCoseno(double valor, int iteraciones) {
         // Variables
-        float resultado = 1;
+        double resultado = 1;
 
         // Iteramos desde el 1 hasta el valor de las iteraciones
         for (int i = 1; i <= iteraciones; i++) {
             // Si la iteración es par, sumamos, si no, restamos
             if (i % 2 == 0) {
                 resultado += (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i).floatValue());
+                        / Factorial(2 * i).doubleValue());
             } else {
                 resultado -= (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i).floatValue());
+                        / Factorial(2 * i).doubleValue());
             }
         }
 
@@ -103,9 +103,9 @@ public class Ejercicio010 {
      * @param valor Valor al que calcular el seno
      * @return Seno del valor
      */
-    private float CalcularSeno(double valor, int iteraciones) {
+    private double CalcularSeno(double valor, int iteraciones) {
         // Variables
-        float resultado = (float) valor;
+        double resultado = (float) valor;
 
         // Iteramos desde 1 hasta el valor de las iteraciones
         for (int i = 1; i <= iteraciones; i++) {
@@ -113,10 +113,10 @@ public class Ejercicio010 {
             // Si la iteración es par sumamos, si es impar, restamos
             if (i % 2 == 0) {
                 resultado += Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1).floatValue();
+                        / Factorial((2 * i) + 1).doubleValue();
             } else {
                 resultado -= Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1).floatValue();
+                        / Factorial((2 * i) + 1).doubleValue();
             }
         }
 

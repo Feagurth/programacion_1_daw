@@ -16,6 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import java.util.Scanner;
+
 /**
  * Crear una clase para cada poliedro que permita: a) Almacenar la arista b)
  * Calcular el volumen c) Calcular el área Crear un programa de prueba que
@@ -264,12 +266,19 @@ public class Ejercicio009 {
         
     public void Ejercicio() {
 
+        // Objeto para recoger datos por teclado
+        Scanner entrada = new Scanner(System.in);
+        
+        // Petición de datos al usuario
+        System.out.print("Introduzca el valor de la arista de los polígonos: ");
+        float arista = entrada.nextFloat();
+        
         // Objetos
-        Tetraedro tetra = new Tetraedro(15);
-        Cubo cubo = new Cubo(15);
-        Octaedro octa = new Octaedro(15);
-        Dodecaedro dode = new Dodecaedro(15);
-        Icosaedro ico = new Icosaedro(15);
+        Tetraedro tetra = new Tetraedro(arista);
+        Cubo cubo = new Cubo(arista);
+        Octaedro octa = new Octaedro(arista);
+        Dodecaedro dode = new Dodecaedro(arista);
+        Icosaedro ico = new Icosaedro(arista);
         
         // Datos del tetraedro
         System.out.println("- Tetraedro -");

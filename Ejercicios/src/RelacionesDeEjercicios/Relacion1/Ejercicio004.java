@@ -111,7 +111,7 @@ public class Ejercicio004 {
     public void Ejercicio() {
 
         // Objeto para leer datos del usuario
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
 
         // Array para almacenar los empleados
         Empleado[] arrayEmpleados = new Empleado[8];
@@ -121,20 +121,23 @@ public class Ejercicio004 {
 
         // Iteramos para preguntar los datos de los empleados y almacenarlos
         for (int i = 0; i < 8; i++) {
+
+             scanner = new Scanner(System.in);
+            
             // Los 4 primeros empleados serán los del turno de mañana
             // y los siguientes los de la tarde
-            System.out.print("\nIntroduzca el nombre del trabajador "
-                    + "para el turno de " + ((i > 3) ? "mañana" : "tarde") + ": ");
-
+            System.out.print("Introduzca el nombre del trabajador "
+                    + "para el turno de " + ((i < 3) ? "mañana" : "tarde") + ": ");
             nombre = scanner.nextLine();
-
-            System.out.print("\nIntroduzca el sueldo del trabajador "
-                    + "para el turno de " + ((i > 3) ? "mañana" : "tarde") + ": ");
+            
+            
+            System.out.print("Introduzca el sueldo del trabajador "
+                    + "para el turno de " + ((i < 3) ? "mañana" : "tarde") + ": ");
 
             sueldo = scanner.nextFloat();
 
             // Creamos el empleado y lo almacenamos en el array
-            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i > 3 ? 'm' : 't'));
+            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i > 3 ? 'm' : 't'));            
         }
 
         // Creamos los acumuladores y los inicializamos

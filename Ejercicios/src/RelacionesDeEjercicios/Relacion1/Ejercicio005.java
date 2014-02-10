@@ -16,6 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import java.util.Scanner;
+
 /**
  * Crear la clase TablaMultiplicar cuya interfaz nos permita: a) Calcular la
  * tabla de multiplicar b) Mostrarla de forma estructurada por pantalla
@@ -75,8 +77,20 @@ public class Ejercicio005 {
 
     public void Ejercicio() {
 
-        TablaDeMultiplicar tabla = new TablaDeMultiplicar(7);
+        // Objeto para recibir datos por teclado
+        Scanner entrada = new Scanner(System.in);
+        
+        // Petición de datos al usuario
+        System.out.print("Introduzca el número cuya tabla quiera mostrar: ");
+        int numero = entrada.nextInt();
+        
+        System.out.print("Introduzca la cantidad de operaciones a mostrar: ");
+        int iteraciones = entrada.nextInt();
+        
+        // Creamos el objeto
+        TablaDeMultiplicar tabla = new TablaDeMultiplicar(numero);
 
-        System.out.println(tabla.generarTabla(100));
+        // Mostramos los resultados
+        System.out.println(tabla.generarTabla(iteraciones));
     }
 }

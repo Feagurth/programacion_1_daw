@@ -16,11 +16,11 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import java.util.Scanner;
+
 /**
- * Crear la clase Triángulo cuya interfaz nos permita
- *  a) Saber el área 
- *  b) Conocer el lado mayor 
- *  c) Saber si es equilátero
+ * Crear la clase Triángulo cuya interfaz nos permita a) Saber el área b)
+ * Conocer el lado mayor c) Saber si es equilátero
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -153,13 +153,30 @@ public class Ejercicio002 {
 
     public void Ejercicio() {
 
-        Triangulo triangulo = new Triangulo(39.12, 33, 21);
+        // Objeto para pedir información por teclado
+        Scanner entrada = new Scanner(System.in);
 
-        System.out.print(triangulo.isValido() + "\n");
-        
-        System.out.print("El lado mayor mide: " + triangulo.ladoMayor()+ "\n");
+        float lado1, lado2, lado3;
 
-        System.out.print(triangulo.valorArea() + "\n");
+        // Petición de datos al usuario
+        System.out.print("Introduzca el valor del primer lado del triangulo : ");
+        lado1 = entrada.nextFloat();
+
+        System.out.print("Introduzca el valor del segundo lado del triangulo : ");
+        lado2 = entrada.nextFloat();
+
+        System.out.print("Introduzca el valor del tercer lado del triangulo : ");
+        lado3 = entrada.nextFloat();
+
+        // Creamos el objeto
+        Triangulo triangulo = new Triangulo(lado1, lado2, lado3);
+
+        // Mostramos los resultados
+        System.out.println(triangulo.isValido() ? "Es un triangulo válido" : "No es un triangulo válido");
+
+        System.out.print("El lado mayor mide: " + triangulo.ladoMayor() + "\n");
+
+        System.out.print("Area: " + triangulo.valorArea() + "\n");
 
     }
 
