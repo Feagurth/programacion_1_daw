@@ -140,11 +140,12 @@ public class Ejercicio010 {
         iterac = scanner.nextInt();
 
         // Pedimos al usuario el valor del exponente
-        System.out.print("\nIntroduzca el valor para el exponente de e^x: ");
+        System.out.print("Introduzca el valor para el exponente de e^x: ");
         numero = scanner.nextDouble();
 
         // Mostramos resultados
-        System.out.print("\ne^" + numero + ": " + CalcularEx(numero, iterac));
+        System.out.print("<H>e^" + numero + ": " + CalcularEx(numero, iterac));
+        System.out.print("\n<C>e^" + numero + ": " + Math.pow(Math.E, numero));
 
         // Pedimos al usuario el angulo para calcular el seno
         System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
@@ -152,7 +153,8 @@ public class Ejercicio010 {
         numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
-        System.out.print("Sen(" + numero + "): " + CalcularSeno(numero, iterac));
+        System.out.print("<H>Sen(" + numero + "): " + CalcularSeno(numero, iterac));
+        System.out.print("\n<C>Sen(" + numero + "): " + Math.sin(numero));
 
         // Pedimos al usuario el angulo para calcular el coseno
         System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
@@ -160,6 +162,7 @@ public class Ejercicio010 {
         numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
-        System.out.print("Cos(" + numero + "): " + CalcularCoseno(numero, iterac));
+        System.out.print("<H>Cos(" + numero + "): " + CalcularCoseno(numero, iterac));
+        System.out.print("\n<C>Cos(" + numero + "): " + Math.cos(numero));
     }
 }
