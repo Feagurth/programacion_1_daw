@@ -16,7 +16,6 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -33,14 +32,14 @@ public class Ejercicio010 {
      * @param valor Numero del que se quiere calcular el factorial
      * @return Valor del factorial
      */
-    private BigDecimal Factorial(int valor) {
+    private double Factorial(int valor) {
 
         // Inicializamos la variable
-        BigDecimal resultado = BigDecimal.ONE;       
+        double resultado = 1;
 
         // Ireramos multiplicando el resultado por el valor anterior
         for (int i = valor; i > 1; i--) {
-            resultado = resultado.multiply(BigDecimal.valueOf(i));
+            resultado *= i;
         }
 
         // Devolvemos el resultado
@@ -56,16 +55,24 @@ public class Ejercicio010 {
     private double CalcularEx(double valor, int iteraciones) {
         // Variables        
         double resultado = 0;
+        double temp = 0;
 
         // Iteramos desde el segundo dígito hasta el valor del número
         // dividiendo por el factorial del valor de la iteración el 
         // número elevado al valor de la iteración
         for (int i = 2; i <= iteraciones; i++) {
-            resultado += Math.pow(valor, i) / Factorial(i).floatValue();
+            temp += Math.pow(valor, i) / Factorial(i);
+
+            if (Double.isNaN(temp)) {
+                resultado += 1 + valor;
+                return resultado;
+            } else {
+                resultado = temp;
+            }
         }
 
         // Añadimos 1 + el valor del número
-        resultado += 1 + valor;
+        resultado = temp + 1 + valor;
 
         // Devolvemos el resultado
         return resultado;
@@ -80,16 +87,22 @@ public class Ejercicio010 {
     private double CalcularCoseno(double valor, int iteraciones) {
         // Variables
         double resultado = 1;
+        double temp = 1;
 
         // Iteramos desde el 1 hasta el valor de las iteraciones
         for (int i = 1; i <= iteraciones; i++) {
             // Si la iteración es par, sumamos, si no, restamos
             if (i % 2 == 0) {
-                resultado += (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i).doubleValue());
+                temp += (Math.pow(valor, (2 * i))
+                        / Factorial(2 * i));
             } else {
-                resultado -= (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i).doubleValue());
+                temp -= (Math.pow(valor, (2 * i)) / Factorial(2 * i));
+            }
+
+            if (Double.isNaN(temp)) {
+                return resultado;
+            } else {
+                resultado = temp;
             }
         }
 
@@ -105,19 +118,28 @@ public class Ejercicio010 {
      */
     private double CalcularSeno(double valor, int iteraciones) {
         // Variables
-        double resultado = (float) valor;
+        double resultado = 0;
+        double temp = valor;
 
         // Iteramos desde 1 hasta el valor de las iteraciones
         for (int i = 1; i <= iteraciones; i++) {
 
             // Si la iteración es par sumamos, si es impar, restamos
             if (i % 2 == 0) {
-                resultado += Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1).doubleValue();
+                temp += Math.pow(valor, ((2 * i) + 1))
+                        / Factorial((2 * i) + 1);
+
             } else {
-                resultado -= Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1).doubleValue();
+                temp -= Math.pow(valor, ((2 * i) + 1))
+                        / Factorial((2 * i) + 1);
             }
+
+            if (Double.isNaN(temp)) {
+                return resultado;
+            } else {
+                resultado = temp;
+            }
+
         }
 
         // Devolvemos el resultado
@@ -163,6 +185,6 @@ public class Ejercicio010 {
 
         // Mostramos el resultado
         System.out.print("<H>Cos(" + numero + "): " + CalcularCoseno(numero, iterac));
-        System.out.print("\n<C>Cos(" + numero + "): " + Math.cos(numero));
+        System.out.print("\n<C>Cos(" + numero + "): " + Math.cos(numero) + "\n");
     }
 }
