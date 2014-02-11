@@ -16,6 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
+import java.util.Scanner;
+
 /**
  * Triples Pitágoras. Un triángulo recto puede tener lados cuyas longitudes sean
  * valores enteros. El conjunto de tres valores enteros para las longitudes de
@@ -32,10 +34,18 @@ package RelacionesDeEjercicios.Relacion2;
 public class Ejercicio006 {
 
     public void Ejercicio() {
-
+        // Objeto para pedir datos desde el teclado
+        Scanner entrada = new Scanner(System.in);
+        
         // Variables 
-        int tamanyo = 500;
+        int tamanyo;
         String resultado = "";
+        
+        // Petición de datos al usuario
+        System.out.print("Introduzca el número limite para calcular los triples "
+                + "pitagóricos: ");
+        
+        tamanyo = entrada.nextInt();
 
         // Iteramos tantas veces como sea necesario
         for (int i = 1; i <= tamanyo; i++) {

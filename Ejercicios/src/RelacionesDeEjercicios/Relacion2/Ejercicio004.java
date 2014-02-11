@@ -16,6 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
+import java.util.Scanner;
+
 /**
  * Escribe una aplicación que muestre la siguiente figura de rombo. Puedes
  * utilizar instrucciones de salida que impriman un solo asterisco (*), un solo
@@ -27,9 +29,19 @@ package RelacionesDeEjercicios.Relacion2;
 public class Ejercicio004 {
 
     public void Ejercicio() {
+        // Objeto para recibir datos desde el teclado
+        Scanner entrada = new Scanner(System.in);
+        
+        
         // Variables
-        final int alto = 9;
+        int alto;
         String resultado = "";
+        
+        // Petición de datos al usuario
+        System.out.print("Introduzca un número entero para definir el ancho "
+                + "máximo del rombo dibujado: ");
+        
+        alto = entrada.nextInt();
 
         for (int i = 1; i <= ((alto / 2) + 1); i++) {
             for (int k = 1; k <= alto / 2 - i + 1; k++) {
