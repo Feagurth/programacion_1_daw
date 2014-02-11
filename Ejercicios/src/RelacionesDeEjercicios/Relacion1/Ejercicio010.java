@@ -16,11 +16,13 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
- * Implementa tres funciones que permitan averiguar los valores de eX, cos(x) y
- * sen(x)
+ * Implementa tres funciones que permitan averiguar los valores de e^(x), cos(x)
+ * y sen(x)
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -29,20 +31,25 @@ public class Ejercicio010 {
     /**
      * Función para calcular el factorial de un número
      *
-     * @param valor Numero del que se quiere calcular el factorial
+     * @param valor número del que se quiere calcular el factorial
      * @return Valor del factorial
      */
-    private double Factorial(int valor) {
+    private BigInteger Factorial(double valor) {
 
-        // Inicializamos la variable
-        double resultado = 1;
+        // Creamos un objeto BigInteger para generar el factorial
+        // debido a su mayor precisión respecto a tipos primitivos
+        BigInteger resultado = BigInteger.ONE;
 
-        // Ireramos multiplicando el resultado por el valor anterior
-        for (int i = valor; i > 1; i--) {
-            resultado *= i;
+        // Comprobamos que no queremos calcular el factorial de 0
+        if (valor != 0) {
+
+            // Iteramos desde 1 hasta el valor a calcular
+            for (int i = 1; i <= valor; i++) {
+                // Multiplicamos el valor actual por el acumulado de las 
+                // multiplicaciones de los anteriores terminos
+                resultado = resultado.multiply(BigInteger.valueOf(i));
+            }
         }
-
-        // Devolvemos el resultado
         return resultado;
     }
 
@@ -52,58 +59,58 @@ public class Ejercicio010 {
      * @param valor Valor del exponente de e
      * @return Resultado de e^ valor
      */
-    private double CalcularEx(double valor, int iteraciones) {
-        // Variables        
-        double resultado = 0;
-        double temp = 0;
+    private BigDecimal CalcularEx(double valor, int iteraciones, int precision) {
 
-        // Iteramos desde el segundo dígito hasta el valor del número
-        // dividiendo por el factorial del valor de la iteración el 
-        // número elevado al valor de la iteración
-        for (int i = 2; i <= iteraciones; i++) {
-            temp += Math.pow(valor, i) / Factorial(i);
+        // Variables para contener los diversos valores intermedios 
+        // de las operaciones
+        BigDecimal resultado = BigDecimal.ZERO;
+        BigDecimal apoyo;
 
-            if (Double.isNaN(temp)) {
-                resultado += 1 + valor;
-                return resultado;
-            } else {
-                resultado = temp;
-            }
+        // Transformamos el valor a calcular en un objeto BigDecimal
+        BigDecimal tempValor = BigDecimal.valueOf(valor);
+
+        // Iteramos tantas veces como se nos haya especificado
+        for (int i = 0; i < iteraciones; i++) {
+            apoyo = tempValor.pow(i).divide(new BigDecimal(Factorial(i)),
+                    precision, BigDecimal.ROUND_HALF_UP);
+
+            // Sumamos el valor al resultado
+            resultado = resultado.add(apoyo);
         }
-
-        // Añadimos 1 + el valor del número
-        resultado = temp + 1 + valor;
 
         // Devolvemos el resultado
         return resultado;
     }
 
     /**
-     * Función para calcular el coseno mediante series
+     * Función para calcular el coseno mediante series de Taylor
      *
      * @param valor Valor al que calcular el coseno
      * @return Coseno del valor
      */
-    private double CalcularCoseno(double valor, int iteraciones) {
+    private BigDecimal CalcularCoseno(double valor, int iteraciones, int precision) {
         // Variables
-        double resultado = 1;
-        double temp = 1;
+        int signo = -1;
+        BigDecimal resultado = BigDecimal.valueOf(valor);
+        BigDecimal apoyo;
 
-        // Iteramos desde el 1 hasta el valor de las iteraciones
-        for (int i = 1; i <= iteraciones; i++) {
-            // Si la iteración es par, sumamos, si no, restamos
-            if (i % 2 == 0) {
-                temp += (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i));
-            } else {
-                temp -= (Math.pow(valor, (2 * i)) / Factorial(2 * i));
-            }
+        // Transformamos el valor a calcular en un objeto BigDecimal
+        BigDecimal tempValor = BigDecimal.valueOf(valor);
 
-            if (Double.isNaN(temp)) {
-                return resultado;
-            } else {
-                resultado = temp;
-            }
+        // Iteramos tantas veces como sea necesario
+        for (int i = 1; i < iteraciones; i++) {
+
+            // Realizamos las operaciones
+            apoyo = tempValor.pow(((2 * i)));
+            apoyo = apoyo.divide(new BigDecimal(Factorial(((2 * i)))),
+                    precision, BigDecimal.ROUND_HALF_DOWN);
+
+            apoyo = apoyo.multiply(BigDecimal.valueOf(signo));
+
+            resultado = resultado.add(apoyo);
+
+            // Cambiamos el valor del signo para la siguiente operación
+            signo *= -1;
         }
 
         // Devolvemos el resultado
@@ -111,35 +118,34 @@ public class Ejercicio010 {
     }
 
     /**
-     * Función para calcular el seno mediante series
+     * Función para calcular el seno mediante series de Taylor
      *
      * @param valor Valor al que calcular el seno
      * @return Seno del valor
      */
-    private double CalcularSeno(double valor, int iteraciones) {
+    private BigDecimal CalcularSeno(double valor, int iteraciones, int precision) {
         // Variables
-        double resultado = 0;
-        double temp = valor;
+        int signo = -1;
+        BigDecimal resultado = BigDecimal.valueOf(valor);
+        BigDecimal apoyo;
 
-        // Iteramos desde 1 hasta el valor de las iteraciones
-        for (int i = 1; i <= iteraciones; i++) {
+        // Transformamos el valor a calcular en un objeto BigDecimal
+        BigDecimal tempValor = BigDecimal.valueOf(valor);
 
-            // Si la iteración es par sumamos, si es impar, restamos
-            if (i % 2 == 0) {
-                temp += Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1);
+        // Iteramos tantas veces como sea necesario
+        for (int i = 1; i < iteraciones; i++) {
 
-            } else {
-                temp -= Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1);
-            }
+            // Realizamos las operaciones
+            apoyo = tempValor.pow(((2 * i) + 1));
+            apoyo = apoyo.divide(new BigDecimal(Factorial(((2 * i) + 1))),
+                    precision, BigDecimal.ROUND_HALF_DOWN);
 
-            if (Double.isNaN(temp)) {
-                return resultado;
-            } else {
-                resultado = temp;
-            }
+            apoyo = apoyo.multiply(BigDecimal.valueOf(signo));
 
+            resultado = resultado.add(apoyo);
+
+            // Cambiamos el valor del signo para la siguiente operación
+            signo *= -1;
         }
 
         // Devolvemos el resultado
@@ -164,9 +170,8 @@ public class Ejercicio010 {
         // Pedimos al usuario el valor del exponente
         System.out.print("Introduzca el valor para el exponente de e^x: ");
         numero = scanner.nextDouble();
-
         // Mostramos resultados
-        System.out.print("<H>e^" + numero + ": " + CalcularEx(numero, iterac));
+        System.out.print("<H>e^" + numero + ": " + CalcularEx(numero, iterac, 30).doubleValue());
         System.out.print("\n<C>e^" + numero + ": " + Math.pow(Math.E, numero));
 
         // Pedimos al usuario el angulo para calcular el seno
@@ -175,7 +180,7 @@ public class Ejercicio010 {
         numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
-        System.out.print("<H>Sen(" + numero + "): " + CalcularSeno(numero, iterac));
+        System.out.print("<H>Sen(" + numero + "): " + CalcularSeno(numero, iterac, 30).doubleValue());
         System.out.print("\n<C>Sen(" + numero + "): " + Math.sin(numero));
 
         // Pedimos al usuario el angulo para calcular el coseno
@@ -184,7 +189,8 @@ public class Ejercicio010 {
         numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
-        System.out.print("<H>Cos(" + numero + "): " + CalcularCoseno(numero, iterac));
+        System.out.print("<H>Cos(" + numero + "): " + CalcularCoseno(numero, iterac, 30).doubleValue());
         System.out.print("\n<C>Cos(" + numero + "): " + Math.cos(numero) + "\n");
+
     }
 }
