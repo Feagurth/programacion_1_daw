@@ -89,9 +89,9 @@ public class Ejercicio010 {
      * @return Coseno del valor
      */
     private BigDecimal CalcularCoseno(double valor, int iteraciones, int precision) {
-        // Variables
+                // Variables
         int signo = -1;
-        BigDecimal resultado = BigDecimal.valueOf(valor);
+        BigDecimal resultado = BigDecimal.ONE;
         BigDecimal apoyo;
 
         // Transformamos el valor a calcular en un objeto BigDecimal
@@ -128,7 +128,7 @@ public class Ejercicio010 {
         int signo = -1;
         BigDecimal resultado = BigDecimal.valueOf(valor);
         BigDecimal apoyo;
-
+       
         // Transformamos el valor a calcular en un objeto BigDecimal
         BigDecimal tempValor = BigDecimal.valueOf(valor);
 
@@ -171,17 +171,15 @@ public class Ejercicio010 {
         System.out.print("Introduzca el valor para el exponente de e^x: ");
         numero = scanner.nextDouble();
         // Mostramos resultados
-        System.out.print("<H>e^" + numero + ": " + CalcularEx(numero, iterac, 30).doubleValue());
-        System.out.print("\n<C>e^" + numero + ": " + Math.pow(Math.E, numero));
-
+        System.out.print("e^" + numero + ": " + CalcularEx(numero, iterac, 30).doubleValue());
+        
         // Pedimos al usuario el angulo para calcular el seno
         System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
                 + "sen(x): ");
         numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
-        System.out.print("<H>Sen(" + numero + "): " + CalcularSeno(numero, iterac, 30).doubleValue());
-        System.out.print("\n<C>Sen(" + numero + "): " + Math.sin(numero));
+        System.out.print("Sen(" + numero + "): " + CalcularSeno(numero, iterac, 30).doubleValue());
 
         // Pedimos al usuario el angulo para calcular el coseno
         System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
@@ -189,8 +187,8 @@ public class Ejercicio010 {
         numero = Math.toRadians(scanner.nextDouble());
 
         // Mostramos el resultado
-        System.out.print("<H>Cos(" + numero + "): " + CalcularCoseno(numero, iterac, 30).doubleValue());
-        System.out.print("\n<C>Cos(" + numero + "): " + Math.cos(numero) + "\n");
+        System.out.print("Cos(" + numero + "): " + CalcularCoseno(numero, iterac, 30).doubleValue());
+        System.out.println("");
 
     }
 }

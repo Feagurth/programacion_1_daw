@@ -38,7 +38,7 @@ public class Ejercicio004 {
         String resultado = "";
         
         // Petición de datos al usuario
-        System.out.print("Introduzca un número entero para definir el ancho "
+        System.out.print("Introduzca un número entero impar para definir el ancho "
                 + "máximo del rombo dibujado: ");
         
         alto = entrada.nextInt();

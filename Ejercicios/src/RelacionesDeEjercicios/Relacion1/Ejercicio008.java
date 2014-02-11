@@ -339,38 +339,49 @@ public class Ejercicio008 {
 
     public void Ejercicio() {
         
+        // Objeto para pedir datos desde teclado
         Scanner entrada = new Scanner(System.in);
         
+        // Variables
         double valorAltura;
         
+        // Creamos el objeto con el que trabajemos
         DistribucionBidimensional distro = new DistribucionBidimensional(8, false);
 
+        // Imprimimos la matriz
         System.out.print(distro.imprimirMatriz());
 
+        // Mostramos los datos del centro de gravedad
         System.out.print("El centro de gravedad de la distribución es: "
                 + distro.centroDeGravedad());
 
+        // Mostramos los datos de la desviación típica de X
         System.out.print("\nLa desviación típica de X es: "
                 + distro.valorDesviacionTipicaX());
 
+        // Mostramos los datos de la desviación típica de Y
         System.out.print("\nLa desviación típica de Y es: "
                 + distro.valorDesviacionTipicaY());
-
+        
+        // Mostramos los datos la covarianza de la distribución
         System.out.print("\nLa covarianza de la distribución es: "
                 + distro.valorCovarianza());
 
+        // Mostramos los datos del coeficiente de correlación
         System.out.print("\nEl valor del coeficiente de correlación es: "
                 + distro.valorCoeficienteCorrelacion());
-
+        
+        // Mostramos la interpretacón del coeficiente de correlación
         System.out.print("\n" + distro.interpretarCoeficienteCorrelacion());
 
+        
+        // Petición de datos al usuario
         System.out.print("Introduzca una altura para estimar el peso: ");
         valorAltura = entrada.nextDouble();
         
+        // Calculamos el peso estimado basdo en la inforamción introducida por el usuario
         System.out.print("El peso estimado es: " + distro.estimarPeso(valorAltura));
         
         System.out.println("");
-        
-        
     }
 }

@@ -127,17 +127,17 @@ public class Ejercicio004 {
             // Los 4 primeros empleados serán los del turno de mañana
             // y los siguientes los de la tarde
             System.out.print("Introduzca el nombre del trabajador "
-                    + "para el turno de " + ((i < 3) ? "mañana" : "tarde") + ": ");
+                    + "para el turno de " + ((i < 4) ? "mañana" : "tarde") + ": ");
             nombre = scanner.nextLine();
             
             
             System.out.print("Introduzca el sueldo del trabajador "
-                    + "para el turno de " + ((i < 3) ? "mañana" : "tarde") + ": ");
+                    + "para el turno de " + ((i < 4) ? "mañana" : "tarde") + ": ");
 
             sueldo = scanner.nextFloat();
 
             // Creamos el empleado y lo almacenamos en el array
-            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i > 3 ? 'm' : 't'));            
+            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i < 4 ? 'm' : 't'));            
         }
 
         // Creamos los acumuladores y los inicializamos
