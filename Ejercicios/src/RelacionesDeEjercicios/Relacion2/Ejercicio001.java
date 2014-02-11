@@ -143,7 +143,7 @@ public class Ejercicio001 {
         }
         
         // Muestra de resultados
-        System.out.println("El día siguiente al introducido es: " + dia + "/" + 
-                mes + "/" + anyo);        
+        System.out.println("El día siguiente al introducido es: " + (dia < 9 ? "0" : "") + dia + "/"
+                + (mes < 9 ? "0" : "") + mes + "/" + anyo);
     }
 }

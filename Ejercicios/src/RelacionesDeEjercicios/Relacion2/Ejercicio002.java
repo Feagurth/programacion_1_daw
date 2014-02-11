@@ -156,7 +156,7 @@ public class Ejercicio002 {
         resultado = DiaSemana(dia, mes, anyo, calendario.charAt(0));
 
         // Mostramos la información al usuario
-        System.out.printf("\nEl %d/%d/%d fue %s\n", dia, mes, anyo, resultado);
+        System.out.printf("\nEl %s/%s/%d fue %s\n", (dia < 9 ? "0" : "") + dia, (mes < 9 ? "0" : "") + mes, anyo, resultado);
 
     }
 }

@@ -143,6 +143,5 @@ public class Ejercicio003 {
 
         // Devolvemos la cadena sin codificar
         return apoyo2.toString();
-    }    
-    
+    }        
 }
