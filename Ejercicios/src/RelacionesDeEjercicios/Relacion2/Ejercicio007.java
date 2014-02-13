@@ -25,19 +25,45 @@ import java.util.Scanner;
  * decimal. La instrucción Redondea x en la posición de las centésimas (es
  * decir, la segunda posición a la derecha del punto decimal). Escribe una
  * aplicación que defina cuatro métodos para redondear un número x en varias
- * formas: 
- * a) redondearAInteger( numero ) 
- * b) redondearADecimas( numero ) 
- * c) redondearACentesimas( numero ) 
- * d) redondearAMilesimas ( numero ) 
- * Para cada valor leído, el programa debe mostrar el valor original, el número 
- * redondeado al entero más cercano, el número redondeado a la décima más 
- * cercana, el número redondeado a la centésima más cercana y el número 
- * redondeado a la milésima más cercana.
+ * formas: a) redondearAInteger( numero ) b) redondearADecimas( numero ) c)
+ * redondearACentesimas( numero ) d) redondearAMilesimas ( numero ) Para cada
+ * valor leído, el programa debe mostrar el valor original, el número redondeado
+ * al entero más cercano, el número redondeado a la décima más cercana, el
+ * número redondeado a la centésima más cercana y el número redondeado a la
+ * milésima más cercana.
  *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio007 {
+
+    /**
+     * Función para detectar si el número debe redondedearse
+     *
+     * @param numero Número a redondear
+     * @param decimales Valores límite del redondeo
+     * @return
+     */
+    private double precalculoRedondeo(double numero, int decimales) {
+
+        // Multiplicamos por la potencia de los decimales que queramos más uno
+        // para coger un valor más y detectar si es mayor de 5 para redondear
+        numero = numero * (Math.pow(10, (decimales + 1)));
+
+        // Verificamos si el último dígito del número es mayor de cinco
+        if ((int) (numero % 10) > 5) {
+            // Si lo es, sumamos 10 al número, lo cual aumentará en 1
+            // el valor decimal del número
+            numero += 10;
+        }
+
+        // Dividimos el número por el mismo valor por el que lo multiplicamos
+        // al principio para dejarlo con la misma cantidad de decimales que 
+        // al inicio de la método
+        numero = numero / (Math.pow(10, (decimales + 1)));
+
+        // Devolvemos el resultado
+        return numero;
+    }
 
     /**
      * Función para realizar el redondeo de un número
@@ -52,9 +78,9 @@ public class Ejercicio007 {
         int parteEntera, parteDecimal;
         int apoyoDecimales;
 
+        // Realizamos el precalculo del redondeo
         numero = precalculoRedondeo(numero, decimales);
-        
-        
+
         // Calculamos el valor por el que tendremos que multiplicar
         // los decimales para conseguir la parte entera del redondeo que
         // queremos
@@ -69,12 +95,12 @@ public class Ejercicio007 {
         // quedandonos la parte que queremos para el redondeo como la parte 
         // entera del numero obtenido, la cual conseguimos dividiendo ese
         // número entre 1
-        parteDecimal = (int) ((numero - parteEntera) * apoyoDecimales) / 1;
-       
+        parteDecimal = (int) (((numero - parteEntera) * apoyoDecimales)) / 1;
+
         // Creamos una cadena con el número de la parte entera concatenado 
         // junto con un punto y la parte decimal, y parseamos la cadena
-        // para obtener el resultado en float
-        resultado = Double.parseDouble(parteEntera + "." + parteDecimal);
+        // para obtener el resultado en double
+        resultado = Double.parseDouble(parteEntera + "." + (parteDecimal));
 
         // Devolvemos el resultado
         return resultado;
@@ -82,6 +108,7 @@ public class Ejercicio007 {
 
     /**
      * Función que permite devolver un numero sin decimales
+     *
      * @param valor Valor a convertir
      * @return numero sin decimales
      */
@@ -91,6 +118,7 @@ public class Ejercicio007 {
 
     /**
      * Función que permite devolver un numero un decimal
+     *
      * @param valor Valor a convertir
      * @return numero con un decimal
      */
@@ -100,6 +128,7 @@ public class Ejercicio007 {
 
     /**
      * Función que permite devolver un numero dos decimales
+     *
      * @param valor Valor a convertir
      * @return numero con dos decimales
      */
@@ -109,6 +138,7 @@ public class Ejercicio007 {
 
     /**
      * Función que permite devolver un numero tres decimales
+     *
      * @param valor Valor a convertir
      * @return numero con tres decimales
      */
@@ -117,13 +147,13 @@ public class Ejercicio007 {
     }
 
     public void Ejercicio() {
-        
+
         // Objeto para leer datos desde el teclado
         Scanner entrada = new Scanner(System.in);
-        
+
         // Variables
         double valor;
-        
+
         // Pedimos datos al usuario
         System.out.print("Introduzca un valor decimal (0 para salir): ");
         valor = entrada.nextDouble();
@@ -131,30 +161,16 @@ public class Ejercicio007 {
 
             // Mostramos la información a través de las funciones wrappers de la
             // función redondeo
-            System.out.printf("Original: %s\n0 Dec: %s\n1 Dec: %s\n2 Dec: %s\n3 Dec: %s\n", 
-                    String.valueOf(valor), 
+            System.out.printf("Original: %s\n0 Dec: %s\n1 Dec: %s\n2 Dec: %s\n3 Dec: %s\n",
+                    String.valueOf(valor),
                     String.valueOf(redondearAInteger(valor)),
                     String.valueOf(redondearADecimas(valor)),
                     String.valueOf(redondearACentesimas(valor)),
                     String.valueOf(redondearAMilesimas(valor)));
-            
+
             // Volvemos a pedir datos
             System.out.print("Introduzca un valor decimal (0 para salir): ");
             valor = entrada.nextFloat();
         } while (valor != 0);
-    }
-
-    private double precalculoRedondeo(double numero, int decimales) {
-        
-        numero = numero * (Math.pow(10, (decimales+1)));
-        
-        if((int)(numero % 10) > 5)
-        {
-            numero += 10;
-        }
-        
-        numero = numero / (Math.pow(10, (decimales+1)));
-        
-        return numero;
     }
 }
