@@ -34,6 +34,7 @@ public class Ejercicio005 {
         int iteraciones;
         float valorPi = 0;
         boolean controlSuma = true;
+        int controlSalida = 3;
 
         do {
             // Pedimos al usuario el número de iteraciones para calcular el valor 
@@ -57,10 +58,10 @@ public class Ejercicio005 {
             }
             // Preparamos la variable para que en la siguiente iteración
             // realize la operación contraria a la actual
-            controlSuma = !controlSuma;
+            controlSuma = !controlSuma;            
         }
 
         // Mostramos el resultado al usuario
-        System.out.println("El resultado es: " + valorPi);
+        System.out.println("El valor final es: " + valorPi);
     }
 }

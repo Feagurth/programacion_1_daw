@@ -31,17 +31,19 @@ public class Ejercicio004 {
     public void Ejercicio() {
         // Objeto para recibir datos desde el teclado
         Scanner entrada = new Scanner(System.in);
-        
-        
+
         // Variables
         int alto;
         String resultado = "";
-        
-        // Petición de datos al usuario
-        System.out.print("Introduzca un número entero impar para definir el ancho "
-                + "máximo del rombo dibujado: ");
-        
-        alto = entrada.nextInt();
+
+        do {
+
+            // Petición de datos al usuario
+            System.out.print("Introduzca un número entero impar para definir el ancho "
+                    + "máximo del rombo dibujado: ");
+
+            alto = entrada.nextInt();
+        } while (alto % 2 == 0);
 
         for (int i = 1; i <= ((alto / 2) + 1); i++) {
             for (int k = 1; k <= alto / 2 - i + 1; k++) {

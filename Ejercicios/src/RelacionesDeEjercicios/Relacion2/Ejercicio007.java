@@ -46,12 +46,15 @@ public class Ejercicio007 {
      * @param decimales Cantidad de decimales que tendrá el redondeo
      * @return Valor redondeado con los parámetros introducidos
      */
-    private float Redondeo(float numero, int decimales) {
+    private double Redondeo(double numero, int decimales) {
         // Variables
-        float resultado;
+        double resultado;
         int parteEntera, parteDecimal;
         int apoyoDecimales;
 
+        numero = precalculoRedondeo(numero, decimales);
+        
+        
         // Calculamos el valor por el que tendremos que multiplicar
         // los decimales para conseguir la parte entera del redondeo que
         // queremos
@@ -71,7 +74,7 @@ public class Ejercicio007 {
         // Creamos una cadena con el número de la parte entera concatenado 
         // junto con un punto y la parte decimal, y parseamos la cadena
         // para obtener el resultado en float
-        resultado = Float.parseFloat(parteEntera + "." + parteDecimal);
+        resultado = Double.parseDouble(parteEntera + "." + parteDecimal);
 
         // Devolvemos el resultado
         return resultado;
@@ -82,7 +85,7 @@ public class Ejercicio007 {
      * @param valor Valor a convertir
      * @return numero sin decimales
      */
-    public int redondearAInteger(float valor) {
+    public int redondearAInteger(double valor) {
         return (int) Redondeo(valor, 0);
     }
 
@@ -91,7 +94,7 @@ public class Ejercicio007 {
      * @param valor Valor a convertir
      * @return numero con un decimal
      */
-    public float redondearADecimas(float valor) {
+    public double redondearADecimas(double valor) {
         return Redondeo(valor, 1);
     }
 
@@ -100,7 +103,7 @@ public class Ejercicio007 {
      * @param valor Valor a convertir
      * @return numero con dos decimales
      */
-    public float redondearACentesimas(float valor) {
+    public double redondearACentesimas(double valor) {
         return Redondeo(valor, 2);
     }
 
@@ -109,7 +112,7 @@ public class Ejercicio007 {
      * @param valor Valor a convertir
      * @return numero con tres decimales
      */
-    public float redondearAMilesimas(float valor) {
+    public double redondearAMilesimas(double valor) {
         return Redondeo(valor, 3);
     }
 
@@ -119,25 +122,39 @@ public class Ejercicio007 {
         Scanner entrada = new Scanner(System.in);
         
         // Variables
-        float valor;
+        double valor;
         
         // Pedimos datos al usuario
         System.out.print("Introduzca un valor decimal (0 para salir): ");
-        valor = entrada.nextFloat();
+        valor = entrada.nextDouble();
         do {
 
             // Mostramos la información a través de las funciones wrappers de la
             // función redondeo
-            System.out.printf("%s - %s - %s - %s - %s\n", 
+            System.out.printf("Original: %s\n0 Dec: %s\n1 Dec: %s\n2 Dec: %s\n3 Dec: %s\n", 
                     String.valueOf(valor), 
-                    String.valueOf(redondearAMilesimas(valor)), 
-                    String.valueOf(redondearACentesimas(valor)),
+                    String.valueOf(redondearAInteger(valor)),
                     String.valueOf(redondearADecimas(valor)),
-                    String.valueOf(redondearAInteger(valor)));
+                    String.valueOf(redondearACentesimas(valor)),
+                    String.valueOf(redondearAMilesimas(valor)));
             
             // Volvemos a pedir datos
             System.out.print("Introduzca un valor decimal (0 para salir): ");
             valor = entrada.nextFloat();
         } while (valor != 0);
+    }
+
+    private double precalculoRedondeo(double numero, int decimales) {
+        
+        numero = numero * (Math.pow(10, (decimales+1)));
+        
+        if((int)(numero % 10) > 5)
+        {
+            numero += 10;
+        }
+        
+        numero = numero / (Math.pow(10, (decimales+1)));
+        
+        return numero;
     }
 }
