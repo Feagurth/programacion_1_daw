@@ -30,9 +30,9 @@ public class Ejercicio098 {
      */
     public class VentaAnualProducto {
 
-        String nombreProducto;
-        float[] ventasMensuales = new float[12];
-        float totalVentasProducto;
+        private final String nombreProducto;
+        private float[] ventasMensuales = new float[12];
+        private float totalVentasProducto;
 
         /**
          * Constructor de la clase
@@ -50,6 +50,24 @@ public class Ejercicio098 {
             for (float ventaMes : ventasMensuales) {
                 this.totalVentasProducto += ventaMes;
             }
+        }
+
+        /**
+         * Función que devuelve el nombre del producto
+         *
+         * @return El nombre del producto
+         */
+        public String getNombreProducto() {
+            return nombreProducto;
+        }
+
+        /**
+         * Función para devolver el valor total de ventas del producto en un año
+         *
+         * @return Valor total del producto en un año
+         */
+        public float getTotalVentasProducto() {
+            return totalVentasProducto;
         }
 
         /**
@@ -73,9 +91,10 @@ public class Ejercicio098 {
         int numProductos;
         String nombreProducto;
         float[] ventaMeses;
-        final String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril",
+        final String[] ARRAY_MESES = new String[]{"Enero", "Febrero", "Marzo", "Abril",
             "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
             "Noviembre", "Diciembre"};
+        final String CADENA_TOTAL_PRODUCTO = "Total Producto";
 
         do {
             System.out.print("Introduzca el número de productos a procesar: ");
@@ -100,11 +119,11 @@ public class Ejercicio098 {
             // Inicializamos el array de ventas
             ventaMeses = new float[12];
 
-            // Creamos e inicializamos un contador para los meses
+            // Creamos e inicializamos un contador para los ARRAY_MESES
             int contadorMeses = -1;
 
             // Iteramos por todos los valores del array
-            for (String mes : meses) {
+            for (String mes : ARRAY_MESES) {
 
                 // Aumentamos el contador
                 contadorMeses++;
@@ -125,15 +144,115 @@ public class Ejercicio098 {
             // Guardamos el objeto en el array de ventas anuales del producto
             ventasAnuales[contador] = ventaAnual;
         }
-        
+
         // Definimos un String para pintar la linea de resultados
-        String linea = "";
-        
-        for (String mes : meses) {
-            linea += 
-            
+        String linea;
+
+        linea = generarCadena(" ", 30, "");
+
+        linea += generarCadena("-", 223, "");
+
+        System.out.println(linea);
+
+        linea = generarCadena(" ", 30, "");
+
+        for (String mes : ARRAY_MESES) {
+            linea += "| " + mes + generarCadena(" ", 15, mes);
         }
+
+        linea += "| " + CADENA_TOTAL_PRODUCTO + generarCadena(" ", 15, CADENA_TOTAL_PRODUCTO) + " |";
+
+        System.out.println(linea);
+
+        linea = generarCadena("-", 253, "");
+
+        System.out.println(linea);
+
+        linea = "";
+
+        float[] totales = new float[13];
+        int[] masVendido = new int[12];
+
         
+        for (VentaAnualProducto producto : ventasAnuales) {
+
+            linea += "| " + producto.getNombreProducto() + generarCadena(" ", 28, producto.getNombreProducto());
+
+            for (int i = 0; i < ARRAY_MESES.length; i++) {
+
+                linea += "| " + producto.getVentasMensual(i) + generarCadena(" ", 15, String.valueOf(producto.getVentasMensual(i)));
+
+                totales[i] += producto.getVentasMensual(i);
+                
+            }
+
+            linea += "| " + producto.getTotalVentasProducto() + generarCadena(" ", 15, String.valueOf(producto.getTotalVentasProducto())) + " |";
+
+            totales[12] += producto.getTotalVentasProducto();
+
+            System.out.println(linea);
+
+            linea = generarCadena("-", 253, "");
+
+            System.out.println(linea);
+
+            linea = "";
+        }
+
+        linea = generarCadena("-", 253, "");
+
+        System.out.println(linea);
+        System.out.println(linea);
+
+        linea = "";
+
+        linea += "| " + "Total mes" + generarCadena(" ", 28, "Total mes");
+
+        for (int i = 0; i < ARRAY_MESES.length; i++) {
+
+            linea += "| " + totales[i] + generarCadena(" ", 15, String.valueOf(totales[i]));
+
+        }
+
+        linea += "| " + totales[12] + generarCadena(" ", 15, String.valueOf(totales[12])) + " |";
+
+        System.out.println(linea);
+
+        linea = generarCadena("-", 253, "");
+
+        System.out.println(linea);
+
+        linea = "";
         
+// fdsfdsfsd
+        
+        linea += "| " + "Producto más vendido" + generarCadena(" ", 28, "Producto más vendido");
+
+        for (int i = 0; i < ARRAY_MESES.length; i++) {
+
+            linea += "| " + totales[i] + generarCadena(" ", 15, String.valueOf(totales[i]));
+
+        }
+
+        linea += "| " + totales[12] + generarCadena(" ", 15, String.valueOf(totales[12])) + " |";
+
+        System.out.println(linea);
+
+        linea = generarCadena("-", 253, "");
+
+        System.out.println(linea);
+
+        linea = "";        
+
+    }
+
+    private String generarCadena(String caracter, int cantidad, String valorCadena) {
+        String resultado = "";
+
+        for (int i = 0; i < cantidad - valorCadena.length(); i++) {
+            resultado += caracter;
+        }
+
+        return resultado;
     }
 }
