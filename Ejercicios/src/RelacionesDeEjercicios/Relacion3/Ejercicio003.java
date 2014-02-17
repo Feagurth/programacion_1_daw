@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Trimestre.Segundo.Ejercicios;
+package RelacionesDeEjercicios.Relacion3;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ import java.util.Scanner;
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio098 {
+public class Ejercicio003 {
 
     /**
      * Clase para almacenar los valores de ventas anuales de un producto mes a
@@ -333,11 +333,11 @@ public class Ejercicio098 {
     /**
      * Función que nos permite generar una serie de caracteres para ayudar a 
      * la maquetación de los resultados
-     * @param caracter Carácter con el que se va a generar la cadena
+     * @param caracter Caracter con el que se va a generar la cadena
      * @param cantidad Cantidad de espacios a ocupar
      * @param valorCadena Cantidad de espacios ya ocupados
      * @return Devuelve una cadena de  caracteres cuya longitud es la cantidad 
-     * menos la longitud de valorCadena
+     * menos la logitud de valorCadena
      */
     private String generarCadena(String caracter, int cantidad, String valorCadena) {
         String resultado = "";
