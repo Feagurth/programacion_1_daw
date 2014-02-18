@@ -33,84 +33,74 @@ public class Ejercicio008 {
         // Objeto para pedir datos al usuario por el teclado
         Scanner entrada = new Scanner(System.in);
 
-        // Variables
-        int numCiudades;
-        String nombreEnlace;
+        // Array para contener el nombre de las ciudades
+        String[] arrayNombreCiudades
+                = new String[]{"Almeria", "Granada", "Jaen", "Malaga",
+                    "Cordoba", "Sevilla", "Cadiz", "Huelva"};
 
-        // Pedimos datos al usuario
-        do {
-            System.out.print("Introduzca el número de ciudades: ");
-            numCiudades = entrada.nextInt();
-        } while (numCiudades <= 0);
-
-        // Creamos un array para almacenar los datos
-        String[][] arrayCiudades = new String[numCiudades][2];
-
-        // Pedimos resultados al usuario
-        for (String[] arrayCiudad : arrayCiudades) {
-
-            // Creamos de nuevo el objeto scanner
-            entrada = new Scanner(System.in);
-
-            // Guardamos el nombre de la ciudad
-            System.out.print("Introduzca el nombre de la ciudad: ");
-            arrayCiudad[0] = entrada.nextLine();
-
-            // Iniciamos el vector para guardar los enlaces
-            arrayCiudad[1] = "";
-
-            // Pedimos al usuario introducir los enlaces de la ciudad
-            do {
-                System.out.print("Introduzca el nombre de la ciudad con la que enlaza. "
-                        + "No introduzca nada para continuar: ");
-                nombreEnlace = entrada.nextLine();
-
-                // Si el nombre introducido es distinto de "" lo concatenamos 
-                // con un punto y coma que luego nos servirá para 
-                // desconcatenarlo
-                if (!nombreEnlace.equals("")) {
-                    arrayCiudad[1] += nombreEnlace + ";";
-                }
-            } while (!nombreEnlace.equals(""));
-
-        }
-
-        // Creamos un objeto cadena para ayudarnos a mostrar los datos al 
-        // usuario
-        String cadena = "";
+        //              ALM      GRA      JAEN     MALA     COR      SEV     CADIZ     HUEL 
+        // Almeria -> {false}, {true},  {false}, {false}, {false}, {false}, {false}, {false};
+        // Granada -> {true},  {false}, {true},  {true},  {false}, {false}, {false}, {false};
+        // Jaen ->    {false}, {true},  {false}, {false}, {true},  {true},  {false}, {false};
+        // Malaga ->  {false}, {true},  {false}, {false}, {true},  {true},  {false}, {false};
+        // Cordoba -> {false}, {false}, {true},  {true},  {false}, {true},  {false}, {false};
+        // Sevilla -> {false}, {false}, {true},  {true},  {true},  {false}, {true},  {true};
+        // Cadiz ->   {false}, {false}, {false}, {false}, {false}, {true},  {false}, {false};  
+        // Huelva ->  {false}, {false}, {false}, {false}, {false}, {true},  {false}, {false};
         
-        // Ponemos un retorno de carro
-        System.out.println("");
+        // Creamos el array que va a contener las conexiones entre provincias
+        //  Los valores indican si una provincia tiene conexion con otra
+        boolean[][] arrayConexiones = new boolean[][]{
+            {false, true, false, false, false, false, false, false},
+            {true, false, true, true, false, false, false, false},
+            {false, true, false, false, true, true, false, false},
+            {false, true, false, false, true, true, false, false},
+            {false, false, true, true, false, true, false, false},
+            {false, false, true, true, true, false, true, true},
+            {false, false, false, false, false, true, false, false},
+            {false, false, false, false, false, true, false, false}
+        };
 
-        // Mostramos los resultados
-        for (String[] arrayCiudade : arrayCiudades) {
+        String cadena;
 
-            // Mostramos el nombre de la ciudad
-            System.out.println("Nombre: " + arrayCiudade[0]);
+        // Iteramos el array que contiene el nombre de las ciudades
+        // que nos servirá para recorrer la horizontal del array de 
+        // conexiones
+        for (int i = 0; i < arrayNombreCiudades.length; i++) {
 
-            // Convertimos la cadena de ciudades enlazadas en un array con la
-            // función split usando los puntos y coma como valor de corte
-            String[] enlaces = arrayCiudade[1].split(";");
-
-            // Mostramos el encabezamiento de la linea
+            // Mostramos los datos de la cabecera, que contiene
+            // el nombre de la ciudad y una raya separadora
+            System.out.println("");
+            System.out.println("Ciudad: " + arrayNombreCiudades[i]);
+            System.out.println("==================================");
+            
+            // Imprimimos el texto enlaza con: y dejamos  la linea lista para
+            // imprimir las conexiones con la provincia
             System.out.print("Enlaza con: ");
 
-            // Construimos el resto
-            for (String enlace : enlaces) {
-                cadena += enlace + ", ";
+            // Reseteamos el valor de la variable cadena
+            cadena = "";
+
+            // Iteramos de nuevo por el array de nombres de ciudades
+            // para recorrer la vertical del array de conexiones
+            for (int j = 0; j < arrayNombreCiudades.length; j++) {
+
+                // Comprobamos si en esa posición el array de conexiones
+                // es true, de ser así, hay conexión entre la ciudad
+                // arrayNombreCiudades[i] y arrayNombreCiudades[j]
+                if (arrayConexiones[i][j]) {
+                    // Concatenamos el nombre de la ciudad al acumulador
+                    cadena += arrayNombreCiudades[j] + ", ";
+                }
             }
 
-            // Quitamos los dos últimos caracteres para que no salga una 
-            // coma de más
+            // Limpiamos los dos últimos caracteres para no tener la 
+            // cadena acabada en coma
             cadena = cadena.substring(0, cadena.length() - 2);
 
-            // Mostramos el resultado
+            // Imprimimos la cadena y un retorno de carro
             System.out.print(cadena);
-
-            // Ponemos un retorno de carro
             System.out.println("");
         }
-
     }
-
 }
