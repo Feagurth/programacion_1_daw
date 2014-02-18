@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import RelacionesDeEjercicios.Relacion3.Ejercicio004;
+import RelacionesDeEjercicios.Relacion3.Ejercicio008;
 
 /**
  *
@@ -29,7 +29,7 @@ public class Lanzador {
      */
     public static void main(String[] args) {
         
-        Ejercicio004 ejercicio = new Ejercicio004();
+        Ejercicio008 ejercicio = new Ejercicio008();
         
         ejercicio.Ejercicio();
     }
