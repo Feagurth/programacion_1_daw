@@ -36,9 +36,9 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return String.format(primerNombre, "%s %s Contratado: %s Cumpleaños: %s",
-                this.apellidoPaterno,
+        return String.format("%s %s Contratado: %s Cumpleaños: %s",
                 this.primerNombre,
+                this.apellidoPaterno,                
                 this.fechaContratacion,
                 this.FechaNacimiento);
 

@@ -15,26 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pruebaempleado;
+package pruebaenum;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class PruebaEmpleado {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Fecha nacimiento = new Fecha(7,24,1949);
-        Fecha contratacion = new Fecha(9, 12, 1988);
+public class Libro {
+ 
+    public enum Libro{
+        JHP6("Java How to Program 6e","2005"),
+        CHTP4("C How to Program 4e","2004"),
+        IW3HTP3("Internet & World Wide Web How to Program 3e","2004"),
+        CPPHTP4("C++ How to Program 4e","2002"),
+        VBHTP2("Visual Basic How to Program 2e","2002");    
         
-        Empleado empleado = new Empleado("Antonio", "Lopez", nacimiento, 
-                contratacion);
-       
-        System.out.println(empleado.toString());
+        private final String titulo;
+        private final String aCopyright;
+
+        Libro(String titulo, String aCopyright) {
+            this.titulo = titulo;
+            this.aCopyright = aCopyright;
+        }
+        
+        
+        
         
     }
+    
+    
     
 }

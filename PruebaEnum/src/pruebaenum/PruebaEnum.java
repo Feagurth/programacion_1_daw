@@ -15,26 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pruebaempleado;
+package pruebaenum;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class PruebaEmpleado {
+public class PruebaEnum {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Fecha nacimiento = new Fecha(7,24,1949);
-        Fecha contratacion = new Fecha(9, 12, 1988);
-        
-        Empleado empleado = new Empleado("Antonio", "Lopez", nacimiento, 
-                contratacion);
-       
-        System.out.println(empleado.toString());
-        
+        // TODO code application logic here
     }
     
 }

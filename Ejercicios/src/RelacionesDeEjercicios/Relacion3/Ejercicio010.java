@@ -64,12 +64,5 @@ public class Ejercicio010 {
         for (int i = 0; i < asientosAvion.length; i++) {
             asientosAvion[i]= false;            
         }
-        
-        
-        
-        
-        
-        
     }
-
 }
