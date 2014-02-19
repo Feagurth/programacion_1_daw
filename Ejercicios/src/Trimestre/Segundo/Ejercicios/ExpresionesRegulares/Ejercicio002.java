@@ -14,17 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Trimestre.Segundo.Ejercicios;
+package Trimestre.Segundo.Ejercicios.ExpresionesRegulares;
 
-import Utiles.Mensajes;
+import java.util.Scanner;
 
 /**
  * Algoritmo que transforma un número introducido por teclado en notación
  * decimal a romana. El número será entero y positivo y no excederá de 3000.
+ * Usar expresiones regulares para validar los datos
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio065 {
+public class Ejercicio002 {
 
     /**
      * Función para pasar un número arábigo a romano
@@ -204,29 +205,46 @@ public class Ejercicio065 {
     }
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
+        // Objeto para pedir datos al usuario        
+        Scanner entrada;
 
         // Variable para almacenar el valor a convertir
-        int valor;
+        String valor;
 
         // Variable para alamcenar el resultado de la conversión
         String resultado;
 
         // Iteramos mientras no se cumpla la condición
         do {
+
+            // Creamos el objeto pare leer los datos del teclado
+            entrada = new Scanner(System.in);
+
             // Petición de datos al usuario
-            valor = Integer.parseInt(mensaje.PedirDatos("Introduzca un número "
-                    + "entero entre 1 y 3000", "Petición de Datos",
-                    Mensajes.TipoMensaje.PREGUNTA));
-        } while (valor <= 0 || valor > 3000);
+            System.out.print("Introduzca un número entero entre 1 y 3000: ");
+            valor = entrada.nextLine();
+
+        } while (!validacion(valor, "[0-9][0-9]{0,3}") || 
+                 Integer.parseInt(valor) <= 0 || 
+                 Integer.parseInt(valor) > 3000);
 
         // Realizamos la conversión
-        resultado = ArabigoARomano(valor);
+        resultado = ArabigoARomano(Integer.parseInt(valor));
 
         // Mostramos el resultado al usuario
-        mensaje.MostrarMensaje("El valor de " + valor + " en números romanos "
-                + "es " + resultado, "Resultado",
-                Mensajes.TipoMensaje.INFORMACION);
-    }   
+        System.out.println("El valor de " + valor + " en números romanos es " + resultado);
+    }
+
+    /**
+     * Función para validar entradas con expresiones regulares
+     *
+     * @param cadena Cadena de texto a validar
+     * @param patron Patrón de validación
+     * @return Verdadero si la cadena es validada correctamente y falso en caso
+     * contrario
+     */
+    private boolean validacion(String cadena, String patron) {
+
+        return cadena.matches(patron);
+    }
 }

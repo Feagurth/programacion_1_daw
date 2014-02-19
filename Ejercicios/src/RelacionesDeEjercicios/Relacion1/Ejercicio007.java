@@ -20,7 +20,7 @@ import java.util.Random;
 
 /**
  * Crear un programa que genere de forma aleatoria una resultado de 10x10
- elementos, donde cada uno es una letra. El programa debe imprimir ese array
+ * elementos, donde cada uno es una letra. El programa debe imprimir ese array
  * bidimensional y mostrar cuantas vocales y consonantes tiene.
  *
  * @author Luis Cabrerizo Gómez
