@@ -33,4 +33,18 @@ package RelacionesDeEjercicios.Relacion3;
  */
 public class Ejercicio009 {
     
+    public class DistribucionEstadistica
+    {
+    
+    
+    
+    }
+    
+    
+    
+    public void Ejercicio()
+    {
+    
+    
+    }        
 }
