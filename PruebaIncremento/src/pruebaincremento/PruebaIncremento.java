@@ -14,36 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package pruebaenum;
-
-import java.util.EnumSet;
+package pruebaincremento;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class PruebaEnum {
+public class PruebaIncremento {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Incremento valor = new Incremento(5);
 
-        System.out.println("Imprimir todos los libros");
-        System.out.println("");
-        System.out.printf("%-10s%-45s%-4s\n", "Abrev.", "Título", "Año");
-        for (Libro libro : Libro.values()) {
-            System.out.printf("%-10s%-45s%-4s\n", libro, libro.obtenerTitulo(), libro.obtenerACopyright());
+        System.out.printf("Antes de incrementar: %s\n", valor);
 
+        for (int i = 0; i <= 3; i++) {
+            valor.sumrIncrementoATotal();
+            System.out.printf("Despues de incrementar: %s\n", valor);
         }
 
-        System.out.println("");
-        System.out.println("Imprimir rango de los libros");  
-        System.out.println("");
-        System.out.printf("%-10s%-45s%-4s\n", "Abrev.", "Título", "Año");        
-        for (Libro libro : EnumSet.range(Libro.JHP6, Libro.CPPHTP4)) {
-            System.out.printf("%-10s%-45s%-4s\n", libro, libro.obtenerTitulo(), libro.obtenerACopyright());
-        }
     }
 
 }

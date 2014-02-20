@@ -14,36 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package pruebaenum;
 
-import java.util.EnumSet;
+package pruebaimportstatic;
+
+import static java.lang.Math.*;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class PruebaEnum {
+public class PruebaImportStatic {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        System.out.println("Imprimir todos los libros");
-        System.out.println("");
-        System.out.printf("%-10s%-45s%-4s\n", "Abrev.", "Título", "Año");
-        for (Libro libro : Libro.values()) {
-            System.out.printf("%-10s%-45s%-4s\n", libro, libro.obtenerTitulo(), libro.obtenerACopyright());
-
-        }
-
-        System.out.println("");
-        System.out.println("Imprimir rango de los libros");  
-        System.out.println("");
-        System.out.printf("%-10s%-45s%-4s\n", "Abrev.", "Título", "Año");        
-        for (Libro libro : EnumSet.range(Libro.JHP6, Libro.CPPHTP4)) {
-            System.out.printf("%-10s%-45s%-4s\n", libro, libro.obtenerTitulo(), libro.obtenerACopyright());
-        }
+        System.out.printf("Raiz Cuadrada de 900: %.1f\n", sqrt(900.0));
+        System.out.printf("Redondeo por arriba de 9,8 %.1f\n",  ceil(9.8));
     }
-
+    
 }

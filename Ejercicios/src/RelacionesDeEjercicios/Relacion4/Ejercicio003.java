@@ -81,9 +81,7 @@ public class Ejercicio003 {
         
         // Definimos la expresión regular que necesitamos
         // Tarjetas de credito de 13 a 16 números sin guiones ni espacios en blanco
-        expresionRegular = "(^[0-9]{13,16}$)";
-        
-        expresionRegular += "|" + "";
+        expresionRegular = "(^[0-9]{13,16}$)";        
         
         // Iteramos hasta que se cumpla la validación
         do
@@ -96,6 +94,74 @@ public class Ejercicio003 {
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!cadena.matches(expresionRegular));            
+        
+        // Apartado c
+        System.out.println("c) Número de teléfono. Ten en cuenta si el número "
+                + "es o no internacional");
+        System.out.println("=================================================="
+                + "=====================");
+        
+        // Definimos la expresión regular que necesitamos
+        // Validación de número de telefono para los siguientes formatos
+        // numero de 9 cifras
+        // +(xx)xxxxxxxxx  +(xx) xxxxxxxxx
+        // (xx)xxxxxxxxx    (xx) xxxxxxxxx
+        // +xxxxxxxxxxx    +xx xxxxxxxxx
+        // xxxxxxxxxxx      xx xxxxxxxxx
+        // xxxxxxxxx
+        expresionRegular = "((\\+)?(\\()?[0-9]{0,2}(\\))?)?( )?[0-9]{9}";
+        
+        // Iteramos hasta que se cumpla la validación
+        do
+        {
+            // Pedimos datos al usuario
+            System.out.print("Introduzca un valor para probar la expresión "
+                    + "regular: ");
+            cadena = entrada.nextLine();
+
+            // Verificamos si se cumple la validación, de no ser así, seguimos
+            // iterando
+        }while(!cadena.matches(expresionRegular));                    
+        
+        
+        // Apartado d
+        System.out.println("d) Código postal");
+        System.out.println("================");
+        
+        // Definimos la expresión regular que necesitamos
+        expresionRegular = "^[0-9]{5}$";        
+        
+        // Iteramos hasta que se cumpla la validación
+        do
+        {
+            // Pedimos datos al usuario
+            System.out.print("Introduzca un valor para probar la expresión "
+                    + "regular: ");
+            cadena = entrada.nextLine();
+
+            // Verificamos si se cumple la validación, de no ser así, seguimos
+            // iterando
+        }while(!cadena.matches(expresionRegular));                    
+        
+        
+        // Apartado e
+        System.out.println("e) CIF");
+        System.out.println("======");
+        
+        // Definimos la expresión regular que necesitamos
+        expresionRegular = "^[0-9]{5}$";        
+        
+        // Iteramos hasta que se cumpla la validación
+        do
+        {
+            // Pedimos datos al usuario
+            System.out.print("Introduzca un valor para probar la expresión "
+                    + "regular: ");
+            cadena = entrada.nextLine();
+
+            // Verificamos si se cumple la validación, de no ser así, seguimos
+            // iterando
+        }while(!cadena.matches(expresionRegular));                            
         
     }
     

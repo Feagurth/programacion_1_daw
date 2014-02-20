@@ -14,38 +14,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package pruebaenum;
+package pruebaincremento;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public enum Libro {
+public class Incremento {
 
-    JHP6("Java How to Program 6e", "2005"),
-    CHTP4("C How to Program 4e", "2004"),
-    IW3HTP3("Internet & World Wide Web How to Program 3e", "2004"),
-    CPPHTP4("C++ How to Program 4e", "2002"),
-    VBHTP2("Visual Basic How to Program 2e", "2002"),
-    CSHARPHTP("C# How to program", "2002");
+    private int total = 0;
+    private final int INCREMENTO;
 
-    private final String titulo;
-    private final String aCopyright;
 
-    Libro(String titulo, String aCopyright) {
-        this.titulo = titulo;
-        this.aCopyright = aCopyright;
+    @Override
+    public String toString()
+    {
+        return String.format("Total: %d", total);        
     }
-
-    public String obtenerTitulo() {
-        return titulo;
-    }
-
-    public String obtenerACopyright() {
-        return aCopyright;
-    }
-
     
     
     
+    public Incremento(int INCREMENTO) {
+        this.INCREMENTO = INCREMENTO;
+    }
+
+    public void sumrIncrementoATotal() {
+        total += INCREMENTO;
+    }
+
 }
