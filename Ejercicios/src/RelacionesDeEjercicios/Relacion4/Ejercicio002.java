@@ -44,7 +44,7 @@ public class Ejercicio002 {
     
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos
-        String expresionRegular = "";
+        String expresionRegular;
         
         // Variable para almacenar los valores que introducirá el usuario por 
         // teclado
@@ -257,7 +257,6 @@ public class Ejercicio002 {
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
-        }while(!cadena.matches(expresionRegular));                                        
-        
+        }while(!cadena.matches(expresionRegular));                                                
     }    
 }
