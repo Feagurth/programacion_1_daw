@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package RelacionesDeEjercicios.Relacion3;
 
 import java.util.Scanner;
@@ -69,7 +68,7 @@ public class Ejercicio002 {
 
     }
 
- public void Ejercicio() {
+    public void Ejercicio() {
         // Objeto para pedir datos por teclado al usuario
         Scanner entrada = new Scanner(System.in);
         int numMedicamentos;
@@ -148,7 +147,7 @@ public class Ejercicio002 {
         }
 
         for (RegistroMedicamento registro : registros) {
-            
+
             System.out.println("Datos del medicamento " + registro.nombre);
             System.out.println("Código: " + registro.codigo);
             System.out.println("Nombre: " + registro.nombre);
@@ -158,15 +157,12 @@ public class Ejercicio002 {
             System.out.println("Precio: " + registro.precio);
             System.out.println("% IVA: " + registro.porcentajeIVA);
             System.out.println("Stock: " + registro.stock);
-            System.out.println("Fecha Caducidad: " + registro.diaFechaCaducidad 
-                    + "/" + registro.mesFechaCaducidad + "/" 
+            System.out.println("Fecha Caducidad: " + registro.diaFechaCaducidad
+                    + "/" + registro.mesFechaCaducidad + "/"
                     + registro.anyoFechaCaducidad);
-            
-            
+
         }
-        
-        
-        
-    }    
-    
+
+    }
+
 }

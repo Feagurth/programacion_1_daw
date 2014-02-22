@@ -19,7 +19,15 @@ package RelacionesDeEjercicios.Relacion3;
 import java.util.Scanner;
 
 /**
- *
+ * Una empresa de venta de productos por correo desea realizar una estadística 
+ * de las ventas realizadas de cada uno de los productos a lo largo del año. 
+ * Distribuye un total de 100 productos, por lo que las ventas se pueden 
+ * almacenar en una tabla de 100 filas y 12 columnas. Se desea conocer: 
+ *  - El total de ventas de cada uno de los productos 
+ *  - El total de ventas de cada mes 
+ *  - El producto más vendido en cada mes 
+ *  - El nombre, mes y la cantidad del producto más vendido
+ * 
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio003 {
@@ -113,6 +121,7 @@ public class Ejercicio003 {
             entrada = new Scanner(System.in);
 
             // Pedimos al usuario el nombre del producto
+            System.out.println("");
             System.out.print("Introduzca el nombre del producto: ");
             nombreProducto = entrada.nextLine();
 
