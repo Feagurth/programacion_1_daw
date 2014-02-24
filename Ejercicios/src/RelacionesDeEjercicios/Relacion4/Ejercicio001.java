@@ -36,16 +36,16 @@ public class Ejercicio001 {
     public void Ejercicio() {
         
         // Valida fechas de 31 dias para los meses 1,3,5,7,8,10 y 12
-        String validaMeses31 = "(0?[13578]|1[02])/(0?[0-9]|[12][0-9]|3[01])/[0-9]{2}";
+        String validaMeses31 = "(0?[0-9]|[12][0-9]|3[01])/(0?[13578]|1[02])/[0-9]{2}";
         
         // Valida fechas de 30 dias para los meses 4, 6, 9 y 11
-        String validaMeses30 = "(0?[469]|11)/(0?[0-9]|[12][0-9]|30)/[0-9]{2}";
+        String validaMeses30 = "(0?[0-9]|[12][0-9]|30)/(0?[469]|11)/[0-9]{2}";
         
         // Valida fechas de 28 dias para el mes 2 y cualquier año
-        String validaFebrero = "(0?[2])/(0?[0-9]|1[0-9]|2[0-8])/[0-9]{2}";
+        String validaFebrero = "(0?[0-9]|1[0-9]|2[0-8])/(0?[2])/[0-9]{2}";
         
         // Valida fechas de 29 dias para el mes 2 para los años que sean divisibles entre 4
-        String validaFebreroBis = "(0?[2])/(0?[0-9]|[12][0-9])/(0[48]|[13579][26]|[2468][048])";
+        String validaFebreroBis = "(0?[0-9]|[12][0-9])/(0?[2])/(0[48]|[13579][26]|[2468][048])";
         
         // Expresión regular para validar la fecha
         String validaFecha = validaMeses31 + "|" + validaMeses30 + "|" + 
@@ -62,7 +62,7 @@ public class Ejercicio001 {
             entrada = new Scanner(System.in);
 
             // Pedimos datos al usuario
-            System.out.print("Introduzca una fecha valida [mm/dd/aa]: ");
+            System.out.print("Introduzca una fecha valida [dd/mm/aa]: ");
             fecha = entrada.nextLine();
 
             // Comprobamos si la fecha es correcta usando expresiones regulares
