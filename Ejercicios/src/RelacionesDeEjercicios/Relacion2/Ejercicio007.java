@@ -36,36 +36,7 @@ import java.util.Scanner;
  */
 public class Ejercicio007 {
 
-    /**
-     * Función para detectar si el número debe redondedearse
-     *
-     * @param numero Número a redondear
-     * @param decimales Valores límite del redondeo
-     * @return
-     */
-    private double precalculoRedondeo(double numero, int decimales) {
-
-        // Multiplicamos por la potencia de los decimales que queramos más uno
-        // para coger un valor más y detectar si es mayor de 5 para redondear
-        numero = numero * (Math.pow(10, (decimales + 1)));
-
-        // Verificamos si el último dígito del número es mayor de cinco
-        if ((int) (numero % 10) > 5) {
-            // Si lo es, sumamos 10 al número, lo cual aumentará en 1
-            // el valor decimal del número
-            numero += 10;
-        }
-
-        // Dividimos el número por el mismo valor por el que lo multiplicamos
-        // al principio para dejarlo con la misma cantidad de decimales que 
-        // al inicio de la método
-        numero = numero / (Math.pow(10, (decimales + 1)));
-
-        // Devolvemos el resultado
-        return numero;
-    }
-
-    /**
+     /**
      * Función para realizar el redondeo de un número
      *
      * @param numero Número que queremos redondear
@@ -78,34 +49,18 @@ public class Ejercicio007 {
         int parteEntera, parteDecimal;
         int apoyoDecimales;
 
-        // Realizamos el precalculo del redondeo
-        numero = precalculoRedondeo(numero, decimales);
-
         // Calculamos el valor por el que tendremos que multiplicar
         // los decimales para conseguir la parte entera del redondeo que
         // queremos
         apoyoDecimales = (int) Math.pow(10, decimales);
 
-        // Calculamos la parte entera, obteniendo la división del número 
-        // entre 1
-        parteEntera = (int) (numero / 1);
-
-        // Calculamos la parte decimal restandole al número la parte entera
-        // Despues, multiplicamos el valor obtenido por el apoyo de decimales,
-        // quedandonos la parte que queremos para el redondeo como la parte 
-        // entera del numero obtenido, la cual conseguimos dividiendo ese
-        // número entre 1
-        parteDecimal = (int) (((numero - parteEntera) * apoyoDecimales)) / 1;
-
-        // Creamos una cadena con el número de la parte entera concatenado 
-        // junto con un punto y la parte decimal, y parseamos la cadena
-        // para obtener el resultado en double
-        resultado = Double.parseDouble(parteEntera + "." + (parteDecimal));
-
+        // Usamos Math.floor para redondear el número a la cantidad de decimales
+        // que queremos
+        resultado = Math.floor((numero * apoyoDecimales) + 0.5 ) /apoyoDecimales;
+                
         // Devolvemos el resultado
         return resultado;
     }
-
     /**
      * Función que permite devolver un numero sin decimales
      *
@@ -148,15 +103,12 @@ public class Ejercicio007 {
 
     public void Ejercicio() {
 
-        // Objeto para leer datos desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variables
         double valor;
+        String cadena;
 
-        // Pedimos datos al usuario
-        System.out.print("Introduzca un valor decimal (0 para salir): ");
-        valor = entrada.nextDouble();
+        valor = Double.parseDouble(pedirNumero());
+        
         do {
 
             // Mostramos la información a través de las funciones wrappers de la
@@ -169,8 +121,39 @@ public class Ejercicio007 {
                     String.valueOf(redondearAMilesimas(valor)));
 
             // Volvemos a pedir datos
-            System.out.print("Introduzca un valor decimal (0 para salir): ");
-            valor = entrada.nextFloat();
+            //System.out.print("Introduzca un valor decimal (0 para salir): ");
+            valor = Double.parseDouble(pedirNumero());
         } while (valor != 0);
     }
+
+    /**
+     * Función que engloba la petición de datos al usuario 
+     * y la validación de los mismos con expresiones regulares
+     * para la introducción de un número del tipo real
+     * @return 
+     */
+    private String pedirNumero() {
+        // Objeto para leer datos desde el teclado
+        Scanner entrada = new Scanner(System.in);
+
+        String cadena;
+
+        String expresionRegular = "^([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$";
+
+        // Iteramos hasta que se cumpla la validación
+        do {
+            // Pedimos datos al usuario
+            System.out.print("Introduzca un número real positivo (0 para salir): ");
+            cadena = entrada.nextLine();
+
+            // Verificamos si se cumple la validación, de no ser así, seguimos
+            // iterando
+        } while (!cadena.matches(expresionRegular));
+
+        // Devolvemos el valor introducido por el usuario cambiando
+        // los puntos que haya podido introducir el usuario por comas
+        // para que no falle al pasarlo a double
+        return cadena.replace(",", ".");
+    }
+
 }

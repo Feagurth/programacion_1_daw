@@ -215,7 +215,7 @@ public class Ejercicio003 {
         System.out.println("=================");
         
         // Definimos la expresión regular que necesitamos
-        expresionRegular = "^[-]?([1-9]{1}[0-9]{0,}(\\.[0-9]{0,})?|0(\\.[0-9]{0,})?|\\.[0-9]{1,})$";
+        expresionRegular = "^[-]?([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$";
         
         // Iteramos hasta que se cumpla la validación
         do
