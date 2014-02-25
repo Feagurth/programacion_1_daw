@@ -68,47 +68,78 @@ public class Ejercicio3_12 {
         } // fin del método obtenerSaldo
     } // fin de la clase Cuenta    
 
-    public void Ejercicio() {
-        
-        Cuenta cuenta1 = new Cuenta(50.00); // crea objeto Cuenta
-        Cuenta cuenta2 = new Cuenta(-7.53); // crea objeto Cuenta
-
-        // muestra el saldo inicial de cada objeto
-        System.out.printf("Saldo de cuenta1: $%.2f\n", cuenta1.obtenerSaldo());
-        System.out.printf("Saldo de cuenta2: $%.2f\n\n", cuenta2.obtenerSaldo());
-
-        // crea objeto Scanner para obtener la entrada de la ventana de comandos
+    /**
+     * Método para mostrar un menú al usuario y validar la selección del mismo
+     *
+     * @return Un entero con la opción selecionada por el usuario
+     */
+    private int mostrarMenu() {
+        int resultado = 0;
+        String seleccion = "";
         Scanner entrada = new Scanner(System.in);
-        double montoDeposito; // deposita el monto escrito por el usuario
-        System.out.print("Escriba el monto a depositar para cuenta1: "); 
 
-        // indicador
-        montoDeposito = entrada.nextDouble(); // obtiene entrada del usuario
-        System.out.printf("\nsumando %.2f al saldo de cuenta1\n\n", montoDeposito);
-        cuenta1.abonar(montoDeposito); // suma al saldo de cuenta1
+        System.out.println("****************************");
+        System.out.println("* 1.- Consultar saldo      *");
+        System.out.println("* 2.- Ingresar dinero      *");
+        System.out.println("* 3.- Retirar dinero       *");
+        System.out.println("* 0.- Salir                *");
+        System.out.println("****************************");
+        System.out.print("Selecciones una operacion: ");
 
-        // muestra los saldos
-        System.out.printf("Saldo de cuenta1: $%.2f\n", cuenta1.obtenerSaldo());
-        System.out.printf("Saldo de cuenta2: $%.2f\n\n", cuenta2.obtenerSaldo());
-        System.out.print("Escriba el monto a depositar para cuenta2: "); 
+        do {
+            seleccion = entrada.nextLine();
 
-        // indicador
-        montoDeposito = entrada.nextDouble(); // obtiene entrada del usuario
-        System.out.printf("\nsumando %.2f al saldo de cuenta2\n\n",
-                montoDeposito);
-        cuenta2.abonar(montoDeposito); // suma al saldo de cuenta2
+        } while (!seleccion.matches("[0-3]{1}"));
 
-        // muestra los saldos
-        System.out.printf("Saldo de cuenta1: $%.2f\n", cuenta1.obtenerSaldo());
-        System.out.printf("Saldo de cuenta2: $%.2f\n", cuenta2.obtenerSaldo());
+        return Integer.parseInt(seleccion);
+    }
 
-        if (cuenta1.cargar(25)) {
-            System.out.printf("Dinero retirado correctamente\n");
-        } else {
-            System.out.printf("Dinero no retirado correctamente\n");
-        }
-        System.out.printf("Saldo de cuenta1: $%.2f\n", cuenta1.obtenerSaldo());
-        System.out.printf("Saldo de cuenta2: $%.2f\n", cuenta2.obtenerSaldo());
-    } 
-} 
+    /**
+     * Método que nos permite pedirle al usuario que introduzca una cantidad
+     * @param cadena Cadena que define la petición al usuario
+     * @return Un valor de dinero como un double
+     */
+    private double pedirDinero(String cadena) {
+        String seleccion = "";
+        Scanner entrada = new Scanner(System.in);
 
+        System.out.print("Introduzca la cantidad de dinero a " + cadena + ": ");
+
+        do {
+            seleccion = entrada.nextLine();
+
+        } while (!seleccion.matches("^([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$"));
+
+        return Double.parseDouble(seleccion);
+    }    
+    
+    public void Ejercicio() {
+
+        Cuenta cuenta = new Cuenta(50.00); // crea objeto Cuenta
+        int seleccion;
+
+        do {
+
+            seleccion = mostrarMenu();
+            switch (seleccion) {
+                case 1: {
+                    System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
+                    break;
+                }
+                case 2: {
+                    double monto = pedirDinero("retirar");
+                    cuenta.abonar(monto);
+                    System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
+                    break;
+                }
+                case 3: {
+                    double monto = pedirDinero("ingresar");
+                    cuenta.cargar(monto);
+                    System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
+                    
+                    break;
+                }
+            }
+        } while (seleccion != 0);
+    }
+}
