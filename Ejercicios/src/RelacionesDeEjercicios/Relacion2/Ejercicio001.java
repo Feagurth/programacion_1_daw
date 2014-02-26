@@ -74,7 +74,7 @@ public class Ejercicio001 {
 
         // Variables
         int dia, mes, anyo;
-        
+
         // Lectura de datos
         System.out.print("Introduzca el día: ");
         dia = entrada.nextInt();
@@ -84,7 +84,7 @@ public class Ejercicio001 {
 
         System.out.print("Introduzca el año: ");
         anyo = entrada.nextInt();
-        
+
         // Verificamos si la fecha introducida es válida
         if (EsFechaValida(dia, mes, anyo)) {
 
@@ -140,10 +140,14 @@ public class Ejercicio001 {
                         dia += 1;
                     }
             }
+
+            // Muestra de resultados
+            System.out.println("El día siguiente al introducido es: " + (dia < 9 ? "0" : "") + dia + "/"
+                    + (mes < 9 ? "0" : "") + mes + "/" + anyo);
+        } else {
+            // Mostramos mensaje de error
+            System.out.println("La fecha intrododucida no es válida");
         }
-        
-        // Muestra de resultados
-        System.out.println("El día siguiente al introducido es: " + (dia < 9 ? "0" : "") + dia + "/"
-                + (mes < 9 ? "0" : "") + mes + "/" + anyo);
+
     }
 }

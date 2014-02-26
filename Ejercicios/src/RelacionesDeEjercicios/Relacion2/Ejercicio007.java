@@ -105,7 +105,6 @@ public class Ejercicio007 {
 
         // Variables
         double valor;
-        String cadena;
 
         valor = Double.parseDouble(pedirNumero());
         
