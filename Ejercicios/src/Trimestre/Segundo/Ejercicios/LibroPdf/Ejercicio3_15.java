@@ -16,6 +16,9 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
+import Utiles.Validaciones;
+
 /**
  * Cree una clase llamada Fecha, que incluya tres piezas de información como
  * variables de instancia — un mes (tipo int), un día (tipo int) y un año (tipo
@@ -89,11 +92,26 @@ public class Ejercicio3_15 {
     }
 
     public void Ejercicio() {
+
+        // Definimos las variables
+        int dia, mes, anyo;
+
+        // Iteramos pidiendo datos al usuario
+        do {
+            // Pedimos datos al usuario a traves de las clases correspondientes
+            dia = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el día");
+            mes = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el mes");
+            anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el año");
+            
+            // Iteraremos hasta que se valide una fecha con los datos 
+            // introducidos por teclado
+        } while(!Validaciones.validarDato(dia + "/" + mes + "/" + anyo, Validaciones.TipoValidacion.FECHA_DDMMAAAA));
+
         // Creamos el objeto
-        Fecha fecha = new Fecha(31, 12, 2013);
+         Fecha fecha = new Fecha(dia, mes, anyo);
 
         // Hacemos que muestre la fecha
-        System.out.println(fecha.mostrarFecha());
+         System.out.printf("La fecha introducida es: %s\n", fecha.mostrarFecha());
     }
 
 }

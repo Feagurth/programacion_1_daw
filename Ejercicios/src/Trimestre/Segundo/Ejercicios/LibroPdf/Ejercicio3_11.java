@@ -16,6 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
+
 /**
  * Modifique la clase LibroCalificaciones (figura 3.10) de la siguiente manera:
  * a) Incluya una segunda variable de instancia String, que represente el nombre
@@ -76,9 +78,24 @@ public class Ejercicio3_11 {
 
     public void Ejercicio() {
 
-        LibroCalificaciones libro = new LibroCalificaciones("1º Desarrollo de Aplicaciones Web", "Alberto Goñi");
-        LibroCalificaciones libro2 = new LibroCalificaciones("Pollas en vinagre", "Bartolo el del bombo");
+        // Definimos las variables
+        String nombreClase, nombreProfesor;
+        
+        // Realizamos petición de datos a través de las clases correspondietnes
+        nombreClase = PeticionDatos.pedirCadena("Introduzca el nombre de la clase");
+        nombreProfesor = PeticionDatos.pedirCadena("Introduzca el nombre del profesor");
+        
+        // Creamos el primer objeto
+        LibroCalificaciones libro = new LibroCalificaciones(nombreClase, nombreProfesor);
+        
+        // Volvemos a pedir datos al usuario
+        nombreClase = PeticionDatos.pedirCadena("Introduzca el nombre de la clase");
+        nombreProfesor = PeticionDatos.pedirCadena("Introduzca el nombre del profesor");
+        
+        // Creamos otro objeto
+        LibroCalificaciones libro2 = new LibroCalificaciones(nombreClase, nombreProfesor);
 
+        // Mostramos resultados
         libro.mostrarMensaje();
         libro2.mostrarMensaje();
     }

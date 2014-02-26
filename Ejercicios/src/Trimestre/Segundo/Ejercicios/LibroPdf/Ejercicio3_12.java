@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
 import java.util.Scanner;
 
 /**
@@ -78,7 +79,7 @@ public class Ejercicio3_12 {
         String seleccion = "";
         Scanner entrada = new Scanner(System.in);
 
-        System.out.println("****************************");
+        System.out.println("\n****************************");
         System.out.println("* 1.- Consultar saldo      *");
         System.out.println("* 2.- Ingresar dinero      *");
         System.out.println("* 3.- Retirar dinero       *");
@@ -94,49 +95,48 @@ public class Ejercicio3_12 {
         return Integer.parseInt(seleccion);
     }
 
-    /**
-     * Método que nos permite pedirle al usuario que introduzca una cantidad
-     * @param cadena Cadena que define la petición al usuario
-     * @return Un valor de dinero como un double
-     */
-    private double pedirDinero(String cadena) {
-        String seleccion = "";
-        Scanner entrada = new Scanner(System.in);
-
-        System.out.print("Introduzca la cantidad de dinero a " + cadena + ": ");
-
-        do {
-            seleccion = entrada.nextLine();
-
-        } while (!seleccion.matches("^([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$"));
-
-        return Double.parseDouble(seleccion);
-    }    
-    
     public void Ejercicio() {
 
         Cuenta cuenta = new Cuenta(50.00); // crea objeto Cuenta
         int seleccion;
 
+        // Iteramos mientras el usuario no eliga la opción de salir en el menú
         do {
 
+            // Mostramos el menú al usuario y almacenamos el valor en una 
+            // variable para controlar la ejecución del bucle
             seleccion = mostrarMenu();
+
+            // Realizamos una acción u otra dependiendo de la seleción del
+            // usuario
             switch (seleccion) {
                 case 1: {
+                    // Mostramos el saldo
                     System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
                     break;
                 }
                 case 2: {
-                    double monto = pedirDinero("retirar");
+
+                    // Pedimos al usaurio el valor que desea ingresar
+                    double monto = PeticionDatos.pedirRealPositivo("Introduzca la cantidad de dinero a ingresar");
+
+                    // Realizamos el ingreso
                     cuenta.abonar(monto);
+
+                    // Mostramos el saldo actualizado de la cuenta
                     System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
                     break;
                 }
                 case 3: {
-                    double monto = pedirDinero("ingresar");
+                    // Pedimos al usaurio el valor que desea retirar
+                    double monto = PeticionDatos.pedirRealPositivo("Introduzca la cantidad de dinero a retirar");
+
+                    // Realizamos la retirada
                     cuenta.cargar(monto);
+
+                    // Mostramos el saldo actualizado de la cuenta
                     System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
-                    
+
                     break;
                 }
             }

@@ -16,6 +16,9 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
+import java.util.Scanner;
+
 /**
  * Cree una clase llamada Empleado, que incluya tres piezas de información como
  * variables de instancia: un primer nombre (tipo String), un apellido paterno
@@ -41,7 +44,7 @@ public class Ejercicio3_14 {
         private String primerNombre;
         private String apellidoPaterno;
         private double sueldoMensual;
-        
+
         // Getters & Setters
         public String getPrimerNombre() {
             return primerNombre;
@@ -73,6 +76,7 @@ public class Ejercicio3_14 {
 
         /**
          * Constructor de la clase
+         *
          * @param primerNombre Nombre del empleado
          * @param apellidoPaterno Apallido del empleado
          * @param sueldoMensual Sueldo del empleado
@@ -85,22 +89,33 @@ public class Ejercicio3_14 {
     }
 
     public void Ejercicio() {
-        
-        // Creamos los objetos
-        Empleado empleado1 = new Empleado("Pepe", "Perez", 1200.50);
-        Empleado empleado2 = new Empleado("Arturo", "Fernandez", 900.75);
-        
+
+        String nombre, apellido;
+        double sueldoMensual;
+
+        // Pedimos datos al usuario y los validamos
+        // apoyados en unas clases diseñadas para ese 
+        // propósito
+        nombre = PeticionDatos.pedirCadena("Introduzca el nombre del empleado");
+
+        apellido = PeticionDatos.pedirCadena("Introduzca el apellido del empleado");
+
+        sueldoMensual = PeticionDatos.pedirRealPositivo("Introduzca el sueldo mensual del empleado");
+
+        // Creamos el objeto
+        Empleado empleado1 = new Empleado(nombre, apellido, sueldoMensual);
+
         // Imprimimos el sueldo anual
+        System.out.print("El sueldo anual del empleado es: ");
         System.out.println(empleado1.getSueldoMensual() * 12);
-        System.out.println(empleado2.getSueldoMensual() * 12);
-        
-        // Asignamos el sueldo como el doble más un 10% 
-        empleado1.setSueldoMensual(empleado1.getSueldoMensual() + (empleado1.getSueldoMensual() * 0.1) );
-        empleado2.setSueldoMensual(empleado2.getSueldoMensual() + (empleado2.getSueldoMensual() * 0.1) );
+
+        // Asignamos el sueldo un 10%
+        empleado1.setSueldoMensual(empleado1.getSueldoMensual() + (empleado1.getSueldoMensual() * 0.1));
 
         // Imprimimos el sueldo anual de nuevo
+        System.out.println("Se ha aumentado el sueldo del empleado un 10%");
+        System.out.print("El sueldo anual del empleado es: ");
         System.out.println(empleado1.getSueldoMensual() * 12);
-        System.out.println(empleado2.getSueldoMensual() * 12);        
 
     }
 }

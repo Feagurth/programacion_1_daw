@@ -16,6 +16,9 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
+import java.util.Scanner;
+
 /**
  * Cree una clase llamada Factura, que una ferretería podría utilizar para
  * representar una factura para un artículo vendido en la tienda. Una Factura
@@ -112,8 +115,24 @@ public class Ejercicio3_13 {
 
     public void Ejercicio() {
         
+        // Variables
+        String id, descripcion;
+        int cantidad;        
+        double precio;
+        
+        // Pedimos datos al usuario y los validamos
+        // apoyados en unas clases diseñadas para ese 
+        // propósito
+        id = PeticionDatos.pedirCadena("Introduzca el identificador de la pieza");
+        
+        descripcion = PeticionDatos.pedirCadena("Introduzca la descripción de la pieza");
+        
+        cantidad = PeticionDatos.pedirEntero("Introduzca el número de piezas compradas");
+        
+        precio = PeticionDatos.pedirReal("Introduzca el precio unitario de la pieza");
+                       
         // Creamos el nuevo objeto
-        Factura nuevaFactura = new Factura("1", "Ladrillos", 5, 8.9);
+        Factura nuevaFactura = new Factura(id, descripcion, cantidad, precio);
         
         // Mostramos el resultado
         System.out.println("La factura es: " + nuevaFactura.obtenerMontoFactura());
