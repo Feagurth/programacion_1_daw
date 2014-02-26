@@ -17,7 +17,6 @@
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * Cree una clase llamada Empleado, que incluya tres piezas de información como
@@ -90,6 +89,7 @@ public class Ejercicio3_14 {
 
     public void Ejercicio() {
 
+        // Variables
         String nombre, apellido;
         double sueldoMensual;
 

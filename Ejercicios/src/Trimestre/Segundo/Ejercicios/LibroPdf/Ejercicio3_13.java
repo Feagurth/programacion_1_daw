@@ -17,7 +17,6 @@
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * Cree una clase llamada Factura, que una ferretería podría utilizar para
