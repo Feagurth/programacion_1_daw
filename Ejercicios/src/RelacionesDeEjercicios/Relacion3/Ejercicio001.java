@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.PeticionDatos;
 import java.util.Scanner;
 
 /**
@@ -43,14 +44,63 @@ public class Ejercicio001 {
      */
     public class Vendedor {
 
-        String DNI;
-        String nombre;
-        String apellidos;
-        String zona;
-        float sueldoBase;
-        float ventasMes[];
-        float totalAnual;
-        float comision;
+        private String DNI;
+        private String nombre;
+        private String apellidos;
+        private String zona;
+        private float sueldoBase;
+        private float ventasMes[];
+        private float totalAnual;
+        private float comision;
+
+        // Getters y Setters
+        public String getDNI() {
+            return DNI;
+        }
+
+        public void setDNI(String DNI) {
+            this.DNI = DNI;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getApellidos() {
+            return apellidos;
+        }
+
+        public void setApellidos(String apellidos) {
+            this.apellidos = apellidos;
+        }
+
+        public String getZona() {
+            return zona;
+        }
+
+        public void setZona(String zona) {
+            this.zona = zona;
+        }
+
+        public float getSueldoBase() {
+            return sueldoBase;
+        }
+
+        public void setSueldoBase(float sueldoBase) {
+            this.sueldoBase = sueldoBase;
+        }
+
+        public float[] getVentasMes() {
+            return ventasMes;
+        }
+
+        public void setVentasMes(float[] ventasMes) {
+            this.ventasMes = ventasMes;
+        }
 
         /**
          * Constructor de la clase Vendedor
@@ -138,6 +188,23 @@ public class Ejercicio001 {
         public float getComision() {
             return comision;
         }
+
+        /**
+         * Función pare devolver el valor del sueldo más la comisión
+         *
+         * @return
+         */
+        public float getSueldoComision() {
+            return this.sueldoBase + this.comision;
+        }
+
+        @Override
+        public String toString() {
+
+            return String.format("Vendedor{DNI=%s, nombre=%s, apellidos=%s, zona=%s, sueldoBase=%s, totalAnual=%s, comision=%s}",
+                    DNI, nombre, apellidos, zona, sueldoBase, totalAnual, comision);
+        }
+
     }
 
     public void Ejercicio() {
@@ -160,10 +227,7 @@ public class Ejercicio001 {
         int contMeses;
 
         // Pedimos al usuario el número de vendedores
-        do {
-            System.out.print("Introduzca el número de vendedores: ");
-            numVendedores = entrada.nextInt();
-        } while (numVendedores <= 0);
+        numVendedores = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de vendedores");
 
         // Creamos un array de objetos Vendedor
         Vendedor[] vendedores = new Vendedor[numVendedores];
@@ -178,20 +242,15 @@ public class Ejercicio001 {
             entrada = new Scanner(System.in);
 
             // Pedimos al usuario los datos principales del vendedor
-            System.out.print("Introduzca el DNI del vendedor: ");
-            dni = entrada.nextLine();
+            dni = PeticionDatos.pedirDNI("Introduzca el DNI del vendedor");
 
-            System.out.print("Introduzca el nombre del vendedor: ");
-            nombre = entrada.nextLine();
+            nombre = PeticionDatos.pedirCadena("Introduzca el nombre del vendedor");
 
-            System.out.print("Introduzca los apellidos del vendedor: ");
-            apellidos = entrada.nextLine();
+            apellidos = PeticionDatos.pedirCadena("Introduzca los apellidos del vendedor");
 
-            System.out.print("Introduzca la zona de trabajo del vendedor: ");
-            zona = entrada.nextLine();
+            zona = PeticionDatos.pedirCadena("Introduzca la zona de trabajo del vendedor");
 
-            System.out.print("Introduzca el sueldo base del vendedor: ");
-            sueldoBase = entrada.nextFloat();
+            sueldoBase = (float) (PeticionDatos.pedirReal("Introduzca el sueldo base del vendedor"));
 
             // Creamos el objeto vendedor
             vendedor = new Vendedor(dni, nombre, apellidos, zona, sueldoBase);
@@ -206,9 +265,7 @@ public class Ejercicio001 {
                 // Aumentamos el contador de meses
                 contMeses++;
 
-                System.out.print("Introduzca el total de ventas para el mes "
-                        + "de " + mes + ": ");
-                ventaMes = entrada.nextFloat();
+                ventaMes = (float) PeticionDatos.pedirReal("Introduzca el total de ventas para el mes de " + mes);
                 vendedor.setVentaMes(contMeses, ventaMes);
             }
 
@@ -224,14 +281,18 @@ public class Ejercicio001 {
         // en el array de vendedores
         for (Vendedor vendedor : vendedores) {
 
-            System.out.println("Datos del vendedor: " + vendedor.nombre + " "
-                    + vendedor.apellidos);
-            System.out.println("DNI: " + vendedor.DNI);
-            System.out.println("Zona: " + vendedor.zona);
-            System.out.println("Sueldo Base: " + vendedor.sueldoBase);
-            System.out.println("Total Ventas Anual: " + vendedor.totalAnual);
-            System.out.println("Comisión : " + vendedor.comision);
+            System.out.println("Datos del vendedor: " + vendedor.getNombre() + " "
+                    + vendedor.getApellidos());
+            System.out.println("DNI: " + vendedor.getDNI());
+            System.out.println("Zona: " + vendedor.getZona());
+            System.out.println("Sueldo Base: " + vendedor.getSueldoBase());
+            System.out.println("Total Ventas Anual: " + vendedor.getTotalAnual());
+            System.out.println("Comisión : " + vendedor.getComision());
+            System.out.println("Sueldo con Comisión: " + vendedor.getSueldoComision());
             System.out.println("");
+
+            System.out.println("ToString: " + vendedor.toString());
+
         }
     }
 }

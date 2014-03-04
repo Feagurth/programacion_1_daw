@@ -62,6 +62,10 @@ public class Validaciones {
 
     
     private static final String CADENA_NUMEROS = "^[a-zA-Z0-9 ]+$";
+    
+    private static final String DNI = "(([X-Z]{1})([-]?)(\\d{7})([-]?)([A-Z]{1}))|((\\d{8})([-]?)([A-Z]{1}))";
+    
+    
     /**
      * Tipos de validaciones que se pueden llevar a cabo
      */
@@ -70,7 +74,7 @@ public class Validaciones {
         CADENA(0), CADENA_MAY(1), CADENA_MIN(2), ENTERO(3), ENTERO_POSITIVO(4),
         ENTERO_NEGATIVO(5), ENTERO_POSITIVO_NO_0(6), ENTERO_NEGATIVO_NO_0(7), REAL(8),
         REAL_POSITIVO(9), REAL_NEGATIVO(10), USUARIO(11), PASSWORD(12),
-        FECHA_DDMMAA(13), FECHA_DDMMAAAA(14), CADENA_NUMEROS(15);
+        FECHA_DDMMAA(13), FECHA_DDMMAAAA(14), CADENA_NUMEROS(15), DNI(16);
 
         private final int value;
 
@@ -120,11 +124,11 @@ public class Validaciones {
             case FECHA_DDMMAAAA:
                 return dato.matches(FECHA_DDMMAAAA);   
             case CADENA_NUMEROS:
-                return dato.matches(CADENA_NUMEROS);   
+                return dato.matches(CADENA_NUMEROS);
+            case DNI:
+                return dato.matches(DNI);
             default:
                 return false;
         }
-
     }
-
 }

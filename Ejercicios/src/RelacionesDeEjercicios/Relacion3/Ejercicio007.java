@@ -14,10 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package RelacionesDeEjercicios.Relacion3;
 
-import java.util.Scanner;
+import Utiles.PeticionDatos;
 
 /**
  * Diseñar una función con la que dadas dos matrices pasadas como parámetros,
@@ -28,22 +27,16 @@ import java.util.Scanner;
 public class Ejercicio007 {
 
     public void Ejercicio() {
-        // Objeto para pedir datos al usuario desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variables
         int valorX, valorY;
 
         // Petición de datos al usuario
-        do {
-            System.out.print("Introduzca la altura de las matrices: ");
-            valorX = entrada.nextInt();
-        } while (valorX <= 0);
+        // Petición de datos usando una clase auxiliar
+        valorX = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la "
+                + "altura de las matrices");
 
-        do {
-            System.out.print("Introduzca la anchura de las matrices: ");
-            valorY = entrada.nextInt();
-        } while (valorY <= 0);
+        valorY = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la "
+                + "anchura de las matrices");
 
         // Creamos las matrices nesarias
         // Dos para recoger los datos del usuario
@@ -53,9 +46,8 @@ public class Ejercicio007 {
         // Volvemos a pedir datos al usuario
         for (int i = 0; i < matriz1.length; i++) {
             for (int j = 0; j < matriz1[0].length; j++) {
-                System.out.print("Introduzca el valor para "
-                        + "[" + i + "," + j + "] para la primera matriz: ");
-                matriz1[i][j] = entrada.nextInt();
+                matriz1[i][j] = PeticionDatos.pedirEntero("Introduzca el valor "
+                        + "para [" + i + "," + j + "] para la primera matriz");
             }
         }
 
@@ -63,9 +55,8 @@ public class Ejercicio007 {
 
         for (int i = 0; i < matriz2.length; i++) {
             for (int j = 0; j < matriz2[0].length; j++) {
-                System.out.print("Introduzca el valor para "
-                        + "[" + i + "," + j + "] para la segunda matriz: ");
-                matriz2[i][j] = entrada.nextInt();
+                matriz2[i][j] = PeticionDatos.pedirEntero("Introduzca el valor "
+                        + "para [" + i + "," + j + "] para la segunda matriz");
             }
         }
 
@@ -79,6 +70,7 @@ public class Ejercicio007 {
 
     /**
      * Función que nos permite comparar dos matrices para ver si son iguales
+     *
      * @param matriz1 Primera matriz a comparar
      * @param matriz2 Segunda matriz a comparar
      * @return Resultado de la comparación

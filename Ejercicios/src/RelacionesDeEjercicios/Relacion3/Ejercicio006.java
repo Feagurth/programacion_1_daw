@@ -14,10 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package RelacionesDeEjercicios.Relacion3;
 
-import java.util.Scanner;
+import Utiles.PeticionDatos;
 
 /**
  * Determinar si una matriz de tres filas y tres columnas es un cuadrado mágico.
@@ -29,17 +28,12 @@ import java.util.Scanner;
 public class Ejercicio006 {
 
     public void Ejercicio() {
-        // Objeto para pedir datos al usuario por el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variables
         int valorLado;
 
         // Pedimos al usuario el tamaño del lado de la matriz
-        do {
-            System.out.print("Introduzca el valor del lado de la matriz: ");
-            valorLado = entrada.nextInt();
-        } while (valorLado <= 0);
+        // Petición de datos al usaurio usando una clase auxiliar
+        valorLado = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor del lado de la matriz");
 
         // Creamos la matriz
         int[][] matriz = new int[valorLado][valorLado];
@@ -47,9 +41,10 @@ public class Ejercicio006 {
         // Pedimos al usuario que rellene la matriz
         for (int i = 0; i < valorLado; i++) {
             for (int j = 0; j < valorLado; j++) {
-                System.out.print("Introduzca el valor de la posición "
-                        + "[" + i + "," + j + "]: ");
-                matriz[i][j] = entrada.nextInt();
+
+                // Petición de datos usando clase auxiliar
+                matriz[i][j] = PeticionDatos.pedirEntero("Introduzca el valor "
+                        + "de la posición [" + i + "," + j + "]");
             }
         }
 

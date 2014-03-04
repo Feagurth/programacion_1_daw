@@ -52,7 +52,35 @@ public class PeticionDatos {
         // Devolvemos el resultado
         return Integer.valueOf(resultado);
     }
-    
+
+    /**
+     * Método para pedir y validar la entrada de un entero por parte del usuario
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static int pedirEnteroPositivo(String cadena) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO_POSITIVO));
+
+        // Devolvemos el resultado
+        return Integer.valueOf(resultado);
+    }
+        
     /**
      * Método para pedir y validar la entrada de un entero por parte del usuario
      *
@@ -79,7 +107,7 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         return Integer.valueOf(resultado);
-    }    
+    }
 
     /**
      * Método para pedir y validar la entrada de una cadena por parte del
@@ -105,11 +133,11 @@ public class PeticionDatos {
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA_NUMEROS));
-        
+
         // Devolvemos el resultado
         return resultado;
     }
-    
+
     /**
      * Método para pedir y validar la entrada de una cadena por parte del
      * usuario
@@ -134,10 +162,10 @@ public class PeticionDatos {
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA));
-        
+
         // Devolvemos el resultado
         return resultado;
-    }    
+    }
 
     /**
      * Método para pedir y validar la entrada de un real por parte del usuario
@@ -155,10 +183,10 @@ public class PeticionDatos {
         do {
             // Mostramos el mensaje especificado al usuario
             System.out.print(cadena + ": ");
-            
+
             // Recogemos lo introducido por el usuario
             resultado = entrada.nextLine();
-            
+
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido            
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.REAL));
@@ -184,10 +212,10 @@ public class PeticionDatos {
         do {
             // Mostramos el mensaje especificado al usuario
             System.out.print(cadena + ": ");
-            
+
             // Recogemos lo introducido por el usuario
             resultado = entrada.nextLine();
-            
+
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido                        
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.REAL_POSITIVO));
@@ -195,4 +223,77 @@ public class PeticionDatos {
         // Devolvemos el resultado
         return Double.valueOf(resultado.replace(",", "."));
     }
+
+    /**
+     * Método para validar una petición de consentimiento para realizar una acción
+     * @param cadena Cadena que se mostrará al usuario
+     * @param valores Valores que puede tomar la cadena para ser validada
+     * @return Verdadero si es un caracter que concuerde con algún valor del 
+     * array de valores
+     */
+    public static String pedirConsentimiento(String cadena, String[] valores) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+        boolean validado = false;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Comprobamos que la cadena contenga alguno de los valores de
+            // consentimiento almacenados en el array
+            for (String valor : valores) {
+                if (resultado.toLowerCase().contains(valor.toLowerCase())) {
+                    validado = true;
+                    break;
+                }
+            }
+
+            // Verificamos que solo sea un caracter
+            if (resultado.length() > 1) {
+                validado = false;
+            }
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido                        
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA) || !validado);
+
+        // Devolvemos el resultado
+        return resultado;
+    }
+
+    /**
+     * Método para pedir un DNI al usuario
+     * @param cadena Cadena con el mensaje a mostrar al usuario
+     * @return DNI validado
+     */
+    public static String pedirDNI(String cadena) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.DNI));
+
+        // Devolvemos el resultado
+        return resultado;
+    }    
+    
+
 }

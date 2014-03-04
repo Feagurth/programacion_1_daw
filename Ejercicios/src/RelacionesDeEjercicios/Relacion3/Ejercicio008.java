@@ -17,8 +17,6 @@
 
 package RelacionesDeEjercicios.Relacion3;
 
-import java.util.Scanner;
-
 /**
  * Supongamos que existen N ciudades en la red ferroviaria de un país, y que sus
  * nombres están almacenados en un vector CIUDAD. Diseñar un algoritmo en el que
@@ -30,9 +28,6 @@ import java.util.Scanner;
 public class Ejercicio008 {
 
     public void Ejercicio() {
-        // Objeto para pedir datos al usuario por el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Array para contener el nombre de las ciudades
         String[] arrayNombreCiudades
                 = new String[]{"Almeria", "Granada", "Jaen", "Malaga",

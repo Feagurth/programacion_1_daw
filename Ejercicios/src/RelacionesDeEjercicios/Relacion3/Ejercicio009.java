@@ -16,22 +16,26 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.PeticionDatos;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Las notas de Informática de todos los alumnos de Bachillerato de un centro
  * están recogidas en la hoja de cálculo. Calcula las medidas de centralización
- * y de dispersión. a. Indicaciones: I. Crearos una clase llamada
- * DistribuciónEstadistica con los siguientes elementos: 1. Crearos un campo de
- * clase que almacene las notas del centro. Podéis generar de forma aleatoria
- * los datos. 2. Métodos de la clase  implementan cada una de las medidas de
- * centralización y dispersión. II. Crearos unas clase de prueba
+ * y de dispersión. 
+ *  a. Indicaciones: 
+ *      I. Crearos una clase llamada DistribuciónEstadistica con los siguientes 
+ *      elementos: 
+ *          1. Crearos un campo de clase que almacene las notas del centro. 
+ *          Podéis generar de forma aleatoria los datos. 
+ *          2. Métodos de la clase  implementan cada una de las medidas de
+ *          centralización y dispersión. 
+ *      II. Crearos unas clase de prueba
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -310,7 +314,7 @@ public class Ejercicio009 {
 
             // Iteramos el array de datos para concatenar los valores
             for (int i = 1; i <= arrayDatos.length; i++) {
-                salida += arrayDatos[i-1] + "\t";
+                salida += arrayDatos[i - 1] + "\t";
 
                 // Si la iteración es múltiplo de 10, introducimos un 
                 // salto de línea
@@ -327,60 +331,47 @@ public class Ejercicio009 {
 
     public void Ejercicio() {
 
-        // Objeto para pedir datos datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Cantidad de datos a generar aleatoriamente
         int numDatos;
 
         // Respuesta del usuario
         String respuesta;
+        int valor;
 
         // Creamos el objeto
         DistribucionEstadistica distro;
 
         // Preguntamos al usuairo si quiere introducir los datos manualmente
         // o generarlos de forma pseudoaleatoria
-        do {
-            System.out.print("¿Desea generar datos aleatorios? [s/n]: ");
-            respuesta = entrada.nextLine();
-        } while (!respuesta.matches("[sSnN]"));
+        respuesta = PeticionDatos.pedirConsentimiento(
+                "¿Desea generar datos aleatorios? [s/n]",
+                new String[]{"s", "n"});
 
         // Si la respuesta es afirmativa
         if (respuesta.equalsIgnoreCase("s")) {
 
-            // Preguntamos cuantos valores deseamos generar
-            do {
-                System.out.print("¿Cuantos valores desea generar?: ");
-                respuesta = entrada.nextLine();
-            } while (!respuesta.matches("[1-9]{1}[0-9]*"));
+            valor = PeticionDatos.pedirEnteroPositivoNoCero("¿Cuantos valores desea generar?");
 
             // Creamos el nuevo objeto pasando null como parametro
             distro = new DistribucionEstadistica(null);
 
             // Generamos tantos nuevos datos aleatorios como haya especificado 
             // el usuario
-            distro.generarDatosAleatorios(Integer.valueOf(respuesta));
+            distro.generarDatosAleatorios(valor);
         } else {
 
             // Preguntamos cuantos valores deseamos generar
-            do {
-                System.out.print("¿Cuantos valores desea generar?: ");
-                respuesta = entrada.nextLine();
-            } while (!respuesta.matches("[1-9]{1}[0-9]*"));
-
+            valor = PeticionDatos.pedirEnteroPositivoNoCero("¿Cuantos valores desea generar?");
             // Creamos un nuevo array del tamaño que nos haya especificado el 
             // usuario
-            int[] valores = new int[Integer.valueOf(respuesta)];
+            int[] valores = new int[valor];
 
             // Iteramos pidiendo al usuario que introduzca nuevos valores
             for (int i = 0; i < valores.length; i++) {
-                do {
-                    System.out.print("Introduzca el valor número " + (i + 1) + ": ");
-                    respuesta = entrada.nextLine();
-                } while (!respuesta.matches("[1-9]{1}[0-9]*"));
 
-                valores[i] = Integer.valueOf(respuesta);
+                valor = PeticionDatos.pedirEnteroPositivo("Introduzca el valor número " + (i + 1));
+                                
+                valores[i] = valor;
             }
 
             // Una vez creado el array de valores para la distribución 
@@ -391,7 +382,7 @@ public class Ejercicio009 {
 
         // Mostramos la distribución estadística con la que trabajaremos
         System.out.println(distro.toString());
-        
+
         // Mostramos resultados
         System.out.println("");
         System.out.println("Resultados");
