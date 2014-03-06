@@ -17,7 +17,6 @@
 package RelacionesDeEjercicios.Relacion3;
 
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * Una empresa tiene almacenados a sus vendedores en un registro. Por cada
@@ -208,8 +207,6 @@ public class Ejercicio001 {
     }
 
     public void Ejercicio() {
-        // Objeto para recoger datos desde el teclado
-        Scanner entrada = new Scanner(System.in);
 
         // Array con los nombres de los meses del año
         final String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril",
@@ -237,9 +234,6 @@ public class Ejercicio001 {
 
             // Aumentamos el contador de vendedores
             loop++;
-
-            // Reinicializamos el objeto de petición de datos por teclado
-            entrada = new Scanner(System.in);
 
             // Pedimos al usuario los datos principales del vendedor
             dni = PeticionDatos.pedirDNI("Introduzca el DNI del vendedor");
