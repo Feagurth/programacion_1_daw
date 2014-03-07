@@ -16,7 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
-import java.util.Scanner;
+import Utiles.PeticionDatos;
 
 /**
  * Una empresa de venta de productos por correo desea realizar una estadística
@@ -91,10 +91,264 @@ public class Ejercicio003 {
 
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
+    /**
+     * Clase diseñada para albergar todas las ventas de productos de un año y
+     * mostrar los resultados de forma maquetada
+     */
+    public class SistemaDeVentas {
 
+        private final String[] ARRAY_MESES = new String[]{"Enero", "Febrero", "Marzo", "Abril",
+            "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
+            "Noviembre", "Diciembre"};
+
+        private final String CADENA_TOTAL_PRODUCTO = "Total Producto";
+
+        private final VentaAnualProducto[] ventasAnuales;
+
+        /**
+         * Método para recuperar todas las ventas anuales de productos
+         * @return Todas las ventas anuales de los productos
+         */
+        public VentaAnualProducto[] getVentasAnuales() {
+            return ventasAnuales;
+        }
+
+        /**
+         * Método para recuperar todas las ventas anuales de un producto
+         * @param posicion Posición del producto en el array de ventas anuales
+         * @return Toads las ventas anuales de un producto
+         */
+        public VentaAnualProducto getVentaAnualProducto(int posicion) {
+            if (posicion <= ventasAnuales.length - 1) {
+                return ventasAnuales[posicion];
+            }
+            else
+            {
+                return null;                
+            }
+        }
+
+        /**
+         * Constructor de la clase
+         *
+         * @param ventasAnuales Un array con las ventas de los productos del año
+         */
+        public SistemaDeVentas(VentaAnualProducto[] ventasAnuales) {
+            this.ventasAnuales = ventasAnuales;
+        }
+
+        /**
+         * Método que nos permite mostrar por pantalla los datos de ventas
+         * anuales formateados con un diseño en forma de rejilla
+         */
+        public void mostrarResultadosAnuales() {
+            int contador;
+
+            // Definimos un String para pintar la linea de resultados
+            String linea;
+
+            // Iniciamos el pintado del cuadro dejando 30 espacios en blanco, esto 
+            // es el espacio de 2 columnas de 15 espacios
+            linea = generarCadena(" ", 30, "");
+
+            // Concatenamos a la cadena 223 guiones para crear la primera linea
+            linea += generarCadena("-", 223, "");
+
+            // La imprimimos por pantalla
+            System.out.println(linea);
+
+            // Reiniciamos el valor de linea, y le asignamos de nuevo 30 espacios 
+            // en blanco
+            linea = generarCadena(" ", 30, "");
+
+            // A continuación iteramos por el array de meses, concatenando a la 
+            // linea una barra, el valor del nombre del mes y los espacios 
+            // necesarios para llegar a 15 caracteres
+            for (String mes : ARRAY_MESES) {
+                linea += "| " + mes + generarCadena(" ", 15, mes);
+            }
+
+            // Para finalizar contatenamos una barra más y la cadena del total del 
+            // producto formateada a 15 espacios en blanco
+            linea += "| " + CADENA_TOTAL_PRODUCTO + generarCadena(" ", 15,
+                    CADENA_TOTAL_PRODUCTO) + " |";
+
+            // Imprimimos la liea
+            System.out.println(linea);
+
+            // Asignamos a la linea 253 guiones
+            linea = generarCadena("-", 253, "");
+
+            // Imprimimos la linea, con esto quedaria la cabeza de los meses 
+            // dibujada
+            System.out.println(linea);
+
+            // Reseteamos la liena una vez más
+            linea = "";
+
+            // Definimos unos arrays para ayudarnos a almacenar los totales
+            // y controlar cual es el producto más vendido para cada mes
+            // de todos los productos vendidos
+            float[] totales = new float[13];
+            float[] valorMasVendido = new float[12];
+            int[] masVendido = new int[12];
+
+            // Reiniciamos el contador para poder controlar en que iteración 
+            // nos encontramos
+            contador = -1;
+
+            // Iteramos por todos los productos almacenados
+            for (VentaAnualProducto producto : ventasAnuales) {
+
+                // Aumentamos la variable contador
+                contador++;
+
+                // Concatenamos a la linea una barra vertical y el nombre del 
+                // producto, formateado a 28 espacios
+                linea += "| " + producto.getNombreProducto()
+                        + generarCadena(" ", 28, producto.getNombreProducto());
+
+                // A continuación iteramos por el array de meses
+                for (int i = 0; i < ARRAY_MESES.length; i++) {
+
+                    // Y concatenamos a la linea las ventas mensuales del producto
+                    // para el mes correspondiente a la iteración actual
+                    linea += "| " + producto.getVentasMensual(i)
+                            + generarCadena(" ", 15,
+                                    String.valueOf(producto.getVentasMensual(i)));
+
+                    // Aumentamos el acumulador de ventas mensuales 
+                    totales[i] += producto.getVentasMensual(i);
+
+                    // Verificamos si las ventas mensuales son mayores que lo 
+                    // almacenado en el array de control
+                    if (producto.getVentasMensual(i) > valorMasVendido[i]) {
+
+                        // De ser así actualizamos el array de control con el 
+                        // valor más alto
+                        valorMasVendido[i] = producto.getVentasMensual(i);
+
+                        // Y guardamos el valor del contador en el array de 
+                        // productos más vendidos
+                        masVendido[i] = contador;
+                    }
+
+                }
+
+                // Para finalizad concatenamos el producto total de ventas para 
+                // el año formateado a 15 espacios en blanco 
+                linea += "| " + producto.getTotalVentasProducto()
+                        + generarCadena(" ", 15,
+                                String.valueOf(producto.getTotalVentasProducto()))
+                        + " |";
+
+                // Aumentamos la valor de la última posición del array de totales
+                // con el valor total de ventas del año
+                totales[12] += producto.getTotalVentasProducto();
+
+                // Imprimimos la linea creada
+                System.out.println(linea);
+
+                // Sobreescribimos el valor de linea con 253 guiones
+                linea = generarCadena("-", 253, "");
+
+                // Imprimimos la nueva linea
+                System.out.println(linea);
+
+                // Limpiamos la variable para la siguiente iteración
+                linea = "";
+            }
+
+            // Generamos una nueva linea de 253 guiones
+            linea = generarCadena("-", 253, "");
+
+            // La imprimimos dos veces, marcará la separación de totales
+            System.out.println(linea);
+            System.out.println(linea);
+
+            // Reseteamos su valor
+            linea = "";
+
+            // Concatenamos los valores de Total Mes formateado a 25 espacios en blanco
+            linea += "| " + "Total mes" + generarCadena(" ", 28, "Total mes");
+
+            // Iteramos una vez más por el array de meses concatenando los resultados
+            for (int i = 0; i < ARRAY_MESES.length; i++) {
+
+                // Concatenamos los valores antes generados formateados a 15 
+                // espacios en blanco
+                linea += "| " + totales[i]
+                        + generarCadena(" ", 15, String.valueOf(totales[i]));
+
+            }
+
+            // Finalmente concatenamos tb el total del año
+            linea += "| " + totales[12]
+                    + generarCadena(" ", 15, String.valueOf(totales[12])) + " |";
+
+            // Lo imprimirmos
+            System.out.println(linea);
+
+            // Imprimimos una linea larga
+            linea = generarCadena("-", 253, "");
+
+            System.out.println(linea);
+
+            // Creamos una nuev a linea para mostrar el producto mas vendido para 
+            // cada mes
+            linea = "| " + "Producto más vendido"
+                    + generarCadena(" ", 28, "Producto más vendido");
+
+            // Iteramos una vez más por el array de meses
+            for (int i = 0; i < ARRAY_MESES.length; i++) {
+
+                // Concatenemos el nombre del producto más vendido formateado
+                // a 15 espacios en blanco
+                linea += "| " + ventasAnuales[masVendido[i]].getNombreProducto()
+                        + generarCadena(" ", 15,
+                                ventasAnuales[masVendido[i]].getNombreProducto());
+
+            }
+
+            // Concatenemoas el último cajón sin psarle valores ninguno y generando
+            // simplemente 15 espacios en blanco
+            linea += "| " + generarCadena(" ", 15, "") + " |";
+
+            // Imprimimos la linea
+            System.out.println(linea);
+
+            // Y finalizamos imprimiendo una linea de 253 guiones
+            linea = generarCadena("-", 253, "");
+
+            System.out.println(linea);
+        }
+
+        /**
+         * Función que nos permite generar una serie de caracteres para ayudar a
+         * la maquetación de los resultados
+         *
+         * @param caracter Carácter con el que se va a generar la cadena
+         * @param cantidad Cantidad de espacios a ocupar
+         * @param valorCadena Cantidad de espacios ya ocupados
+         * @return Devuelve una cadena de caracteres cuya longitud es la
+         * cantidad menos la longitud de valorCadena
+         */
+        private String generarCadena(String caracter, int cantidad, String valorCadena) {
+            String resultado = "";
+
+            // Generamos una cadena con tantos caracteres repetidos como 
+            // cantidad necesitemos menos la longitud del texto que vamos a 
+            // introducir
+            for (int i = 0; i < cantidad - valorCadena.length(); i++) {
+                resultado += caracter;
+            }
+
+            return resultado;
+        }
+
+    }
+
+    public void Ejercicio() {
         // Variables
         int numProductos;
         String nombreProducto;
@@ -102,12 +356,8 @@ public class Ejercicio003 {
         final String[] ARRAY_MESES = new String[]{"Enero", "Febrero", "Marzo", "Abril",
             "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
             "Noviembre", "Diciembre"};
-        final String CADENA_TOTAL_PRODUCTO = "Total Producto";
 
-        do {
-            System.out.print("Introduzca el número de productos a procesar: ");
-            numProductos = entrada.nextInt();
-        } while (numProductos <= 0);
+        numProductos = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de productos a procesar");
 
         // Creamos un array de objetos VentaAnualProducto
         VentaAnualProducto[] ventasAnuales = new VentaAnualProducto[numProductos];
@@ -117,13 +367,8 @@ public class Ejercicio003 {
 
         for (VentaAnualProducto ventaAnual : ventasAnuales) {
 
-            // Creamos de nuevo el objeto Scanner
-            entrada = new Scanner(System.in);
-
             // Pedimos al usuario el nombre del producto
-            System.out.println("");
-            System.out.print("Introduzca el nombre del producto: ");
-            nombreProducto = entrada.nextLine();
+            nombreProducto = PeticionDatos.pedirCadena("Introduzca el nombre del producto");
 
             // Inicializamos el array de ventas
             ventaMeses = new float[12];
@@ -138,9 +383,7 @@ public class Ejercicio003 {
                 contadorMeses++;
 
                 // Preguntamos las ventas del producto al usuario para el mes
-                System.out.print("Introduzca la ventas del producto para "
-                        + mes + ": ");
-                ventaMeses[contadorMeses] = entrada.nextFloat();
+                ventaMeses[contadorMeses] = (float) PeticionDatos.pedirRealPositivo("Introduzca la ventas del producto para " + mes);
             }
 
             // Creamos el objeto correspondiente a las ventas anuales del 
@@ -154,203 +397,12 @@ public class Ejercicio003 {
             ventasAnuales[contador] = ventaAnual;
         }
 
-        // Definimos un String para pintar la linea de resultados
-        String linea;
+        // Creamos un nuevo objeto de Sistema de ventas al cual pasaremos en su
+        // constructor los valores introducidos por el usuario
+        SistemaDeVentas sistemaDeVentas = new SistemaDeVentas(ventasAnuales);
 
-        // Iniciamos el pintado del cuadro dejando 30 espacios en blanco, esto 
-        // es el espacio de 2 columnas de 15 espacios
-        linea = generarCadena(" ", 30, "");
+        // Mostramos los resultados formateados
+        sistemaDeVentas.mostrarResultadosAnuales();
 
-        // Concatenamos a la cadena 223 guiones para crear la primera linea
-        linea += generarCadena("-", 223, "");
-
-        // La imprimimos por pantalla
-        System.out.println(linea);
-
-        // Reiniciamos el valor de linea, y le asignamos de nuevo 30 espacios 
-        // en blanco
-        linea = generarCadena(" ", 30, "");
-
-        // A continuación iteramos por el array de meses, concatenando a la 
-        // linea una barra, el valor del nombre del mes y los espacios 
-        // necesarios para llegar a 15 caracteres
-        for (String mes : ARRAY_MESES) {
-            linea += "| " + mes + generarCadena(" ", 15, mes);
-        }
-
-        // Para finalizar contatenamos una barra más y la cadena del total del 
-        // producto formateada a 15 espacios en blanco
-        linea += "| " + CADENA_TOTAL_PRODUCTO + generarCadena(" ", 15,
-                CADENA_TOTAL_PRODUCTO) + " |";
-
-        // Imprimimos la liea
-        System.out.println(linea);
-
-        // Asignamos a la linea 253 guiones
-        linea = generarCadena("-", 253, "");
-
-        // Imprimimos la linea, con esto quedaria la cabeza de los meses 
-        // dibujada
-        System.out.println(linea);
-
-        // Reseteamos la liena una vez más
-        linea = "";
-
-        // Definimos unos arrays para ayudarnos a almacenar los totales
-        // y controlar cual es el producto más vendido para cada mes
-        // de todos los productos vendidos
-        float[] totales = new float[13];
-        float[] valorMasVendido = new float[12];
-        int[] masVendido = new int[12];
-
-        // Reiniciamos el contador para poder controlar en que iteración 
-        // nos encontramos
-        contador = -1;
-
-        // Iteramos por todos los productos almacenados
-        for (VentaAnualProducto producto : ventasAnuales) {
-
-            // Aumentamos la variable contador
-            contador++;
-
-            // Concatenamos a la linea una barra vertical y el nombre del 
-            // producto, formateado a 28 espacios
-            linea += "| " + producto.getNombreProducto()
-                    + generarCadena(" ", 28, producto.getNombreProducto());
-
-            // A continuación iteramos por el array de meses
-            for (int i = 0; i < ARRAY_MESES.length; i++) {
-
-                // Y concatenamos a la linea las ventas mensuales del producto
-                // para el mes correspondiente a la iteración actual
-                linea += "| " + producto.getVentasMensual(i)
-                        + generarCadena(" ", 15,
-                                String.valueOf(producto.getVentasMensual(i)));
-
-                // Aumentamos el acumulador de ventas mensuales 
-                totales[i] += producto.getVentasMensual(i);
-
-                // Verificamos si las ventas mensuales son mayores que lo 
-                // almacenado en el array de control
-                if (producto.getVentasMensual(i) > valorMasVendido[i]) {
-
-                    // De ser así actualizamos el array de control con el 
-                    // valor más alto
-                    valorMasVendido[i] = producto.getVentasMensual(i);
-
-                    // Y guardamos el valor del contador en el array de 
-                    // productos más vendidos
-                    masVendido[i] = contador;
-                }
-
-            }
-
-            // Para finalizad concatenamos el producto total de ventas para 
-            // el año formateado a 15 espacios en blanco 
-            linea += "| " + producto.getTotalVentasProducto()
-                    + generarCadena(" ", 15,
-                            String.valueOf(producto.getTotalVentasProducto()))
-                    + " |";
-
-            // Aumentamos la valor de la última posición del array de totales
-            // con el valor total de ventas del año
-            totales[12] += producto.getTotalVentasProducto();
-
-            // Imprimimos la linea creada
-            System.out.println(linea);
-
-            // Sobreescribimos el valor de linea con 253 guiones
-            linea = generarCadena("-", 253, "");
-
-            // Imprimimos la nueva linea
-            System.out.println(linea);
-
-            // Limpiamos la variable para la siguiente iteración
-            linea = "";
-        }
-
-        // Generamos una nueva linea de 253 guiones
-        linea = generarCadena("-", 253, "");
-
-        // La imprimimos dos veces, marcará la separación de totales
-        System.out.println(linea);
-        System.out.println(linea);
-
-        // Reseteamos su valor
-        linea = "";
-
-        // Concatenamos los valores de Total Mes formateado a 25 espacios en blanco
-        linea += "| " + "Total mes" + generarCadena(" ", 28, "Total mes");
-
-        // Iteramos una vez más por el array de meses concatenando los resultados
-        for (int i = 0; i < ARRAY_MESES.length; i++) {
-
-            // Concatenamos los valores antes generados formateados a 15 
-            // espacios en blanco
-            linea += "| " + totales[i]
-                    + generarCadena(" ", 15, String.valueOf(totales[i]));
-
-        }
-
-        // Finalmente concatenamos tb el total del año
-        linea += "| " + totales[12]
-                + generarCadena(" ", 15, String.valueOf(totales[12])) + " |";
-
-        // Lo imprimirmos
-        System.out.println(linea);
-
-        // Imprimimos una linea larga
-        linea = generarCadena("-", 253, "");
-
-        System.out.println(linea);
-
-        // Creamos una nuev a linea para mostrar el producto mas vendido para 
-        // cada mes
-        linea = "| " + "Producto más vendido"
-                + generarCadena(" ", 28, "Producto más vendido");
-
-        // Iteramos una vez más por el array de meses
-        for (int i = 0; i < ARRAY_MESES.length; i++) {
-
-            // Concatenemos el nombre del producto más vendido formateado
-            // a 15 espacios en blanco
-            linea += "| " + ventasAnuales[masVendido[i]].getNombreProducto()
-                    + generarCadena(" ", 15,
-                            ventasAnuales[masVendido[i]].getNombreProducto());
-
-        }
-
-        // Concatenemoas el último cajón sin psarle valores ninguno y generando
-        // simplemente 15 espacios en blanco
-        linea += "| " + generarCadena(" ", 15, "") + " |";
-
-        // Imprimimos la linea
-        System.out.println(linea);
-
-        // Y finalizamos imprimiendo una linea de 253 guiones
-        linea = generarCadena("-", 253, "");
-
-        System.out.println(linea);
-
-    }
-
-    /**
-     * Función que nos permite generar una serie de caracteres para ayudar a la
-     * maquetación de los resultados
-     *
-     * @param caracter Caracter con el que se va a generar la cadena
-     * @param cantidad Cantidad de espacios a ocupar
-     * @param valorCadena Cantidad de espacios ya ocupados
-     * @return Devuelve una cadena de caracteres cuya longitud es la cantidad
-     * menos la logitud de valorCadena
-     */
-    private String generarCadena(String caracter, int cantidad, String valorCadena) {
-        String resultado = "";
-
-        for (int i = 0; i < cantidad - valorCadena.length(); i++) {
-            resultado += caracter;
-        }
-
-        return resultado;
     }
 }

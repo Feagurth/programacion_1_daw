@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.PeticionDatos;
 import java.util.Scanner;
 
 /**
@@ -25,8 +26,7 @@ import java.util.Scanner;
  * asignar asientos en cada vuelo del único avión de la aerolínea (capacidad: 10
  * asientos). Tu aplicación debe mostrar las siguientes alternativas:
  *
- * Por favor escriba 1 para Primera clase 
- * Por favor escriba 2 para Económico
+ * Por favor escriba 1 para Primera clase Por favor escriba 2 para Económico
  *
  * Si el usuario escribe 1, tu aplicación debe asignarle un asiento en la
  * sección de primera clase (asientos 1 a 5). Si el usuario escribe 2, tu
@@ -153,49 +153,36 @@ public class Ejercicio010 {
 
     public void Ejercicio() {
 
-        // OBjeto para pedir información por el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // variables
         String nombreUsuario;
         int tipoReserva;
         int numAsiento;
-        int cantidadAsientos;
-        int cantidadAsientosPrimera;
+        int cantidadAsientos = 10;
+        int cantidadAsientosPrimera = 5;
 
-        // Pedimos al usuario el número de asientos que tendrá el sistema de 
-        // reservas en total
-        do {
-            System.out.print("Introduzca el número de asientos reservables: ");
-            cantidadAsientos = entrada.nextInt();
-        } while (cantidadAsientos <= 1);
+        /*
+         do {
+         // Pedimos al usuario el número de asientos que tendrá el sistema de 
+         // reservas en total
+         cantidadAsientos = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de asientos reservables");
 
-        // Pedimos al usuario el número de asientos de primera clase que 
-        // tendrá el sistema de reservas en total
-        do {
-            System.out.print("Introduzca el número de asientos de Primera Clase: ");
-            cantidadAsientosPrimera = entrada.nextInt();
-        } while (cantidadAsientosPrimera <= 0 || cantidadAsientosPrimera >= cantidadAsientos);
-
+         // Pedimos al usuario el número de asientos de primera clase que 
+         // tendrá el sistema de reservas en total
+         cantidadAsientosPrimera = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de asientos de Primera Clase");
+            
+         } while (cantidadAsientos <= cantidadAsientosPrimera);
+         */
         // Creamos un objeto SistemaReservas para gestionar las reservas        
         SistemaReservas reservas = new SistemaReservas(cantidadAsientos, cantidadAsientosPrimera);
 
         do {
-            // Reiniciamos el objeto scanner
-            entrada = new Scanner(System.in);
-
             // Petición de nombre al usuario
-            System.out.print("Introduzca su nombre: ");
-            nombreUsuario = entrada.nextLine();
+            nombreUsuario = PeticionDatos.pedirCadena("Introduzca su nombre");
 
             // Pedimos al usuario el tipo de reserva
-            do {
-                System.out.println("1 Primera Clase");
-                System.out.println("2 Económico");
-                System.out.print("Introduzca el tipo de reserva: ");
-                tipoReserva = entrada.nextInt();
-
-            } while (tipoReserva < 1 || tipoReserva > 2);
+            System.out.println("1 Primera Clase");
+            System.out.println("2 Económico");
+            tipoReserva = PeticionDatos.pedirEnteroRango("Introduzca el tipo de reserva", 1, 2);
 
             // Verificamos que hay asientos para el tipo de reserva seleccionado
             if (reservas.verificarAsiento((tipoReserva == 1))) {
@@ -216,21 +203,16 @@ public class Ejercicio010 {
                 // objeto String
                 String respuesta;
 
-                // Reiniciamos el objeto scanner
-                entrada = new Scanner(System.in);
-
                 // Realizamos la pregunta clase al usuario
-                do {
-                    System.out.println("No quedan asientos libres en "
-                            + (tipoReserva == 1 ? "Primera Clase" : "clase económica"));
+                respuesta = ("No quedan asientos libres en "
+                        + (tipoReserva == 1 ? "Primera Clase\n" : "clase económica\n"));
 
-                    System.out.print("¿Desea reservar asiento en "
-                            + (tipoReserva == 1 ? "clase económica" : "Primera Clase")
-                            + " [s/n]: ");
+                respuesta += ("¿Desea reservar asiento en "
+                        + (tipoReserva == 1 ? "clase económica" : "Primera Clase")
+                        + " [s/n]: ");
 
-                    // Almacenamos la respuesta
-                    respuesta = entrada.nextLine().toLowerCase();
-                } while (!respuesta.equals("s") && !respuesta.equals("n"));
+                // Almacenamos la respuesta
+                respuesta = PeticionDatos.pedirConsentimiento(respuesta, new String[]{"s", "n"});
 
                 // Si la respuesa es negativa, mostramos la respuesta 
                 // especificada

@@ -40,25 +40,11 @@ public class Ejercicio007 {
 
         // Creamos las matrices nesarias
         // Dos para recoger los datos del usuario
-        int[][] matriz1 = new int[valorX][valorY];
-        int[][] matriz2 = new int[valorX][valorY];
-
-        // Volvemos a pedir datos al usuario
-        for (int i = 0; i < matriz1.length; i++) {
-            for (int j = 0; j < matriz1[0].length; j++) {
-                matriz1[i][j] = PeticionDatos.pedirEntero("Introduzca el valor "
-                        + "para [" + i + "," + j + "] para la primera matriz");
-            }
-        }
-
-        System.out.println("");
-
-        for (int i = 0; i < matriz2.length; i++) {
-            for (int j = 0; j < matriz2[0].length; j++) {
-                matriz2[i][j] = PeticionDatos.pedirEntero("Introduzca el valor "
-                        + "para [" + i + "," + j + "] para la segunda matriz");
-            }
-        }
+        System.out.println("Introduzca los datos para la primera matriz");
+        int[][] matriz1 = crearMatriz(valorX, valorY);
+        
+        System.out.println("Introduzca los datos para la segunda matriz");
+        int[][] matriz2 = crearMatriz(valorX, valorY);
 
         // Comparamos las matrices y mostramos el resultado
         if (matricesIguales(matriz1, matriz2)) {
@@ -68,6 +54,29 @@ public class Ejercicio007 {
         }
     }
 
+    /**
+     * Método que nos permite crear una matriz y rellenarla con datos
+     *
+     * @param ancho Ancho de la matriz
+     * @param alto Alto de la matriz
+     * @return Matriz con valores
+     */
+    private int[][] crearMatriz(int ancho, int alto) {
+        // Creamos una matriz para almacenar los datos
+        int[][] matrizInicial = new int[alto][ancho];
+
+        // Pedimos datos al usuario
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                matrizInicial[i][j] = PeticionDatos.pedirEntero("Introduce el "
+                        + "valor para la posición [" + i + "," + j + "]");
+            }
+        }
+
+        // Devolvemos la matriz con los datos introducidos
+        return matrizInicial;
+    }        
+    
     /**
      * Función que nos permite comparar dos matrices para ver si son iguales
      *

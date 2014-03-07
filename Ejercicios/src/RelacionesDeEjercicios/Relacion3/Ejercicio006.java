@@ -36,17 +36,7 @@ public class Ejercicio006 {
         valorLado = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor del lado de la matriz");
 
         // Creamos la matriz
-        int[][] matriz = new int[valorLado][valorLado];
-
-        // Pedimos al usuario que rellene la matriz
-        for (int i = 0; i < valorLado; i++) {
-            for (int j = 0; j < valorLado; j++) {
-
-                // Petición de datos usando clase auxiliar
-                matriz[i][j] = PeticionDatos.pedirEntero("Introduzca el valor "
-                        + "de la posición [" + i + "," + j + "]");
-            }
-        }
+        int[][] matriz = crearMatriz(valorLado, valorLado);
 
         // Pasamos la matriz a la función de verificación y mostramos el 
         // resultado
@@ -58,6 +48,30 @@ public class Ejercicio006 {
 
     }
 
+    /**
+     * Método que nos permite crear una matriz y rellenarla con datos
+     *
+     * @param ancho Ancho de la matriz
+     * @param alto Alto de la matriz
+     * @return Matriz con valores
+     */
+    private int[][] crearMatriz(int ancho, int alto) {
+        // Creamos una matriz para almacenar los datos
+        int[][] matrizInicial = new int[alto][ancho];
+
+        // Pedimos datos al usuario
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                matrizInicial[i][j] = PeticionDatos.pedirEntero("Introduce el "
+                        + "valor para la posición [" + i + "," + j + "]");
+            }
+        }
+
+        // Devolvemos la matriz con los datos introducidos
+        return matrizInicial;
+    }    
+    
+    
     /**
      * Función que nos permite verificar si una matriz es un cuadrado mágico
      *
