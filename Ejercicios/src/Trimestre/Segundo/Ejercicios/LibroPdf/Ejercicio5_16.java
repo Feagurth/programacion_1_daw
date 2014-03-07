@@ -17,7 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 5.16 del libro de texto Como Programar en
@@ -28,9 +28,6 @@ public class Ejercicio5_16 {
     
     public void Ejercicio()
     {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variable para almacenar el numero elegido por el usuario
         int numero;
         
@@ -41,10 +38,8 @@ public class Ejercicio5_16 {
         for (int i = 0; i < 5; i++) {
             
             // Pedimos el número al usuario
-            numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un número "
-                    + "entre 1 y 20", "Petición de Datos", 
-                    Mensajes.TipoMensaje.PREGUNTA));
-            
+            numero = PeticionDatos.pedirEnteroRango("Introduzca un número entre 1 y 20", 1, 20);
+                    
             // Inicializamos la variable para que no acumule valores del número
             // anterior
             resultado = "";
@@ -55,8 +50,7 @@ public class Ejercicio5_16 {
             }
             
             // Mostramos el resultado
-            mensaje.MostrarMensaje(resultado, "Información", 
-                    Mensajes.TipoMensaje.INFORMACION);            
+            System.out.println(resultado);            
         }
     }
 }

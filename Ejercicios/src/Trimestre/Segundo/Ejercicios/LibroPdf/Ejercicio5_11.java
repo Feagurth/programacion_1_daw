@@ -17,7 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 5.11 del libro de texto Como Programar en
@@ -28,26 +28,19 @@ public class Ejercicio5_11 {
     
     public void Ejercicio()
     {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variables
         int cantidadNumeros;
         int numMayor = Integer.MIN_VALUE;
         int numero;
         
         // Pedimos la cantidad de números a introducir a el usuario
-        cantidadNumeros = Integer.parseInt(mensaje.PedirDatos("¿Cantidad de "
-                + "números a introducir?", "Petición de Datos", 
-                Mensajes.TipoMensaje.PREGUNTA));        
+        cantidadNumeros = PeticionDatos.pedirEnteroPositivoNoCero("¿Cantidad de números a introducir?");
 
         // Iteramos tantas veces como sea necesario
         for (int i = 0; i < cantidadNumeros; i++) {
 
             // Pedimos al usuario un número nuevo
-            numero = Integer.parseInt(mensaje.PedirDatos("Introduzca el valor "
-                    + "del número " + (i + 1), "Petición de Datos", 
-                    Mensajes.TipoMensaje.PREGUNTA));
+            numero = PeticionDatos.pedirEntero("Introduzca el valor del número " + (i + 1));
             
             // Comprobamos si el número es mayor que el que tenemos almacenado
             if(numMayor < numero)
@@ -58,7 +51,6 @@ public class Ejercicio5_11 {
         }
 
         // Mostramos el resultado
-        mensaje.MostrarMensaje("El mayot número introducido es el " + 
-                numMayor, "Información", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("El mayor número introducido es el " + numMayor);
     }    
 }

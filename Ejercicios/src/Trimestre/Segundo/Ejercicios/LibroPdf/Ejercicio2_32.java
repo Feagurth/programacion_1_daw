@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import java.util.Scanner;
+import Utiles.PeticionDatos;
 
 /**
  * Escriba un programa que reciba cinco números, y que determine e imprima la
@@ -31,24 +31,16 @@ public class Ejercicio2_32 {
         int numero1, numero2, numero3, numero4, numero5;
         int positivos = 0, negativos = 0, ceros = 0;
         
-        // Objeto para leer datos del usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Petición de datos al usuario
-        System.out.print("Introduzca el valor del primer número: ");
-        numero1 = entrada.nextInt();
+        numero1 = PeticionDatos.pedirEntero("Introduzca el valor del primer número");
 
-        System.out.print("Introduzca el valor del segundo número: ");
-        numero2 = entrada.nextInt();
+        numero2 = PeticionDatos.pedirEntero("Introduzca el valor del segundo número");
 
-        System.out.print("Introduzca el valor del tercero número: ");
-        numero3 = entrada.nextInt();
+        numero3 = PeticionDatos.pedirEntero("Introduzca el valor del tercer número");
 
-        System.out.print("Introduzca el valor del cuarto número: ");
-        numero4 = entrada.nextInt();
+        numero4 = PeticionDatos.pedirEntero("Introduzca el valor del cuarto número");
 
-        System.out.print("Introduzca el valor del quinto número: ");
-        numero5 = entrada.nextInt();
+        numero5 = PeticionDatos.pedirEntero("Introduzca el valor del quinto número");
 
         // Comprobamos el valor de numero1
         if (numero1 == 0) {

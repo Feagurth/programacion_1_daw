@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 5.21 del libro de texto Como Programar en
@@ -26,17 +26,12 @@ import Utiles.Mensajes;
 public class Ejercicio5_21 {
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
         // Variables 
         int tamanyo;
         String resultado = "";
 
         // Petición de datos al usuario
-        tamanyo = Integer.parseInt(mensaje.PedirDatos("Introduzca el número "
-                + "de iteraciones", "Petición de Datos",
-                Mensajes.TipoMensaje.PREGUNTA));
+        tamanyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de iteraciones");
 
         // Iteramos tantas veces como sea necesario
         for (int i = 1; i <= tamanyo; i++) {

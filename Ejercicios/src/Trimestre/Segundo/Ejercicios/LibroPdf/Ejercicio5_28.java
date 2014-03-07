@@ -16,8 +16,6 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
-
 /**
  * Clase para realizar el ejercicio 5.28 del libro de texto Como Programar en
  * Java 7ed Deitel*
@@ -27,9 +25,6 @@ public class Ejercicio5_28 {
 
     public void Ejercicio() {
         
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-
         // Variable para contar las iteraciones
         int contador = 0;
         
@@ -45,8 +40,7 @@ public class Ejercicio5_28 {
         }     
 
         // Mostramos resultados al usuario
-        mensaje.MostrarMensaje("Se ha iterado " + contador + " veces" , 
-                "Información", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("Se ha iterado " + contador + " veces");
 
     }     
 }

@@ -17,7 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 5.20 del libro de texto Como Programar en
@@ -28,9 +28,6 @@ public class Ejercicio5_20 {
     
     public void Ejercicio()
     {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-    
         // Variables
         int iteraciones;
         float valorPi = 0;
@@ -38,9 +35,7 @@ public class Ejercicio5_20 {
         
         // Pedimos al usuario el número de iteraciones para calcular el valor 
         // de pi
-        iteraciones = Integer.parseInt(mensaje.PedirDatos("Introduzca la "
-                + "cantidad de iteraciones", "Petición de Datos", 
-                Mensajes.TipoMensaje.PREGUNTA));
+        iteraciones = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la cantidad de iteraciones");
         
         
         // Iteramos desde 1 hasta el numero de iteraciones multiplicada por 2
@@ -64,7 +59,6 @@ public class Ejercicio5_20 {
         }
         
         // Mostramos el resultado al usuario
-        mensaje.MostrarMensaje("El resultado es: " + valorPi, "Información", 
-                Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("El resultado es: " + valorPi);
     }    
 }

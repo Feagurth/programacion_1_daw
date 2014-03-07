@@ -17,7 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 5.17 del libro de texto Como Programar en
@@ -28,18 +28,13 @@ public class Ejercicio5_17 {
     
     public void Ejercicio()
     {
-        // Objeto para pedir y mostrar mensajes al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variables
         int codigoArticulo;
         double total = 0f;
         
         do {                     
             // Pedimos datos al usuario
-            codigoArticulo = Integer.parseInt(mensaje.PedirDatos("Introduzca "
-                    + "el código de articulo. 0 para salir", "Petición de "
-                            + "Datos", Mensajes.TipoMensaje.PREGUNTA));
+            codigoArticulo = PeticionDatos.pedirEnteroPositivo("Introduzca el código de articulo. 0 para salir");
             
             // Comprobamos el artículo introducido y sumamos su precio
             switch(codigoArticulo)
@@ -65,7 +60,6 @@ public class Ejercicio5_17 {
         } while (codigoArticulo != 0);
                 
         // Mostramos resultados
-        mensaje.MostrarMensaje("El total es: " + String.format("%.2f", total)  , "Información", 
-                Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("El total es: " + String.format("%.2f", total));
     }
 }

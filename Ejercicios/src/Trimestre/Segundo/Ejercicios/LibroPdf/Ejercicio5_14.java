@@ -16,6 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
+
 /**
  * Clase para realizar el ejercicio 5.14 del libro de texto Como Programar en
  * Java 7ed Deitel
@@ -25,14 +27,19 @@ public class Ejercicio5_14 {
 
     public void Ejercicio() {
         double monto; // Monto depositado al final de cada año
-        double principal = 1000.0; // monto inicial antes de los intereses
+        double principal; // monto inicial antes de los intereses
 
+        
+        // Petición de datos al usuario
+        principal = PeticionDatos.pedirRealPositivoNoCero("Introduzca el valor del monto inicial");
+        
+        
         // muestra los encabezados
         System.out.printf("s%20s\n", "Anio", "Monto en deposito");
         // calcula el monto en deposito para cada uno de diez años
         for (int i = 5; i < 11; i++) {
             
-            System.out.println("Interes: " + (i/100f));
+            System.out.printf("\nInteres: %,1.2f\n", (i/100f));
             
             for (int anio = 1; anio <= 10; anio++) {
                 // calcula el nuevo monto para el año especificado

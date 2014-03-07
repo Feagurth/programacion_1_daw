@@ -14,39 +14,89 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+
 /**
- * Clase para controlar los repostajes y el consumo en gasolina
+ * Clase para realizar el ejercicio 4.17 del libro de texto Como Programar en
+ * Java 7ed Deitel
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_17 {
 
-    private final double kms;
-    private final double litrosGasolina;
-    private final float kmsXLitro;
-
     /**
-     * Nos permite recoger el valor de kms / litro del repostaje
-     * @return Los kms recorridos con un litro de gasolina
+     * Clase para controlar los repostajes y el consumo en gasolina
      */
-    public float getKmsXLitro() {
-        return kmsXLitro;
-    }
-    
-    /**
-     * Constructor de la clase
-     * @param kmsRecorridos Numero de kms recorridos en un repostaje
-     * @param litrosGasolinaUsada Litros de gasolina usada en el repostaje
-     */
-    public Ejercicio4_17(double kmsRecorridos, double litrosGasolinaUsada) {
-        this.kms = kmsRecorridos;
-        this.litrosGasolina = litrosGasolinaUsada;
-        this.kmsXLitro = (float) (this.kms / this.litrosGasolina);
-    }
-    
+    public class Repostajes {
 
-    
-    
+        private final double kms;
+        private final double litrosGasolina;
+        private final float kmsXLitro;
+
+        /**
+         * Nos permite recoger el valor de kms / litro del repostaje
+         *
+         * @return Los kms recorridos con un litro de gasolina
+         */
+        public float getKmsXLitro() {
+            return kmsXLitro;
+        }
+
+        /**
+         * Constructor de la clase
+         *
+         * @param kmsRecorridos Numero de kms recorridos en un repostaje
+         * @param litrosGasolinaUsada Litros de gasolina usada en el repostaje
+         */
+        public Repostajes(double kmsRecorridos, double litrosGasolinaUsada) {
+            this.kms = kmsRecorridos;
+            this.litrosGasolina = litrosGasolinaUsada;
+            this.kmsXLitro = (float) (this.kms / this.litrosGasolina);
+        }
+
+    }
+
+    public void Ejercicio() {
+        // Variable para controlar el número de reabastecimientos que usaremos
+        int numReabastecimientos;
+        // Variable para acumular el total de los reabastecimientos
+        float total = 0.0f;
+
+        // Variables para introducir los datos necesarios
+        double kms, litros;
+
+        // Objeto Mensajes que usaremos para leer datos y mostrar resultados
+        Mensajes mensaje = new Mensajes();
+
+        // Creamos el objeto que usaremos
+        Repostajes reabastecimiento;
+
+        // Pedimos al usuario en numero de reabastecimientos realizados
+        numReabastecimientos = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de reabastecimientos realizados");
+
+        // Iteramos tantas veces como reabastecimientos se hayan realizado
+        for (int i = 0; i < numReabastecimientos; i++) {
+
+            // Pedimos el número de kms realizados en cada reabastecimiento
+            kms = PeticionDatos.pedirRealPositivoNoCero("Introduzca el número de  kms realizados");
+
+            // Pedimos el número de litros de gasolina consumidos en cada reabastecimiento
+            litros = PeticionDatos.pedirRealPositivoNoCero("Introduzca el número de litros consumidos");
+
+            // Creamos una clase nueva con los datos pedidos al usuarios
+            reabastecimiento = new Repostajes(kms, litros);
+
+            // Acumulamos el valor de kms por litro extraido de la clase
+            total += reabastecimiento.getKmsXLitro();
+
+        }
+
+        // Mostramos el resultado final
+        System.out.println("El total de kms/litros es de: " + total);
+
+    }
+
 }

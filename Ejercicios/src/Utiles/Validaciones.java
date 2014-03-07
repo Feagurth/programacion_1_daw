@@ -52,18 +52,23 @@ public class Validaciones {
     private static final String FECHA_DDMMAA = validaMeses31 + "|" + validaMeses30 + "|"
             + validaFebrero + "|" + validaFebreroBis;
 
-    private static final String FECHA_DDMMAAAA = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]"
-            + "|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))"
-            + "(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:"
-            + "(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16"
-            + "|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])"
-            + "(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]"
-            + "\\d)?\\d{2})$";
+    private static final String FECHA_DDMMAAAA = "(((0*[1-9]|[12][0-9]|3[01])"
+            + "([-./])(0*[13578]|10|12)([-./])(\\d{4}))|((0*[1-9]|[12][0-9]|30)"
+            + "([-./])(0*[469]|11)([-./])(\\d{4}))|((0*[1-9]|1[0-9]|2[0-8])"
+            + "([-./])(02|2)([-./])(\\d{4}))|((29)(\\.|-|\\/)(02|2)"
+            + "([-./])([02468][048]00))|((29)"
+            + "([-./])(02|2)"
+            + "([-./])([13579][26]00))|((29)"
+            + "([-./])(02|2)([-./])([0-9][0-9][0][48]))|((29)"
+            + "([-./])(02|2)([-./])([0-9][0-9][2468][048]))|((29)"
+            + "([-./])(02|2)([-./])([0-9][0-9][13579][26])))";
 
     
     private static final String CADENA_NUMEROS = "^[a-zA-Z0-9 ]+$";
     
     private static final String DNI = "(([X-Z]{1})([-]?)(\\d{7})([-]?)([A-Z]{1}))|((\\d{8})([-]?)([A-Z]{1}))";
+    
+    private static final String BINARIO = "^[0-1]+$";
     
     
     /**
@@ -74,7 +79,8 @@ public class Validaciones {
         CADENA(0), CADENA_MAY(1), CADENA_MIN(2), ENTERO(3), ENTERO_POSITIVO(4),
         ENTERO_NEGATIVO(5), ENTERO_POSITIVO_NO_0(6), ENTERO_NEGATIVO_NO_0(7), REAL(8),
         REAL_POSITIVO(9), REAL_NEGATIVO(10), USUARIO(11), PASSWORD(12),
-        FECHA_DDMMAA(13), FECHA_DDMMAAAA(14), CADENA_NUMEROS(15), DNI(16);
+        FECHA_DDMMAA(13), FECHA_DDMMAAAA(14), CADENA_NUMEROS(15), DNI(16), 
+        BINARIO(17);
 
         private final int value;
 
@@ -127,6 +133,8 @@ public class Validaciones {
                 return dato.matches(CADENA_NUMEROS);
             case DNI:
                 return dato.matches(DNI);
+            case BINARIO:
+                return dato.matches(BINARIO);
             default:
                 return false;
         }

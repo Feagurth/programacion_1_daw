@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 4.30 del libro de texto Como Programar en
@@ -26,23 +26,18 @@ import Utiles.Mensajes;
 public class Ejercicio4_30 {
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
 
         // Cadena para almacenar el texto introducido por el usuario
         String cadena;
 
         // Petición de datos al usuario
-        cadena = mensaje.PedirDatos("Introduzca una cadena de texto",
-                "Petición de DAtos", Mensajes.TipoMensaje.PREGUNTA);
+        cadena = PeticionDatos.pedirCadena("Introduzca una cadena de texto");
 
         // Realizamos la comprobación y mostramos el resultado
         if (esPalindromo(cadena)) {
-            mensaje.MostrarMensaje("Es un palíndromo", "Resultado",
-                    Mensajes.TipoMensaje.INFORMACION);
+            System.out.println("Es un palíndromo");
         } else {
-            mensaje.MostrarMensaje("No es un palíndromo", "Resultado",
-                    Mensajes.TipoMensaje.INFORMACION);
+            System.out.println("No es un palíndromo");
         }
     }
 

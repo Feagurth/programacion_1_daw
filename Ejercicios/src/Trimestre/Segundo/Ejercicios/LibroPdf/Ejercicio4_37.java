@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 4.37 del libro de texto Como Programar en
@@ -26,29 +26,23 @@ import Utiles.Mensajes;
 public class Ejercicio4_37 {
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
         // Variable para almacenar los datos introducidos por el usuario
         String numero;
 
         // Petición de datos al usuario
-        numero = mensaje.PedirDatos("Introduzca un entero de 4 digitos",
-                "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA);
+        numero = String.valueOf(PeticionDatos.pedirEnteroCadenaLongitud("Introduzca un entero de 4 digitos", 4));
 
         // Codificamos el valor
         numero = codificar(numero);
 
         // Mostramos en número codificado
-        mensaje.MostrarMensaje("El valor codificado es: " + numero,
-                "Codificación", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("El valor codificado es: " + numero);
 
         // Descodificamos el numero codificado
         numero = decodificar(numero);
 
         // Mostramos el número descodificado
-        mensaje.MostrarMensaje("El numero descodificado es: " + numero,
-                "Descodificación", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("El numero descodificado es: " + numero);
     }
 
     private String codificar(String valorNumero) {

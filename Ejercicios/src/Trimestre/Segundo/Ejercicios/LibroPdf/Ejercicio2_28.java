@@ -17,6 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.PeticionDatos;
 import java.util.Scanner;
 
 /**
@@ -55,8 +56,7 @@ public class Ejercicio2_28 {
         Scanner entrada = new Scanner(System.in);
         
         // Recogida de datos iniciales
-        System.out.print("Introduzca el valor del radio: ");
-        radio = entrada.nextInt();
+        radio = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor del radio");
     
         // Se muestra el valor del diametro
         System.out.printf("El diametro es: %d", 2 * radio );

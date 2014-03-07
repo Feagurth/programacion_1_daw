@@ -17,8 +17,6 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
-
 /**
  * Clase para realizar el ejercicio 4.22 del libro de texto
  * Como Programar en Java 7ed Deitel
@@ -28,16 +26,16 @@ public class Ejercicio4_22 {
     
     public void Ejercicio()
     {
-        // Objeto para petición y muestra de información al usuario
-        Mensajes mensaje = new Mensajes();
-        
+        // Creamos una cadena, la cual inicializaremos con los primeros valores
+        // para crear una represetanción por columnas separadas por tabulaciones
         String resultado = "N\t\t10 * N\t\t100 * N\t\t1000 * N\n";
         
+        // Iteramos añadiendo a la cadena resultado los valores calculados
         for (int i = 1; i < 6; i++) {
             resultado += i + "\t\t" + 10 * i  + "\t\t" + 100 * i + "\t\t" + 1000 * i + "\n";
         }
 
-        mensaje.MostrarMensaje(resultado, "Resultado", 
-                Mensajes.TipoMensaje.INFORMACION, true);
+        // Mostramos los resultados
+        System.out.println(resultado);
     }    
 }

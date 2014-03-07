@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import java.util.Scanner;
+import Utiles.PeticionDatos;
 
 /**
  * Escriba una aplicación que reciba del usuario un número compuesto por cinco 
@@ -38,11 +38,9 @@ public class Ejercicio2_30 {
 // Declaración de variables
         int numero, cociente;
         String resultado = "";
-        Scanner entrada = new Scanner(System.in);
-
+        
         // Petición de datos al usuario 
-        System.out.print("Introduzca un número: ");
-        numero = entrada.nextInt();
+        numero = PeticionDatos.pedirEnteroRango("Introduzca un número entero [10000-99999]", 10000, 99999);
 
         // Dividimos entre 10000 pasa sacar el primer númeor
         cociente = numero / 10000;

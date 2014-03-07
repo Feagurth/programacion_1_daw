@@ -14,43 +14,84 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+
 /**
- * Clase para encontrar el número mayor en un array
+ * Clase para realizar el ejercicio 4.21 del libro de texto Como Programar en
+ * Java 7ed Deitel
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_21 {
-    
-    private final int[] numeros;
-    private int numeroMayor;
 
     /**
-     * Devuelve el número mayor del array
-     * @return El número mayor del array
+     * Clase para encontrar el número mayor en un array
      */
-    public int getNumeroMayor() {
-        return numeroMayor;
-    }
-    
-    /**
-     * Constructor de la clase
-     * @param numeros array con los valores a comparar
-     */
-    public Ejercicio4_21(int[] numeros) {
-        this.numeros = numeros;
-        
-        // Inicializamos con el primer valor del array
-        numeroMayor = numeros[0];
-        
-        // Iteramos la longitud del array
-        for (int i = 0; i < numeros.length; i++) {
+    public class NumeroMayor {
 
-            // Comparamos con el resto de valores y cambiamos el valor de la 
-            // variable si esta es menor que el numero actual
-            if(numeroMayor < numeros[i])
-                numeroMayor = numeros[i];
+        private final int[] numeros;
+        private int numeroMayor;
+
+        /**
+         * Devuelve el número mayor del array
+         *
+         * @return El número mayor del array
+         */
+        public int getNumeroMayor() {
+            return numeroMayor;
         }
-    }    
+
+        /**
+         * Constructor de la clase
+         *
+         * @param numeros array con los valores a comparar
+         */
+        public NumeroMayor(int[] numeros) {
+            this.numeros = numeros;
+
+            // Inicializamos con el primer valor del array
+            numeroMayor = numeros[0];
+
+            // Iteramos la longitud del array
+            for (int i = 0; i < numeros.length; i++) {
+
+                // Comparamos con el resto de valores y cambiamos el valor de la 
+                // variable si esta es menor que el numero actual
+                if (numeroMayor < numeros[i]) {
+                    numeroMayor = numeros[i];
+                }
+            }
+        }
+    }
+
+    public void Ejercicio() {
+        // Objeto que usaremos para encontrar el número mayor
+        NumeroMayor numMayor;
+
+        // Variable para almacenar la cantidad de números a comparar
+        int tamanyoArray;
+
+        // Array para almacenar los números a comparar
+        int[] numeros;
+
+        // Pedimos datos al usuario
+        tamanyoArray = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la cantidad de números a comparar");
+
+        numeros = new int[tamanyoArray];
+
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = PeticionDatos.pedirEnteroPositivo("Introduzca el valor para el dígito número " + (i + 1));
+        }
+
+        // Creamos el objeto con los datos introducidos
+        numMayor = new NumeroMayor(numeros);
+
+        // Mostramos el resultado
+        System.out.println("El número mayor es: " + numMayor.getNumeroMayor());
+
+    }
+
 }

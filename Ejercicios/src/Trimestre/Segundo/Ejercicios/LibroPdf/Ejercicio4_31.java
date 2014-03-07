@@ -16,7 +16,9 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+
+
 
 /**
  * Clase para realizar el ejercicio 4.31 del libro de texto Como Programar en
@@ -26,20 +28,14 @@ import Utiles.Mensajes;
 public class Ejercicio4_31 {
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
         // Variable para almacenar el valor introducido por el usuario
         String cadenaBinaria;
 
         // Pedimos datos al usuario
-        cadenaBinaria = mensaje.PedirDatos("Introduzca un valor en binario",
-                "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA);
+        cadenaBinaria = PeticionDatos.pedirBinario("Introduzca un valor en binario");
 
         // Mostramos el resultado
-        mensaje.MostrarMensaje("Su valor es: "
-                + enteroDeCadenaBinaria(cadenaBinaria), "Resultado",
-                Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("Su valor es: " + enteroDeCadenaBinaria(cadenaBinaria));
     }
 
     /**

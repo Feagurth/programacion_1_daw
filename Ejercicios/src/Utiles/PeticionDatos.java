@@ -77,6 +77,30 @@ public class PeticionDatos {
         return Integer.valueOf(resultado);
     }
 
+    public static String pedirEnteroCadenaLongitud(String cadena, int longitud) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO)
+                || resultado.length() != longitud);
+
+        // Devolvemos el resultado
+        return resultado;
+    }    
+    
+    
     /**
      * Método para pedir y validar la entrada de un entero por parte del usuario
      *
@@ -248,6 +272,38 @@ public class PeticionDatos {
         return Double.valueOf(resultado.replace(",", "."));
     }
 
+   /**
+     * Método para pedir y validar la entrada de un real positivo por parte del
+     * usuario
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static double pedirRealPositivoNoCero(String cadena) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido                        
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.REAL_POSITIVO) 
+                || resultado.equals("0")
+                || resultado.equals("0.0"));
+
+        // Devolvemos el resultado
+        return Double.valueOf(resultado.replace(",", "."));
+    }
+    
+    
     /**
      * Método para validar una petición de consentimiento para realizar una
      * acción
@@ -322,4 +378,33 @@ public class PeticionDatos {
         return resultado;
     }
 
+    /**
+     * Método para pedir y validar la entrada de un entero por parte del usuario
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static String pedirBinario(String cadena) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.BINARIO));
+
+        // Devolvemos el resultado
+        return resultado;
+    }    
+    
+    
 }

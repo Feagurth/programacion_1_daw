@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 4.29 del libro de texto Como Programar en
@@ -26,8 +26,6 @@ import Utiles.Mensajes;
 public class Ejercicio4_29 {
 
     public void Ejercicio() {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
 
         // Variable para almacenar el tamaño del cuadrado
         int tamanyoLado;
@@ -36,16 +34,10 @@ public class Ejercicio4_29 {
         String resultado;
 
         // Petición de datos al usuario
-        tamanyoLado = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor "
-                + "ente 1 y 20", "Petición de Datos",
-                Mensajes.TipoMensaje.INFORMACION));
+        tamanyoLado = PeticionDatos.pedirEnteroRango("Introduzca un valor ente 1 y 20", 1, 20);
 
         // Ejecutamos la función que genera el cuadrado
         resultado = pintarCuadrado(tamanyoLado);
-
-        // Muestra de resultados
-        mensaje.MostrarMensaje(resultado, "Información",
-                Mensajes.TipoMensaje.INFORMACION);
 
         // Muestra de resultado en consola
         System.out.print(resultado);

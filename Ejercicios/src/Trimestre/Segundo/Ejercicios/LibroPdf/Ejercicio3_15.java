@@ -99,6 +99,7 @@ public class Ejercicio3_15 {
         // Iteramos pidiendo datos al usuario
         do {
             // Pedimos datos al usuario a traves de las clases correspondientes
+            System.out.println("Introduzca la fecha en formato DD/MM/AAAA");
             dia = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el día");
             mes = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el mes");
             anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el año");

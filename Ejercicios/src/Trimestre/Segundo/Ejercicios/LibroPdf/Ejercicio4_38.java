@@ -16,11 +16,12 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 4.38 del libro de texto Como Programar en
  * Java 7ed Deitel
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_38 {
@@ -29,47 +30,31 @@ public class Ejercicio4_38 {
      * Ejercicio principal
      */
     public void Ejercicio() {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-
         // Variables
         int m, x;
         float resultado, resultadoPotencia;
 
-        do {
-            // Petición de datos al usuario
-            m = Integer.parseInt(msg.PedirDatos("Introduzca el numero de "
-                    + "iteraciones","Petición de datos", 
-                    Mensajes.TipoMensaje.PREGUNTA));
+        // Petición de datos al usuario
+        m = PeticionDatos.pedirEntero("Introduzca el numero de iteraciones");
 
-            x = Integer.parseInt(msg.PedirDatos("Introduzca el valor de "
-                    + "la potencia","Petición de datos", 
-                    Mensajes.TipoMensaje.PREGUNTA));
+        x = PeticionDatos.pedirEntero("Introduzca el valor de la potencia");
 
+        // Se calcula el resultado
+        resultado = calculoE(m);
 
-            // Verificación de que los datos introducidos sean correctos
-            if (m > 0 && x > 0) {
-                // Se calcula el resultado y se muestra al usuario
-                resultado = calculoE(m);
-                
-                resultadoPotencia = calculoEPowX(m, x);
+        // Calculamos el resultaod de la potencia de e
+        resultadoPotencia = calculoEPowX(m, x);
+        
+        // Mostramos la información al usuario
+        System.out.println("El resultado es " + resultado);
 
-                msg.MostrarMensaje("El resultado es " + resultado,
-                        "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("El resultado de la potencia es " + resultadoPotencia);
 
-                msg.MostrarMensaje("El resultado de la potencia es " + resultadoPotencia,
-                        "Resultado", Mensajes.TipoMensaje.INFORMACION);
-                
-
-            } else {
-                msg.MostrarMensaje("Los valores introducidos no eran correcto",
-                        "Atención", Mensajes.TipoMensaje.ERROR);
-            }
-        } while (m < 0 || x < 0);
     }
 
     /**
      * Función para calcular la potencia de e elevado a x
+     *
      * @param iteraciones Numero de iteraciones para calcular la aproximación
      * @param valorPotencia Valor de la potencia
      * @return Resultado aproximado
@@ -79,22 +64,23 @@ public class Ejercicio4_38 {
 
         // Iteramos tantas veces como sea preciso
         for (int i = 0; i < iteraciones; i++) {
-            
+
             // Si la iteración es la primera el valor es 1
             if (i == 0) {
                 resultado += 1;
             } else {
                 // Para el resto es igual a 1/ factorial de la iteración
                 resultado += Math.pow(valorPotencia, i) / Factorial(i);
-           }
+            }
         }
 
         // Devolvemos el resultado
         return resultado;
-    }    
-    
+    }
+
     /**
      * Función para calcular la aproximación del número e
+     *
      * @param iteraciones Cantidad de iteraciones para calcular el valor de e
      * @return valor aproximado de e
      */
@@ -103,7 +89,7 @@ public class Ejercicio4_38 {
 
         // Iteramos tantas veces como sea preciso
         for (int i = 0; i < iteraciones; i++) {
-            
+
             // Si la iteración es la primera el valor es 1
             if (i == 0) {
                 resultado += 1;

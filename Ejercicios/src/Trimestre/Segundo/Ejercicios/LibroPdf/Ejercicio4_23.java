@@ -16,7 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 4.23 del libro de texto Como Programar en
@@ -28,9 +28,6 @@ public class Ejercicio4_23 {
     int numMayor1, numMayor2;
 
     public void Ejercicio() {
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
-
         // Variable para almacenar la cantidad de números a comparar
         int tamanyoArray;
 
@@ -38,26 +35,20 @@ public class Ejercicio4_23 {
         int[] numeros;
 
         // Pedimos datos al usuario
-        tamanyoArray = Integer.parseInt(mensaje.PedirDatos("Introduzca la "
-                + "cantidad de números a comparar", "Petición de Datos",
-                Mensajes.TipoMensaje.PREGUNTA));
+        tamanyoArray = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la cantidad de números a comparar");
 
         numeros = new int[tamanyoArray];
 
         // Pedimos los valores necesarios al usuario
         for (int i = 0; i < numeros.length; i++) {
-            numeros[i] = Integer.parseInt(mensaje.PedirDatos("Introduzca el "
-                    + "valor para el dígito número " + (i + 1), "Petición de Datos",
-                    Mensajes.TipoMensaje.PREGUNTA));
+            numeros[i] = PeticionDatos.pedirEntero("Introduzca el valor para el dígito número " + (i + 1));
         }
 
         // Ejecutamos el procedimiento para encontrar los numeros
         encontrar2Mayores(numeros);
 
         // Mostramos resultados
-        mensaje.MostrarMensaje("Los numeros mayores son: " + numMayor1
-                + " y " + numMayor2, "Resultado",
-                Mensajes.TipoMensaje.INFORMACION);
+        System.out.println("Los numeros mayores son: " + numMayor1 + " y " + numMayor2);
     }
 
     /**
