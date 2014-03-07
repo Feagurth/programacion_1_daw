@@ -34,12 +34,62 @@ public class Ejercicio002 {
     /**
      * Clase que nos permite almacenar los datos de un registro de medicamentos
      */
-    public class Medicamento {
+    public static class Medicamento {
+
+        /**
+         * Enumerador para almacenar la descrioción del medicamento
+         */
+        public enum TipoDescripcion {
+
+            analgesico(0), antibiotico(1), antipiretico(2);
+            private final int value;
+            private String cadena;
+
+            /**
+             * Constructor del enumerador
+             *
+             * @param value
+             */
+            private TipoDescripcion(int value) {
+                this.value = value;
+
+                switch (value) {
+                    case 0:
+                        this.cadena = "Analgésico";
+                        break;
+                    case 1:
+                        this.cadena = "Antibiotico";
+                        break;
+                    case 2:
+                        this.cadena = "Antipirético";
+                        break;
+                }
+            }
+
+            /**
+             * Devuelve el valor numérico del tipo de medicamento
+             *
+             * @return El valor numérico del tipo de medicamento
+             */
+            public int getValue() {
+                return value;
+            }
+
+            /**
+             * Método que nos devuelve la cadena representativa de la
+             * descripción
+             *
+             * @return
+             */
+            public String getString() {
+                return cadena;
+            }
+        };
 
         // Variables de la clase
         private final String codigo;
         private final String nombre;
-        private final String descripcion;
+        private final TipoDescripcion descripcion;
         private final String laboratorio;
         private final String proveedor;
         private final float precio;
@@ -58,7 +108,7 @@ public class Ejercicio002 {
             return nombre;
         }
 
-        public String getDescripcion() {
+        public TipoDescripcion getDescripcion() {
             return descripcion;
         }
 
@@ -111,11 +161,12 @@ public class Ejercicio002 {
          * medicamento
          */
         public Medicamento(String codigo, String nombre,
-                String descripcion, String laboratorio, String proveedor,
+                TipoDescripcion descripcion, String laboratorio, String proveedor,
                 float precio, float porcentajeIVA, int stock,
                 int diaFechaCaducidad, int mesFechaCaducidad,
                 int anyoFechaCaducidad) {
 
+            // Asginamos los parametros a las variables de instancia
             this.codigo = codigo;
             this.nombre = nombre;
             this.descripcion = descripcion;
@@ -130,12 +181,16 @@ public class Ejercicio002 {
         }
 
         @Override
+        /**
+         * Método para devolver una representación en cadena de los valores
+         * que contiene el objeto
+         */
         public String toString() {
             return String.format("Medicamento{codigo=%s, nombre=%s, "
                     + "descripcion=%s, laboratorio=%s, proveedor=%s, precio=%s, "
                     + "porcentajeIVA=%s, stock=%s, diaFechaCaducidad=%s, "
                     + "mesFechaCaducidad=%s, anyoFechaCaducidad=%s}",
-                    codigo, nombre, descripcion, laboratorio, proveedor, precio,
+                    codigo, nombre, descripcion.getString(), laboratorio, proveedor, precio,
                     porcentajeIVA, stock, diaFechaCaducidad, mesFechaCaducidad,
                     anyoFechaCaducidad);
 
@@ -159,7 +214,7 @@ public class Ejercicio002 {
         int contador = -1;
         String codigo;
         String nombre;
-        String descripcion;
+        int descripcion;
         String laboratorio;
         String proveedor;
         float precio;
@@ -168,7 +223,7 @@ public class Ejercicio002 {
         int diaFechaCaducidad;
         int mesFechaCaducidad;
         int anyoFechaCaducidad;
-        
+
         // Iteramos tantasveces como número de medicamentos hayamos especificados
         for (Medicamento registro : registros) {
             contador++;
@@ -178,7 +233,17 @@ public class Ejercicio002 {
 
             nombre = PeticionDatos.pedirCadena("Introduzca el nombre del medicamento");
 
-            descripcion = PeticionDatos.pedirCadena("Introduzca la descripción del medicamento");
+            // Iteramos por todos los valores del enumerador para mostrar las posibilidades de selección
+            // al usuario
+            for (Medicamento.TipoDescripcion tipoDescripcion : Medicamento.TipoDescripcion.values()) {
+                System.out.println("[" + tipoDescripcion.getValue() + "] " + tipoDescripcion.getString());
+            }
+
+            // Pedimos que introduzca la descripción del medicamento, y limitaremos
+            // los valores de entrada desde el cero hasta un valor menos del tamaño
+            // de los valores del enumerador, para que, de este modo se puedan
+            // elegir todos los tipos de descripciones
+            descripcion = PeticionDatos.pedirEnteroRango("Introduzca la descripción del medicamento", 0, Medicamento.TipoDescripcion.values().length - 1);
 
             laboratorio = PeticionDatos.pedirCadena("Introduzca el laboratorio del medicamento");
 
@@ -202,7 +267,7 @@ public class Ejercicio002 {
                     Validaciones.TipoValidacion.FECHA_DDMMAAAA));
 
             // Cremaos el objeto con los datos que ha introducido el usuario
-            registro = new Medicamento(codigo, nombre, descripcion,
+            registro = new Medicamento(codigo, nombre, Medicamento.TipoDescripcion.values()[descripcion],
                     laboratorio, proveedor, precio, porcentajeIVA, stock,
                     diaFechaCaducidad, mesFechaCaducidad, anyoFechaCaducidad);
 
@@ -217,7 +282,7 @@ public class Ejercicio002 {
             System.out.println("Datos del medicamento " + registro.nombre);
             System.out.println("Código: " + registro.codigo);
             System.out.println("Nombre: " + registro.nombre);
-            System.out.println("Descripción: " + registro.descripcion);
+            System.out.println("Descripción: " + registro.descripcion.getString());
             System.out.println("Laboratorio: " + registro.laboratorio);
             System.out.println("Proveedor: " + registro.proveedor);
             System.out.println("Precio: " + registro.precio);
@@ -227,6 +292,7 @@ public class Ejercicio002 {
                     + "/" + registro.mesFechaCaducidad + "/"
                     + registro.anyoFechaCaducidad);
 
+            // Mostramos el resultado del método toString de la clase
             System.out.println("");
             System.out.println(registro.toString());
         }

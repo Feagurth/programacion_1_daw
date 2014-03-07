@@ -53,6 +53,30 @@ public class PeticionDatos {
         return Integer.valueOf(resultado);
     }
 
+    public static int pedirEnteroRango(String cadena, int valorMinimo, int valorMaximo) {
+        // Objeto para pedir valores al usuario
+        Scanner entrada = new Scanner(System.in);
+
+        // Variable
+        String resultado;
+
+        do {
+            // Mostramos el mensaje especificado al usuario
+            System.out.print(cadena + ": ");
+
+            // Recogemos lo introducido por el usuario
+            resultado = entrada.nextLine();
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO)
+                || Integer.valueOf(resultado) < valorMinimo
+                ||  Integer.valueOf(resultado) > valorMaximo);
+
+        // Devolvemos el resultado
+        return Integer.valueOf(resultado);
+    }
+
     /**
      * Método para pedir y validar la entrada de un entero por parte del usuario
      *
@@ -80,7 +104,7 @@ public class PeticionDatos {
         // Devolvemos el resultado
         return Integer.valueOf(resultado);
     }
-        
+
     /**
      * Método para pedir y validar la entrada de un entero por parte del usuario
      *
@@ -225,10 +249,12 @@ public class PeticionDatos {
     }
 
     /**
-     * Método para validar una petición de consentimiento para realizar una acción
+     * Método para validar una petición de consentimiento para realizar una
+     * acción
+     *
      * @param cadena Cadena que se mostrará al usuario
      * @param valores Valores que puede tomar la cadena para ser validada
-     * @return Verdadero si es un caracter que concuerde con algún valor del 
+     * @return Verdadero si es un caracter que concuerde con algún valor del
      * array de valores
      */
     public static String pedirConsentimiento(String cadena, String[] valores) {
@@ -270,6 +296,7 @@ public class PeticionDatos {
 
     /**
      * Método para pedir un DNI al usuario
+     *
      * @param cadena Cadena con el mensaje a mostrar al usuario
      * @return DNI validado
      */
@@ -293,7 +320,6 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         return resultado;
-    }    
-    
+    }
 
 }

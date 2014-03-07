@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.PeticionDatos;
 import java.util.Scanner;
 
 /**
@@ -25,98 +26,82 @@ import java.util.Scanner;
  */
 public class Ejercicio005 {
 
-    public void Ejercicio() {
+    
+ /**
+     * Método que nos permite crear una matriz y rellenarla con datos
+     *
+     * @param ancho Ancho de la matriz
+     * @param alto Alto de la matriz
+     * @return Matriz con valores
+     */
+    private int[][] crearMatriz(int ancho, int alto) {
+        // Creamos una matriz para almacenar los datos
+        int[][] matrizInicial = new int[alto][ancho];
 
-        // Objeto para pedir datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
-
-        // Variables
-        int valorX, valorY;
-
-        // Petición de datos al usuario
-        do {
-            System.out.print("Introduzca la altura de las matrices: ");
-            valorX = entrada.nextInt();
-        } while (valorX <= 0);
-
-        do {
-            System.out.print("Introduzca la anchura de las matrices: ");
-            valorY = entrada.nextInt();
-        } while (valorY <= 0);
-
-        // Creamos las matrices nesarias
-        // Dos para recoger los datos del usuario y otra
-        // para almacenar el resultado de la suma
-        int[][] matrizSuma1 = new int[valorX][valorY];
-        int[][] matrizSuma2 = new int[valorX][valorY];
-        int[][] matrizResultado;
-
-        // Volvemos a pedir datos al usuario
-        for (int i = 0; i < matrizSuma1.length; i++) {
-            for (int j = 0; j < matrizSuma1[0].length; j++) {
-                System.out.print("Introduzca el valor para "
-                        + "[" + i + "," + j + "] para la primera matriz: ");
-                matrizSuma1[i][j] = entrada.nextInt();
+        // Pedimos datos al usuario
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                matrizInicial[i][j] = PeticionDatos.pedirEntero("Introduce el "
+                        + "valor para la posición [" + i + "," + j + "]");
             }
         }
 
-        System.out.println("");
-
-        for (int i = 0; i < matrizSuma2.length; i++) {
-            for (int j = 0; j < matrizSuma2[0].length; j++) {
-                System.out.print("Introduzca el valor para "
-                        + "[" + i + "," + j + "] para la segunda matriz: ");
-                matrizSuma2[i][j] = entrada.nextInt();
-            }
-        }
-
-        // Realizamos la suma de matrices
-        matrizResultado = sumaMatrices(matrizSuma1, matrizSuma2);
-
-        // Mostramos resultados
-        System.out.println("Resultado de la operación");
-
+        // Devolvemos la matriz con los datos introducidos
+        return matrizInicial;
+    }
+    
+    /**
+     * Método para mostrar el resultado de las una de dos matrices
+     * @param matrizSumando1 Primer sumando de la suma de matrices
+     * @param matrizSumando2 Segundo sumando de la suma de matrices
+     * @param resultado  Resultado de la suma de matrices
+     */
+    private void mostrarResultadoSuma(int[][] matrizSumando1, 
+            int[][]matrizSumando2, int[][] resultado)
+    {
         // Iteramos primero por la altura de la matriz
-        for (int i = 0; i < matrizSuma1.length; i++) {
+        for (int i = 0; i < matrizSumando1.length; i++) {
 
             // Iteramos ahora la primera matriz mostrando sus valores
-            for (int j = 0; j < matrizSuma1[0].length; j++) {
-                System.out.print("\t" + matrizSuma1[i][j]);
+            for (int j = 0; j < matrizSumando1[0].length; j++) {
+                System.out.print("\t" + matrizSumando1[i][j]);
             }
 
             // Calculamos si estamos a la mitad de la altura de las matrices
             // para colocar el simbolo de sumar, si no simplemente ponemos
             // las tabulaciones
-            if (i == Math.round(matrizSuma1.length / 2)) {
+            if (i == Math.round(matrizSumando1.length / 2)) {
                 System.out.print("\t + \t");
             } else {
                 System.out.print("\t\t");
             }
 
             // Iteramos ahora la segunda matriz mostrando sus valores
-            for (int j = 0; j < matrizSuma2[0].length; j++) {
-                System.out.print("\t" + matrizSuma2[i][j]);
+            for (int j = 0; j < matrizSumando2[0].length; j++) {
+                System.out.print("\t" + matrizSumando2[i][j]);
             }
 
             // Calculamos si estamos a la mitad de la altura de las matrices
             // para colocar el simbolo igual, si no simplemente ponemos
             // las tabulaciones
-            if (i == Math.round(matrizSuma2.length / 2)) {
+            if (i == Math.round(matrizSumando2.length / 2)) {
                 System.out.print("\t = \t");
             } else {
                 System.out.print("\t\t");
             }
 
             // Iteramos finalmente la matriz resultado mostrando sus valores
-            for (int j = 0; j < matrizResultado[0].length; j++) {
-                System.out.print("\t" + matrizResultado[i][j]);
+            for (int j = 0; j < resultado[0].length; j++) {
+                System.out.print("\t" + resultado[i][j]);
             }
 
             // Añadimos un retorno de carro
             System.out.println("");
-        }
+        }    
+    
+    
     }
-
+        
     /**
      * Función que nos permite sumar dos matrices de igual tamaño
      *
@@ -134,5 +119,39 @@ public class Ejercicio005 {
         }
 
         return resultado;
-    }
+    }    
+        
+    public void Ejercicio() {
+
+        // Objeto para pedir datos al usuario por teclado
+        Scanner entrada = new Scanner(System.in);
+
+        // Variables
+        int valorX, valorY;
+
+        // Pedimos datos al usuario
+        valorX = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el ancho de la matriz");
+
+        valorY = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el alto de la matriz");
+
+        // Creamos las matrices nesarias
+        // Dos para recoger los datos del usuario y otra
+        // para almacenar el resultado de la suma
+        
+        System.out.println("Primera matriz");
+        int[][] matrizSuma1 = crearMatriz(valorX, valorY);
+        
+        System.out.println("Segunda matriz");
+        int[][] matrizSuma2 = crearMatriz(valorX, valorY);
+        int[][] matrizResultado;
+
+        // Realizamos la suma de matrices
+        matrizResultado = sumaMatrices(matrizSuma1, matrizSuma2);
+
+        // Mostramos resultados
+        System.out.println("Resultado de la operación");
+
+        mostrarResultadoSuma(matrizSuma1, matrizSuma2, matrizResultado);
+
+    }    
 }
