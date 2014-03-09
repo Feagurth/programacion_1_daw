@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -97,8 +98,9 @@ public class Ejercicio4_20 {
             sueldo = new Salario(numHorasTrabajadas, precioHoraTrabajo);
             
             // Mostramos el resultado
-            System.out.println("El sueldo bruto del trabajador " + i + 
-                    " es de: " + sueldo.getSueldoBruto());
+            Mensajes.mostrarMensaje("El sueldo bruto del trabajador " + i + 
+                    " es de: " + sueldo.getSueldoBruto(), 
+                    Mensajes.TipoMensaje.INFORMACION);
         }    
     
     }

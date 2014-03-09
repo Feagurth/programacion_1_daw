@@ -16,7 +16,9 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
+import java.awt.Dimension;
 
 /**
  * Clase para realizar el ejercicio 5.21 del libro de texto Como Programar en
@@ -53,6 +55,7 @@ public class Ejercicio5_21 {
         }
         
         // Muestra de resultados
-        System.out.print(resultado);
+        Mensajes.mostrarMensaje(resultado, "Información", 
+                Mensajes.TipoMensaje.INFORMACION, true, new Dimension(20, 40));
     }
 }

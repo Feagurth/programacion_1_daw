@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -51,7 +52,11 @@ public class Ejercicio4_23 {
         encontrar2Mayores(numeros);
 
         // Mostramos resultados
-        System.out.println("Los numeros mayores son: " + numMayor1 + " y " + numMayor2);
+        Mensajes.mostrarMensaje("Los numeros mayores son: " + 
+                (numMayor2 > numMayor1 ? 
+                        numMayor1 + " y " + numMayor2: 
+                        numMayor2 + " y " + numMayor1),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 
     /**

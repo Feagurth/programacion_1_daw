@@ -71,9 +71,6 @@ public class Ejercicio4_17 {
         // Variables para introducir los datos necesarios
         double kms, litros;
 
-        // Objeto Mensajes que usaremos para leer datos y mostrar resultados
-        Mensajes mensaje = new Mensajes();
-
         // Creamos el objeto que usaremos
         Repostajes reabastecimiento;
 
@@ -94,11 +91,11 @@ public class Ejercicio4_17 {
 
             // Acumulamos el valor de kms por litro extraido de la clase
             total += reabastecimiento.getKmsXLitro();
-
         }
 
         // Mostramos el resultado final
-        System.out.println("El total de kms/litros es de: " + total);
+        Mensajes.mostrarMensaje("El total de kms/litros es de: " + total,
+                Mensajes.TipoMensaje.INFORMACION);
 
     }
 

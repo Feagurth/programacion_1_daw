@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 import Utiles.Validaciones;
 
@@ -45,6 +46,7 @@ public class Ejercicio3_15 {
 
         /**
          * Método para recuperar el día
+         *
          * @return El día
          */
         public int getDia() {
@@ -53,6 +55,7 @@ public class Ejercicio3_15 {
 
         /**
          * Método para asignar el día
+         *
          * @param dia El día
          */
         public void setDia(int dia) {
@@ -61,6 +64,7 @@ public class Ejercicio3_15 {
 
         /**
          * Método para recuperar el mes
+         *
          * @return El mes
          */
         public int getMes() {
@@ -69,6 +73,7 @@ public class Ejercicio3_15 {
 
         /**
          * Método para asignar el mes
+         *
          * @param mes El mes
          */
         public void setMes(int mes) {
@@ -77,6 +82,7 @@ public class Ejercicio3_15 {
 
         /**
          * Método para recuperar el año
+         *
          * @return El año
          */
         public int getAnyo() {
@@ -85,6 +91,7 @@ public class Ejercicio3_15 {
 
         /**
          * Método para asignar el año
+         *
          * @param anyo El año
          */
         public void setAnyo(int anyo) {
@@ -94,7 +101,7 @@ public class Ejercicio3_15 {
         /**
          * Constructor de la clase
          *
-         * @param dia Dia del mes
+         * @param dia Día del mes
          * @param mes Mes del año
          * @param anyo Año
          */
@@ -125,20 +132,21 @@ public class Ejercicio3_15 {
         // Iteramos pidiendo datos al usuario
         do {
             // Pedimos datos al usuario a traves de las clases correspondientes
-            System.out.println("Introduzca la fecha en formato DD/MM/AAAA");
-            dia = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el día");
-            mes = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el mes");
-            anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el año");
-            
+            dia = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el día [DD]");
+            mes = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el mes [MM]");
+            anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor para el año [AAAA]");
+
             // Iteraremos hasta que se valide una fecha con los datos 
             // introducidos por teclado
-        } while(!Validaciones.validarDato(dia + "/" + mes + "/" + anyo, Validaciones.TipoValidacion.FECHA_DDMMAAAA));
+        } while (!Validaciones.validarDato(dia + "/" + mes + "/" + anyo, Validaciones.TipoValidacion.FECHA_DDMMAAAA));
 
         // Creamos el objeto
-         Fecha fecha = new Fecha(dia, mes, anyo);
+        Fecha fecha = new Fecha(dia, mes, anyo);
 
         // Hacemos que muestre la fecha
-         System.out.printf("La fecha introducida es: %s\n", fecha.mostrarFecha());
+        Mensajes.mostrarMensaje(String.format("La fecha introducida es: %s\n",
+                fecha.mostrarFecha()),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 
 }

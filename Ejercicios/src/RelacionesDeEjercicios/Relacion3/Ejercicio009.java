@@ -46,7 +46,7 @@ public class Ejercicio009 {
 
     /**
      * Clase para trabajar con distribuciones estadísticas
-     */
+     */    
     public class DistribucionEstadistica {
 
         // Array para almacenar los datos de la distribución estadística
@@ -114,6 +114,7 @@ public class Ejercicio009 {
          * @return Devuelve el valor que más aparece en la distribución
          * estadística
          */
+        @SuppressWarnings("unchecked")
         public Object[] moda() {
 
             Objects.requireNonNull(arrayDatos);
@@ -337,9 +338,6 @@ public class Ejercicio009 {
      */
     public void ejercicio() {
 
-        // Cantidad de datos a generar aleatoriamente
-        int numDatos;
-
         // Respuesta del usuario
         String respuesta;
         int valor;
@@ -416,7 +414,7 @@ public class Ejercicio009 {
 
         resultado += "\nDesviación Típica: " + distro.desviacionTipica();
 
-        
+      
         Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(40, 40));
     }

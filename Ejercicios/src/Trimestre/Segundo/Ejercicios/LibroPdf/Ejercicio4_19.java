@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -47,7 +48,7 @@ public class Ejercicio4_19 {
         }
 
         /**
-         * Constuctor de la clase
+         * Constructor de la clase
          *
          * @param valorVentas Valor total de las ventas del comercial
          */
@@ -110,8 +111,8 @@ public class Ejercicio4_19 {
         comision = new CalculoComisiones(totalVendido);
 
         // Mostramos el el resultado
-        System.out.println("Los ingresos del vendedor son de: "
-                + comision.getPaga());
+        Mensajes.mostrarMensaje("Los ingresos del vendedor son de: "
+                + comision.getPaga(), Mensajes.TipoMensaje.INFORMACION);
     }
 
 }

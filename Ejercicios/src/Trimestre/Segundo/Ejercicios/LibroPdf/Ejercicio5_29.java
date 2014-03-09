@@ -17,6 +17,8 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * Clase para realizar el ejercicio 5.29 del libro de texto Como Programar en
  * Java 7ed Deitel*
@@ -81,6 +83,6 @@ public class Ejercicio5_29 {
         }
         
         // Mostramos el resultado
-        System.out.println(resultado);
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }   
 }

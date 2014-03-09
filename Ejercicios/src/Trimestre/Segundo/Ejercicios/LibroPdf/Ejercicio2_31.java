@@ -16,6 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * Utilizando sólo las técnicas de programación que aprendió en este capítulo, 
  * escriba una aplicación que calcule los cuadrados y cubos de los números 
@@ -33,70 +35,59 @@ public class Ejercicio2_31 {
 
         // Inicializamos el valor
         int valor = 0;
+        String resultado;
 
-        // Imprimimos el resultado 
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        // Concatenamos el resultado
+        resultado = String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 1;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 2;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 3;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 4;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 5;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
-
-        // Cambiamos el valor e imprimimos el resultado
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        
+        // Cambiamos el valor y concatenamos el resultado
         valor = 6;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 7;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 8;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 9;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
 
-        // Cambiamos el valor e imprimimos el resultado
+        // Cambiamos el valor y concatenamos el resultado
         valor = 10;
-        System.out.printf("%d\t%d\t%d", valor, valor * valor, valor * valor * valor);
-        System.out.println();
+        resultado += String.format("%d\t%d\t%d\n\n\n", valor, valor * valor, valor * valor * valor);
 
         // ó
-        System.out.println();
-        System.out.println();
-        
-        // Iteramos desde 1 hasta 10 y mostramos los resultados
-        for (int i = 1; i <= 10; i++) {
-            System.out.printf("%d\t%d\t%d", i, i * i, i * i * i);
-            System.out.println();
+        // Iteramos desde 1 hasta 10 y concatenamos los resultados
+        for (int i = 0; i <= 10; i++) {
+            resultado += String.format("%d\t%d\t%d\n", i, i * i, i * i * i);
         }
+        
+        // Mostramos el resultado
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
     }
 
 }

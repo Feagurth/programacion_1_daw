@@ -20,8 +20,8 @@ import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
- * Clase para realizar el ejercicio 4.18 del libro de texto
- * Como Programar en Java 7ed Deitel
+ * Clase para realizar el ejercicio 4.18 del libro de texto Como Programar en
+ * Java 7ed Deitel
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -120,46 +120,35 @@ public class Ejercicio4_18 {
     /**
      * Ejercicio principal
      */
-    public void ejercicio()
-    {
+    public void ejercicio() {
         // Objeto que usaremos para controlar las cuetnas de un cliente
         CuentaCorriente cuentaCliente;
 
-        // Objeto que usaremos para pedir y mostrar datos al usuario
-        Mensajes mensajes = new Mensajes();
-        
         // Variables para almacenar datos que pediremos al usuario
         int numCuenta, saldoInicial, totalArticulos, totalCreditos, limiteCredito;
-    
-        
+
         // Pedismos los datos necesarios al usuario
         numCuenta = PeticionDatos.pedirEnteroPositivo("Introduzca el número de cuenta del cliente");
-        
+
         saldoInicial = PeticionDatos.pedirEntero("Introduzca el saldo inicial del cliente");
-        
+
         totalArticulos = PeticionDatos.pedirEnteroPositivo("Introduzca el total de artículos cargados este mes");
-        
+
         totalCreditos = PeticionDatos.pedirEnteroPositivo("Introduzca el total de creditos cargados este mes");
-        
+
         limiteCredito = PeticionDatos.pedirEnteroPositivo("Introduzca el límite de crédito del cliente");
-                
+
         // Creamos el objeto
         cuentaCliente = new CuentaCorriente(numCuenta, saldoInicial, totalArticulos, totalCreditos, limiteCredito);
-        
-        
+
         // Comparamos valores y mostramos el resultado correspondiente
-        if(cuentaCliente.getSaldoActual() <=  cuentaCliente.getLimitePermitido())
-        {
-            System.out.println("Se excedió el límite de su crédito");
+        if (cuentaCliente.getSaldoActual() <= cuentaCliente.getLimitePermitido()) {
+            Mensajes.mostrarMensaje("Se excedió el límite de su crédito",
+                    Mensajes.TipoMensaje.AVISO);
+        } else {
+            Mensajes.mostrarMensaje("Su saldo actual es de: "
+                    + cuentaCliente.getSaldoActual(),
+                    Mensajes.TipoMensaje.INFORMACION);
         }
-        else
-        {
-            System.err.println("Su saldo actual es de: " +cuentaCliente.getSaldoActual());
-                    
-        }
-    
-    
     }
-
-
 }

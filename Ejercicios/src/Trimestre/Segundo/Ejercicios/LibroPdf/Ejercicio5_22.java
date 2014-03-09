@@ -16,6 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * Clase para realizar el ejercicio 5.22 del libro de texto Como Programar en
  * Java 7ed Deitel*
@@ -29,43 +31,48 @@ public class Ejercicio5_22 {
     public void ejercicio() {
 
         int fila, columna;
+        String salida = "";
 
         for (fila = 1; fila <= 10; fila++) {
             for (columna = 1; columna <= fila; columna++) {
-                System.out.print('*');
+                salida += '*';
             }
 
             for (int i = columna; i <= 15; i++) {
-                System.out.print(' ');
+                salida += ' ';
             }
 
             for (columna = 10; columna >= fila; columna--) {
-                System.out.print('*');
+                salida += '*';
             }
 
             for (int i = 0; i < 5 + fila; i++) {
-                System.out.print(' ');
+                salida += ' ';
             }
 
             for (columna = 1; columna < fila; columna++) {
-                System.out.print(' ');
+                salida += ' ';
             }
             for (columna = 10; columna >= fila; columna--) {
-                System.out.print('*');
+                salida += '*';
             }
 
             for (int i = 0; i < 5; i++) {
-                System.out.print(' ');
+                salida += ' ';
             }
 
             for (columna = 10; columna > fila; columna--) {
-                System.out.print(' ');
+                salida += ' ';
             }
             for (columna = 1; columna <= fila; columna++) {
-                System.out.print('*');
+                salida += '*';
             }
 
-            System.out.println();
+            salida += "\n";                
+            
         }
+        
+        System.out.println(salida);
+        Mensajes.mostrarMensaje(salida,"Información", Mensajes.TipoMensaje.INFORMACION, true);
     }
 }

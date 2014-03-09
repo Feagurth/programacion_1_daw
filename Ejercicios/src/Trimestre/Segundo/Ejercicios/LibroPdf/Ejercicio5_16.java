@@ -17,6 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -53,7 +54,7 @@ public class Ejercicio5_16 {
             }
             
             // Mostramos el resultado
-            System.out.println(resultado);            
+            Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
         }
     }
 }

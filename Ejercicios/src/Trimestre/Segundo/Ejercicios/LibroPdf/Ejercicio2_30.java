@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -82,7 +83,8 @@ public class Ejercicio2_30 {
 
         resultado = resultado + cociente + "   ";
 
-        System.out.println(resultado);
+        // Mostramos el resultado al usuario
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
 
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -40,15 +41,23 @@ public class Ejercicio4_37 {
         numero = codificar(numero);
 
         // Mostramos en número codificado
-        System.out.println("El valor codificado es: " + numero);
+        Mensajes.mostrarMensaje("El valor codificado es: " + numero,
+                Mensajes.TipoMensaje.INFORMACION);
 
         // Descodificamos el numero codificado
         numero = decodificar(numero);
 
         // Mostramos el número descodificado
-        System.out.println("El numero descodificado es: " + numero);
+        Mensajes.mostrarMensaje("El valor descodificado es: " + numero,
+                Mensajes.TipoMensaje.INFORMACION);
     }
 
+    /**
+     * Función para decodificar un valor numérico como una cadena
+     *
+     * @param valorNumero valor numérico a codificar
+     * @return Cadena codificada
+     */
     private String codificar(String valorNumero) {
         StringBuilder apoyo = new StringBuilder();
 
@@ -75,6 +84,12 @@ public class Ejercicio4_37 {
         return apoyo.toString();
     }
 
+    /**
+     * Función para decodificar un valor numérico codificado a su valor original
+     *
+     * @param valorNumero valor numérico a descodificar
+     * @return Valor descodificado
+     */
     private String decodificar(String valorNumero) {
         StringBuilder apoyo = new StringBuilder(valorNumero);
 

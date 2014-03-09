@@ -63,6 +63,6 @@ public class Ejercicio5_24 {
         // Mostramos resultados. Se muestra tb por consola pues en un 
         // cuando de mensaje no queda bien alineado
         System.out.print(resultado);
-        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
     }
 }

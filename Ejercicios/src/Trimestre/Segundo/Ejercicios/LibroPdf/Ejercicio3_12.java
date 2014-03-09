@@ -16,8 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * Modifique la clase Cuenta (figura 3.13) para proporcionar un método llamado
@@ -32,7 +32,7 @@ import java.util.Scanner;
 public class Ejercicio3_12 {
 
     /**
-     * La clase Cuenta con un constructor para inicializar la variable de 
+     * La clase Cuenta con un constructor para inicializar la variable de
      * instancia saldo.
      */
     public class Cuenta {
@@ -42,8 +42,9 @@ public class Ejercicio3_12 {
 
         /**
          * Método para sacar dinero de la cuenta.
+         *
          * @param cantidadRetirar Cantidad de dinero a retirar
-         * @return Verdadero si es posible retirar el dinero, falso si no es 
+         * @return Verdadero si es posible retirar el dinero, falso si no es
          * posible
          */
         public boolean cargar(double cantidadRetirar) {
@@ -58,6 +59,7 @@ public class Ejercicio3_12 {
 
         /**
          * Constructor de la clase Cuenta
+         *
          * @param saldoInicial Saldo inicial de la cuenta
          */
         public Cuenta(double saldoInicial) {
@@ -70,6 +72,7 @@ public class Ejercicio3_12 {
 
         /**
          * abona (suma) un monto a la cuenta
+         *
          * @param monto Cantidad a abonar
          */
         public void abonar(double monto) {
@@ -78,6 +81,7 @@ public class Ejercicio3_12 {
 
         /**
          * Devuelve el saldo de la cuenta
+         *
          * @return El saldo de la cuenta
          */
         public double obtenerSaldo() {
@@ -91,24 +95,21 @@ public class Ejercicio3_12 {
      * @return Un entero con la opción selecionada por el usuario
      */
     private int mostrarMenu() {
-        int resultado = 0;
-        String seleccion = "";
-        Scanner entrada = new Scanner(System.in);
+        String mensaje = "";
+        int seleccion;
 
-        System.out.println("\n****************************");
-        System.out.println("* 1.- Consultar saldo      *");
-        System.out.println("* 2.- Ingresar dinero      *");
-        System.out.println("* 3.- Retirar dinero       *");
-        System.out.println("* 0.- Salir                *");
-        System.out.println("****************************");
-        System.out.print("Selecciones una operacion: ");
+        // Creamos el mensaje a mostrar
+        mensaje += " 1.- Consultar saldo";
+        mensaje += "\n 2.- Ingresar dinero";
+        mensaje += "\n 3.- Retirar dinero";
+        mensaje += "\n 0.- Salir";
 
-        do {
-            seleccion = entrada.nextLine();
+        mensaje += "\nSelecciones una operacion: ";
 
-        } while (!seleccion.matches("[0-3]{1}"));
+        // Pedimos una selección al usuario
+        seleccion = PeticionDatos.pedirEnteroRango(mensaje, 0, 3);
 
-        return Integer.parseInt(seleccion);
+        return seleccion;
     }
 
     /**
@@ -131,7 +132,10 @@ public class Ejercicio3_12 {
             switch (seleccion) {
                 case 1: {
                     // Mostramos el saldo
-                    System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
+                    Mensajes.mostrarMensaje(String.format("El saldo actual de "
+                            + "la cuenta es: %6.2f\n",
+                            cuenta.obtenerSaldo()),
+                            Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }
                 case 2: {
@@ -143,7 +147,9 @@ public class Ejercicio3_12 {
                     cuenta.abonar(monto);
 
                     // Mostramos el saldo actualizado de la cuenta
-                    System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
+                    Mensajes.mostrarMensaje(String.format("El saldo actual de "
+                            + "la cuenta es: %6.2f\n", cuenta.obtenerSaldo()),
+                            Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }
                 case 3: {
@@ -154,8 +160,9 @@ public class Ejercicio3_12 {
                     cuenta.cargar(monto);
 
                     // Mostramos el saldo actualizado de la cuenta
-                    System.out.printf("El saldo actual de la cuenta es: %6.2f\n", cuenta.obtenerSaldo());
-
+                    Mensajes.mostrarMensaje(String.format("El saldo actual de "
+                            + "la cuenta es: %6.2f\n", cuenta.obtenerSaldo()),
+                            Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }
             }

@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -31,7 +32,8 @@ public class Ejercicio4_21 {
      */
     public class NumeroMayor {
 
-        private final int[] numeros;
+        // Variables
+        private final int[] NUMEROS;
         private int numeroMayor;
 
         /**
@@ -49,18 +51,18 @@ public class Ejercicio4_21 {
          * @param numeros array con los valores a comparar
          */
         public NumeroMayor(int[] numeros) {
-            this.numeros = numeros;
+            this.NUMEROS = numeros;
 
             // Inicializamos con el primer valor del array
-            numeroMayor = numeros[0];
+            numeroMayor = this.NUMEROS[0];
 
             // Iteramos la longitud del array
-            for (int i = 0; i < numeros.length; i++) {
+            for (int i = 0; i < this.NUMEROS.length; i++) {
 
                 // Comparamos con el resto de valores y cambiamos el valor de la 
                 // variable si esta es menor que el numero actual
-                if (numeroMayor < numeros[i]) {
-                    numeroMayor = numeros[i];
+                if (numeroMayor < this.NUMEROS[i]) {
+                    numeroMayor = this.NUMEROS[i];
                 }
             }
         }
@@ -85,14 +87,16 @@ public class Ejercicio4_21 {
         numeros = new int[tamanyoArray];
 
         for (int i = 0; i < numeros.length; i++) {
-            numeros[i] = PeticionDatos.pedirEnteroPositivo("Introduzca el valor para el dígito número " + (i + 1));
+            numeros[i] = PeticionDatos.pedirEntero("Introduzca el valor para el dígito número " + (i + 1));
         }
 
         // Creamos el objeto con los datos introducidos
         numMayor = new NumeroMayor(numeros);
 
         // Mostramos el resultado
-        System.out.println("El número mayor es: " + numMayor.getNumeroMayor());
+        Mensajes.mostrarMensaje("El número mayor es: "
+                + numMayor.getNumeroMayor(),
+                Mensajes.TipoMensaje.INFORMACION);
 
     }
 

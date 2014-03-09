@@ -16,6 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * Clase para realizar el ejercicio 5.28 del libro de texto Como Programar en
  * Java 7ed Deitel*
@@ -43,7 +45,8 @@ public class Ejercicio5_28 {
         }     
 
         // Mostramos resultados al usuario
-        System.out.println("Se ha iterado " + contador + " veces");
+        Mensajes.mostrarMensaje("Se ha iterado " + contador + " veces", 
+                Mensajes.TipoMensaje.INFORMACION);
 
     }     
 }

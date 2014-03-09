@@ -17,6 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -54,6 +55,7 @@ public class Ejercicio5_11 {
         }
 
         // Mostramos el resultado
-        System.out.println("El mayor número introducido es el " + numMayor);
+        Mensajes.mostrarMensaje("El mayor número introducido es el " + 
+                numMayor, Mensajes.TipoMensaje.INFORMACION);
     }    
 }

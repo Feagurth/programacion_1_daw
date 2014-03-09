@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Luis Cabrerizo Gómez
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,12 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 5.25 del libro de texto Como Programar en
  * Java 7ed Deitel
- *
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -31,15 +31,19 @@ public class Ejercicio5_25 {
      * Ejercicio principal
      */
     public void ejercicio() {
-
         // Variables
         int alto;
         String resultado = "";
 
-        // Pedimos datos al usuario y nos aseguramos de que es impar
         do {
-            alto = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca un numero impar");
 
+            // Petición de datos al usuario
+            alto = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca un número "
+                    + "entero impar\npara definir el ancho máximo del rombo "
+                    + "dibujado");
+
+            // Verificamos que el número sea impar para que el triángulo se 
+            // dibuje correctamente
         } while (alto % 2 == 0);
 
         for (int i = 1; i <= ((alto / 2) + 1); i++) {
@@ -68,8 +72,12 @@ public class Ejercicio5_25 {
             resultado += "\n";
         }
 
-        // Mostramos resultados. 
-        System.out.print(resultado);
-    }
+        // Mostramos resultados. Se muestra tb por consola pues en un 
+        // cuando de mensaje no queda bien alineado
+        System.out.println(resultado);
 
+        Mensajes.mostrarMensaje(resultado, "Resultado",
+                Mensajes.TipoMensaje.INFORMACION, true);
+
+    }
 }

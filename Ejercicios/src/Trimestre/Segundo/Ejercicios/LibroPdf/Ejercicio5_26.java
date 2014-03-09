@@ -17,6 +17,8 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * Clase para realizar el ejercicio 5.26 del libro de texto Como Programar en
  * Java 7ed Deitel*
@@ -47,6 +49,7 @@ public class Ejercicio5_26 {
         }
 
         // Muestra de resultados al usuario
-        System.out.println("Se ha salido de la bucle en la iteración " + (i -1));           
+        Mensajes.mostrarMensaje("Se ha salido de la bucle en la iteración " + 
+                (i -1), Mensajes.TipoMensaje.INFORMACION);
     }   
 }

@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -33,6 +34,7 @@ public class Ejercicio4_38 {
         // Variables
         int m, x;
         float resultado, resultadoPotencia;
+        String salida;
 
         // Petición de datos al usuario
         m = PeticionDatos.pedirEntero("Introduzca el numero de iteraciones");
@@ -44,11 +46,13 @@ public class Ejercicio4_38 {
 
         // Calculamos el resultaod de la potencia de e
         resultadoPotencia = calculoEPowX(m, x);
-        
-        // Mostramos la información al usuario
-        System.out.println("El resultado es " + resultado);
 
-        System.out.println("El resultado de la potencia es " + resultadoPotencia);
+        // Preparamos la cadena de salida
+        salida = "El resultado es " + resultado;
+        salida += "\nEl resultado de la potencia es " + resultadoPotencia;
+
+        // Mostramos la información al usuario
+        Mensajes.mostrarMensaje(salida, Mensajes.TipoMensaje.INFORMACION);
 
     }
 

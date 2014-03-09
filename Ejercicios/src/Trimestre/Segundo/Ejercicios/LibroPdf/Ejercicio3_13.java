@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -51,6 +52,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para recuperar el número de pieza
+         *
          * @return el número de pieza
          */
         public String getNumeroPieza() {
@@ -59,7 +61,8 @@ public class Ejercicio3_13 {
 
         /**
          * Método para asignar el número de pieza
-         * @param numeroPieza 
+         *
+         * @param numeroPieza
          */
         public void setNumeroPieza(String numeroPieza) {
             this.numeroPieza = numeroPieza;
@@ -67,6 +70,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para recuperar la descripción
+         *
          * @return La descripción
          */
         public String getDescripcion() {
@@ -75,6 +79,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para asignar la descripción
+         *
          * @param descripcion La descripción
          */
         public void setDescripcion(String descripcion) {
@@ -83,6 +88,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para recuperar la cantidad
+         *
          * @return La cantidad
          */
         public int getCantidad() {
@@ -91,6 +97,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para asignar la cantidad
+         *
          * @param cantidad La cantidad
          */
         public void setCantidad(int cantidad) {
@@ -103,6 +110,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para recuperar el precio
+         *
          * @return El precio
          */
         public double getPrecio() {
@@ -111,6 +119,7 @@ public class Ejercicio3_13 {
 
         /**
          * Método para asignar el precio
+         *
          * @param precio El precio
          */
         public void setPrecio(double precio) {
@@ -136,7 +145,7 @@ public class Ejercicio3_13 {
             precio = prec;
         }
 
-       /**
+        /**
          * Método para devolver el valor de la factura
          *
          * @return Valor de la factura
@@ -150,27 +159,29 @@ public class Ejercicio3_13 {
      * Ejercicio principal
      */
     public void ejercicio() {
-        
+
         // Variables
         String id, descripcion;
-        int cantidad;        
+        int cantidad;
         double precio;
-        
+
         // Pedimos datos al usuario y los validamos
         // apoyados en unas clases diseñadas para ese 
         // propósito
         id = PeticionDatos.pedirCadena("Introduzca el identificador de la pieza");
-        
+
         descripcion = PeticionDatos.pedirCadena("Introduzca la descripción de la pieza");
-        
+
         cantidad = PeticionDatos.pedirEntero("Introduzca el número de piezas compradas");
-        
+
         precio = PeticionDatos.pedirReal("Introduzca el precio unitario de la pieza");
-                       
+
         // Creamos el nuevo objeto
         Factura nuevaFactura = new Factura(id, descripcion, cantidad, precio);
-        
+
         // Mostramos el resultado
-        System.out.println("La factura es: " + nuevaFactura.obtenerMontoFactura());
+        Mensajes.mostrarMensaje("La factura es: "
+                + nuevaFactura.obtenerMontoFactura(),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

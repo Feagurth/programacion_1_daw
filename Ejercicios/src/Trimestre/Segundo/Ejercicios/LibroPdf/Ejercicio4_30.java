@@ -16,11 +16,13 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
  * Clase para realizar el ejercicio 4.30 del libro de texto Como Programar en
  * Java 7ed Deitel
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_30 {
@@ -38,9 +40,11 @@ public class Ejercicio4_30 {
 
         // Realizamos la comprobación y mostramos el resultado
         if (esPalindromo(cadena)) {
-            System.out.println("Es un palíndromo");
+            Mensajes.mostrarMensaje("Es un palíndromo",
+                    Mensajes.TipoMensaje.INFORMACION);
         } else {
-            System.out.println("No es un palíndromo");
+            Mensajes.mostrarMensaje("No es un palíndromo",
+                    Mensajes.TipoMensaje.INFORMACION);
         }
     }
 
@@ -53,10 +57,10 @@ public class Ejercicio4_30 {
     private boolean esPalindromo(String palindromo) {
         boolean salida = true;
         int puntero = 0;
-        
+
         // Quitamos espacios en blanco si los hubiese y pasamos a minúscula
         // todo el texto
-        palindromo = palindromo.replace(" ", "").toLowerCase();        
+        palindromo = palindromo.replace(" ", "").toLowerCase();
 
         // Iteramos a lo largo de la cadena
         do {

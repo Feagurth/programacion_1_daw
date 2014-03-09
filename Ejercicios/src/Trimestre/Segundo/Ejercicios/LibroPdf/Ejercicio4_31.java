@@ -16,13 +16,13 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
-
-
 
 /**
  * Clase para realizar el ejercicio 4.31 del libro de texto Como Programar en
  * Java 7ed Deitel
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_31 {
@@ -38,7 +38,9 @@ public class Ejercicio4_31 {
         cadenaBinaria = PeticionDatos.pedirBinario("Introduzca un valor en binario");
 
         // Mostramos el resultado
-        System.out.println("Su valor es: " + enteroDeCadenaBinaria(cadenaBinaria));
+        Mensajes.mostrarMensaje("Su valor es: "
+                + enteroDeCadenaBinaria(cadenaBinaria),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 
     /**

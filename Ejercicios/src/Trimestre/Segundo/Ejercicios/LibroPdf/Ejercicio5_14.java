@@ -16,7 +16,9 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
+import java.awt.Dimension;
 
 /**
  * Clase para realizar el ejercicio 5.14 del libro de texto Como Programar en
@@ -31,26 +33,30 @@ public class Ejercicio5_14 {
     public void ejercicio() {
         double monto; // Monto depositado al final de cada año
         double principal; // monto inicial antes de los intereses
+        String cadena;
 
-        
         // Petición de datos al usuario
         principal = PeticionDatos.pedirRealPositivoNoCero("Introduzca el valor del monto inicial");
         
-        
-        // muestra los encabezados
-        System.out.printf("s%20s\n", "Anio", "Monto en deposito");
+        // Preparamos los encabezados
+        cadena = String.format("s%20s\n", "Anio", "Monto en deposito");
         // calcula el monto en deposito para cada uno de diez años
         for (int i = 5; i < 11; i++) {
             
-            System.out.printf("\nInteres: %,1.2f\n", (i/100f));
+            cadena += String.format("\nInteres: %,1.2f\n", (i/100f));
             
             for (int anio = 1; anio <= 10; anio++) {
                 // calcula el nuevo monto para el año especificado
                 monto = calculoDeInteres(principal, (i/100f), anio);
 
-                System.out.printf("%4d%,20.2f\n", anio, monto);
+                cadena += String.format("%4d%,20.2f\n", anio, monto);
             }
         }
+        
+        // Mostramos el resultado
+        Mensajes.mostrarMensaje(cadena, "Información", 
+                Mensajes.TipoMensaje.INFORMACION, true, 
+                new Dimension(40, 40));
     }
 
     /**

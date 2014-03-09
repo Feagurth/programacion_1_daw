@@ -16,6 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * He aquí otro adelanto. En este capítulo, aprendió acerca de los enteros y el
  * tipo int. Java puede también representar letras en mayúsculas, en minúsculas
@@ -47,61 +49,67 @@ public class Ejercicio2_29 {
      * Ejercicio principal
      */
     public void ejercicio() {
-        
-        // Imprimimos el valor para A
-        System.out.printf(
-                "El caracter %c tiene el valor %d\n", 'A', ((int) 'A'));
-        
-        // Imprimimos el valor para B
-        System.out.printf(
+
+        String resultado;
+
+        // Concatenamos el valor para A
+        resultado = String.format("El caracter %c tiene el valor %d\n",
+                'A', ((int) 'A'));
+
+        // Concatenamos el valor para B
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", 'B', ((int) 'B'));
-        
-        // Imprimimos el valor para C
-        System.out.printf(
+
+        // Concatenamos el valor para C
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", 'C', ((int) 'C'));
-        
-        // Imprimimos el valor para a
-        System.out.printf(
+
+        // Concatenamos el valor para a
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", 'a', ((int) 'a'));
-        
-        // Imprimimos el valor para b
-        System.out.printf(
+
+        // Concatenamos el valor para b
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", 'b', ((int) 'b'));
-        
-        // Imprimimos el valor para c
-        System.out.printf(
+
+        // Concatenamos el valor para c
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", 'c', ((int) 'c'));
-        
-        // Imprimimos el valor para 0
-        System.out.printf(
+
+        // Concatenamos el valor para 0
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '0', ((int) '0'));
-        
-        // Imprimimos el valor para 1
-        System.out.printf(
+
+        // Concatenamos el valor para 1
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '1', ((int) '1'));
-        
-        // Imprimimos el valor para 2
-        System.out.printf(
+
+        // Concatenamos el valor para 2
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '2', ((int) '2'));
-        
-        // Imprimimos el valor para $
-        System.out.printf(
+
+        // Concatenamos el valor para $
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '$', ((int) '$'));
-        
-        // Imprimimos el valor para *
-        System.out.printf(
+
+        // Concatenamos el valor para *
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '*', ((int) '*'));
-        
-        // Imprimimos el valor para +
-        System.out.printf(
+
+        // Concatenamos el valor para +
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '+', ((int) '+'));
-        
-        // Imprimimos el valor para /
-        System.out.printf(
+
+        // Concatenamos el valor para /
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", '/', ((int) '/'));
-        
-        // Imprimimos el valor para el espacio en blanco
-        System.out.printf(
+
+        // Concatenamos el valor para el espacio en blanco
+        resultado += String.format(
                 "El caracter %c tiene el valor %d\n", ' ', ((int) ' '));
+
+        // Imprimimos los resultados
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+
     }
 }

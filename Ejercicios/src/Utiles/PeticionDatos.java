@@ -329,7 +329,9 @@ public class PeticionDatos {
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.REAL_POSITIVO));
 
         // Devolvemos el resultado
-        return Double.valueOf(resultado.replace(",", "."));
+        resultado = resultado.replace(",", ".");
+        
+        return Double.valueOf(resultado);
     }
 
     /**

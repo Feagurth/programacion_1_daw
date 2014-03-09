@@ -16,9 +16,16 @@
  */
 package Utiles;
 
-import RelacionesDeEjercicios.Relacion3.Ejercicio003;
+import Trimestre.Segundo.Ejercicios.LibroPdf.Ejercicio3_12;
 
 /**
+ * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
+ * simplemente hay que que crear un objeto de la clase que queramos ejecutar y
+ * lanzar el método ejercicio
+ *
+ * P.Ej. Ejercicio3_14 ejercicio = new Ejercicio3_14();
+ *
+ * ejercicio.ejercicio();
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -28,9 +35,9 @@ public class Lanzador {
      * @param args argumentos por linea de comandos
      */
     public static void main(String[] args) {
-        
-        Ejercicio003 ejercicio = new Ejercicio003();
-        
+
+        Ejercicio3_12 ejercicio = new Ejercicio3_12();
+
         ejercicio.ejercicio();
     }
 }

@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -101,9 +102,13 @@ public class Ejercicio2_32 {
         }
 
         // Mostramos los resultados
-        System.out.println("Positivos: " + positivos);
-        System.out.println("Ceros: " + ceros);
-        System.out.println("Negativos: " + negativos);
+        String resultado;
+
+        resultado = "Positivos: " + positivos;
+        resultado += "\nCeros: " + ceros;
+        resultado += "\nNegativos: " + negativos;
+        
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
 
     }
 }

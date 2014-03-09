@@ -17,6 +17,8 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
+
 /**
  * Clase para realizar el ejercicio 4.22 del libro de texto
  * Como Programar en Java 7ed Deitel
@@ -39,6 +41,7 @@ public class Ejercicio4_22 {
         }
 
         // Mostramos los resultados
-        System.out.println(resultado);
+        Mensajes.mostrarMensaje(resultado, "Información", 
+                Mensajes.TipoMensaje.INFORMACION, true);
     }    
 }

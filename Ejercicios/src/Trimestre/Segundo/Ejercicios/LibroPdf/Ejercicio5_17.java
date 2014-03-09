@@ -17,6 +17,7 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -63,6 +64,8 @@ public class Ejercicio5_17 {
         } while (codigoArticulo != 0);
                 
         // Mostramos resultados
-        System.out.println("El total es: " + String.format("%.2f", total));
+        Mensajes.mostrarMensaje("El total es: " + 
+                String.format("%.2f", total), 
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

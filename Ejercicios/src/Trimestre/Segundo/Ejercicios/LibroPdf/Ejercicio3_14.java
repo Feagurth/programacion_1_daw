@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -100,7 +101,7 @@ public class Ejercicio3_14 {
          * Constructor de la clase
          *
          * @param primerNombre Nombre del empleado
-         * @param apellidoPaterno Apallido del empleado
+         * @param apellidoPaterno Apellido del empleado
          * @param sueldoMensual Sueldo del empleado
          */
         public Empleado(String primerNombre, String apellidoPaterno, double sueldoMensual) {
@@ -118,6 +119,7 @@ public class Ejercicio3_14 {
         // Variables
         String nombre, apellido;
         double sueldoMensual;
+        String resultado;
 
         // Pedimos datos al usuario y los validamos
         // apoyados en unas clases diseñadas para ese 
@@ -129,19 +131,41 @@ public class Ejercicio3_14 {
         sueldoMensual = PeticionDatos.pedirRealPositivo("Introduzca el sueldo mensual del empleado");
 
         // Creamos el objeto
-        Empleado empleado1 = new Empleado(nombre, apellido, sueldoMensual);
+        Empleado empleado = new Empleado(nombre, apellido, sueldoMensual);
 
-        // Imprimimos el sueldo anual
-        System.out.print("El sueldo anual del empleado es: ");
-        System.out.println(empleado1.getSueldoMensual() * 12);
+        // Concatenamos el nombre y el apellido del trabajador
+        resultado = String.format("Trabajador: %s %s\n", 
+                empleado.getPrimerNombre(), 
+                empleado.getApellidoPaterno());
+        
+        // Concatenamos el sueldo anual
+        resultado += String.format("Sueldo anual : %.2f", 
+                empleado.getSueldoMensual() * 12);
 
+        // Mostramos información al usuario
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+
+        // Reiniciamos la cadena y mostramos mensaje
+        resultado = "Se ha aumentado el sueldo del empleado un 10%\n";
+        
+        // Concatenamos los datos del trabajador
+        resultado += String.format("Trabajador: %s %s\n", 
+                empleado.getPrimerNombre(), 
+                empleado.getApellidoPaterno());
+
+        // Concatenamos su sueldo antes del aumento del 10%
+        resultado += String.format("Antiguo sueldo anual: %.2f\n", 
+                empleado.getSueldoMensual() * 12);
+                
         // Asignamos el sueldo un 10%
-        empleado1.setSueldoMensual(empleado1.getSueldoMensual() + (empleado1.getSueldoMensual() * 0.1));
+        empleado.setSueldoMensual(empleado.getSueldoMensual() + (empleado.getSueldoMensual() * 0.1));
 
-        // Imprimimos el sueldo anual de nuevo
-        System.out.println("Se ha aumentado el sueldo del empleado un 10%");
-        System.out.print("El sueldo anual del empleado es: ");
-        System.out.println(empleado1.getSueldoMensual() * 12);
+        // Concatenamos el sueldo anual
+        resultado += String.format("Sueldo anual: %.2f", 
+                empleado.getSueldoMensual() * 12);
+        
+        // Mostramos el resultado
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
 
     }
 }

@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -90,8 +91,12 @@ public class Ejercicio3_11 {
         public void mostrarMensaje() {
         // esta instrucción llama a obtenerNombreDelCurso para obtener el
             // nombre del curso que este LibroCalificaciones representa
-            System.out.printf("Bienvenido al Libro de calificaciones para\n%s!\n"
-                    + "Este curso es presentado por: %s\n", obtenerNombreDelCurso(), getNombreInstructor());
+            
+            Mensajes.mostrarMensaje(String.format("Bienvenido al Libro de calificaciones para\n%s!\n"
+                    + "Este curso es presentado por: %s\n", 
+                    obtenerNombreDelCurso(), 
+                    getNombreInstructor()), 
+                    Mensajes.TipoMensaje.INFORMACION);
         } // fin del método mostrarMensaje
 
     } // fin de la clase LibroCalificaciones
