@@ -31,14 +31,11 @@ public class Ejercicio026 {
      */
     public void ejercicio(){
     
-        // Objeto para mostrar y tomar datos del usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero;
         String cadena = "";
         
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca el limite de la secuencia", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca el limite de la secuencia", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
         for (int i = 4; i <= numero; i += 4) {
@@ -46,7 +43,7 @@ public class Ejercicio026 {
         }
         
         
-        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
     
 }

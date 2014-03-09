@@ -26,28 +26,28 @@ import Utiles.Mensajes;
  */
 public class Ejercicio039 {
    
+    /**
+     * Ejercicio principal
+     */
     public void ejercicio(){
     
-        // Objeto para la petición y muestra de datos al usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero;
         
         // Petición de datos al usuario
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         
         // Hacemos la comparación y mostramos resultados
         if(numero >= 10 && numero <= 100)
         {
-            msg.MostrarMensaje(numero + " está comprendido entre 10 y 100", 
+            Mensajes.mostrarMensaje(numero + " está comprendido entre 10 y 100", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            msg.MostrarMensaje(numero + " no está comprendido entre 10 y 100", 
+            Mensajes.mostrarMensaje(numero + " no está comprendido entre 10 y 100", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);        
         }        
     }

@@ -59,7 +59,10 @@ public class Ejercicio4_17 {
 
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para controlar el número de reabastecimientos que usaremos
         int numReabastecimientos;
         // Variable para acumular el total de los reabastecimientos

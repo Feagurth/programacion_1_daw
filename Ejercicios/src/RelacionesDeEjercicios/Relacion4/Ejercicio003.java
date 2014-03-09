@@ -38,7 +38,11 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio003 {
     
-    public void Ejercicio()
+
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos

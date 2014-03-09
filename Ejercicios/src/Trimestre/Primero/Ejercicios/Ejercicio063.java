@@ -122,33 +122,32 @@ public class Ejercicio063 {
         return resultado;
     }
 
-    public void Ejercicio() {
-        
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         Double numero;
         int iterac;
         
         // Petición de datos al usuario
-        numero = Double.parseDouble(mensaje.PedirDatos("Introduzca un número", 
+        numero = Double.parseDouble(Mensajes.pedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        iterac = Integer.parseInt(mensaje.PedirDatos("Introduzca el número de "
+        iterac = Integer.parseInt(Mensajes.pedirDatos("Introduzca el número de "
                 + "iteraciones para calcular los valores", "Petición de Datos", 
                 Mensajes.TipoMensaje.ERROR));
     
         // Muestra de resultados al usuario
-        mensaje.MostrarMensaje("e^" + numero + ": " + 
+        Mensajes.mostrarMensaje("e^" + numero + ": " + 
                 CalcularEx(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
-        mensaje.MostrarMensaje("Cos(" + numero + "): " + 
+        Mensajes.mostrarMensaje("Cos(" + numero + "): " + 
                 CalcularCoseno(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
-        mensaje.MostrarMensaje("Sen(" + numero + "): " + 
+        Mensajes.mostrarMensaje("Sen(" + numero + "): " + 
                 CalcularSeno(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }

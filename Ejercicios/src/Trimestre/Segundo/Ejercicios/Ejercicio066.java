@@ -26,7 +26,10 @@ package Trimestre.Segundo.Ejercicios;
  */
 public class Ejercicio066 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
     
     

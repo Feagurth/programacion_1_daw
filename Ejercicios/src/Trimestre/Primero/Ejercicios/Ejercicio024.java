@@ -30,9 +30,6 @@ public class Ejercicio024 {
      */
 public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero, suma = 0, contador = 0;
         
@@ -40,7 +37,7 @@ public void ejercicio()
             contador++;
 
             // Petición de datos al usuario
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
             
             // Sumamos el número introducido a la suma existente
@@ -48,7 +45,7 @@ public void ejercicio()
         }
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("El resultado es: " + suma, 
+        Mensajes.mostrarMensaje("El resultado es: " + suma, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

@@ -27,11 +27,11 @@ import Utiles.Mensajes;
  */
 public class Ejercicio045 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-        // Objero para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
-
         // Variables
         int numero = 0, valor, apoyo = 0, contador;
         
@@ -73,7 +73,7 @@ public class Ejercicio045 {
         
         
         // Mostramos el resultado
-        mensaje.MostrarMensaje(String.valueOf(contador), "Información", 
+        Mensajes.mostrarMensaje(String.valueOf(contador), "Información", 
                 Mensajes.TipoMensaje.INFORMACION);                
     }
     

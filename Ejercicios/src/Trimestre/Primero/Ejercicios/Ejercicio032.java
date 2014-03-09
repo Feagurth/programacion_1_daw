@@ -30,16 +30,12 @@ public class Ejercicio032 {
      * Ejercicio principal
      */
     public void ejercicio(){
-    
-        // Objeto para toma y muestra de datos al usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero;
         String resultado;
       
         // Lectura de datos
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Comprobamos si el número es par usando el modulo de 2
@@ -53,6 +49,6 @@ public class Ejercicio032 {
         }
         
         // Muestra de resultados
-        msg.MostrarMensaje(resultado, "Resultados", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, "Resultados", Mensajes.TipoMensaje.INFORMACION);
     }
 }

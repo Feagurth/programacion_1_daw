@@ -133,7 +133,10 @@ public class Ejercicio005 {
         return resultado;
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         int valorX, valorY;
@@ -159,7 +162,7 @@ public class Ejercicio005 {
         String resultado;
         resultado = mostrarResultadoSuma(matrizSuma1, matrizSuma2, matrizResultado);
 
-        Mensajes.MostrarMensaje(resultado, "Resultado",
+        Mensajes.mostrarMensaje(resultado, "Resultado",
                 Mensajes.TipoMensaje.INFORMACION, true,
                 new Dimension(60, matrizResultado[0].length + 2));
 

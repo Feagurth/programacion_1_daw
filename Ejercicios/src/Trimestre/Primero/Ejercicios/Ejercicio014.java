@@ -31,9 +31,6 @@ public class Ejercicio014 {
     */
     public void ejercicio(){
         
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Array que contiene las letras del abecedario de la a la m ordenadas
         char[] vector = new char[]{
             'a','b','c','d','e','f','g','h','i','j','k','l','m'
@@ -45,7 +42,7 @@ public class Ejercicio014 {
         boolean encontradaLetra = false;
         
         // Petición de datos al usuario
-        letra = msg.PedirDatos("Introduzca la letra a localizar", "Petición de datos", 
+        letra = Mensajes.pedirDatos("Introduzca la letra a localizar", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA).charAt(0);
 
         // Mientras la letra no se encuentre y no se haya recorrido todo el
@@ -62,12 +59,12 @@ public class Ejercicio014 {
         
         // Mostramos información al usuario dependiendo del resultado
         if (!encontradaLetra) {
-            msg.MostrarMensaje("La letra " + letra + " va depues de la m", 
+            Mensajes.mostrarMensaje("La letra " + letra + " va depues de la m", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            msg.MostrarMensaje("La letra " + letra + " va antes de la m", 
+            Mensajes.mostrarMensaje("La letra " + letra + " va antes de la m", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);            
         }
     }

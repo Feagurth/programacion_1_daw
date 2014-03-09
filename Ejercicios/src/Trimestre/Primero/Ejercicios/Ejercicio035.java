@@ -38,15 +38,12 @@ public class Ejercicio035 {
      */
     public void ejercicio()
     {
-        // Objeto para pedir y mostrar datos para el usuario
-        Mensajes msg = new Mensajes();
-
         // Variables
         int alumnos40 = 0, alumnos4050 = 0, alumnos5060 = 0, alumnos60 = 0;
         double peso;
                 
         // Petición de datos al usuario
-        peso = Double.parseDouble(msg.PedirDatos("Introduzca el peso", 
+        peso = Double.parseDouble(Mensajes.pedirDatos("Introduzca el peso", 
                 "Petición de Datos", Mensajes.TipoMensaje.INFORMACION));
         
         // Iteramos hasta que leamos el valor centinela para salir del bucle
@@ -70,12 +67,12 @@ public class Ejercicio035 {
             }
             
             // Petición de datos al usuario
-            peso = Double.parseDouble(msg.PedirDatos("Introduzca el peso", 
+            peso = Double.parseDouble(Mensajes.pedirDatos("Introduzca el peso", 
                     "Petición de Datos", Mensajes.TipoMensaje.INFORMACION));            
         }
     
         // Muestra de resultados
-        msg.MostrarMensaje(
+        Mensajes.mostrarMensaje(
                 "Alumnos de menos de 40 kgs: " + alumnos40 + "\n" +
                 "Alumnos de mas 40 y menos de 50 kgs: " + alumnos4050 + "\n" +
                 "Alumnos de mas 50 y menos de 60 kgs: " + alumnos5060 + "\n" +

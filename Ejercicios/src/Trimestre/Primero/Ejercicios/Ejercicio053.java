@@ -26,11 +26,11 @@ import Utiles.Mensajes;
  */
 public class Ejercicio053 {
 
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variable para almacenar el resultado de la división
         ResultadoDivision res;
     
@@ -38,11 +38,11 @@ public class Ejercicio053 {
         int div, divs;
         
         // Petición de datos al usuario
-        div = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor para "
+        div = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
                 + "el dividendo", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
 
-        divs = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor para "
+        divs = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
                 + "el divisor", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
@@ -50,14 +50,14 @@ public class Ejercicio053 {
         res = Division(div, divs);
         
         // Mostramos resultados
-        mensaje.MostrarMensaje("Cociente: " + res.getCociente() + "\nResto: " 
+        Mensajes.mostrarMensaje("Cociente: " + res.getCociente() + "\nResto: " 
                 + res.getResto(), "Resultado", Mensajes.TipoMensaje.INFORMACION);
         
     }
     
     
     /**
-     * Fumción para dividir usando solo sumas y restas
+     * Función para dividir usando solo sumas y restas
      * @param dividendo Dividendo
      * @param divisor Divisor
      * @return Resultado

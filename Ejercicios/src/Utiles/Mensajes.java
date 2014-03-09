@@ -18,12 +18,9 @@ package Utiles;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.WindowConstants;
 
 /**
  * Clase de ayuda para peticiones y muestra de datos con ventanas
@@ -37,7 +34,26 @@ public class Mensajes {
      */
     public enum TipoMensaje {
 
-        ERROR, INFORMACION, AVISO, PREGUNTA, PLANO
+        /**
+         * Valor para error
+         */
+        ERROR, 
+        /**
+         * Valor para información
+         */
+        INFORMACION, 
+        /**
+         * Valor para aviso
+         */
+        AVISO, 
+        /**
+         * Valor para pregunta
+         */
+        PREGUNTA, 
+        /**
+         * Valor para aviso plano
+         */
+        PLANO
     }
 
     /**
@@ -81,7 +97,7 @@ public class Mensajes {
      * @param newTextArea Permite indicar si se creará un JTextArea al crear el
      * mensaje
      */
-    public static void MostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje, boolean newTextArea) {
+    public static void mostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje, boolean newTextArea) {
         if (!newTextArea) {
             JOptionPane.showMessageDialog(null, mensaje, titulo,
                     parseTipoMensaje(tipoMensaje));
@@ -114,7 +130,7 @@ public class Mensajes {
      * @param tamanyoMaximo  Permite especificar el tamaño máximo de la ventana en filas y columnas
      * mensaje
      */
-    public static void MostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje, boolean newTextArea, Dimension tamanyoMaximo) {
+    public static void mostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje, boolean newTextArea, Dimension tamanyoMaximo) {
         if (!newTextArea) {
             JOptionPane.showMessageDialog(null, mensaje, titulo,
                     parseTipoMensaje(tipoMensaje));
@@ -158,8 +174,8 @@ public class Mensajes {
      * @param titulo Título de la ventana
      * @param tipoMensaje Tipo de mensaje que se mostrará
      */
-    public static void MostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje) {
-        MostrarMensaje(mensaje, titulo, tipoMensaje, false);
+    public static void mostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje) {
+        mostrarMensaje(mensaje, titulo, tipoMensaje, false);
     }
 
     /**
@@ -168,7 +184,7 @@ public class Mensajes {
      * @param mensaje Mensaje que se le muestra al usuario
      * @param tipoMensaje Tipo de mensaje que se mostrará
      */
-    public static void MostrarMensaje(String mensaje, TipoMensaje tipoMensaje) {
+    public static void mostrarMensaje(String mensaje, TipoMensaje tipoMensaje) {
 
         String titulo;
 
@@ -190,7 +206,7 @@ public class Mensajes {
                 break;
         }
 
-        MostrarMensaje(mensaje, titulo, tipoMensaje, false);
+        mostrarMensaje(mensaje, titulo, tipoMensaje, false);
     }
 
     /**
@@ -201,7 +217,7 @@ public class Mensajes {
      * @param tipoMensaje Tipo de mensaje que se mostrará
      * @return Datos introducidos por el usuario
      */
-    public static String PedirDatos(String mensaje, String titulo, TipoMensaje tipoMensaje) {
+    public static String pedirDatos(String mensaje, String titulo, TipoMensaje tipoMensaje) {
         String cadena;
 
         do {
@@ -221,7 +237,7 @@ public class Mensajes {
      * @param tipoMensaje Tipo de mensaje que se mostrará
      * @return Datos introducidos por el usuario
      */
-    public static String PedirDatos(String mensaje, TipoMensaje tipoMensaje) {
+    public static String pedirDatos(String mensaje, TipoMensaje tipoMensaje) {
         String titulo;
 
         switch (tipoMensaje) {
@@ -242,7 +258,7 @@ public class Mensajes {
                 break;
         }
 
-        return PedirDatos(mensaje, titulo, tipoMensaje);
+        return pedirDatos(mensaje, titulo, tipoMensaje);
     }
 
 }

@@ -29,7 +29,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio004 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int alto;
         String resultado = "";
@@ -75,7 +78,7 @@ public class Ejercicio004 {
         // cuando de mensaje no queda bien alineado
         System.out.println(resultado);
         
-        Mensajes.MostrarMensaje(resultado, "Resultado",
+        Mensajes.mostrarMensaje(resultado, "Resultado",
                 Mensajes.TipoMensaje.INFORMACION, true);
 
     }

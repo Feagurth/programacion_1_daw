@@ -31,23 +31,20 @@ public class Ejercicio004
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero1, numero2, numero3, numero4;
         String cadena;
 
-        numero1 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+        numero1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
                 + "el número 1", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
-        numero2 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+        numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
                 + "el número 2", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
-        numero3 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+        numero3 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
                 + "el número 3", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
-        numero4 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para "
+        numero4 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
                 + "el número 4", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
 
@@ -105,7 +102,7 @@ public class Ejercicio004
         }
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
         
     }
 }

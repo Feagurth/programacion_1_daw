@@ -18,7 +18,6 @@
 package RelacionesDeEjercicios.Relacion4;
 
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * Construir las expresiones regulares para: 
@@ -37,11 +36,11 @@ import java.util.Scanner;
  */
 public class Ejercicio002 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-    
-        // Objeto pare pedir datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
     
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos

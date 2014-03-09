@@ -29,6 +29,9 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio002 {
 
+    /**
+     * Clase para almacenar y trabajar con triángulos
+     */
     public class Triangulo {
 
         // Variables de instancia
@@ -154,7 +157,10 @@ public class Ejercicio002 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         float lado1, lado2, lado3;
@@ -174,27 +180,27 @@ public class Ejercicio002 {
         // Mostramos los resultados
         // Verficamos si es un triángulo válido
         if (triangulo.isValido()) {
-            Mensajes.MostrarMensaje("Es un triangulo válido", 
+            Mensajes.mostrarMensaje("Es un triangulo válido", 
                     Mensajes.TipoMensaje.INFORMACION);
 
             // Comprobamos si es equilátero
             if (triangulo.esEquilatero()) {
-                Mensajes.MostrarMensaje("Es un triangulo equilátero", 
+                Mensajes.mostrarMensaje("Es un triangulo equilátero", 
                         Mensajes.TipoMensaje.INFORMACION);
             } else {
-                Mensajes.MostrarMensaje("No es un triangulo equilátero", 
+                Mensajes.mostrarMensaje("No es un triangulo equilátero", 
                         Mensajes.TipoMensaje.INFORMACION);
             }
 
             // Mostramos su lado mayor y su area
-            Mensajes.MostrarMensaje("El lado mayor mide: " + 
+            Mensajes.mostrarMensaje("El lado mayor mide: " + 
                     triangulo.ladoMayor(), Mensajes.TipoMensaje.INFORMACION);
             
-            Mensajes.MostrarMensaje("Area: " + triangulo.valorArea(), 
+            Mensajes.mostrarMensaje("Area: " + triangulo.valorArea(), 
                     Mensajes.TipoMensaje.INFORMACION);
         } else {
             // Si no es válido, mostramos un mensaje
-            Mensajes.MostrarMensaje("No es un triangulo válido", 
+            Mensajes.mostrarMensaje("No es un triangulo válido", 
                     Mensajes.TipoMensaje.ERROR);
         }
     }

@@ -31,9 +31,6 @@ public class Ejercicio017 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos        
-        Mensajes msg = new Mensajes();
-        
         // Variables de control
         int contador, sumaPar, sumaImpar;
         
@@ -61,10 +58,10 @@ public class Ejercicio017 {
         
         
         // Se muestran los resultados al usuario
-        msg.MostrarMensaje("La suma de los pares de los 200 primeros números es: "
+        Mensajes.mostrarMensaje("La suma de los pares de los 200 primeros números es: "
                 + sumaPar, "Información", Mensajes.TipoMensaje.INFORMACION);
         
-        msg.MostrarMensaje("La suma de los impares de los 200 primeros números es: "
+        Mensajes.mostrarMensaje("La suma de los impares de los 200 primeros números es: "
                 + sumaImpar, "Información", Mensajes.TipoMensaje.INFORMACION);
         
     }

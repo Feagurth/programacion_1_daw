@@ -34,39 +34,59 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio3_11 {
 
-    // La clase LibroCalificaciones con un constructor para inicializar el nombre del curso.
+    /**
+     * La clase LibroCalificaciones con un constructor para inicializar el nombre del curso.
+     */
     public class LibroCalificaciones {
 
         private String nombreDelCurso; // nombre del curso para este LibroCalificaciones
         private String nombreInstructor; // nombre del instructor del curso
 
-        // getter del nombre del instructor del curso
+        /**
+         * getter del nombre del instructor del curso
+         * @return El nombre del instructor
+         */
         public String getNombreInstructor() {
             return nombreInstructor;
         }
 
-        // setter del nombre del instructor del curso
+        /**
+         * setter del nombre del instructor del curso
+         * @param nombreInstructor El nombre del instructor
+         */
         public void setNombreInstructor(String nombreInstructor) {
             this.nombreInstructor = nombreInstructor;
         }
 
-        // el constructor inicializa nombreDelCurso con el objeto String que se provee como argumento
+        /**
+         * el constructor inicializa nombreDelCurso con el objeto String que se provee como argumento
+         * @param nombre Nombre del curso
+         * @param instructor Profesor que lo instruye
+         */
         public LibroCalificaciones(String nombre, String instructor) {
             nombreDelCurso = nombre; // inicializa nombreDelCurso
             nombreInstructor = instructor;
         } // fin del constructor 
 
-        // método para establecer el nombre del curso
+        /**
+         * Método para establecer el nombre del curso
+         * @param nombre Nombre del curso
+         */
         public void establecerNombreDelCurso(String nombre) {
             nombreDelCurso = nombre; // almacena el nombre del curso
         } // fin del método establecerNombreDelCurso
 
-        // método para obtener el nombre del curso
+        /**
+         * Método para obtener el nombre del curso
+         * @return El nombre del curso
+         */
         public String obtenerNombreDelCurso() {
             return nombreDelCurso;
         } // fin del método obtenerNombreDelCurso
 
-        // muestra un mensaje de bienvenida al usuario de LibroCalificaciones
+        /**
+         * Muestra un mensaje de bienvenida al usuario de LibroCalificaciones
+         */
         public void mostrarMensaje() {
         // esta instrucción llama a obtenerNombreDelCurso para obtener el
             // nombre del curso que este LibroCalificaciones representa
@@ -76,7 +96,10 @@ public class Ejercicio3_11 {
 
     } // fin de la clase LibroCalificaciones
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Definimos las variables
         String nombreClase, nombreProfesor;

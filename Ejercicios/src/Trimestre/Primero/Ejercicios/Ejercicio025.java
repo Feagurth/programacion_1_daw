@@ -30,9 +30,6 @@ public class Ejercicio025 {
      * Ejercicio principal
      */
     public void ejercicio(){
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero, suma = 0, contador = 0;
     
@@ -42,7 +39,7 @@ public class Ejercicio025 {
             contador++;
             
             // Petición de datos al usuario
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca el número " + contador, 
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca el número " + contador, 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
             
             // Acumulamos el número introducido a la suma existente
@@ -51,7 +48,7 @@ public class Ejercicio025 {
         }
                 
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("El resultado es: " + suma, 
+        Mensajes.mostrarMensaje("El resultado es: " + suma, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
     

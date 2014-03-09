@@ -57,7 +57,10 @@ public class Ejercicio4_19 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Objeto para calcular las comisiones del comercial
         CalculoComisiones comision;
 

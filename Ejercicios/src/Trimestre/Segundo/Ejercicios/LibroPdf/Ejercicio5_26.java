@@ -24,7 +24,10 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio5_26 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Variables
         int i;

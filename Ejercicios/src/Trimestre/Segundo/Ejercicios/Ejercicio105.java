@@ -16,7 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Una empresa tiene almacenados a sus vendedores en un registro. Por cada
@@ -41,16 +42,112 @@ public class Ejercicio105 {
      *
      * @author Luis Cabrerizo Gómez
      */
-    class Vendedor {
+    public class Vendedor {
 
-        String DNI;
-        String nombre;
-        String apellidos;
-        String zona;
-        float sueldoBase;
-        float ventasMes[];
-        float totalAnual;
-        float comision;
+        private String DNI;
+        private String nombre;
+        private String apellidos;
+        private String zona;
+        private float sueldoBase;
+        private float ventasMes[];
+        private float totalAnual;
+        private float comision;
+
+        /**
+         * Método para retornar el DNI de un vendedor
+         * @return El valor del DNI
+         */
+        public String getDNI() {
+            return DNI;
+        }
+
+        /**
+         * Método para asignar un DNI a un vendedor
+         * @param DNI El valor del DNI
+         */
+        public void setDNI(String DNI) {
+            this.DNI = DNI;
+        }
+
+        /**
+         * Método para retornar el nombre de un vendedor
+         * @return El nombre del vendedor
+         */
+        public String getNombre() {
+            return nombre;
+        }
+
+        /**
+         * Método para asignar un nombre a un vendedor
+         * @param nombre El valor del nombre
+         */
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        /**
+         * Método para retornar los apellidos de un vendedor
+         * @return Los apellidos del vendedor
+         */
+        public String getApellidos() {
+            return apellidos;
+        }
+
+        /**
+         * Método para asignar los apellidos de un vendedor
+         * @param apellidos El valor de los apellidos
+         */
+        public void setApellidos(String apellidos) {
+            this.apellidos = apellidos;
+        }
+
+        /**
+         * Método para retornar la zona de trabajo de un vendedor
+         * @return La zona de trabajo del vendedor
+         */
+        public String getZona() {
+            return zona;
+        }
+
+        /**
+         * Método para asignar la zona de trabajo de un vendedor
+         * @param zona El valor de la zona de trabajo
+         */
+        public void setZona(String zona) {
+            this.zona = zona;
+        }
+
+        /**
+         * Método para recuperar el sueldo base de un vendedor
+         * @return El sueldo base del vendedor
+         */
+        public float getSueldoBase() {
+            return sueldoBase;
+        }
+
+        /**
+         * Método para asignar el sueldo base de un vendedor
+         * @param sueldoBase El valor del sueldo base de vendedor
+         */
+        public void setSueldoBase(float sueldoBase) {
+            this.sueldoBase = sueldoBase;
+        }
+
+        /**
+         * Método para recuperar las ventas por meses de un vendedor
+         * @return Las ventas por meses de un vendedor
+         */
+        public float[] getVentasMes() {
+            return ventasMes;
+        }
+
+        /**
+         * Método para asignar las ventas por meses de un vendedor
+         * @param ventasMes El valor de las ventas por meses de un vendedor
+         */
+        public void setVentasMes(float[] ventasMes) {
+            this.ventasMes = ventasMes;
+        }
 
         /**
          * Constructor de la clase Vendedor
@@ -70,7 +167,7 @@ public class Ejercicio105 {
             this.zona = zona;
             this.sueldoBase = sueldoBase;
 
-        // Creamos un array de float de 12 de tamaño, que corresponderá a los 
+            // Creamos un array de float de 12 de tamaño, que corresponderá a los 
             // meses del año
             ventasMes = new float[12];
         }
@@ -93,7 +190,7 @@ public class Ejercicio105 {
                 this.totalAnual += ventasMes[i];
             }
 
-        // Asginamos el porcentaje de la comisión del vendedor dependiendo del 
+            // Asginamos el porcentaje de la comisión del vendedor dependiendo del 
             // total de ventas anual
             if (totalAnual < 1500000) {
                 this.comision = 0;
@@ -138,7 +235,7 @@ public class Ejercicio105 {
         public float getComision() {
             return comision;
         }
-        
+
         /**
          * Función pare devolver el valor del sueldo más la comisión
          *
@@ -147,12 +244,20 @@ public class Ejercicio105 {
         public float getSueldoComision() {
             return this.sueldoBase + this.comision;
         }
-        
+
+        @Override
+        public String toString() {
+
+            return String.format("Vendedor{DNI=%s, nombre=%s, apellidos=%s, zona=%s, sueldoBase=%s, totalAnual=%s, comision=%s}",
+                    DNI, nombre, apellidos, zona, sueldoBase, totalAnual, comision);
+        }
+
     }
 
-    public void Ejercicio() {
-        // Objeto para recoger datos desde el teclado
-        Scanner entrada = new Scanner(System.in);
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Array con los nombres de los meses del año
         final String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril",
@@ -170,10 +275,7 @@ public class Ejercicio105 {
         int contMeses;
 
         // Pedimos al usuario el número de vendedores
-        do {
-            System.out.print("Introduzca el número de vendedores: ");
-            numVendedores = entrada.nextInt();
-        } while (numVendedores <= 0);
+        numVendedores = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de vendedores");
 
         // Creamos un array de objetos Vendedor
         Vendedor[] vendedores = new Vendedor[numVendedores];
@@ -184,24 +286,16 @@ public class Ejercicio105 {
             // Aumentamos el contador de vendedores
             loop++;
 
-            // Reinicializamos el objeto de petición de datos por teclado
-            entrada = new Scanner(System.in);
-
             // Pedimos al usuario los datos principales del vendedor
-            System.out.print("Introduzca el DNI del vendedor: ");
-            dni = entrada.nextLine();
+            dni = PeticionDatos.pedirDNI("Introduzca el DNI del vendedor");
 
-            System.out.print("Introduzca el nombre del vendedor: ");
-            nombre = entrada.nextLine();
+            nombre = PeticionDatos.pedirCadena("Introduzca el nombre del vendedor");
 
-            System.out.print("Introduzca los apellidos del vendedor: ");
-            apellidos = entrada.nextLine();
+            apellidos = PeticionDatos.pedirCadena("Introduzca los apellidos del vendedor");
 
-            System.out.print("Introduzca la zona de trabajo del vendedor: ");
-            zona = entrada.nextLine();
+            zona = PeticionDatos.pedirCadena("Introduzca la zona de trabajo del vendedor");
 
-            System.out.print("Introduzca el sueldo base del vendedor: ");
-            sueldoBase = entrada.nextFloat();
+            sueldoBase = (float) (PeticionDatos.pedirReal("Introduzca el sueldo base del vendedor"));
 
             // Creamos el objeto vendedor
             vendedor = new Vendedor(dni, nombre, apellidos, zona, sueldoBase);
@@ -216,9 +310,7 @@ public class Ejercicio105 {
                 // Aumentamos el contador de meses
                 contMeses++;
 
-                System.out.print("Introduzca el total de ventas para el mes "
-                        + "de " + mes + ": ");
-                ventaMes = entrada.nextFloat();
+                ventaMes = (float) PeticionDatos.pedirReal("Introduzca el total de ventas para el mes de " + mes);
                 vendedor.setVentaMes(contMeses, ventaMes);
             }
 
@@ -226,23 +318,30 @@ public class Ejercicio105 {
             // vendedores creado anteriormente
             vendedores[loop] = vendedor;
 
-            System.out.println("");
-
         }
 
+        String resultado;
+        
         // Iteramos para ver los resultados del todos los vendedores que haya 
         // en el array de vendedores
         for (Vendedor vendedor : vendedores) {
 
-            System.out.println("Datos del vendedor: " + vendedor.nombre + " "
-                    + vendedor.apellidos);
-            System.out.println("DNI: " + vendedor.DNI);
-            System.out.println("Zona: " + vendedor.zona);
-            System.out.println("Sueldo Base: " + vendedor.sueldoBase);
-            System.out.println("Total Ventas Anual: " + vendedor.totalAnual);
-            System.out.println("Comisión : " + vendedor.comision);
-            System.out.println("Sueldo con Comisión: " + vendedor.getSueldoComision());
-            System.out.println("");
+            
+            
+            resultado = "Datos del vendedor: " + vendedor.getNombre() + " " 
+                    + vendedor.getApellidos();
+            resultado += "\nDNI: " + vendedor.getDNI();
+            resultado += "\nZona: " + vendedor.getZona();
+            resultado += "\nSueldo Base: " + vendedor.getSueldoBase();
+            resultado += "\nTotal Ventas Anual: " + vendedor.getTotalAnual();
+            resultado += "\nComisión : " + vendedor.getComision();
+            resultado += "\nSueldo con Comisión: " + vendedor.getSueldoComision();
+            resultado += "\n";
+
+            resultado += "\nToString: " + vendedor.toString();
+
+            Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+            
         }
     }
 }

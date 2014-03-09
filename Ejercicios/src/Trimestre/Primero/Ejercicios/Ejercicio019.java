@@ -31,9 +31,6 @@ public class Ejercicio019 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int suma = 0;
         double producto = 1;
@@ -61,9 +58,9 @@ public class Ejercicio019 {
                         + "variable doble en la iteración " + i );
             }
         }
-        msg.MostrarMensaje("Suma: " + suma, "Atención", 
+        Mensajes.mostrarMensaje("Suma: " + suma, "Atención", 
                 Mensajes.TipoMensaje.INFORMACION);
-        msg.MostrarMensaje("Multiplicación: " + producto, "Atención", 
+        Mensajes.mostrarMensaje("Multiplicación: " + producto, "Atención", 
                 Mensajes.TipoMensaje.INFORMACION);
     }
 }

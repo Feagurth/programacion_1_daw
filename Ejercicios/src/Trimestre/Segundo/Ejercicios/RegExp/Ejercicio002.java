@@ -16,12 +16,12 @@
  */
 package Trimestre.Segundo.Ejercicios.RegExp;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Algoritmo que transforma un número introducido por teclado en notación
- * decimal a romana. El número será entero y positivo y no excederá de 3000.
- * Usar expresiones regulares para validar los datos
+ * Crear un programa en Java que convierta un número natural (menor a 4000) en
+ * romano (construido como una cadena de caracteres).
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -204,47 +204,21 @@ public class Ejercicio002 {
         return resultado;
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir datos al usuario        
-        Scanner entrada;
-
-        // Variable para almacenar el valor a convertir
-        String valor;
-
-        // Variable para alamcenar el resultado de la conversión
-        String resultado;
-
-        // Iteramos mientras no se cumpla la condición
-        do {
-
-            // Creamos el objeto pare leer los datos del teclado
-            entrada = new Scanner(System.in);
-
-            // Petición de datos al usuario
-            System.out.print("Introduzca un número entero entre 1 y 3000: ");
-            valor = entrada.nextLine();
-
-        } while (!validacion(valor, "[0-9][0-9]{0,3}") || 
-                 Integer.parseInt(valor) <= 0 || 
-                 Integer.parseInt(valor) > 3000);
-
-        // Realizamos la conversión
-        resultado = ArabigoARomano(Integer.parseInt(valor));
-
-        // Mostramos el resultado al usuario
-        System.out.println("El valor de " + valor + " en números romanos es " + resultado);
-    }
-
     /**
-     * Función para validar entradas con expresiones regulares
-     *
-     * @param cadena Cadena de texto a validar
-     * @param patron Patrón de validación
-     * @return Verdadero si la cadena es validada correctamente y falso en caso
-     * contrario
+     * Ejercicio principal
      */
-    private boolean validacion(String cadena, String patron) {
+    public void ejercicio() {
+        // Variable para almacenar el número introducido por el usuario
+        int numero;
 
-        return cadena.matches(patron);
+        // Pedimos al usuario un número y lo almacenamos en la variable
+        // destinada a ello
+        numero = PeticionDatos.pedirEnteroRango("Introduzca un número "
+                + "entre 1 y 3999", 1, 3999);
+
+        // Mostramos el resultado
+        Mensajes.mostrarMensaje("El valor de " + numero + " en números romanos "
+                + "es: " + ArabigoARomano(numero),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

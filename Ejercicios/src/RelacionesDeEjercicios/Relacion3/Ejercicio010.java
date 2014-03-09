@@ -155,7 +155,10 @@ public class Ejercicio010 {
         return resultado;
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // variables
         String nombreUsuario;
@@ -187,7 +190,7 @@ public class Ejercicio010 {
 
                 // Imprimimos el pasaje de abordaje con los datos que 
                 // tenemos almacenados
-                Mensajes.MostrarMensaje(
+                Mensajes.mostrarMensaje(
                         imprimirPaseAbordaje(
                                 nombreUsuario,
                                 numAsiento,
@@ -216,7 +219,7 @@ public class Ejercicio010 {
                 // Si la respuesa es negativa, mostramos la respuesta 
                 // especificada
                 if (respuesta.equals("n")) {
-                    Mensajes.MostrarMensaje("El próximo vuelo sale en 3 horas",
+                    Mensajes.mostrarMensaje("El próximo vuelo sale en 3 horas",
                             Mensajes.TipoMensaje.INFORMACION);
                 } else {
 
@@ -227,7 +230,7 @@ public class Ejercicio010 {
 
                     // Imprimimos el pase de abordaje con los datos que 
                     // tenemos almacenados
-                    Mensajes.MostrarMensaje(
+                    Mensajes.mostrarMensaje(
                             imprimirPaseAbordaje(
                                     nombreUsuario, 
                                     numAsiento, 
@@ -246,7 +249,7 @@ public class Ejercicio010 {
         apoyo += "\nEl próximo vuelo sale en 3 horas";
         apoyo += "\n============================================";
         
-        Mensajes.MostrarMensaje(apoyo, Mensajes.TipoMensaje.AVISO);
+        Mensajes.mostrarMensaje(apoyo, Mensajes.TipoMensaje.AVISO);
 
     }
 }

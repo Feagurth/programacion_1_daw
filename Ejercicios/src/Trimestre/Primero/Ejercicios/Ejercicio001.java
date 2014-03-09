@@ -31,17 +31,14 @@ public class Ejercicio001
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int valor1, valor2, resto;
         
         // Petición de datos al usuario
-        valor1 = Integer.parseInt(msg.PedirDatos("Introduzca el valor1", 
+        valor1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor1", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        valor2 = Integer.parseInt(msg.PedirDatos("Introduzca el valor2", 
+        valor2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor2", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Mientras que el modulo de los dos valores sea distinto de cero
@@ -58,7 +55,7 @@ public class Ejercicio001
         }
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("El maximo común divisor es: " + valor1, 
+        Mensajes.mostrarMensaje("El maximo común divisor es: " + valor1, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
      }
 }

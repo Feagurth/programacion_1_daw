@@ -41,15 +41,12 @@ public class Ejercicio015
         // Variables de control
         int control, posLetra1 = 0, posLetra2 = 0;
         
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Petición de datos al usuario
-        letra1 = msg.PedirDatos("Introduzca la primera letra", 
+        letra1 = Mensajes.pedirDatos("Introduzca la primera letra", 
                 "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA).charAt(0);
 
-        letra2 = msg.PedirDatos("Introduzca la segunda letra", 
+        letra2 = Mensajes.pedirDatos("Introduzca la segunda letra", 
                 "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA).charAt(0);
         control = 0;
@@ -78,12 +75,12 @@ public class Ejercicio015
         // están ordenadas
         if(posLetra1 < posLetra2)
         {
-            msg.MostrarMensaje("Están ordenadas alfabeticamente", 
+            Mensajes.mostrarMensaje("Están ordenadas alfabeticamente", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            msg.MostrarMensaje("No están ordenadas alfabeticamente", 
+            Mensajes.mostrarMensaje("No están ordenadas alfabeticamente", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
 

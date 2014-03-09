@@ -24,7 +24,10 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio5_29 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Variable para almacenar el resultado
         String resultado;

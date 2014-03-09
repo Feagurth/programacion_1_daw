@@ -44,27 +44,50 @@ public class Ejercicio3_14 {
         private String apellidoPaterno;
         private double sueldoMensual;
 
-        // Getters & Setters
+        /**
+         * Método para recuperar el nombre del empleado
+         * @return El nombre del empleado
+         */
         public String getPrimerNombre() {
             return primerNombre;
         }
 
+        /**
+         * Método para asignar el primer nombre del empleado
+         * @param primerNombre El primer nombre del empleado
+         */
         public void setPrimerNombre(String primerNombre) {
             this.primerNombre = primerNombre;
         }
 
+        /**
+         * Método para recuperar el apellido paterno del empleado
+         * @return El apellido paterno del empleado
+         */
         public String getApellidoPaterno() {
             return apellidoPaterno;
         }
 
+        /**
+         * Método para asignar el apellido paterno del empleado
+         * @param apellidoPaterno El apellido paterno del empleado
+         */
         public void setApellidoPaterno(String apellidoPaterno) {
             this.apellidoPaterno = apellidoPaterno;
         }
 
+        /**
+         * Método para recuperar el sueldo mensual del empleado
+         * @return El sueldo mensual del empleado
+         */
         public double getSueldoMensual() {
             return sueldoMensual;
         }
 
+        /**
+         * Método para asignar el sueldo mensual del empleado
+         * @param sueldoMensual El sueldo mensual del empleado
+         */
         public void setSueldoMensual(double sueldoMensual) {
             if (sueldoMensual > 0) {
                 this.sueldoMensual = sueldoMensual;
@@ -87,7 +110,10 @@ public class Ejercicio3_14 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         String nombre, apellido;

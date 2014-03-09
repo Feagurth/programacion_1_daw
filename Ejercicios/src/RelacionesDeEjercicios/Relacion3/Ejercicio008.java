@@ -29,7 +29,10 @@ import Utiles.Mensajes;
  */
 public class Ejercicio008 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Array para contener el nombre de las ciudades
         String[] arrayNombreCiudades
                 = new String[]{"Almeria", "Granada", "Jaen", "Malaga",
@@ -100,6 +103,6 @@ public class Ejercicio008 {
         }
         
         // Mostramos los resultados
-        Mensajes.MostrarMensaje(resultado,Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado,Mensajes.TipoMensaje.INFORMACION);
     }
 }

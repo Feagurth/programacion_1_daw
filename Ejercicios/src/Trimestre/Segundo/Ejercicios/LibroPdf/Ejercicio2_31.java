@@ -26,7 +26,10 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio2_31 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Inicializamos el valor
         int valor = 0;

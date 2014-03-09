@@ -31,9 +31,6 @@ public class Ejercicio012 {
    */    
    public void ejercicio()
    {
-       // Objeto para mensajes y recogida de datos
-       Mensajes msg = new Mensajes();
-       
        int numero = 0;
        
        // Iteramos y sumamos los numeros
@@ -42,7 +39,7 @@ public class Ejercicio012 {
        }
        
        // Muestra de resultados al usuario
-       msg.MostrarMensaje("La suma de los 10 primeros enteros es: " + numero, 
+       Mensajes.mostrarMensaje("La suma de los 10 primeros enteros es: " + numero, 
                "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
        

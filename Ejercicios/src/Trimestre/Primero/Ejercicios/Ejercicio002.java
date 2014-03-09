@@ -33,9 +33,6 @@ public class Ejercicio002
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int contador = 0;
         int numero = -1;
@@ -44,7 +41,7 @@ public class Ejercicio002
         // Comprobamos que el número introducido es distinto de cero
         while (numero != 0) 
         {            
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
             
             cadena += numero + " ";
@@ -52,7 +49,7 @@ public class Ejercicio002
         }
         cadena += "\n" + "Número de valores introducidos: " + contador;
         
-        msg.MostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
         
         
     }

@@ -39,11 +39,10 @@ public class Ejercicio054 {
         return new Coordenadas(valorX, valorY);
     }
 
-    public void Ejercicio() {
-
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable paa almacenar el resultado
         Coordenadas resultado;
 
@@ -51,11 +50,11 @@ public class Ejercicio054 {
         double angulo, radio;
 
         // Petición de datos al usuario
-        angulo = Double.parseDouble(mensaje.PedirDatos("Introduzca el valor "
+        angulo = Double.parseDouble(Mensajes.pedirDatos("Introduzca el valor "
                 + "del angulo", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
 
-        radio = Double.parseDouble(mensaje.PedirDatos("Introduzca el valor "
+        radio = Double.parseDouble(Mensajes.pedirDatos("Introduzca el valor "
                 + "del radio", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
 
@@ -63,7 +62,7 @@ public class Ejercicio054 {
         resultado = CoordenadasPolares(radio, angulo);
 
         // Mostramos resultados
-        mensaje.MostrarMensaje("La coordenada es: (" + resultado.getX()
+        Mensajes.mostrarMensaje("La coordenada es: (" + resultado.getX()
                 + ", " + resultado.getY() + ")", "Resultado",
                 Mensajes.TipoMensaje.INFORMACION);
     }

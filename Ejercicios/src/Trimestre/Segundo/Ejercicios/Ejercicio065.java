@@ -203,10 +203,10 @@ public class Ejercicio065 {
         return resultado;
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar el valor a convertir
         int valor;
 
@@ -216,7 +216,7 @@ public class Ejercicio065 {
         // Iteramos mientras no se cumpla la condición
         do {
             // Petición de datos al usuario
-            valor = Integer.parseInt(mensaje.PedirDatos("Introduzca un número "
+            valor = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número "
                     + "entero entre 1 y 3000", "Petición de Datos",
                     Mensajes.TipoMensaje.PREGUNTA));
         } while (valor <= 0 || valor > 3000);
@@ -225,7 +225,7 @@ public class Ejercicio065 {
         resultado = ArabigoARomano(valor);
 
         // Mostramos el resultado al usuario
-        mensaje.MostrarMensaje("El valor de " + valor + " en números romanos "
+        Mensajes.mostrarMensaje("El valor de " + valor + " en números romanos "
                 + "es " + resultado, "Resultado",
                 Mensajes.TipoMensaje.INFORMACION);
     }   

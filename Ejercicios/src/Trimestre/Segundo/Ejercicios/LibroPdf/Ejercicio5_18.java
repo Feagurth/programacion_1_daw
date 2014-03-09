@@ -23,7 +23,10 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio5_18 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         int monto; // Monto depositado al final de cada año
         int principal = 1000; // monto inicial antes de los intereses
         int tasa = 5; // tasa de interés

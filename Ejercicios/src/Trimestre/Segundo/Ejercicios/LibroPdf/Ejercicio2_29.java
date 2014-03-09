@@ -43,7 +43,10 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio2_29 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         
         // Imprimimos el valor para A
         System.out.printf(

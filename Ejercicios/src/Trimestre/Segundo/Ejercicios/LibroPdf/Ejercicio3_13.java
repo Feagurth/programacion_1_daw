@@ -38,6 +38,9 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio3_13 {
 
+    /**
+     * Clase factura
+     */
     public class Factura {
 
         // Variables
@@ -46,27 +49,50 @@ public class Ejercicio3_13 {
         private int cantidad;
         private double precio;
 
-        // Getters & Setters
+        /**
+         * Método para recuperar el número de pieza
+         * @return el número de pieza
+         */
         public String getNumeroPieza() {
             return numeroPieza;
         }
 
+        /**
+         * Método para asignar el número de pieza
+         * @param numeroPieza 
+         */
         public void setNumeroPieza(String numeroPieza) {
             this.numeroPieza = numeroPieza;
         }
 
+        /**
+         * Método para recuperar la descripción
+         * @return La descripción
+         */
         public String getDescripcion() {
             return descripcion;
         }
 
+        /**
+         * Método para asignar la descripción
+         * @param descripcion La descripción
+         */
         public void setDescripcion(String descripcion) {
             this.descripcion = descripcion;
         }
 
+        /**
+         * Método para recuperar la cantidad
+         * @return La cantidad
+         */
         public int getCantidad() {
             return cantidad;
         }
 
+        /**
+         * Método para asignar la cantidad
+         * @param cantidad La cantidad
+         */
         public void setCantidad(int cantidad) {
             if (cantidad > 0) {
                 this.cantidad = cantidad;
@@ -75,10 +101,18 @@ public class Ejercicio3_13 {
             }
         }
 
+        /**
+         * Método para recuperar el precio
+         * @return El precio
+         */
         public double getPrecio() {
             return precio;
         }
 
+        /**
+         * Método para asignar el precio
+         * @param precio El precio
+         */
         public void setPrecio(double precio) {
             if (precio > 0) {
                 this.precio = precio;
@@ -112,7 +146,10 @@ public class Ejercicio3_13 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         
         // Variables
         String id, descripcion;

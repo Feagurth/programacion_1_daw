@@ -31,9 +31,11 @@ import Utiles.PeticionDatos;
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio005 {
-
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos
@@ -81,7 +83,7 @@ public class Ejercicio005 {
         apoyo = "Usuario: " + usuario;
         apoyo += "\nPassword: " + password;
         
-        Mensajes.MostrarMensaje(apoyo, Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(apoyo, Mensajes.TipoMensaje.INFORMACION);
     
     }
     

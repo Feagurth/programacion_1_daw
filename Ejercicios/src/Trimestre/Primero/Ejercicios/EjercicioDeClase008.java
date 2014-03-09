@@ -50,9 +50,6 @@ public class EjercicioDeClase008 {
      */
     private void operaciones(int valorOpciones)
     {
-        // Objeto para mostrar y tomar datos del usuario
-        Mensajes msg = new Mensajes();
-    
         // Variables
         Double arista, volumen = null, area = null;
         String tipoPoliedro = null;
@@ -60,7 +57,7 @@ public class EjercicioDeClase008 {
         // Petición de datos de usuario
         do
         {
-            arista = Double.parseDouble(msg.PedirDatos("Introduzca un valor para la "
+            arista = Double.parseDouble(Mensajes.pedirDatos("Introduzca un valor para la "
                     + "arista", "Petición de Datos", Mensajes.TipoMensaje.INFORMACION));
         }
         while(arista <= 0);
@@ -98,7 +95,7 @@ public class EjercicioDeClase008 {
         
 
         // Muestra de resultados    
-        msg.MostrarMensaje("El area de un " + tipoPoliedro + " de arista " + 
+        Mensajes.mostrarMensaje("El area de un " + tipoPoliedro + " de arista " + 
                 arista + " es de " + area + "\nEl volumen de un " + tipoPoliedro 
                 + " de arista " + arista + " es de " + volumen, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
@@ -126,7 +123,7 @@ public class EjercicioDeClase008 {
         mensaje += "6.- SALIR\n";
         
         do{            
-            resultado = Integer.parseInt(msg.PedirDatos(mensaje, "POLIEDROS", 
+            resultado = Integer.parseInt(Mensajes.pedirDatos(mensaje, "POLIEDROS", 
                     Mensajes.TipoMensaje.PREGUNTA));
         }while (resultado > 6 || resultado < 1) ;
         

@@ -27,7 +27,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio007 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int valorX, valorY;
 
@@ -47,10 +50,10 @@ public class Ejercicio007 {
 
         // Comparamos las matrices y mostramos el resultado
         if (matricesIguales(matriz1, matriz2)) {
-            Mensajes.MostrarMensaje("Las matrices son iguales", 
+            Mensajes.mostrarMensaje("Las matrices son iguales", 
                     Mensajes.TipoMensaje.INFORMACION);
         } else {
-            Mensajes.MostrarMensaje("Las matrices no son iguales", 
+            Mensajes.mostrarMensaje("Las matrices no son iguales", 
                     Mensajes.TipoMensaje.INFORMACION);
 
         }

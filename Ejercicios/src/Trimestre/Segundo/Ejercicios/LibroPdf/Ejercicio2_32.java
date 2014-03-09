@@ -26,7 +26,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio2_32 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Declaración de variables
         int numero1, numero2, numero3, numero4, numero5;
         int positivos = 0, negativos = 0, ceros = 0;

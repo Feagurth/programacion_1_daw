@@ -27,7 +27,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio4_31 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar el valor introducido por el usuario
         String cadenaBinaria;
 

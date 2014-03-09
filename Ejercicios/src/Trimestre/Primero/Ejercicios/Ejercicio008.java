@@ -31,19 +31,16 @@ public class Ejercicio008 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();        
-        
         // Variables
         int numero;
 
         // Petición de datos al usuario
-        numero = Integer.parseInt(msg.PedirDatos("Introduce un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduce un número", 
                 "Pedir datos", Mensajes.TipoMensaje.PREGUNTA));
                 
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("El resultado de doblar el número " + numero +
+        Mensajes.mostrarMensaje("El resultado de doblar el número " + numero +
                 " y multiplicarlo por 25 es: " + numero * 50, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }

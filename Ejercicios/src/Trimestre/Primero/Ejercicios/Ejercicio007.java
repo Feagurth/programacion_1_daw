@@ -31,20 +31,17 @@ public class Ejercicio007 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         double base, altura;
 
         // Petición de datos al usuario
-        base = Double.parseDouble(msg.PedirDatos("Introduzca la base del triangulo", 
+        base = Double.parseDouble(Mensajes.pedirDatos("Introduzca la base del triangulo", 
                 "Pedir datos", Mensajes.TipoMensaje.PREGUNTA));
-        altura = Double.parseDouble(msg.PedirDatos("Introduzca la altura del triangulo", 
+        altura = Double.parseDouble(Mensajes.pedirDatos("Introduzca la altura del triangulo", 
                 "Pedir datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("La superficie es: " + ((base * altura)/2), 
+        Mensajes.mostrarMensaje("La superficie es: " + ((base * altura)/2), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
         
     }

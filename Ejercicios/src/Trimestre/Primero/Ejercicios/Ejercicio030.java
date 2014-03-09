@@ -30,23 +30,20 @@ public class Ejercicio030 {
      */
     public void ejercicio()
     {
-        // Objeto para la tma y muestra de datos al usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero1, numero2, numero3;
         String cadena;
         
         // Petición de datos al usuario
-        numero1 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para el "
+        numero1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para el "
                 + "primer número", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
-        numero2 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para el "
+        numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para el "
                 + "segundo número", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
-        numero3 = Integer.parseInt(msg.PedirDatos("Introduzca un valor para el "
+        numero3 = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para el "
                 + "tercer número", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
@@ -89,6 +86,6 @@ public class Ejercicio030 {
         }
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

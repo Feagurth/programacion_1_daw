@@ -29,9 +29,6 @@ public class Ejercicio013 {
     * Ejercicio principal
     */
     public void ejercicio(){
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variable para concatenar los resultados
         String resultado = "";
         
@@ -41,7 +38,7 @@ public class Ejercicio013 {
         }
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);
     }
     

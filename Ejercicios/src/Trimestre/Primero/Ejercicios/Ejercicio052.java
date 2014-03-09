@@ -25,22 +25,21 @@ import Utiles.Mensajes;
  */
 public class Ejercicio052 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-        
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variables
         int valor;
 
         // Petición de datos al usuario
-        valor = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor", 
+        valor = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         
         // Muestra de resultados
-        mensaje.MostrarMensaje("El valor absoluto es: " + ValorAbsoluto(valor), 
+        Mensajes.mostrarMensaje("El valor absoluto es: " + ValorAbsoluto(valor), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }    
     

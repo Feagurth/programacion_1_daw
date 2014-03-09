@@ -31,9 +31,6 @@ public class Ejercicio018 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables de controls
         int numero, mayor = 0;
         boolean salir = false;
@@ -43,7 +40,7 @@ public class Ejercicio018 {
         do {            
             
             // Petición de datos al usuario
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca un número (-99 para salir)"
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número (-99 para salir)"
                     , "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
 
             // Si el número introducido es mayor que cero
@@ -66,7 +63,7 @@ public class Ejercicio018 {
         } while (!salir);
 
         // Mostramos resultados al usuario
-        msg.MostrarMensaje("De los números introducidos el mayor es: " + mayor, 
+        Mensajes.mostrarMensaje("De los números introducidos el mayor es: " + mayor, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     
     }

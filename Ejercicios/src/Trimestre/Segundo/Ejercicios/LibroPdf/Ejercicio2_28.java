@@ -17,8 +17,8 @@
 
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * He aquí un adelanto. En este capítulo, aprendió sobre los enteros y el 
@@ -49,26 +49,29 @@ import java.util.Scanner;
  */
 public class Ejercicio2_28 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {    
        // Declaración de variables
         int radio;
-        Scanner entrada = new Scanner(System.in);
+        String resultado = "";
         
         // Recogida de datos iniciales
         radio = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor del radio");
     
-        // Se muestra el valor del diametro
-        System.out.printf("El diametro es: %d", 2 * radio );
-        System.out.println("");
+        // Concatenamos el valor del diametro
+        resultado += String.format("El diametro es: %d\n", 2 * radio );
+                
+        // Concatenamos el valor de la circunferencia
+        resultado += String.format("La circunferencia es: %.2f\n", 2 * Math.PI * radio );
+                
+        // Concatenamos el valor de la circunferencia
+        resultado = String.format("El area es: %.2f", Math.PI * (Math.pow(radio, 2))); 
         
-        // Se muestra el valor de la circunferencia
-        System.out.printf("La circunferencia es: %.2f", 2 * Math.PI * radio );
-        System.out.println("");
-        
-        // Se muestra el valor de la circunferencia
-        System.out.printf("El area es: %.2f", Math.PI * (Math.pow(radio, 2))); 
-        System.out.println("");                
+        // Mostramos el resultado
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }
     
 }

@@ -16,10 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
-import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 import Utiles.Varios;
-import java.awt.Dimension;
 
 /**
  * Una empresa de venta de productos por correo desea realizar una estadística
@@ -331,7 +329,10 @@ public class Ejercicio003 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int numProductos;
         String nombreProducto;

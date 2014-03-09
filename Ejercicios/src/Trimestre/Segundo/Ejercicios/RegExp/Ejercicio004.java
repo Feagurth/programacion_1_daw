@@ -16,7 +16,10 @@
  */
 package Trimestre.Segundo.Ejercicios.RegExp;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+import Utiles.Validaciones;
+import Utiles.Varios;
 
 /**
  * Una farmacia desea almacenar sus productos en una estructura de registros.
@@ -33,26 +36,196 @@ public class Ejercicio004 {
     /**
      * Clase que nos permite almacenar los datos de un registro de medicamentos
      */
-    public class RegistroMedicamento {
+    public static class Medicamento {
 
-        String codigo;
-        String nombre;
-        String descripcion;
-        String laboratorio;
-        String proveedor;
-        float precio;
-        float porcentajeIVA;
-        int stock;
-        int diaFechaCaducidad;
-        int mesFechaCaducidad;
-        int anyoFechaCaducidad;
+        /**
+         * Enumerador para almacenar la descripción del medicamento
+         */
+        public enum TipoDescripcion {
 
-        public RegistroMedicamento(String codigo, String nombre,
-                String descripcion, String laboratorio, String proveedor,
+            /**
+             * Valor para analgésico
+             */
+            analgesico(0), 
+            /**
+             * Valor para antibiótico
+             */
+            antibiotico(1), 
+            /**
+             * Valor para antipirético
+             */
+            antipiretico(2);
+            private final int value;
+            private String cadena;
+
+            /**
+             * Constructor del enumerador
+             *
+             * @param value
+             */
+            private TipoDescripcion(int value) {
+                this.value = value;
+
+                switch (value) {
+                    case 0:
+                        this.cadena = "Analgésico";
+                        break;
+                    case 1:
+                        this.cadena = "Antibiotico";
+                        break;
+                    case 2:
+                        this.cadena = "Antipirético";
+                        break;
+                }
+            }
+
+            /**
+             * Devuelve el valor numérico del tipo de medicamento
+             *
+             * @return El valor numérico del tipo de medicamento
+             */
+            public int getValue() {
+                return value;
+            }
+
+            /**
+             * Método que nos devuelve la cadena representativa de la
+             * descripción
+             *
+             * @return
+             */
+            public String getString() {
+                return cadena;
+            }
+        };
+
+        // Variables de la clase
+        private final String codigo;
+        private final String nombre;
+        private final TipoDescripcion descripcion;
+        private final String laboratorio;
+        private final String proveedor;
+        private final float precio;
+        private final float porcentajeIVA;
+        private final int stock;
+        private final int diaFechaCaducidad;
+        private final int mesFechaCaducidad;
+        private final int anyoFechaCaducidad;
+
+        /**
+         * Método para recuperar el código de un medicamento
+         * @return El código del medicamento
+         */
+        public String getCodigo() {
+            return codigo;
+        }
+
+        /**
+         * Método para recuperar el nombre de un medicamento
+         * @return El nombre del medicamento
+         */
+        public String getNombre() {
+            return nombre;
+        }
+
+        /**
+         * Método para recuperar la descripción de un medicamento
+         * @return La descripción del medicamento
+         */
+        public TipoDescripcion getDescripcion() {
+            return descripcion;
+        }
+
+        /**
+         * Método para recuperar el laboratorio de un medicamento
+         * @return El laboratorio del medicamento
+         */
+        public String getLaboratorio() {
+            return laboratorio;
+        }
+
+        /**
+         * Método para recuperar el proveedor de un medicamento
+         * @return El proveedor del medicamento
+         */
+        public String getProveedor() {
+            return proveedor;
+        }
+
+        /**
+         * Método para recuperar el precio de un medicamento
+         * @return El precio del medicamento
+         */
+        public float getPrecio() {
+            return precio;
+        }
+
+        /**
+         * Método para recuperar el porcentaje de IVA de un medicamento
+         * @return El porcentaje de IVA de un medicamento
+         */
+        public float getPorcentajeIVA() {
+            return porcentajeIVA;
+        }
+
+        /**
+         * Método para recuperar el stock de un medicamento
+         * @return El stock de un medicamento
+         */
+        public int getStock() {
+            return stock;
+        }
+
+        /**
+         * Método para recuperar el día de la fecha de caducidad de un 
+         * medicamento
+         * @return El día de la fecha de caducidad de un medicamento
+         */
+        public int getDiaFechaCaducidad() {
+            return diaFechaCaducidad;
+        }
+
+        /**
+         * Método para recuperar el mes de la fecha de caducidad de un 
+         * medicamento
+         * @return El mes de la fecha de caducidad de un medicamento
+         */
+        public int getMesFechaCaducidad() {
+            return mesFechaCaducidad;
+        }
+
+        /**
+         * Método para recuperar el año de de la fecha de caducidad de un 
+         * medicamento
+         * @return El año de la fecha de caducidad de un medicamento
+         */
+        public int getAnyoFechaCaducidad() {
+            return anyoFechaCaducidad;
+        }
+
+        /**
+         * Constructor de la clase
+         *
+         * @param codigo Código del medicamento
+         * @param nombre Nombre del medicamento
+         * @param descripcion Descripción del medicamento
+         * @param laboratorio Laboratorio del medicamento
+         * @param proveedor Proveedor del medicamento
+         * @param precio Precio del medicamento
+         * @param porcentajeIVA Procentaje de IVA del medicamento
+         * @param stock Stock del medicamento
+         * @param diaFechaCaducidad Dia de la fecha de caducidad del medicamento
+         * @param mesFechaCaducidad Mes de la fecha de caducidad del medicamento
+         * @param anyoFechaCaducidad Año de la fecha de caducidad del
+         * medicamento
+         */
+        public Medicamento(String codigo, String nombre,
+                TipoDescripcion descripcion, String laboratorio, String proveedor,
                 float precio, float porcentajeIVA, int stock,
                 int diaFechaCaducidad, int mesFechaCaducidad,
                 int anyoFechaCaducidad) {
 
+            // Asginamos los parametros a las variables de instancia
             this.codigo = codigo;
             this.nombre = nombre;
             this.descripcion = descripcion;
@@ -66,197 +239,138 @@ public class Ejercicio004 {
             this.anyoFechaCaducidad = anyoFechaCaducidad;
         }
 
+        @Override
+        /**
+         * Método para devolver una representación en cadena de los valores que
+         * contiene el objeto
+         */
+        public String toString() {
+            return String.format("Medicamento{codigo=%s, nombre=%s, "
+                    + "descripcion=%s, laboratorio=%s, proveedor=%s, precio=%s, "
+                    + "porcentajeIVA=%s, stock=%s, diaFechaCaducidad=%s, "
+                    + "mesFechaCaducidad=%s, anyoFechaCaducidad=%s}",
+                    codigo, nombre, descripcion.getString(), laboratorio, proveedor, precio,
+                    porcentajeIVA, stock, diaFechaCaducidad, mesFechaCaducidad,
+                    anyoFechaCaducidad);
+
+        }
+
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir datos por teclado al usuario
-        Scanner entrada = new Scanner(System.in);
-        String numMedicamentos;
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
-        do {
-            System.out.print("Introduzca el número de medicamentos a procesar: ");
-            numMedicamentos = entrada.nextLine();
-        } while (!validacion(numMedicamentos, "[0-9]+") || Integer.parseInt(numMedicamentos) <= 0);
+        // Variables
+        int numMedicamentos;
+
+        // Pedimos el número de medicamentos a procesar
+        numMedicamentos = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de medicamentos a procesar");
 
         // Creamos un array de objetos para almacenar los registros de 
         // los medicamentos
-        RegistroMedicamento[] registros = new RegistroMedicamento[Integer.parseInt(numMedicamentos)];
+        Medicamento[] registros = new Medicamento[numMedicamentos];
 
+        // Variables para almacenar los valores que se pedirán al usuario
         int contador = -1;
         String codigo;
         String nombre;
-        String descripcion;
+        int descripcion;
         String laboratorio;
         String proveedor;
-        String precio;
-        String porcentajeIVA;
-        String stock;
-        int diaFechaCaducidad = 0;
-        int mesFechaCaducidad = 0;
-        int anyoFechaCaducidad = 0;
-        String fechaCaducidad;
+        float precio;
+        float porcentajeIVA;
+        int stock;
+        int diaFechaCaducidad;
+        int mesFechaCaducidad;
+        int anyoFechaCaducidad;
 
-        for (RegistroMedicamento registro : registros) {
+        // Iteramos tantasveces como número de medicamentos hayamos especificados
+        for (Medicamento registro : registros) {
             contador++;
 
-            // Reiniciamos el objeto encargado de leer datos desde el teclado
-            entrada = new Scanner(System.in);
+            // Pedimos los datos necesarios al usaurio
+            codigo = PeticionDatos.pedirCadena("Introduzca el código del medicamento");
 
-            // Pedimos los datos necesarios al usaurio validando las entradas
-            // con expresiones regulares
+            nombre = PeticionDatos.pedirCadena("Introduzca el nombre del medicamento");
+
+            // Usaremos la variable proveedor para almacenar temporalmente estos valores
+            // y ahorrarons declarar una variable más pues no contendrá los valores
+            // mucho tiempo
+            laboratorio = "";
+
+            // Iteramos por todos los valores del enumerador para mostrar las posibilidades de selección
+            // al usuario
+            for (Medicamento.TipoDescripcion tipoDescripcion : Medicamento.TipoDescripcion.values()) {
+
+                laboratorio += "[" + tipoDescripcion.getValue() + "] " + tipoDescripcion.getString() + "\n";
+            }
+
+            // Pedimos que introduzca la descripción del medicamento, y limitaremos
+            // los valores de entrada desde el cero hasta un valor menos del tamaño
+            // de los valores del enumerador, para que, de este modo se puedan
+            // elegir todos los tipos de descripciones
+            laboratorio += "\nIntroduzca la descripción del medicamento";
+            descripcion = PeticionDatos.pedirEnteroRango(laboratorio, 0, Medicamento.TipoDescripcion.values().length - 1);
+
+            laboratorio = PeticionDatos.pedirCadena("Introduzca el laboratorio del medicamento");
+
+            proveedor = PeticionDatos.pedirCadena("Introduzca el proveedor del medicamento");
+
+            precio = (float) PeticionDatos.pedirRealPositivo("Introduzca el precio del medicamento");
+
+            porcentajeIVA = (float) PeticionDatos.pedirRealPositivo("Introduzca el porcentaje del IVA del medicamento");
+
+            stock = PeticionDatos.pedirEnteroPositivo("Introduzca el stock del medicamento");
+
+            // Iteramos preguntando los datos de la fechas hasta introducir una válida           
             do {
-                System.out.print("Introduzca el código del medicamento: ");
-                codigo = entrada.nextLine();
-            } while (!validacion(codigo, "[a-zA-Z0-9]+"));
+                diaFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el dia de caducidad del medicamento");
 
-            do {
-                System.out.print("Introduzca el nombre del medicamento: ");
-                nombre = entrada.nextLine();
-            } while (!validacion(nombre, "[a-zA-Z0-9 ]+"));
+                mesFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el mes de caducidad del medicamento");
 
-            do {
-                System.out.print("Introduzca la descripción del medicamento: ");
-                descripcion = entrada.nextLine();
-            } while (!validacion(descripcion, "[a-zA-Z0-9 ]+"));
-
-            do {
-                System.out.print("Introduzca el laboratorio del medicamento: ");
-                laboratorio = entrada.nextLine();
-            } while (!validacion(laboratorio, "[a-zA-Z0-9 ]+"));
-
-            do {
-                System.out.print("Introduzca el proveedor del medicamento: ");
-                proveedor = entrada.nextLine();
-            } while (!validacion(proveedor, "[a-zA-Z0-9 ]+"));
-
-            do {
-                System.out.print("Introduzca el precio del medicamento: ");
-                precio = entrada.nextLine();
-            } while (!validacion(String.valueOf(precio), "[0-9]*\\,[0-9]+|[0-9]*\\.[0-9]+|[0-9]+"));
-
-            precio = precio.replace(",", ".");
-
-            do {
-                System.out.print("Introduzca el porcentaje del IVA del medicamento: ");
-                porcentajeIVA = entrada.nextLine();
-            } while (!validacion(String.valueOf(porcentajeIVA), "[0-9]*\\,[0-9]+|[0-9]*\\.[0-9]+|[0-9]+"));
-
-            porcentajeIVA = porcentajeIVA.replace(",", ".");
-
-            do {
-                System.out.print("Introduzca el stock del medicamento: ");
-                stock = entrada.nextLine();
-            } while (!validacion(String.valueOf(stock), "[0-9]+"));
-
-            // Definimos una variable control para poder validar la fecha 
-            // introducida por teclado
-            boolean control = false;
-
-            // Iteraremos mientras control sea falso
-            do {
-                System.out.print("Introduzca la fecha de caducidad del medicamento [dd/mm/yyy]: ");
-                fechaCaducidad = entrada.nextLine();
-
-                // Validamos la fecha con expresiones regulares
-                if (validacion(String.valueOf(fechaCaducidad), "[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
-                    
-                    // Partimos la cadena en cachos usando el carácter / 
-                    // como punto de partición
-                    diaFechaCaducidad = Integer.parseInt(fechaCaducidad.split("/")[0]);
-                    mesFechaCaducidad = Integer.parseInt(fechaCaducidad.split("/")[1]);
-                    anyoFechaCaducidad = Integer.parseInt(fechaCaducidad.split("/")[2]);
-
-                    // Validamos si la fechas es válida
-                    if (EsFechaValida(diaFechaCaducidad, mesFechaCaducidad, anyoFechaCaducidad)) {
-                        // Si es válida cambiamos el valor de la variable de 
-                        // control
-                        control = true;
-                    }
-                }
-
-            } while (!control);
+                anyoFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el año de caducidad del medicamento");
+            } while (!Validaciones.validarDato(
+                    diaFechaCaducidad + "/" + mesFechaCaducidad + "/" + anyoFechaCaducidad,
+                    Validaciones.TipoValidacion.FECHA_DDMMAAAA));
 
             // Cremaos el objeto con los datos que ha introducido el usuario
-            registro = new RegistroMedicamento(codigo, nombre, descripcion,
-                    laboratorio, proveedor, Float.parseFloat(precio),
-                    Float.parseFloat(porcentajeIVA), Integer.parseInt(stock),
+            registro = new Medicamento(codigo, nombre, Medicamento.TipoDescripcion.values()[descripcion],
+                    laboratorio, proveedor, precio, porcentajeIVA, stock,
                     diaFechaCaducidad, mesFechaCaducidad, anyoFechaCaducidad);
 
             // Asignamos el objeto con los datos introducidos en el array de 
             // registros
             registros[contador] = registro;
-
         }
 
-        // Iteramos por los registros para mostrar los resultados
-        for (RegistroMedicamento registro : registros) {
+        String resultado;
 
-            System.out.println("Datos del medicamento " + registro.nombre);
-            System.out.println("Código: " + registro.codigo);
-            System.out.println("Nombre: " + registro.nombre);
-            System.out.println("Descripción: " + registro.descripcion);
-            System.out.println("Laboratorio: " + registro.laboratorio);
-            System.out.println("Proveedor: " + registro.proveedor);
-            System.out.println("Precio: " + registro.precio);
-            System.out.println("% IVA: " + registro.porcentajeIVA);
-            System.out.println("Stock: " + registro.stock);
-            System.out.println("Fecha Caducidad: " + registro.diaFechaCaducidad
-                    + "/" + registro.mesFechaCaducidad + "/"
-                    + registro.anyoFechaCaducidad);
+        // Iteramos mostrando los resultados
+        for (Medicamento registro : registros) {
+
+            resultado = "Datos del medicamento " + registro.nombre;
+            resultado += "\nCódigo: " + registro.codigo;
+            resultado += "\nNombre: " + registro.nombre;
+            resultado += "\nDescripción: " + registro.descripcion.getString();
+            resultado += "\nLaboratorio: " + registro.laboratorio;
+            resultado += "\nProveedor: " + registro.proveedor;
+            resultado += "\nPrecio: " + registro.precio;
+            resultado += "\nIVA: " + registro.porcentajeIVA;
+            resultado += "\nStock: " + registro.stock;
+            resultado += "\nFecha Caducidad: " + 
+                    Varios.fechaDDMMAAAA(registro.diaFechaCaducidad, 
+                            registro.mesFechaCaducidad, 
+                            registro.anyoFechaCaducidad, 
+                            "/");
+                    
+
+            // Mostramos el resultado del método toString de la clase
+            resultado += "\n";
+            resultado += "\n" + registro.toString();
+
+            Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
         }
     }
-
-    /**
-     * Función para validar entradas con expresiones regulares
-     *
-     * @param cadena Cadena de texto a validar
-     * @param patron Patrón de validación
-     * @return Verdadero si la cadena es validada correctamente y falso en caso
-     * contrario
-     */
-    private boolean validacion(String cadena, String patron) {
-
-        return cadena.matches(patron);
-    }
-
-    /**
-     * Función para comprobar si una fecha es válida
-     *
-     * @param numdia Día
-     * @param numMes Mes
-     * @param numAnyo Año
-     * @return Resultado de la comprobación
-     */
-    private boolean EsFechaValida(int numdia, int numMes, int numAnyo) {
-        int[] dias = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-        // Comprobamos que los valores introducidos sean positivos
-        if (numdia <= 0 || numMes <= 0 || numAnyo < 0 || numMes > 12) {
-            return false;
-        } else {
-            // Verificamos si el año es bisiesto y si es febrero
-            if (EsAnyoBisiesto(numAnyo) && numMes == 2) {
-                // Devolvemos la comprobación de si el dia está en los dias
-                // que tiene el mes mas 1 dia por ser bisiesto Febrero                
-                return numdia <= (dias[numMes - 1] + 1);
-            } else {
-                // Devolvemos la comprobación de si el dia está en los dias
-                // que tiene el mes
-                return numdia <= dias[numMes - 1];
-            }
-        }
-    }
-
-    /**
-     * Función para comprobar si un año es bisiesto
-     *
-     * @param anyo Año a comprobar
-     * @return Resultado de la comprobación
-     */
-    private boolean EsAnyoBisiesto(int anyo) {
-        // Para verificar si un año es bisiesto se tiene que verificar esta
-        // condición
-        return (anyo % 4 == 0) && ((anyo % 100 != 0) || (anyo % 400 == 0));
-    }
-
 }

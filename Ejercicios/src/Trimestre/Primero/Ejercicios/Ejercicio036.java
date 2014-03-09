@@ -31,18 +31,15 @@ public class Ejercicio036 {
      */
     public void ejercicio(){
     
-        // Objeto para pedir y mostrar datos al usuarios
-        Mensajes msg = new Mensajes();
-                
         // Variables
         int numero1, numero2;
         boolean control = false;
         
         // Petición de datos
-        numero1 = Integer.parseInt(msg.PedirDatos("Introduzca el primer número",
+        numero1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el primer número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        numero2 = Integer.parseInt(msg.PedirDatos("Introduzca el segundo número",
+        numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el segundo número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));        
 
         // Comprobamos si un numero es divisible por el otro y viceversa
@@ -57,12 +54,12 @@ public class Ejercicio036 {
         // Muestra de resultados dependiendo del valor de control
         if(control)
         {
-            msg.MostrarMensaje("Uno es divisor de el otro", 
+            Mensajes.mostrarMensaje("Uno es divisor de el otro", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            msg.MostrarMensaje("Uno no es divisor de el otro", 
+            Mensajes.mostrarMensaje("Uno no es divisor de el otro", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);        
         }
     }

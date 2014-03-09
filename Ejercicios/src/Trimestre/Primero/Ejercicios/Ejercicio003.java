@@ -32,9 +32,6 @@ public class Ejercicio003
     */    
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();        
-        
         // Variables
         int numero = 3;
         String cadena = "";
@@ -48,6 +45,6 @@ public class Ejercicio003
         }       
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

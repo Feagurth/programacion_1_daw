@@ -30,9 +30,6 @@ public class Ejercicio037 {
      * Ejercicio principal
      */
     public void ejercicio(){
-        // Objeto para la toma y muestra de resultados para el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int opcion;
         String mensaje;
@@ -48,7 +45,7 @@ public class Ejercicio037 {
         do
         {
             // Petición de datos
-            opcion = Integer.parseInt(msg.PedirDatos(mensaje, 
+            opcion = Integer.parseInt(Mensajes.pedirDatos(mensaje, 
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
             
             // Se realiza un método u otro dependiendo de la opción elegida
@@ -73,14 +70,11 @@ public class Ejercicio037 {
      */
     private void ejercicio_desde(){
 
-        // Objeto para la toma y muestra de resultados para el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int suma = 0, numero;
         
         // Petición de datos
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Iteramos
@@ -89,7 +83,7 @@ public class Ejercicio037 {
         }
     
         // Muestra de resultados
-        msg.MostrarMensaje("La suma es: " + suma, 
+        Mensajes.mostrarMensaje("La suma es: " + suma, 
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);
     }
     
@@ -98,14 +92,11 @@ public class Ejercicio037 {
      */
     private void ejercicio_mientras(){
 
-        // Objeto para la toma y muestra de resultados para el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int suma = 0, numero, contador= 1;
         
         // Petición de datos
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Iteramos
@@ -115,7 +106,7 @@ public class Ejercicio037 {
         }
     
         // Muestra de resultados
-        msg.MostrarMensaje("La suma es: " + suma, 
+        Mensajes.mostrarMensaje("La suma es: " + suma, 
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);
     }    
     
@@ -124,14 +115,11 @@ public class Ejercicio037 {
      */
     private void ejercicio_repetir(){
 
-        // Objeto para la toma y muestra de resultados para el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int suma = 0, numero, contador = 0;
         
         // Petición de datos
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Iteramos
@@ -141,7 +129,7 @@ public class Ejercicio037 {
         }while(contador != numero);
     
         // Muestra de resultados
-        msg.MostrarMensaje("La suma es: " + suma, 
+        Mensajes.mostrarMensaje("La suma es: " + suma, 
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);
     }           
 }

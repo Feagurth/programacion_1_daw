@@ -53,51 +53,98 @@ public class Ejercicio001 {
         private float totalAnual;
         private float comision;
 
-        // Getters y Setters
+        /**
+         * Método para retornar el DNI de un vendedor
+         * @return El valor del DNI
+         */
         public String getDNI() {
             return DNI;
         }
 
+        /**
+         * Método para asignar un DNI a un vendedor
+         * @param DNI El valor del DNI
+         */
         public void setDNI(String DNI) {
             this.DNI = DNI;
         }
 
+        /**
+         * Método para retornar el nombre de un vendedor
+         * @return El nombre del vendedor
+         */
         public String getNombre() {
             return nombre;
         }
 
+        /**
+         * Método para asignar un nombre a un vendedor
+         * @param nombre El valor del nombre
+         */
         public void setNombre(String nombre) {
             this.nombre = nombre;
         }
 
+        /**
+         * Método para retornar los apellidos de un vendedor
+         * @return Los apellidos del vendedor
+         */
         public String getApellidos() {
             return apellidos;
         }
 
+        /**
+         * Método para asignar los apellidos de un vendedor
+         * @param apellidos El valor de los apellidos
+         */
         public void setApellidos(String apellidos) {
             this.apellidos = apellidos;
         }
 
+        /**
+         * Método para retornar la zona de trabajo de un vendedor
+         * @return La zona de trabajo del vendedor
+         */
         public String getZona() {
             return zona;
         }
 
+        /**
+         * Método para asignar la zona de trabajo de un vendedor
+         * @param zona El valor de la zona de trabajo
+         */
         public void setZona(String zona) {
             this.zona = zona;
         }
 
+        /**
+         * Método para recuperar el sueldo base de un vendedor
+         * @return El sueldo base del vendedor
+         */
         public float getSueldoBase() {
             return sueldoBase;
         }
 
+        /**
+         * Método para asignar el sueldo base de un vendedor
+         * @param sueldoBase El valor del sueldo base de vendedor
+         */
         public void setSueldoBase(float sueldoBase) {
             this.sueldoBase = sueldoBase;
         }
 
+        /**
+         * Método para recuperar las ventas por meses de un vendedor
+         * @return Las ventas por meses de un vendedor
+         */
         public float[] getVentasMes() {
             return ventasMes;
         }
 
+        /**
+         * Método para asignar las ventas por meses de un vendedor
+         * @param ventasMes El valor de las ventas por meses de un vendedor
+         */
         public void setVentasMes(float[] ventasMes) {
             this.ventasMes = ventasMes;
         }
@@ -207,7 +254,10 @@ public class Ejercicio001 {
 
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Array con los nombres de los meses del año
         final String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril",
@@ -290,7 +340,7 @@ public class Ejercicio001 {
 
             resultado += "\nToString: " + vendedor.toString();
 
-            Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+            Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
             
         }
     }

@@ -26,26 +26,26 @@ import Utiles.Mensajes;
  */
 public class Ejercicio051 {
 
-    public void Ejercicio() {
-
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         int limiteSuperior, limiteInferior;
 
         // Petición de datos al usuario
-        limiteInferior = Integer.parseInt(mensaje.PedirDatos("Introduzca un "
+        limiteInferior = Integer.parseInt(Mensajes.pedirDatos("Introduzca un "
                 + "valor para el límite inferior", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
 
-        limiteSuperior = Integer.parseInt(mensaje.PedirDatos("Introduzca un "
+        limiteSuperior = Integer.parseInt(Mensajes.pedirDatos("Introduzca un "
                 + "valor para el límite superior", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
 
         // Muestra de resultados al usuario
-        mensaje.MostrarMensaje("El número es " + 
-                calcularEntero(limiteInferior, limiteSuperior), 
+        Mensajes.mostrarMensaje("El número es "
+                + calcularEntero(limiteInferior, limiteSuperior),
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 
@@ -64,5 +64,5 @@ public class Ejercicio051 {
         } else {
             return limiteSup;
         }
-    }    
+    }
 }

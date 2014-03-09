@@ -39,11 +39,22 @@ public class Ejercicio002 {
     public static class Medicamento {
 
         /**
-         * Enumerador para almacenar la descrioción del medicamento
+         * Enumerador para almacenar la descripción del medicamento
          */
         public enum TipoDescripcion {
 
-            analgesico(0), antibiotico(1), antipiretico(2);
+            /**
+             * Valor para analgésico
+             */
+            analgesico(0), 
+            /**
+             * Valor para antibiótico
+             */
+            antibiotico(1), 
+            /**
+             * Valor para antipirético
+             */
+            antipiretico(2);
             private final int value;
             private String cadena;
 
@@ -101,47 +112,93 @@ public class Ejercicio002 {
         private final int mesFechaCaducidad;
         private final int anyoFechaCaducidad;
 
-        // Getters
+        /**
+         * Método para recuperar el código de un medicamento
+         * @return El código del medicamento
+         */
         public String getCodigo() {
             return codigo;
         }
 
+        /**
+         * Método para recuperar el nombre de un medicamento
+         * @return El nombre del medicamento
+         */
         public String getNombre() {
             return nombre;
         }
 
+        /**
+         * Método para recuperar la descripción de un medicamento
+         * @return La descripción del medicamento
+         */
         public TipoDescripcion getDescripcion() {
             return descripcion;
         }
 
+        /**
+         * Método para recuperar el laboratorio de un medicamento
+         * @return El laboratorio del medicamento
+         */
         public String getLaboratorio() {
             return laboratorio;
         }
 
+        /**
+         * Método para recuperar el proveedor de un medicamento
+         * @return El proveedor del medicamento
+         */
         public String getProveedor() {
             return proveedor;
         }
 
+        /**
+         * Método para recuperar el precio de un medicamento
+         * @return El precio del medicamento
+         */
         public float getPrecio() {
             return precio;
         }
 
+        /**
+         * Método para recuperar el porcentaje de IVA de un medicamento
+         * @return El porcentaje de IVA de un medicamento
+         */
         public float getPorcentajeIVA() {
             return porcentajeIVA;
         }
 
+        /**
+         * Método para recuperar el stock de un medicamento
+         * @return El stock de un medicamento
+         */
         public int getStock() {
             return stock;
         }
 
+        /**
+         * Método para recuperar el día de la fecha de caducidad de un 
+         * medicamento
+         * @return El día de la fecha de caducidad de un medicamento
+         */
         public int getDiaFechaCaducidad() {
             return diaFechaCaducidad;
         }
 
+        /**
+         * Método para recuperar el mes de la fecha de caducidad de un 
+         * medicamento
+         * @return El mes de la fecha de caducidad de un medicamento
+         */
         public int getMesFechaCaducidad() {
             return mesFechaCaducidad;
         }
 
+        /**
+         * Método para recuperar el año de de la fecha de caducidad de un 
+         * medicamento
+         * @return El año de la fecha de caducidad de un medicamento
+         */
         public int getAnyoFechaCaducidad() {
             return anyoFechaCaducidad;
         }
@@ -200,7 +257,10 @@ public class Ejercicio002 {
 
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         int numMedicamentos;
@@ -218,7 +278,7 @@ public class Ejercicio002 {
         String nombre;
         int descripcion;
         String laboratorio;
-        String proveedor = "";
+        String proveedor;
         float precio;
         float porcentajeIVA;
         int stock;
@@ -310,7 +370,7 @@ public class Ejercicio002 {
             resultado += "\n";
             resultado += "\n" + registro.toString();
 
-            Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+            Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
         }
     }
 }

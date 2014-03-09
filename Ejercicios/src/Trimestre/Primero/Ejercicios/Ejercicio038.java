@@ -32,21 +32,18 @@ public class Ejercicio038 {
      */
     public void ejercicio(){
     
-        // Objeto para petición y muestra de datos para el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int  numero1, numero2;
         char operacion;
         
         // Petición de datos
-        numero1 = Integer.parseInt(msg.PedirDatos("Introduzca el primer número", 
+        numero1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el primer número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        numero2 = Integer.parseInt(msg.PedirDatos("Introduzca el segundo número", 
+        numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el segundo número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        operacion = msg.PedirDatos("Introduzca la operación [S/R]", 
+        operacion = Mensajes.pedirDatos("Introduzca la operación [S/R]", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA).toUpperCase().charAt(0);
 
         // Realizamos una operación u otra dependiendo de la opción seleccionada
@@ -59,7 +56,7 @@ public class Ejercicio038 {
         }
         
         // Muestra de resultados
-        msg.MostrarMensaje("El resultado es: " + numero1, 
+        Mensajes.mostrarMensaje("El resultado es: " + numero1, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);        
     }
 }

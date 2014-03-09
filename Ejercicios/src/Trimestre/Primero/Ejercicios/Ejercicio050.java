@@ -64,41 +64,41 @@ public class Ejercicio050 {
         return f3;
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
-        int limite, resultado, crearSerie;
+        int limite, crearSerie;
         String resultadoSerie = "";
 
         do {
             // Petición de datos al usuario
-            crearSerie = Integer.parseInt(mensaje.PedirDatos("1.- Calcular un "
+            crearSerie = Integer.parseInt(Mensajes.pedirDatos("1.- Calcular un "
                     + "valor de la serie de Fibonacci\n2.- Calcular una serie de "
                     + "n valores", "Petición de Datos",
                     Mensajes.TipoMensaje.PREGUNTA));
         } while (crearSerie != 1 && crearSerie != 2);
 
         // Petición de datos al usuario
-        limite = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor",
+        limite = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         if (crearSerie == 1) {
             // Muestra de resultados al usuario
-            mensaje.MostrarMensaje("El valor para " + limite + " es : " + 
-                    String.valueOf(Fibonacci(limite)), "Resultado",
+            Mensajes.mostrarMensaje("El valor para " + limite + " es : "
+                    + String.valueOf(Fibonacci(limite)), "Resultado",
                     Mensajes.TipoMensaje.INFORMACION);
         } else {
-            
+
             // Iteramos calculando los valores y añadiendolos a la variable
             for (int i = 0; i <= limite; i++) {
-                resultadoSerie += ((i ==0) ? "" : ", ") + String.valueOf(Fibonacci(i));
-                        
+                resultadoSerie += ((i == 0) ? "" : ", ") + String.valueOf(Fibonacci(i));
+
             }
 
             // Muestra de resultados al usuario
-            mensaje.MostrarMensaje("La serie es: " + resultadoSerie, 
+            Mensajes.mostrarMensaje("La serie es: " + resultadoSerie,
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
     }

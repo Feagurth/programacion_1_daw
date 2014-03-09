@@ -14,38 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
  * Calcule la suma de los 50 primeros números enteros
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio041 {
-    
-    public void Ejercicio()
-    {
-    
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-        
+
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int suma, contador;
-        
+
         // Inicializamos la variable
         suma = 0;
-        
+
         // Iteramos de 1 a 50
-        for ( contador= 1; contador <= 50; contador++) {
-                // Sumamos los valores de forma consecutiva
-                suma = suma + contador;            
+        for (contador = 1; contador <= 50; contador++) {
+            // Sumamos los valores de forma consecutiva
+            suma = suma + contador;
         }
-        
-        
+
         // Mostramos resultado al usuario
-        mensaje.MostrarMensaje("El resultado es: " + suma, "Resultado", 
+        Mensajes.mostrarMensaje("El resultado es: " + suma, "Resultado",
                 Mensajes.TipoMensaje.INFORMACION);
     }
 }

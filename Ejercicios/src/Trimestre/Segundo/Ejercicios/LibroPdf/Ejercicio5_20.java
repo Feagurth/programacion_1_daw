@@ -26,7 +26,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio5_20 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Variables
         int iteraciones;

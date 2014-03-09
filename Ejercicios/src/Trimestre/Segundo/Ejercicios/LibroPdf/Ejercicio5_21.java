@@ -25,7 +25,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio5_21 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables 
         int tamanyo;
         String resultado = "";

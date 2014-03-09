@@ -38,7 +38,10 @@ import java.awt.Dimension;
  */
 public class Ejercicio006 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables 
         int tamanyo;
         String resultado = "";
@@ -63,7 +66,7 @@ public class Ejercicio006 {
         }
 
         // Muestra de resultados
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(30, 30));
     }
 }

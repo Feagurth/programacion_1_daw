@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
- * Realizar un procedimiento que permita intercambiar el contenido de 
- * dos variables.
+ * Realizar un procedimiento que permita intercambiar el contenido de dos
+ * variables.
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio049 {
@@ -35,14 +35,15 @@ public class Ejercicio049 {
          * Variable x
          */
         private final int x;
-        
+
         /**
          * Variable y
          */
         private final int y;
-        
+
         /**
          * Constructor de la clase
+         *
          * @param x Valor de x
          * @param y Valor de y
          */
@@ -53,6 +54,7 @@ public class Ejercicio049 {
 
         /**
          * Devuelve el valor de X
+         *
          * @return El valor de X
          */
         public int getX() {
@@ -61,55 +63,53 @@ public class Ejercicio049 {
 
         /**
          * Devuelve el valor de Y
+         *
          * @return El valor de Y
          */
         public int getY() {
             return y;
         }
-    }    
-    
-    public void Ejercicio()
-    {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
+    }
 
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int a, b;
-        
+
         // Petición de datos al usuario
-        a = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor para "
-                + "la primera variable", "Petición de Datos", 
+        a = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
+                + "la primera variable", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
-        
-        b = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor para "
-                + "la segunda variable", "Petición de Datos", 
-                Mensajes.TipoMensaje.PREGUNTA));        
-        
+
+        b = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor para "
+                + "la segunda variable", "Petición de Datos",
+                Mensajes.TipoMensaje.PREGUNTA));
+
         // Creamos un objeto resultado y llamamos a la función
         Resultado result = intercambiar(a, b);
-        
+
         // Mostramos el resultado
-        mensaje.MostrarMensaje("La primera variable es " + result.getX() + 
-                " y la segunda es " + result.getY(), "Resultado", 
+        Mensajes.mostrarMensaje("La primera variable es " + result.getX()
+                + " y la segunda es " + result.getY(), "Resultado",
                 Mensajes.TipoMensaje.INFORMACION);
 
-    }    
-  
+    }
+
     /**
      * Función que permite cambiar los valores de dos variables
+     *
      * @param x Valor de la variable x
      * @param y Valor de la variable y
      * @return Devuelve la clase resultado con los valores intercambiados
      */
-    private Resultado intercambiar(int x, int y)
-    {
+    private Resultado intercambiar(int x, int y) {
         // Creamos el objeto con los valores intercambiados
         Resultado resultado = new Resultado(y, x);
 
         // Devolvemos el resultado
         return resultado;
     }
-    
-        
 
 }

@@ -28,6 +28,9 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio005 {
 
+    /**
+     * Clase para trabajar con tablas de multiplicar
+     */
     public class TablaDeMultiplicar {
 
         // Variable de instancia
@@ -62,22 +65,28 @@ public class Ejercicio005 {
 
         }
 
+        /**
+         * Método que nos permite generar tablas de multiplicar
+         * @param numMaximo Número máximo de operadores
+         * @return Una cadena con la tabla de multiplicar formateada
+         */
         public String generarTabla(int numMaximo) {
-            // Creamos un acumulador y lo inicializamos
-            String resultado = "";
+            StringBuilder buf = new StringBuilder();
 
             // Iteramos creando el resultado
             for (int i = 0; i <= numMaximo; i++) {
-                resultado += i + " x " + this.numero
-                        + " = " + (i * this.numero) + "\n";
+                buf.append(i).append(" x ").append(this.numero).append(" = ").append(i * this.numero).append("\n");
             }
 
             // Devolvemos el resultado
-            return resultado;
+            return buf.toString();
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Petición de datos al usuario
         int numero = PeticionDatos.pedirEntero("Introduzca el número cuya tabla "
@@ -97,7 +106,7 @@ public class Ejercicio005 {
                 + "consola [s/n]", new String[]{"s", "n"}).equals("s")) {
             System.out.println(tabla.generarTabla(iteraciones));
         } else {
-            Mensajes.MostrarMensaje(tabla.generarTabla(iteraciones), "Resultado",
+            Mensajes.mostrarMensaje(tabla.generarTabla(iteraciones), "Resultado",
                     Mensajes.TipoMensaje.INFORMACION, false);
         }
     }

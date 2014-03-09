@@ -31,24 +31,21 @@ public class Ejercicio009 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();        
-        
         // Variables
         int a, b, c, d;
         String cadena;
 
         // Petición de datos al usuario
-        a = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para a", "Pedir datos", 
+        a = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor numérico para a", "Pedir datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
   
-        b = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para b", "Pedir datos", 
+        b = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor numérico para b", "Pedir datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
   
-        c = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para c", "Pedir datos", 
+        c = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor numérico para c", "Pedir datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
   
-        d = Integer.parseInt(msg.PedirDatos("Introduzca el valor numérico para d", "Pedir datos", 
+        d = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor numérico para d", "Pedir datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
   
         // Creación de la cadena de resultados
@@ -57,7 +54,7 @@ public class Ejercicio009 {
         cadena += "Su media arimética es: " + ((a + b + c + d)/(float)4);
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     
     }
 }

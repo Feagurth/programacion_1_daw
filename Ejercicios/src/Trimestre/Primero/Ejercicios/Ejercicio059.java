@@ -112,17 +112,17 @@ public class Ejercicio059 {
         return resultado;
     }
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variables
         int ciclos;
         float pi;
         
         // Petición de datos al usuario
-        ciclos = Integer.parseInt(mensaje.PedirDatos("Introduzca el número "
+        ciclos = Integer.parseInt(Mensajes.pedirDatos("Introduzca el número "
                 + "de ciclos", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
                 
@@ -130,21 +130,21 @@ public class Ejercicio059 {
         pi = CalcularPiMetodoA(ciclos);
         
         // Mostramos el resultado
-        mensaje.MostrarMensaje("Metodo A - Pi: " + pi, "Resultado", 
+        Mensajes.mostrarMensaje("Metodo A - Pi: " + pi, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);    
         
         // Ejecutamos el segundo método
         pi = CalcularPiMetodoB(ciclos);
         
         // Mostramos el resultado
-        mensaje.MostrarMensaje("Metodo B - Pi: " + pi, "Resultado", 
+        Mensajes.mostrarMensaje("Metodo B - Pi: " + pi, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);    
         
         // Ejecutamos el tercer  método
         pi = CalcularPiMetodoC(ciclos);
         
         // Mostramos el resultado
-        mensaje.MostrarMensaje("Metodo C - Pi: " + pi, "Resultado", 
+        Mensajes.mostrarMensaje("Metodo C - Pi: " + pi, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);            
         
     }    

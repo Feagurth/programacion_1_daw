@@ -279,7 +279,10 @@ public class Ejercicio009 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         String resultado = "";
 
@@ -319,6 +322,6 @@ public class Ejercicio009 {
         resultado += "\nArea : " + ico.getArea();
         resultado += "\nVolumen : " + ico.getVolumen();
 
-        Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }

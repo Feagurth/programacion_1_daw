@@ -25,7 +25,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio4_30 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Cadena para almacenar el texto introducido por el usuario
         String cadena;

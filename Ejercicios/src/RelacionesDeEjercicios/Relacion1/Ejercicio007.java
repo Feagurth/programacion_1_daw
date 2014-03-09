@@ -28,7 +28,10 @@ import java.util.Random;
  */
 public class Ejercicio007 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Array para almacenar los elementos
         char[][] array = new char[10][10];
@@ -76,7 +79,7 @@ public class Ejercicio007 {
         resultado += "\nCantidad de vocales: " + vocales;
         resultado += "\nCantidad de consonantes: " + consonantes;
         
-        Mensajes.MostrarMensaje(resultado,"Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        Mensajes.mostrarMensaje(resultado,"Resultado", Mensajes.TipoMensaje.INFORMACION, true);
         
     }
 }

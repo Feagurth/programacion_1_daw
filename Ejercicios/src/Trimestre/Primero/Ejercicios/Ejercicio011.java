@@ -30,18 +30,15 @@ public class Ejercicio011 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero;
 
         // Petición de datos al usuario
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", "Petición de datos", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("El cuadrado del número es: " + numero * numero, 
+        Mensajes.mostrarMensaje("El cuadrado del número es: " + numero * numero, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
     }

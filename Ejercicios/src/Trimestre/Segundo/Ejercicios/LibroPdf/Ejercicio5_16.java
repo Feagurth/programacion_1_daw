@@ -26,7 +26,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio5_16 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Variable para almacenar el numero elegido por el usuario
         int numero;

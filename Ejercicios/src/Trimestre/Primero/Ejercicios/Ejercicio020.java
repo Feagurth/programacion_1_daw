@@ -30,9 +30,6 @@ public class Ejercicio020 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int entero, contador = 0, numPositivos = 0;
 
@@ -41,7 +38,7 @@ public class Ejercicio020 {
             contador++;
             
             // Petición de datos al usuario
-            entero = Integer.parseInt(msg.PedirDatos("Introduzca un número", 
+            entero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
             
             // Comprobamos si el número es maypr de cero
@@ -53,7 +50,7 @@ public class Ejercicio020 {
         } while (contador < 500);
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje("La cantidad de números positivos es: " + numPositivos, 
+        Mensajes.mostrarMensaje("La cantidad de números positivos es: " + numPositivos, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
         
     

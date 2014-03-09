@@ -27,7 +27,10 @@ public class Ejercicio4_23 {
 
     int numMayor1, numMayor2;
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar la cantidad de números a comparar
         int tamanyoArray;
 

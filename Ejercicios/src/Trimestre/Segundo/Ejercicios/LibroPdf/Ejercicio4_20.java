@@ -70,7 +70,10 @@ public class Ejercicio4_20 {
         }
     }
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Objeto para calcular el sueldo de un empleado
         Salario sueldo;

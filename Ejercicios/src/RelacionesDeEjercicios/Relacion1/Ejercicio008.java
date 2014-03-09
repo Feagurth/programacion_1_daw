@@ -27,6 +27,9 @@ import java.util.Random;
  */
 public class Ejercicio008 {
 
+    /**
+     * Clase para trabajar con distribuciones bidimensionales
+     */
     public class DistribucionBidimensional {
 
         // Variable para almacena el tamaño de la distribución
@@ -222,6 +225,9 @@ public class Ejercicio008 {
                     case 2:
                         resultado += "y";
                         break;
+                    default:
+                        resultado += "";
+                        break;
                 }
                 for (int j = 0; j < distribucion[0].length; j++) {
                     switch (i) {
@@ -234,6 +240,10 @@ public class Ejercicio008 {
                         case 2:
                             resultado += "\t" + distribucion[1][j];
                             break;
+                        default:
+                            resultado += "";
+                            break;
+
                     }
                 }
                 resultado += "\n";
@@ -338,18 +348,21 @@ public class Ejercicio008 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         double valorAltura;
         String resultado = "";
         String generacionAleatoria;
-        
+
         generacionAleatoria = PeticionDatos.pedirConsentimiento("¿Desea generar "
-                + "datos aleatorios? [s/n]", new String[]{"s","n"});
+                + "datos aleatorios? [s/n]", new String[]{"s", "n"});
 
         // Creamos el objeto con el que trabajemos
-        DistribucionBidimensional distro = new DistribucionBidimensional(8, 
+        DistribucionBidimensional distro = new DistribucionBidimensional(8,
                 (generacionAleatoria.matches("s")));
 
         // Imprimimos la matriz
@@ -379,14 +392,14 @@ public class Ejercicio008 {
         resultado += "\n" + distro.interpretarCoeficienteCorrelacion();
 
         // Mostramos los resultados
-        Mensajes.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
 
         // Petición de datos al usuario
         valorAltura = PeticionDatos.pedirRealPositivoNoCero("Introduzca "
                 + "una altura en centímetros para estimar el peso");
 
         // Calculamos el peso estimado basdo en la inforamción introducida por el usuario
-        Mensajes.MostrarMensaje("El peso estimado es: "
+        Mensajes.mostrarMensaje("El peso estimado es: "
                 + distro.estimarPeso(valorAltura),
                 Mensajes.TipoMensaje.INFORMACION);
     }

@@ -32,7 +32,7 @@ public class Ejercicio061 {
      * divisores
      * @return La suma de los divisores del número
      */
-    private int SumaDivisores(int valorNumero)
+    private int sumaDivisores(int valorNumero)
     {
         // Variables
         int resultado = 0;
@@ -64,40 +64,40 @@ public class Ejercicio061 {
      * @param valorNumero2 Valor del segundo número
      * @return Si los números son amigos
      */
-    private boolean SonAmigos(int valorNumero1, int valorNumero2)
+    private boolean sonAmigos(int valorNumero1, int valorNumero2)
     {
         // Verificamos si los numeros son amigos y devolvemos el valor
         // correspondiente
-        return SumaDivisores(valorNumero1) == valorNumero2 &&
-                SumaDivisores(valorNumero2) == valorNumero1;
+        return sumaDivisores(valorNumero1) == valorNumero2 &&
+                sumaDivisores(valorNumero2) == valorNumero1;
     }
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
-
        // Variables
        int numero1, numero2;
               
        // Petición de datos al usuario
-       numero1 = Integer.parseInt(mensaje.PedirDatos("Introduzca el valor del "
+       numero1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor del "
                + "primer número", "Petición de Datos", 
                Mensajes.TipoMensaje.PREGUNTA));
 
-       numero2 = Integer.parseInt(mensaje.PedirDatos("Introduzca el valor del "
+       numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor del "
                + "segundo número", "Petición de Datos", 
                Mensajes.TipoMensaje.PREGUNTA));
        
        // Verificamos si son amigo y mostramos el resultado correspondiente
-       if(SonAmigos(numero1, numero2))
+       if(sonAmigos(numero1, numero2))
        {
-           mensaje.MostrarMensaje(numero1 + " y " + numero2 + " son amigos", 
+           Mensajes.mostrarMensaje(numero1 + " y " + numero2 + " son amigos", 
                    "Resultado", Mensajes.TipoMensaje.INFORMACION);
        }
        else
        {
-           mensaje.MostrarMensaje(numero1 + " y " + numero2 + " no son amigos", 
+           Mensajes.mostrarMensaje(numero1 + " y " + numero2 + " no son amigos", 
                    "Resultado", Mensajes.TipoMensaje.INFORMACION);       
        }
     }    

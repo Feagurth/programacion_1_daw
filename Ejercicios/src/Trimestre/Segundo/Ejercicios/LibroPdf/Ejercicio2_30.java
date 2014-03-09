@@ -34,8 +34,12 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio2_30 {
 
-    public void Ejercicio() {
-// Declaración de variables
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
+        
+        // Declaración de variables
         int numero, cociente;
         String resultado = "";
         

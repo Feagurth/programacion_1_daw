@@ -42,7 +42,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio003 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar los datos introducidos por el usuario
         String numero;
 
@@ -53,14 +56,14 @@ public class Ejercicio003 {
         numero = codificar(numero);
 
         // Mostramos en número codificado
-        Mensajes.MostrarMensaje("El valor codificado es: " + numero, 
+        Mensajes.mostrarMensaje("El valor codificado es: " + numero, 
                 Mensajes.TipoMensaje.INFORMACION);
 
         // Descodificamos el numero codificado
         numero = decodificar(numero);
 
         // Mostramos el número descodificado
-        Mensajes.MostrarMensaje("El valor descodificado es: " + numero, 
+        Mensajes.mostrarMensaje("El valor descodificado es: " + numero, 
                 Mensajes.TipoMensaje.INFORMACION);
     }
 

@@ -44,11 +44,10 @@ import java.util.Random;
  */
 public class Ejercicio009 {
 
+    /**
+     * Clase para trabajar con distribuciones estadísticas
+     */
     public class DistribucionEstadistica {
-
-        // Variable para almacenar el tamaño del vector donde se almacenarán
-        // los datos de la distribución estadística
-        private int tamanyo;
 
         // Array para almacenar los datos de la distribución estadística
         int[] arrayDatos;
@@ -333,7 +332,10 @@ public class Ejercicio009 {
 
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Cantidad de datos a generar aleatoriamente
         int numDatos;
@@ -415,7 +417,7 @@ public class Ejercicio009 {
         resultado += "\nDesviación Típica: " + distro.desviacionTipica();
 
         
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(40, 40));
     }
 }

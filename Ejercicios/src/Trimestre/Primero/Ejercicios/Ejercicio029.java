@@ -31,14 +31,11 @@ public class Ejercicio029 {
      */
     public void ejercicio()
     {
-        // Objeto para petición y muestra de información al usuario
-        Mensajes msg = new Mensajes();
-        
         int numeroNotas, contador = 0;
         double nota, notaMedia = 0;
 
         // Petición de datos al usuario
-        numeroNotas = Integer.parseInt(msg.PedirDatos("Número de notas a "
+        numeroNotas = Integer.parseInt(Mensajes.pedirDatos("Número de notas a "
                 + "introducir", "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
         
@@ -48,14 +45,14 @@ public class Ejercicio029 {
             contador += 1;
             
             // Petición de datos al usuario
-            nota = Double.parseDouble(msg.PedirDatos("Introduzca la nota", 
+            nota = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota", 
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
             
             notaMedia += nota;
         }
 
         // Escribir resultados
-        msg.MostrarMensaje("La media del alumno es: " + (notaMedia / numeroNotas), 
+        Mensajes.mostrarMensaje("La media del alumno es: " + (notaMedia / numeroNotas), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);        
     }
 }

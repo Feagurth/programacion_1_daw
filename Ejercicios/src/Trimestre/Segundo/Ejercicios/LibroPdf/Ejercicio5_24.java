@@ -25,11 +25,11 @@ import Utiles.Mensajes;
  */
 public class Ejercicio5_24 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
-        // Objeto para mostrar y pedir datos al usuarios
-        Mensajes mensaje = new Mensajes();
-        
         // Variables
         final int alto = 9;
         String resultado = "";
@@ -63,6 +63,6 @@ public class Ejercicio5_24 {
         // Mostramos resultados. Se muestra tb por consola pues en un 
         // cuando de mensaje no queda bien alineado
         System.out.print(resultado);
-        mensaje.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

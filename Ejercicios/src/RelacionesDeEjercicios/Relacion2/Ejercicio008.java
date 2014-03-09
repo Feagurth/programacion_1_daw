@@ -46,7 +46,10 @@ import Utiles.Mensajes;
  */
 public class Ejercicio008 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         apartadoA();
         System.out.println();
@@ -75,7 +78,7 @@ public class Ejercicio008 {
         
         // Mostramos el resultado por consola y por mensaje emergente
         System.out.println(resultado);
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true);            
     }
 
@@ -97,7 +100,7 @@ public class Ejercicio008 {
 
         // Mostramos el resultado por consola y por mensaje emergente
         System.out.println(resultado);
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true);        
     }
     
@@ -124,7 +127,7 @@ public class Ejercicio008 {
         }
         // Mostramos el resultado por consola y por mensaje emergente
         System.out.println(resultado);
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true);        
     }
     
@@ -152,7 +155,7 @@ public class Ejercicio008 {
         
         // Mostramos el resultado por consola y por mensaje emergente
         System.out.println(resultado);
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true);
     }        
 }

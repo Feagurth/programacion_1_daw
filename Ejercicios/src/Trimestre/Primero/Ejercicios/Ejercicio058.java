@@ -34,29 +34,31 @@ public class Ejercicio058 {
      */
     public void ejercicio()
     {
-        // Objeto para mostrar y tomar datos del usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         Double base, resultado;
         int exponente;
         
         // Petición de datos al usuario
-        base = Double.parseDouble(msg.PedirDatos("Introduzca un valor para la base", 
+        base = Double.parseDouble(Mensajes.pedirDatos("Introduzca un valor para la base", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        exponente = Integer.parseInt(msg.PedirDatos("Introduzca un entero para "
+        exponente = Integer.parseInt(Mensajes.pedirDatos("Introduzca un entero para "
                 + "el exponente", "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Ejecutamos la función de potenciación
         resultado = Potencia(base, exponente);
         
         // Mostramos el resultado
-        msg.MostrarMensaje("El resultado es: " + resultado, "Resultado", 
+        Mensajes.mostrarMensaje("El resultado es: " + resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);        
     }
     
-    
+    /**
+     * Método para calcular la potencia de dos números mediante iteraciones
+     * @param valorBase Valor de la base
+     * @param valorExponente Valor del exponente
+     * @return Resultado de la operación
+     */
     private Double Potencia(Double valorBase, int valorExponente)
     {
         Double resultado;

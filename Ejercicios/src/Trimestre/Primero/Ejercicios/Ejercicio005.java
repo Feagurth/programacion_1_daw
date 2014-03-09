@@ -39,9 +39,6 @@ public class Ejercicio005
         // Variable con el valor del recorrido
         int RECORRIDO = 1500;
 
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         String nombre;
         int minutos, segundos;
@@ -49,14 +46,14 @@ public class Ejercicio005
         String cadena;
 
         // Petición de datos al usuario
-        nombre = msg.PedirDatos("Introduzca el nombre del corredor", 
+        nombre = Mensajes.pedirDatos("Introduzca el nombre del corredor", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
-        minutos = Integer.parseInt(msg.PedirDatos("Introduzca "
+        minutos = Integer.parseInt(Mensajes.pedirDatos("Introduzca "
                 + "la cantidad de minutos para el corredor", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        segundos = Integer.parseInt(msg.PedirDatos("Introduzca la cantidad de "
+        segundos = Integer.parseInt(Mensajes.pedirDatos("Introduzca la cantidad de "
                 + "segundos para el corredor: ", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
@@ -72,18 +69,18 @@ public class Ejercicio005
             
             cadena += "Su media es de : " + media;
             
-            msg.MostrarMensaje(cadena, "Resultados", 
+            Mensajes.mostrarMensaje(cadena, "Resultados", 
                     Mensajes.TipoMensaje.INFORMACION);
             
         // Petición de datos al usuario
-        nombre = msg.PedirDatos("Introduzca el nombre del corredor", 
+        nombre = Mensajes.pedirDatos("Introduzca el nombre del corredor", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
-        minutos = Integer.parseInt(msg.PedirDatos("Introduzca "
+        minutos = Integer.parseInt(Mensajes.pedirDatos("Introduzca "
                 + "la cantidad de minutos para el corredor", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        segundos = Integer.parseInt(msg.PedirDatos("Introduzca la cantidad de "
+        segundos = Integer.parseInt(Mensajes.pedirDatos("Introduzca la cantidad de "
                 + "segundos para el corredor: ", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));        }
     }

@@ -31,14 +31,21 @@ import java.util.Scanner;
  */
 public class Ejercicio3_12 {
 
-    // La clase Cuenta con un constructor para
-    // inicializar la variable de instancia saldo.
+    /**
+     * La clase Cuenta con un constructor para inicializar la variable de 
+     * instancia saldo.
+     */
     public class Cuenta {
 
         // variable de instancia que almacena el saldo
         private double saldo;
 
-        // Metodo para sacar dinero de la cuenta.
+        /**
+         * Método para sacar dinero de la cuenta.
+         * @param cantidadRetirar Cantidad de dinero a retirar
+         * @return Verdadero si es posible retirar el dinero, falso si no es 
+         * posible
+         */
         public boolean cargar(double cantidadRetirar) {
             if (cantidadRetirar < saldo) {
                 saldo = saldo - cantidadRetirar;
@@ -49,7 +56,10 @@ public class Ejercicio3_12 {
             }
         }
 
-        // constructor
+        /**
+         * Constructor de la clase Cuenta
+         * @param saldoInicial Saldo inicial de la cuenta
+         */
         public Cuenta(double saldoInicial) {
             // valida que saldoInicial sea mayor que 0.0;
             // si no lo es, saldo se inicializa con el valor predeterminado 0.0
@@ -58,12 +68,18 @@ public class Ejercicio3_12 {
             }
         } // fin del constructor de Cuenta
 
-        // abona (suma) un monto a la cuenta
+        /**
+         * abona (suma) un monto a la cuenta
+         * @param monto Cantidad a abonar
+         */
         public void abonar(double monto) {
             saldo = saldo + monto; // suma el monto al saldo
         } // fin del método abonar
 
-        // devuelve el saldo de la cuenta
+        /**
+         * Devuelve el saldo de la cuenta
+         * @return El saldo de la cuenta
+         */
         public double obtenerSaldo() {
             return saldo; // proporciona el valor de saldo al método que hizo la llamada
         } // fin del método obtenerSaldo
@@ -95,7 +111,10 @@ public class Ejercicio3_12 {
         return Integer.parseInt(seleccion);
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         Cuenta cuenta = new Cuenta(50.00); // crea objeto Cuenta
         int seleccion;

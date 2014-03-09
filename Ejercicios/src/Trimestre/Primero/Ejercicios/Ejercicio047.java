@@ -14,44 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
- * Se desea leer desde teclado una serie de números hasta que aparezca 
- * alguno menor que 1000.
+ * Se desea leer desde teclado una serie de números hasta que aparezca alguno
+ * menor que 1000.
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio047 {
-    
-    public void Ejercicio()
-    {
-        
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-    
+
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         double numero;
-        
+
         // Petición de datos al usuario
-        numero = Double.parseDouble(mensaje.PedirDatos("Introduzca un número", 
+        numero = Double.parseDouble(Mensajes.pedirDatos("Introduzca un número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        
         // Verificamos si el número es menor de 1000
-        while (numero >=  1000) 
-        {            
+        while (numero >= 1000) {
             // Pedimos un número nuevo
-            numero = Double.parseDouble(mensaje.PedirDatos("Introduzca un "
-                    + "número", "Petición de Datos", 
-                    Mensajes.TipoMensaje.PREGUNTA));            
+            numero = Double.parseDouble(Mensajes.pedirDatos("Introduzca un "
+                    + "número", "Petición de Datos",
+                    Mensajes.TipoMensaje.PREGUNTA));
         }
-        
+
         // Mostramos en número
-        mensaje.MostrarMensaje(String.valueOf(numero), "Información", 
-                Mensajes.TipoMensaje.INFORMACION);     
+        Mensajes.mostrarMensaje(String.valueOf(numero), "Información",
+                Mensajes.TipoMensaje.INFORMACION);
     }
-    
+
 }

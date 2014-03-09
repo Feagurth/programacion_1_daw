@@ -34,15 +34,12 @@ public class Ejercicio010 {
         // Valor en kgs de una libra
         final double LIBRA = 0.453592;
     
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         double peso;
         String resultado;
                 
         // Petición de datos al usuario
-        peso = Double.parseDouble(msg.PedirDatos("Introduzca el peso en libras", 
+        peso = Double.parseDouble(Mensajes.pedirDatos("Introduzca el peso en libras", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Calculamos el peso en kgs
@@ -53,7 +50,7 @@ public class Ejercicio010 {
         resultado += "El peso en gramos es: " + peso * 1000;
         
         // Muestra de resultados al usuario
-        msg.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
     
 }

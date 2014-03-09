@@ -38,9 +38,6 @@ public class Ejercicio021 {
         // Precio del artículo
         final int VALOR_ARTICULO = 500;
       
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         int unidades;
         double precioTotal;
 
@@ -48,7 +45,7 @@ public class Ejercicio021 {
         do 
         {            
             // Petición de datos al usuario
-            unidades = Integer.parseInt(msg.PedirDatos(
+            unidades = Integer.parseInt(Mensajes.pedirDatos(
                     "Introduzca el número de unidades a comprar", 
                     "Introduzca datos", Mensajes.TipoMensaje.PREGUNTA));
             
@@ -68,7 +65,7 @@ public class Ejercicio021 {
         }
         
         // Muestra de resulados al usuario
-        msg.MostrarMensaje("El precio total es: " + precioTotal, 
+        Mensajes.mostrarMensaje("El precio total es: " + precioTotal, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
     }

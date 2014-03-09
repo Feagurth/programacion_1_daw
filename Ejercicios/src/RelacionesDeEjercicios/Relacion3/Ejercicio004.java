@@ -96,7 +96,10 @@ public class Ejercicio004 {
         return resultado;
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int tamanyoX, tamanyoY;
         String resultado;
@@ -129,6 +132,6 @@ public class Ejercicio004 {
         resultado += mostrarMatriz(matrizFinal);
 
         // Mostramos los resultados
-        Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }

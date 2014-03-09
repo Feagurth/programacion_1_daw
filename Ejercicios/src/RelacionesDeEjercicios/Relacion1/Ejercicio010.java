@@ -35,7 +35,7 @@ public class Ejercicio010 {
      * @param valor número del que se quiere calcular el factorial
      * @return Valor del factorial
      */
-    private BigInteger Factorial(double valor) {
+    private BigInteger factorial(double valor) {
 
         // Creamos un objeto BigInteger para generar el factorial
         // debido a su mayor precisión respecto a tipos primitivos
@@ -60,7 +60,7 @@ public class Ejercicio010 {
      * @param valor Valor del exponente de e
      * @return Resultado de e^ valor
      */
-    private BigDecimal CalcularEx(double valor, int iteraciones, int precision) {
+    private BigDecimal calcularEx(double valor, int iteraciones, int precision) {
 
         // Variables para contener los diversos valores intermedios 
         // de las operaciones
@@ -72,7 +72,7 @@ public class Ejercicio010 {
 
         // Iteramos tantas veces como se nos haya especificado
         for (int i = 0; i < iteraciones; i++) {
-            apoyo = tempValor.pow(i).divide(new BigDecimal(Factorial(i)),
+            apoyo = tempValor.pow(i).divide(new BigDecimal(factorial(i)),
                     precision, BigDecimal.ROUND_HALF_UP);
 
             // Sumamos el valor al resultado
@@ -89,7 +89,7 @@ public class Ejercicio010 {
      * @param valor Valor al que calcular el coseno
      * @return Coseno del valor
      */
-    private BigDecimal CalcularCoseno(double valor, int iteraciones, int precision) {
+    private BigDecimal calcularCoseno(double valor, int iteraciones, int precision) {
                 // Variables
         int signo = -1;
         BigDecimal resultado = BigDecimal.ONE;
@@ -103,7 +103,7 @@ public class Ejercicio010 {
 
             // Realizamos las operaciones
             apoyo = tempValor.pow(((2 * i)));
-            apoyo = apoyo.divide(new BigDecimal(Factorial(((2 * i)))),
+            apoyo = apoyo.divide(new BigDecimal(factorial(((2 * i)))),
                     precision, BigDecimal.ROUND_HALF_DOWN);
 
             apoyo = apoyo.multiply(BigDecimal.valueOf(signo));
@@ -124,7 +124,7 @@ public class Ejercicio010 {
      * @param valor Valor al que calcular el seno
      * @return Seno del valor
      */
-    private BigDecimal CalcularSeno(double valor, int iteraciones, int precision) {
+    private BigDecimal calcularSeno(double valor, int iteraciones, int precision) {
         // Variables
         int signo = -1;
         BigDecimal resultado = BigDecimal.valueOf(valor);
@@ -138,7 +138,7 @@ public class Ejercicio010 {
 
             // Realizamos las operaciones
             apoyo = tempValor.pow(((2 * i) + 1));
-            apoyo = apoyo.divide(new BigDecimal(Factorial(((2 * i) + 1))),
+            apoyo = apoyo.divide(new BigDecimal(factorial(((2 * i) + 1))),
                     precision, BigDecimal.ROUND_HALF_DOWN);
 
             apoyo = apoyo.multiply(BigDecimal.valueOf(signo));
@@ -153,7 +153,10 @@ public class Ejercicio010 {
         return resultado;
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         Double numero;
@@ -169,8 +172,8 @@ public class Ejercicio010 {
                 + "de e^x");
         
         // Mostramos resultados
-        Mensajes.MostrarMensaje("e^" + numero + ": " + 
-                CalcularEx(numero, iterac, 30).doubleValue(), 
+        Mensajes.mostrarMensaje("e^" + numero + ": " + 
+                calcularEx(numero, iterac, 30).doubleValue(), 
                 Mensajes.TipoMensaje.INFORMACION);
         
         // Pedimos al usuario el angulo para calcular el seno
@@ -178,8 +181,8 @@ public class Ejercicio010 {
                 + "del angulo en grados para calcular sen(x)"));
 
         // Mostramos el resultado
-        Mensajes.MostrarMensaje("Sen(" + numero + "): " + 
-                CalcularSeno(numero, iterac, 30).doubleValue(), 
+        Mensajes.mostrarMensaje("Sen(" + numero + "): " + 
+                calcularSeno(numero, iterac, 30).doubleValue(), 
                 Mensajes.TipoMensaje.INFORMACION);
 
         // Pedimos al usuario el angulo para calcular el coseno
@@ -187,8 +190,8 @@ public class Ejercicio010 {
                 + "del angulo en grados para calcular cos(x)"));
 
         // Mostramos el resultado
-        Mensajes.MostrarMensaje("Cos(" + numero + "): " + 
-                CalcularCoseno(numero, iterac, 30).doubleValue(), 
+        Mensajes.mostrarMensaje("Cos(" + numero + "): " + 
+                calcularCoseno(numero, iterac, 30).doubleValue(), 
                 Mensajes.TipoMensaje.INFORMACION);
     }
 }

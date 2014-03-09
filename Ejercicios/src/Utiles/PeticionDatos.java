@@ -16,6 +16,8 @@
  */
 package Utiles;
 
+import java.util.Locale;
+
 /**
  * Clase para la petición y validación y control de datos al usuario
  *
@@ -35,7 +37,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -45,13 +47,22 @@ public class PeticionDatos {
         return Integer.valueOf(resultado);
     }
 
+    /**
+     * Método que nos permite pedir y validar un número entero comprendido entre
+     * 2 números como valores máximo y mínimo
+     * @param cadena El mensaje que se le mostrará al usuario para pedir los 
+     * datos
+     * @param valorMinimo Valor mínimo que debe tener el dato introducido
+     * @param valorMaximo Valor máximo que debe tener el dato introducido
+     * @return El valor numérico validado
+     */
     public static int pedirEnteroRango(String cadena, int valorMinimo, int valorMaximo) {
         // Variable
         String resultado;
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -75,7 +86,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -97,7 +108,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -120,7 +131,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -143,7 +154,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -166,7 +177,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -192,7 +203,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -215,7 +226,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -240,7 +251,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -264,7 +275,7 @@ public class PeticionDatos {
 
         do {
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -287,7 +298,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido            
@@ -311,7 +322,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido                        
@@ -335,7 +346,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido                        
@@ -364,12 +375,12 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Comprobamos que la cadena contenga alguno de los valores de
             // consentimiento almacenados en el array
             for (String valor : valores) {
-                if (resultado.toLowerCase().contains(valor.toLowerCase())) {
+                if (resultado.toLowerCase(new Locale("es")).contains(valor.toLowerCase(new Locale("es")))) {
                     validado = true;
                     break;
                 }
@@ -401,7 +412,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -424,7 +435,7 @@ public class PeticionDatos {
         do {
 
             // Realizamos una petición de datos la usuario
-            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido

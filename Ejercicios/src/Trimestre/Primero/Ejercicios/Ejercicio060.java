@@ -49,19 +49,19 @@ public class Ejercicio060 {
         return suma;
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int numero;
 
         // Petición de datos al usuario
-        numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un número",
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         // Mostrar resultados
-        mensaje.MostrarMensaje("La suma de los divisores de " + numero + " es: "
+        Mensajes.mostrarMensaje("La suma de los divisores de " + numero + " es: "
                 + SumaDivisores(numero), "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 

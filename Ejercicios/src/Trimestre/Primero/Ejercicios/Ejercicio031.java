@@ -29,14 +29,11 @@ public class Ejercicio031 {
      * Ejercicio principal
      */
     public void ejercicio(){
-        // Objeto para mosrtar y tomar datos al usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero, contador = 1;
         
         // Petición de datos al usuario
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número", "Petición de Datos", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", "Petición de Datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
         
         // Iteramos mientras la potencia de 2 del contador sea distinta 
@@ -61,7 +58,7 @@ public class Ejercicio031 {
         }
         
         // Muestra de resultados
-        msg.MostrarMensaje("La raiz cuadrada de " + numero + " es: " + contador,
+        Mensajes.mostrarMensaje("La raiz cuadrada de " + numero + " es: " + contador,
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }  
 }

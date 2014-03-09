@@ -31,20 +31,17 @@ public class Ejercicio034 {
      */
     public void ejercicio()
     {
-        // Objeto para toma y muestra de datos con el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int dia, mes, anyo, apoyoBisiesto;
     
         // Lectura de datos
-        dia = Integer.parseInt(msg.PedirDatos("Introduzca el día", 
+        dia = Integer.parseInt(Mensajes.pedirDatos("Introduzca el día", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        mes  = Integer.parseInt(msg.PedirDatos("Introduzca el mes", 
+        mes  = Integer.parseInt(Mensajes.pedirDatos("Introduzca el mes", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        anyo = Integer.parseInt(msg.PedirDatos("Introduzca el año", 
+        anyo = Integer.parseInt(Mensajes.pedirDatos("Introduzca el año", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         
@@ -115,7 +112,7 @@ public class Ejercicio034 {
         }
         
         // Muestra de resultados
-        msg.MostrarMensaje("El dia siguiente es " + dia + "/" + mes + "/" + anyo, 
+        Mensajes.mostrarMensaje("El dia siguiente es " + dia + "/" + mes + "/" + anyo, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);                      
     }    
 }

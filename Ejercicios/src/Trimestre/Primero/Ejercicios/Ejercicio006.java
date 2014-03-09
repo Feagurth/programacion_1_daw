@@ -31,13 +31,10 @@ public class Ejercicio006 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-
         // Variables
         int numero, contador = 2;
 
-        numero = Integer.parseInt(msg.PedirDatos("Introduzca un número para saber si es primo", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número para saber si es primo", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
 
@@ -53,12 +50,12 @@ public class Ejercicio006 {
         // es así, no lo es
         if (contador < numero) 
         {
-            msg.MostrarMensaje(numero + " no es primo", 
+            Mensajes.mostrarMensaje(numero + " no es primo", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            msg.MostrarMensaje(numero + " es primo", 
+            Mensajes.mostrarMensaje(numero + " es primo", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }        
     }

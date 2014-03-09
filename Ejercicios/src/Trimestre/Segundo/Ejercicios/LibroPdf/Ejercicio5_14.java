@@ -25,7 +25,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio5_14 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         double monto; // Monto depositado al final de cada año
         double principal; // monto inicial antes de los intereses
 

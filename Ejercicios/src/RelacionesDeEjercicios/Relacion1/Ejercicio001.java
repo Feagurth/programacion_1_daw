@@ -17,7 +17,6 @@
 package RelacionesDeEjercicios.Relacion1;
 
 import Utiles.Mensajes;
-import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -36,6 +35,9 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio001 {
 
+    /**
+     * Clase para contener los datos de una persona
+     */
     public static class Persona {
 
         /**
@@ -43,7 +45,22 @@ public class Ejercicio001 {
          */
         public enum NivelEstudios {
 
-            ESO(1), BACHILLERATO(2), UNIVERSIDAD(3), DOCTORADO(4);
+            /**
+             * Valor para estudios ESO
+             */
+            ESO(1), 
+            /**
+             * Valor para estudios BACHILLERATO
+             */
+            BACHILLERATO(2), 
+            /**
+             * Valor para estudios UNIVERSIDAD
+             */
+            UNIVERSIDAD(3), 
+            /**
+             * Valor para estudios DOCTORADO
+             */
+            DOCTORADO(4);
             private final int value;
 
             /**
@@ -112,7 +129,7 @@ public class Ejercicio001 {
          *
          * @return
          */
-        public boolean EsMayorDeEdad() {
+        public boolean esMayorDeEdad() {
             // Devolvemos verdadero si la edad es mayor o igual a 18
             return this.edad >= 18;
         }
@@ -123,7 +140,7 @@ public class Ejercicio001 {
          *
          * @return Verdadero si lo es, falso si no lo es
          */
-        public boolean EsJASP() {
+        public boolean esJASP() {
             boolean resultado = false;
 
             // Verificamos si se complen las condiciones
@@ -145,7 +162,7 @@ public class Ejercicio001 {
          *
          * @return Una cadena que contiene la información de la persona
          */
-        public String MostrarDatosPersona() {
+        public String mostrarDatosPersona() {
             // Variable para almacenar el resutlado
             String resultado = "";
 
@@ -175,7 +192,10 @@ public class Ejercicio001 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Petición de datos al usuario
         String nombre = PeticionDatos.pedirCadena("Nombre");
 
@@ -183,7 +203,7 @@ public class Ejercicio001 {
 
         float sueldo = (float) PeticionDatos.pedirRealPositivoNoCero("Sueldo");
 
-        Persona.NivelEstudios nivelEstudios = null;
+        Persona.NivelEstudios nivelEstudios;
 
         switch (PeticionDatos.pedirEnteroRango("Nivel de Estudios [ESO(1), "
                 + "BACHILLERATO(2), UNIVERSIDAD(3), DOCTORADO(4)]", 1, 4)) {
@@ -199,6 +219,9 @@ public class Ejercicio001 {
             case 4:
                 nivelEstudios = Persona.NivelEstudios.DOCTORADO;
                 break;
+            default:
+                nivelEstudios = null;
+                break;
         }
 
         // Creamos el objeto
@@ -206,19 +229,19 @@ public class Ejercicio001 {
                 nombre, edad, sueldo, nivelEstudios);
 
         // Mostramos la información
-        Mensajes.MostrarMensaje("Datos de la persona:\n " + 
-                persona.MostrarDatosPersona(), "Resultados", 
+        Mensajes.mostrarMensaje("Datos de la persona:\n " + 
+                persona.mostrarDatosPersona(), "Resultados", 
                 Mensajes.TipoMensaje.INFORMACION);
 
         // Mostramos si es mayor de edad
-        Mensajes.MostrarMensaje((persona.EsMayorDeEdad()? 
+        Mensajes.mostrarMensaje((persona.esMayorDeEdad()? 
                 "Es mayor de edad" : 
                 "No es mayor de edad"), 
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);        
         
         
         // Mostramos si es JASP
-        Mensajes.MostrarMensaje((persona.EsJASP()? 
+        Mensajes.mostrarMensaje((persona.esJASP()? 
                 "Es JASP" : 
                 "No es JASP"), 
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);        

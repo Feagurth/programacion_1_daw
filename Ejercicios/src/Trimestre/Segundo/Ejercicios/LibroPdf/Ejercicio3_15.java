@@ -43,27 +43,50 @@ public class Ejercicio3_15 {
         private int mes;
         private int anyo;
 
-        // Getters & Setters
+        /**
+         * Método para recuperar el día
+         * @return El día
+         */
         public int getDia() {
             return dia;
         }
 
+        /**
+         * Método para asignar el día
+         * @param dia El día
+         */
         public void setDia(int dia) {
             this.dia = dia;
         }
 
+        /**
+         * Método para recuperar el mes
+         * @return El mes
+         */
         public int getMes() {
             return mes;
         }
 
+        /**
+         * Método para asignar el mes
+         * @param mes El mes
+         */
         public void setMes(int mes) {
             this.mes = mes;
         }
 
+        /**
+         * Método para recuperar el año
+         * @return El año
+         */
         public int getAnyo() {
             return anyo;
         }
 
+        /**
+         * Método para asignar el año
+         * @param anyo El año
+         */
         public void setAnyo(int anyo) {
             this.anyo = anyo;
         }
@@ -91,7 +114,10 @@ public class Ejercicio3_15 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Definimos las variables
         int dia, mes, anyo;

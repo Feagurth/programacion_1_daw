@@ -33,9 +33,6 @@ public class Ejercicio033 {
      */
     public void ejercicio()
     {
-        // Objeto para petición y muestra de datos al usuario
-        Mensajes msg = new Mensajes();
-        
         // Constante que define el precio por km
         final double PRECIO_KM = 2.5;
         
@@ -44,11 +41,11 @@ public class Ejercicio033 {
         double precio;
                 
         // Petición de datos al usuario
-        diasEstancia = Integer.parseInt(msg.PedirDatos("Introduzca el número "
+        diasEstancia = Integer.parseInt(Mensajes.pedirDatos("Introduzca el número "
                 + "de días de estancia", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA));
 
-        numKms = Integer.parseInt(msg.PedirDatos("Introduzca la distancia"
+        numKms = Integer.parseInt(Mensajes.pedirDatos("Introduzca la distancia"
                 + " en kms", "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Calculamos el precio del billete
@@ -62,7 +59,7 @@ public class Ejercicio033 {
         }
         
         // Muestra de resultados
-        msg.MostrarMensaje("El precio del billete es: " + precio, 
+        Mensajes.mostrarMensaje("El precio del billete es: " + precio, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);    
     }
     

@@ -26,17 +26,17 @@ import Utiles.Mensajes;
  */
 public class Ejercicio044 {
 
-    public void Ejercicio() {
-
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         double numero, suma = 0;
         int contador = 0;
 
         // Petición de datos al usuario
-        numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor. -999 para salir",
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor. -999 para salir",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         // Verificamos la condición
@@ -46,18 +46,18 @@ public class Ejercicio044 {
             suma = suma + numero;
             
             // Petición de datos al usuario
-            numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor. -999 para salir",
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor. -999 para salir",
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         }
 
         // Verificamos si se han introducido números y mostramos resultados
         if (contador != 0) {
-            mensaje.MostrarMensaje("El resultado es: "
+            Mensajes.mostrarMensaje("El resultado es: "
                     + (suma / (double) contador), "Información",
                     Mensajes.TipoMensaje.INFORMACION);
         } else {
-            mensaje.MostrarMensaje("No se han introducido valores",
+            Mensajes.mostrarMensaje("No se han introducido valores",
                     "Información", Mensajes.TipoMensaje.INFORMACION);
         }
     }

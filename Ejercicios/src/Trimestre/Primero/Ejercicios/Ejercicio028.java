@@ -32,9 +32,6 @@ public class Ejercicio028 {
      */
     public void ejercicio(){
     
-        // Objeto para la toma y muestra de información para el usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int numero, sumapar = 0, sumaimpar = 0, pares = 0, impares = 0, contador = 0;
         
@@ -42,7 +39,7 @@ public class Ejercicio028 {
         while (contador < 10)
         {            
             // Petición de datos
-            numero = Integer.parseInt(msg.PedirDatos("Introduzca un numero", 
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un numero", 
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
             
             // Comprobamos si el número es mayor de cero para contarlo entre
@@ -66,7 +63,7 @@ public class Ejercicio028 {
         }
         
         // Mostrar resultados
-        msg.MostrarMensaje("Suma de pares: " + sumapar + "\nSuma de "
+        Mensajes.mostrarMensaje("Suma de pares: " + sumapar + "\nSuma de "
                 + "impares : " + sumaimpar + "\nMedia aritmética entre pares e "
                 + "impares: " + (sumapar / (float)sumapar), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);

@@ -16,7 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Visualizar la matriz traspuesta de una matriz M de 6 x 7 elementos
@@ -25,73 +26,112 @@ import java.util.Scanner;
  */
 public class Ejercicio092 {
 
-    public void Ejercicio() {
-        // Objeto para pedir datos al usuario desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
-        // Variables
-        int tamanyoX, tamanyoY;
-
-        // Pedimos datos al usuario
-        do {
-            System.out.print("Introduzca el ancho de la matriz: ");
-            tamanyoX = entrada.nextInt();
-        } while (tamanyoX <= 0);
-
-        do {
-            System.out.print("Introduzca el alto de la matriz: ");
-            tamanyoY = entrada.nextInt();
-        } while (tamanyoY <= 0);
-
+    /**
+     * Método que nos permite crear una matriz y rellenarla con datos
+     *
+     * @param ancho Ancho de la matriz
+     * @param alto Alto de la matriz
+     * @return Matriz con valores
+     */
+    private int[][] crearMatriz(int ancho, int alto) {
         // Creamos una matriz para almacenar los datos
-        int[][] matrizInicial = new int[tamanyoY][tamanyoX];
+        int[][] matrizInicial = new int[alto][ancho];
 
         // Pedimos datos al usuario
-        for (int i = 0; i < tamanyoY; i++) {
-            for (int j = 0; j < tamanyoX; j++) {
-                System.out.print("Introduce el valor para la posición "
-                        + "[" + i + "," + j + "]: ");
-                matrizInicial[i][j] = entrada.nextInt();
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                matrizInicial[i][j] = PeticionDatos.pedirEntero("Introduce el "
+                        + "valor para la posición [" + i + "," + j + "]");
             }
         }
 
+        // Devolvemos la matriz con los datos introducidos
+        return matrizInicial;
+    }
+
+    /**
+     * Método que nos permite transponer una matriz
+     *
+     * @param matriz Matriz a transponer
+     * @return Matriz transpuesta
+     */
+    private int[][] transponerMatriz(int[][] matriz) {
         // Creamos una nueva matriz para almacenar el resultado cuya altura
         // será del tamaño del ancho de la matriz original y la anchura
         // corresponderá a la altura de la matriz original
-        int[][] matrizFinal = new int[tamanyoX][tamanyoY];
+        int[][] matrizFinal = new int[matriz[1].length][matriz.length];
 
         // Iteramos por la matriz inicial
-        for (int i = 0; i < tamanyoY; i++) {
-            for (int j = 0; j < tamanyoX; j++) {
-                
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[1].length; j++) {
+
                 // El valor de la matriz final será
                 // el valor traspuesto de la matriz inicial
                 // esto es, el que esta cambiando los valores 
                 // de x e y
-                matrizFinal[j][i] = matrizInicial[i][j];
+                matrizFinal[j][i] = matriz[i][j];
             }
         }
+
+        // Devolvemos la matriz transpuesta
+        return matrizFinal;
+
+    }
+
+    /**
+     * Método que nos permite mostrar una matriz
+     * @param matriz Matriz a formar
+     * @return Cadena con la matriz formateada
+     */
+    private String mostrarMatriz(int[][] matriz) {
+        String resultado = "";
+        
+        for (int[] matriz1 : matriz) {
+            for (int j = 0; j < matriz[1].length; j++) {
+                resultado += String.format("\t%s", matriz1[j]);
+            }
+            resultado+= "\n";
+        }
+
+        return resultado;
+    }
+
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
+        // Variables
+        int tamanyoX, tamanyoY;
+        String resultado;
+
+        // Pedimos datos al usuario
+        tamanyoX = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el ancho de la matriz");
+
+        tamanyoY = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el alto de la matriz");
+
+        // Creamos una matriz para almacenar los datos
+        int[][] matrizInicial = crearMatriz(tamanyoX, tamanyoY);
+
+        // Creamos una nueva matriz para almacenar el resultado de la 
+        // transposición
+        int[][] matrizFinal;
+
+        // Realizamos la transposición
+        matrizFinal = transponerMatriz(matrizInicial);
 
         // Pintamos la matriz inicial
-        System.out.println("Matriz Inicial"); 
-                
-        // Iteramos y mostramos los resultados
-        for (int i = 0; i < tamanyoY; i++) {
-            for (int j = 0; j < tamanyoX; j++) {                
-                System.out.print("\t" + matrizInicial[i][j]);
-            }
-            System.out.println("");
-        }
+        resultado = "Matriz Inicial\n";
 
-        // Pintamos la matriz final
-        System.out.println("Matriz Final"); 
+        resultado += mostrarMatriz(matrizInicial);
+
+        resultado += "\n";
         
-        // Iteramos y mostramos los resultados
-        for (int i = 0; i < tamanyoX; i++) {
-            for (int j = 0; j < tamanyoY; j++) {                
-                System.out.printf("\t" + matrizFinal[i][j]);
-            }
-            System.out.println("");
-        }
+        // Pintamos la matriz final
+        resultado += "Matriz Final\n";
+
+        resultado += mostrarMatriz(matrizFinal);
+
+        // Mostramos los resultados
+        Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }

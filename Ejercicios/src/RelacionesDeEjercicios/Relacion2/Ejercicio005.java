@@ -28,7 +28,10 @@ import java.awt.Dimension;
  */
 public class Ejercicio005 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         int iteraciones;
@@ -69,7 +72,7 @@ public class Ejercicio005 {
         // Mostramos el resultado al usuario
         resultado += "\nEl valor final de PI es: " + valorPi;
         
-        Mensajes.MostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(20, 30));
     }
 }

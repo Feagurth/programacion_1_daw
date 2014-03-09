@@ -36,6 +36,9 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio004 {
 
+    /**
+     * Clase para trabajar con empleados
+     */
     public class Empleado {
 
         // Variables de instancia
@@ -113,7 +116,10 @@ public class Ejercicio004 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Array para almacenar los empleados
         Empleado[] arrayEmpleados = new Empleado[8];
@@ -187,9 +193,9 @@ public class Ejercicio004 {
 
                         // Si lo hemos localizado, comprobamos si paga impuestos
                         // y mostramos el mensaje adecuado
-                        Mensajes.MostrarMensaje(arrayEmpleados[localizador].imprimirDatos(), Mensajes.TipoMensaje.INFORMACION);
+                        Mensajes.mostrarMensaje(arrayEmpleados[localizador].imprimirDatos(), Mensajes.TipoMensaje.INFORMACION);
                     } else {
-                        Mensajes.MostrarMensaje("No se ha podido localizar al "
+                        Mensajes.mostrarMensaje("No se ha podido localizar al "
                                 + "trabajador en el turno especificado",
                                 Mensajes.TipoMensaje.ERROR);
                     }
@@ -213,17 +219,17 @@ public class Ejercicio004 {
                         // Si lo hemos localizado, comprobamos si paga impuestos
                         // y mostramos el mensaje adecuado
                         if (arrayEmpleados[localizador].pagaImpuestos()) {
-                            Mensajes.MostrarMensaje("El trabajador "
+                            Mensajes.mostrarMensaje("El trabajador "
                                     + valorNombre + " debe pagar impuestos",
                                     Mensajes.TipoMensaje.INFORMACION);
                         } else {
-                            Mensajes.MostrarMensaje("El trabajador "
+                            Mensajes.mostrarMensaje("El trabajador "
                                     + valorNombre + " no debe pagar impuestos",
                                     Mensajes.TipoMensaje.INFORMACION);
 
                         }
                     } else {
-                        Mensajes.MostrarMensaje("No se ha podido localizar al "
+                        Mensajes.mostrarMensaje("No se ha podido localizar al "
                                 + "trabajador en el turno especificado",
                                 Mensajes.TipoMensaje.ERROR);
                     }
@@ -232,17 +238,20 @@ public class Ejercicio004 {
                 
                 // Opción de menú numero 3
                 case 3: {
-                    Mensajes.MostrarMensaje("El total del sueldo de la mañana es: "
+                    Mensajes.mostrarMensaje("El total del sueldo de la mañana es: "
                             + sueldoMañana, Mensajes.TipoMensaje.INFORMACION);
                     break;
 
                 }
                 // Opción de menú numero 4
                 case 4: {
-                    Mensajes.MostrarMensaje("El total del sueldo de la tarde es: "
+                    Mensajes.mostrarMensaje("El total del sueldo de la tarde es: "
                             + sueldoTarde, Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }
+                
+                default:
+                    break;
             }
             
             valorMenu = PeticionDatos.pedirEnteroRango(menu, 0, 4);

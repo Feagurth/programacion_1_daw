@@ -64,10 +64,10 @@ public class Ejercicio064 {
         return resultado;
     }
 
-    public void Ejercicio() {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar el valor a redondear
         float valor;
 
@@ -75,11 +75,11 @@ public class Ejercicio064 {
         int numDecimales;
 
         // Petición de datos al usuario
-        valor = Float.parseFloat(mensaje.PedirDatos("Introduzca un valor para "
+        valor = Float.parseFloat(Mensajes.pedirDatos("Introduzca un valor para "
                 + "redondear", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
 
-        numDecimales = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor "
+        numDecimales = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor "
                 + "para el redondeo", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
 
@@ -87,7 +87,7 @@ public class Ejercicio064 {
         valor = Redondeo(valor, numDecimales);
 
         // Mostramos el resultado al usuario
-        mensaje.MostrarMensaje("El resultado es: " + valor, "Resultado",
+        Mensajes.mostrarMensaje("El resultado es: " + valor, "Resultado",
                 Mensajes.TipoMensaje.INFORMACION);
 
     }

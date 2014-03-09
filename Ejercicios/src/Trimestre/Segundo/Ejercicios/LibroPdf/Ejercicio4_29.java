@@ -25,7 +25,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio4_29 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variable para almacenar el tamaño del cuadrado
         int tamanyoLado;

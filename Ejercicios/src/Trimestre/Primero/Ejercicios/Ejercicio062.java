@@ -30,9 +30,6 @@ public class Ejercicio062 {
      */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Variables
         int n, m;
         double resultado;
@@ -40,10 +37,10 @@ public class Ejercicio062 {
         do
         {
             // Petición de datos al usuario
-            m = Integer.parseInt(msg.PedirDatos("Introduzca el valor para m", 
+            m = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor para m", 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
 
-            n = Integer.parseInt(msg.PedirDatos("Introduzca el valor para n", 
+            n = Integer.parseInt(Mensajes.pedirDatos("Introduzca el valor para n", 
                     "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
 
             // Verificación de que los datos introducidos sean correctos
@@ -52,12 +49,12 @@ public class Ejercicio062 {
                 // Se calcula el resultado y se muestra al usuario
                 resultado = Factorial(n) / (((Factorial(m)) * Factorial(n-m)));
 
-                msg.MostrarMensaje("El resultado es " + resultado, 
+                Mensajes.mostrarMensaje("El resultado es " + resultado, 
                         "Resultado", Mensajes.TipoMensaje.INFORMACION);
             }
             else
             {
-                msg.MostrarMensaje("Los valores introducidos no eran correcto", 
+                Mensajes.mostrarMensaje("Los valores introducidos no eran correcto", 
                         "Atención", Mensajes.TipoMensaje.ERROR);
             }
         }while(n <= m || n < 0);

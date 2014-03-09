@@ -16,7 +16,8 @@
  */
 package Trimestre.Segundo.Ejercicios;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Diseñar una función con la que dadas dos matrices pasadas como parámetros,
@@ -26,58 +27,65 @@ import java.util.Scanner;
  */
 public class Ejercicio093 {
 
-    public void Ejercicio() {
-        // Objeto para pedir datos al usuario desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int valorX, valorY;
 
         // Petición de datos al usuario
-        do {
-            System.out.print("Introduzca la altura de las matrices: ");
-            valorX = entrada.nextInt();
-        } while (valorX <= 0);
+        // Petición de datos usando una clase auxiliar
+        valorX = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la "
+                + "altura de las matrices");
 
-        do {
-            System.out.print("Introduzca la anchura de las matrices: ");
-            valorY = entrada.nextInt();
-        } while (valorY <= 0);
+        valorY = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca la "
+                + "anchura de las matrices");
 
         // Creamos las matrices nesarias
         // Dos para recoger los datos del usuario
-        int[][] matriz1 = new int[valorX][valorY];
-        int[][] matriz2 = new int[valorX][valorY];
-
-        // Volvemos a pedir datos al usuario
-        for (int i = 0; i < matriz1.length; i++) {
-            for (int j = 0; j < matriz1[0].length; j++) {
-                System.out.print("Introduzca el valor para "
-                        + "[" + i + "," + j + "] para la primera matriz: ");
-                matriz1[i][j] = entrada.nextInt();
-            }
-        }
-
-        System.out.println("");
-
-        for (int i = 0; i < matriz2.length; i++) {
-            for (int j = 0; j < matriz2[0].length; j++) {
-                System.out.print("Introduzca el valor para "
-                        + "[" + i + "," + j + "] para la segunda matriz: ");
-                matriz2[i][j] = entrada.nextInt();
-            }
-        }
+        int[][] matriz1 = crearMatriz(valorX, valorY, "Primera matriz");
+        
+        int[][] matriz2 = crearMatriz(valorX, valorY, "Segunda matriz");
 
         // Comparamos las matrices y mostramos el resultado
         if (matricesIguales(matriz1, matriz2)) {
-            System.out.println("Las matrices son iguales");
+            Mensajes.mostrarMensaje("Las matrices son iguales", 
+                    Mensajes.TipoMensaje.INFORMACION);
         } else {
-            System.out.println("Las matrices no son iguales");
+            Mensajes.mostrarMensaje("Las matrices no son iguales", 
+                    Mensajes.TipoMensaje.INFORMACION);
+
         }
     }
 
     /**
+     * Método que nos permite crear una matriz y rellenarla con datos
+     *
+     * @param ancho Ancho de la matriz
+     * @param alto Alto de la matriz
+     * @return Matriz con valores
+     */
+    private int[][] crearMatriz(int ancho, int alto, String mensaje) {
+        // Creamos una matriz para almacenar los datos
+        int[][] matrizInicial = new int[alto][ancho];
+
+        // Pedimos datos al usuario
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                matrizInicial[i][j] = PeticionDatos.pedirEntero(mensaje + 
+                        "\nIntroduce el valor para la posición "
+                        + "[" + i + "," + j + "]");
+            }
+        }
+
+        // Devolvemos la matriz con los datos introducidos
+        return matrizInicial;
+    }        
+    
+    /**
      * Función que nos permite comparar dos matrices para ver si son iguales
+     *
      * @param matriz1 Primera matriz a comparar
      * @param matriz2 Segunda matriz a comparar
      * @return Resultado de la comparación

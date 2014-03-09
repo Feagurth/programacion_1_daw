@@ -39,7 +39,8 @@ public class Ejercicio057 {
 
     /**
      * Función para comprobar si una fecha es válida
-     * @param numdia Día 
+     *
+     * @param numdia Día
      * @param numMes Mes
      * @param numAnyo Año
      * @return Resultado de la comprobación
@@ -64,34 +65,33 @@ public class Ejercicio057 {
         }
     }
 
-public void Ejercicio() {
-    
-    // Objeto para pedir o mostrar datos al usuario
-    Mensajes mensaje = new Mensajes();
-    
-    // Variables
-    int dia, mes, anyo;
-    boolean resultado;
-    
-    // Petición de datos al usuario
-    dia = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor numérico "
-            + "para el día", "Petición de Datos", 
-            Mensajes.TipoMensaje.PREGUNTA));
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
+        // Variables
+        int dia, mes, anyo;
+        boolean resultado;
 
-    mes = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor numérico "
-            + "para el mes", "Petición de Datos", 
-            Mensajes.TipoMensaje.PREGUNTA));
-    
-    anyo = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor numérico "
-            + "para el año", "Petición de Datos", 
-            Mensajes.TipoMensaje.PREGUNTA));
-    
-    // Llamamos a la función
-    resultado = EsFechaValida(dia, mes, anyo);
-        
-    // Mostramos resultado
-    mensaje.MostrarMensaje("La fecha " + dia + "/" + mes + "/" + anyo + 
-            " es valida: " + (resultado ? "Verdadero" : "Falso"), "Resultado", 
-            Mensajes.TipoMensaje.INFORMACION);
+        // Petición de datos al usuario
+        dia = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor numérico "
+                + "para el día", "Petición de Datos",
+                Mensajes.TipoMensaje.PREGUNTA));
+
+        mes = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor numérico "
+                + "para el mes", "Petición de Datos",
+                Mensajes.TipoMensaje.PREGUNTA));
+
+        anyo = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor numérico "
+                + "para el año", "Petición de Datos",
+                Mensajes.TipoMensaje.PREGUNTA));
+
+        // Llamamos a la función
+        resultado = EsFechaValida(dia, mes, anyo);
+
+        // Mostramos resultado
+        Mensajes.mostrarMensaje("La fecha " + dia + "/" + mes + "/" + anyo
+                + " es valida: " + (resultado ? "Verdadero" : "Falso"), "Resultado",
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

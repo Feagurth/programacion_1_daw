@@ -27,7 +27,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio5_25 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         int alto;

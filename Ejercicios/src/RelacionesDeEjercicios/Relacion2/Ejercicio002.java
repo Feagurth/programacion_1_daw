@@ -127,7 +127,10 @@ public class Ejercicio002 {
         return resultado;
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         int dia, mes, anyo;
@@ -148,7 +151,7 @@ public class Ejercicio002 {
             if (EsFechaValida(dia, mes, anyo)) {
                 control = true;
             } else {
-                Mensajes.MostrarMensaje("La fecha introducida es inválida",
+                Mensajes.mostrarMensaje("La fecha introducida es inválida",
                         Mensajes.TipoMensaje.ERROR);
             }
 
@@ -161,7 +164,7 @@ public class Ejercicio002 {
         resultado = DiaSemana(dia, mes, anyo, calendario.charAt(0));
 
         // Mostramos la información al usuario
-        Mensajes.MostrarMensaje(String.format("El %s/%s/%d fue %s\n",
+        Mensajes.mostrarMensaje(String.format("El %s/%s/%d fue %s\n",
                 Varios.fechaDDMMAAAA(dia, mes, anyo, "/")),
                 Mensajes.TipoMensaje.INFORMACION);
     }

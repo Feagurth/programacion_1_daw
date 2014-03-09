@@ -29,7 +29,7 @@ public class Ejercicio4_38 {
     /**
      * Ejercicio principal
      */
-    public void Ejercicio() {
+    public void ejercicio() {
         // Variables
         int m, x;
         float resultado, resultadoPotencia;

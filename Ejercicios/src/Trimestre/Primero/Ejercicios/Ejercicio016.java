@@ -31,9 +31,6 @@ public class Ejercicio016 {
     */
     public void ejercicio()
     {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
         // Array con las letras del alfabeto de la i a la m
         char[] vector = new char[]{'i', 'j', 'k', 'l', 'm'};
         
@@ -45,7 +42,7 @@ public class Ejercicio016 {
         control = 0;
         
         // Petición de datos al usuario
-        letra1 = msg.PedirDatos("Introduzca la primera letra", "Petición de datos", 
+        letra1 = Mensajes.pedirDatos("Introduzca la primera letra", "Petición de datos", 
                 Mensajes.TipoMensaje.PREGUNTA).charAt(control);
         
         // Iteramos por el array para comprobar si la letra introducida está
@@ -64,12 +61,12 @@ public class Ejercicio016 {
         // Mostramos resultado dependiendo del valor de la variable de control
         if (encontrado) 
         {
-            msg.MostrarMensaje("La letra introducida está entre i y m", 
+            Mensajes.mostrarMensaje("La letra introducida está entre i y m", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
         }
         else
         {
-            msg.MostrarMensaje("La letra introducida no está entre i y m", 
+            Mensajes.mostrarMensaje("La letra introducida no está entre i y m", 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
         }

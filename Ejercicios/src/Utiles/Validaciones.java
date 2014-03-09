@@ -83,12 +83,94 @@ public class Validaciones {
      */
     public enum TipoValidacion {
 
-        CADENA(0), CADENA_MAY(1), CADENA_MIN(2), ENTERO(3), ENTERO_POSITIVO(4),
-        ENTERO_NEGATIVO(5), ENTERO_POSITIVO_NO_0(6), ENTERO_NEGATIVO_NO_0(7), REAL(8),
-        REAL_POSITIVO(9), REAL_NEGATIVO(10), USUARIO(11), PASSWORD(12),
-        FECHA_DDMMAA(13), FECHA_DDMMAAAA(14), CADENA_NUMEROS(15), DNI(16), 
-        BINARIO(17), ENTERO_POSITIVO_NO_0_EXT(18), CADENA_SOLO_NUMEROS(19), 
-        CADENA_NUMEROS_SIMBOLOS(20), CADENA_SOLO_LETRAS_NUMEROS(21);
+        /**
+         * Valor para cadena
+         */
+        CADENA(0), 
+        /**
+         * Valor para cadena de mayúsculas
+         */
+        CADENA_MAY(1), 
+        /**
+         * Valor para cadena en minúsculas
+         */
+        CADENA_MIN(2), 
+        /**
+         * Valor para enteros
+         */
+        ENTERO(3), 
+        /**
+         * Valor para enteros positivos
+         */
+        ENTERO_POSITIVO(4),
+        /**
+         * Valor para enteros negativos
+         */
+        ENTERO_NEGATIVO(5), 
+        /**
+         * Valor para enteros positivos excepto cero
+         */
+        ENTERO_POSITIVO_NO_0(6), 
+        /**
+         * Valor para enteros negativos excepto cero
+         */
+        ENTERO_NEGATIVO_NO_0(7), 
+        /**
+         * Valor para números reales
+         */
+        REAL(8),
+        /**
+         * Valor para reales positivos
+         */
+        REAL_POSITIVO(9), 
+        /**
+         * Valor para reales negativos
+         */
+        REAL_NEGATIVO(10), 
+        /**
+         * Valor para usuario
+         */
+        USUARIO(11), 
+        /**
+         * Valor para password
+         */
+        PASSWORD(12),
+        /**
+         * Valor para fecha DDMMAA
+         */
+        FECHA_DDMMAA(13), 
+        /**
+         * Valor para fecha DDMMAAAA
+         */
+        FECHA_DDMMAAAA(14), 
+        /**
+         * Valor para cadena con números
+         */
+        CADENA_NUMEROS(15), 
+        /**
+         * Valor para DNI
+         */
+        DNI(16), 
+        /**
+         * Valor para binario
+         */
+        BINARIO(17), 
+        /**
+         * Valor para enteros positivos sin cero extendido
+         */
+        ENTERO_POSITIVO_NO_0_EXT(18), 
+        /**
+         * Valor para cadena de números
+         */
+        CADENA_SOLO_NUMEROS(19), 
+        /**
+         * Valor para cadena de números y símbolos
+         */
+        CADENA_NUMEROS_SIMBOLOS(20), 
+        /**
+         * Valor para cadena de letras y números exclusivamente
+         */
+        CADENA_SOLO_LETRAS_NUMEROS(21);
 
         private final int value;
 

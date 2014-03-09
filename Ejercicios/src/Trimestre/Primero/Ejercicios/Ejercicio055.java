@@ -45,19 +45,19 @@ public class Ejercicio055 {
         return resultado;
     }
 
-    public void Ejercicio() {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int numero;
 
         // Petición de datos al usuario
-        numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un número",
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         // Mostramos información al usuario
-        mensaje.MostrarMensaje("El factorial de " + numero + " es " + 
+        Mensajes.mostrarMensaje("El factorial de " + numero + " es " + 
                 Factorial(numero).stripTrailingZeros().toEngineeringString()
                 ,
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);

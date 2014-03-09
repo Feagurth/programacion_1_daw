@@ -28,7 +28,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio004 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos
         String expresionRegular;
@@ -61,7 +64,7 @@ public class Ejercicio004 {
         } while (!cadena.matches(expresionRegular));
 
         // Mostramos mensaje
-        Mensajes.MostrarMensaje("Matrícula válida",
+        Mensajes.mostrarMensaje("Matrícula válida",
                 Mensajes.TipoMensaje.INFORMACION);
     }
 

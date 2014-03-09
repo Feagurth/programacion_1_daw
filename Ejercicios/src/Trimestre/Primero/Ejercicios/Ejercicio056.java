@@ -64,26 +64,26 @@ public class Ejercicio056 {
         return resto;        
     }
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
-        // Objeto para mostrar y pedir datos al usuario
-        Mensajes mensaje = new Mensajes();
-        
         // Variables
         int num1, num2, resultado;    
         
         // Petición de datos al usuario
-        num1 = Integer.parseInt(mensaje.PedirDatos("Introduzca el primer "
+        num1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el primer "
                 + "valor", "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        num2 = Integer.parseInt(mensaje.PedirDatos("Introduzca el segundo "
+        num2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el segundo "
                 + "valor", "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));        
     
         // Calculamos el maximo comun divisor
         resultado = MCD(num1, num2);
         
         // Mostramos el resultado
-        mensaje.MostrarMensaje("El máximo común divisor de " + num1 + 
+        Mensajes.mostrarMensaje("El máximo común divisor de " + num1 + 
                 " y de " + num2 + " es " + resultado, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);
     }    

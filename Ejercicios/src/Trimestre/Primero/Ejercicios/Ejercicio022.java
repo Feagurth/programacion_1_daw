@@ -31,10 +31,6 @@ public class Ejercicio022 {
     public void ejercicio(){
         int sumaCuadrados = 0;
         
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-        
-        
         // Iteramos y acumulamos el cuadrado de el contador
         for (int i = 0; i < 100; i++) 
         {
@@ -42,7 +38,7 @@ public class Ejercicio022 {
         }
         
         // Mostramos el resultado al usuario
-        msg.MostrarMensaje("El resultado es: " + sumaCuadrados, 
+        Mensajes.mostrarMensaje("El resultado es: " + sumaCuadrados, 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }   
 }

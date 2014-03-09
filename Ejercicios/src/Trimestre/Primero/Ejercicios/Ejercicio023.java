@@ -29,9 +29,6 @@ public class Ejercicio023 {
     * Ejercicio principal
     */
     public void ejercicio() {
-        // Objeto para mensajes y recogida de datos
-        Mensajes msg = new Mensajes();
-
         // Variables
         int sumaPares = 0;
 
@@ -41,7 +38,7 @@ public class Ejercicio023 {
         }
 
         // Muestra de resultados para el usuario
-        msg.MostrarMensaje("El resultado es: " + sumaPares, "Resultado",
+        Mensajes.mostrarMensaje("El resultado es: " + sumaPares, "Resultado",
                 Mensajes.TipoMensaje.INFORMACION);
 
     }

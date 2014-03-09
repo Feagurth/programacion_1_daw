@@ -16,7 +16,6 @@
  */
 package Trimestre.Segundo.Ejercicios.LibroPdf;
 
-import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -67,7 +66,10 @@ public class Ejercicio4_21 {
         }
     }
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Objeto que usaremos para encontrar el número mayor
         NumeroMayor numMayor;
 

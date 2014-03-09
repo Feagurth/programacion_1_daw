@@ -27,23 +27,23 @@ import Utiles.Mensajes;
  */
 public class Ejercicio043 {
 
-    public void Ejercicio() {
-
-        // Objeto para pedir y mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
 
         // Variables
         float capital, interes, capitalFinal;
         int anyos;
 
         // Petición de datos al usuario
-        capital = Float.parseFloat(mensaje.PedirDatos("Introduzca el capital",
+        capital = Float.parseFloat(Mensajes.pedirDatos("Introduzca el capital",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        interes = Float.parseFloat(mensaje.PedirDatos("Introduzca el interés",
+        interes = Float.parseFloat(Mensajes.pedirDatos("Introduzca el interés",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        anyos = Integer.parseInt(mensaje.PedirDatos("Introduzca el número de años",
+        anyos = Integer.parseInt(Mensajes.pedirDatos("Introduzca el número de años",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         // Calculamos el capital final
@@ -51,10 +51,10 @@ public class Ejercicio043 {
 
         // Comprobamos si se dobla y mostramos el resultado
         if (capitalFinal >= capital * 2) {
-            mensaje.MostrarMensaje("Se dobla el capital!\n" + String.format("%.2f", capitalFinal),
+            Mensajes.mostrarMensaje("Se dobla el capital!\n" + String.format("%.2f", capitalFinal),
                     "Información", Mensajes.TipoMensaje.INFORMACION);
         } else {
-            mensaje.MostrarMensaje("No se dobla el capital!\n" + String.format("%.2f", capitalFinal),
+            Mensajes.mostrarMensaje("No se dobla el capital!\n" + String.format("%.2f", capitalFinal),
                     "Información", Mensajes.TipoMensaje.INFORMACION);
         }
     }

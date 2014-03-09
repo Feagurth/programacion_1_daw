@@ -26,7 +26,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio4_37 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variable para almacenar los datos introducidos por el usuario
         String numero;
 

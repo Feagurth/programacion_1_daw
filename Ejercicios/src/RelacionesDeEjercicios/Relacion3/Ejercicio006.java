@@ -28,7 +28,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio006 {
 
-    public void Ejercicio() {
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int valorLado;
 
@@ -42,10 +45,10 @@ public class Ejercicio006 {
         // Pasamos la matriz a la función de verificación y mostramos el 
         // resultado
         if (esCuadradoMagico(matriz)) {
-            Mensajes.MostrarMensaje("La matriz introducida es un cuadrado mágico", 
+            Mensajes.mostrarMensaje("La matriz introducida es un cuadrado mágico", 
                     Mensajes.TipoMensaje.INFORMACION);
         } else {
-            Mensajes.MostrarMensaje("La matriz introducida no es un cuadrado mágico", 
+            Mensajes.mostrarMensaje("La matriz introducida no es un cuadrado mágico", 
                     Mensajes.TipoMensaje.INFORMACION);
 
         }

@@ -31,9 +31,6 @@ public class Ejercicio027 {
      */
     public void ejercicio(){
         
-        // Objeto para mostrar y pedir información al usuario
-        Mensajes msg = new Mensajes();
-    
         // Variables
         String resultado = "";
         
@@ -42,7 +39,7 @@ public class Ejercicio027 {
         }
 
         // Muestra de resultados
-        msg.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
     
     }
     

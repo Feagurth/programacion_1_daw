@@ -14,46 +14,42 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
- * Escribir un algoritmo que permita calcular X^n, donde: 
- * X → puede ser cualquier numero real distinto de 0
- * n → puede ser cualquier entero positivo, negativo o nulo.
- * Nota: suponemos que no esta implementado el operador de exponenciación
+ * Escribir un algoritmo que permita calcular X^n, donde: X → puede ser
+ * cualquier numero real distinto de 0 n → puede ser cualquier entero positivo,
+ * negativo o nulo. Nota: suponemos que no esta implementado el operador de
+ * exponenciación
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio046 {
-    
-    public void Ejercicio()
-    {
-        
-        // Objeto para pedir o mostrar información al usuario
-        Mensajes mensaje = new Mensajes();
-    
+
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         double base, resultado = 0;
         int exponente, contador;
-        
+
         // Petición de datos al usuario
-        base = Double.parseDouble(mensaje.PedirDatos("Introduzca un valor para "
-                + "la base", "Petición de Datos", 
+        base = Double.parseDouble(Mensajes.pedirDatos("Introduzca un valor para "
+                + "la base", "Petición de Datos",
                 Mensajes.TipoMensaje.INFORMACION));
 
-        exponente = Integer.parseInt(mensaje.PedirDatos("Introduzca un valor "
-                + "para el exponente", "Petición de Datos", 
+        exponente = Integer.parseInt(Mensajes.pedirDatos("Introduzca un valor "
+                + "para el exponente", "Petición de Datos",
                 Mensajes.TipoMensaje.INFORMACION));
-        
+
         // Comprobamos que la base es mayor de cero
-        if(base > 0)
-        {
-            
+        if (base > 0) {
+
             // Dependiendo del exponente haremos una u otra cosa
-            switch(exponente)
-            {
+            switch (exponente) {
                 case 0:
                     resultado = 1;
                     break;
@@ -63,19 +59,18 @@ public class Ejercicio046 {
                 default:
                     // Igualamos el resultado a la base
                     resultado = base;
-                    
+
                     // Iteramos tantas veces como sea necesario
-                    for(contador = 1; contador < exponente; contador++)
-                    {
+                    for (contador = 1; contador < exponente; contador++) {
                         resultado = resultado * base;
                     }
-                    break;                        
+                    break;
             }
         }
-        
+
         // Mostramos el resultado al usuario
-        mensaje.MostrarMensaje(String.valueOf(resultado), "Información", 
+        Mensajes.mostrarMensaje(String.valueOf(resultado), "Información",
                 Mensajes.TipoMensaje.INFORMACION);
     }
-    
+
 }

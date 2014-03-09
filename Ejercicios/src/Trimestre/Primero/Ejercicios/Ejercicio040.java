@@ -32,20 +32,17 @@ public class Ejercicio040 {
      */
     public void ejercicio()
     {
-        // Objeto para petición y muestra de datos al usuario
-        Mensajes msg = new Mensajes();
-        
         // Variables
         double notaBasic,notaFortran,notaPascal, media;
 
         // Petición de datos
-        notaBasic = Double.parseDouble(msg.PedirDatos("Introduzca la nota para BASIC", 
+        notaBasic = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota para BASIC", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        notaFortran = Double.parseDouble(msg.PedirDatos("Introduzca la nota para FORTRAN", 
+        notaFortran = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota para FORTRAN", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-        notaPascal = Double.parseDouble(msg.PedirDatos("Introduzca la nota para PASCAL", 
+        notaPascal = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota para PASCAL", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Iteramos hasta que las notas sean negativas
@@ -55,17 +52,17 @@ public class Ejercicio040 {
             media = ((notaBasic + notaFortran + notaPascal) / 3);
             
             // Mostramos resultados
-            msg.MostrarMensaje("La nota media es: " + media, 
+            Mensajes.mostrarMensaje("La nota media es: " + media, 
                     "Resultado", Mensajes.TipoMensaje.INFORMACION);
             
             // Petición de datos
-            notaBasic = Double.parseDouble(msg.PedirDatos("Introduzca la nota para BASIC", 
+            notaBasic = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota para BASIC", 
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-            notaFortran = Double.parseDouble(msg.PedirDatos("Introduzca la nota para FORTRAN", 
+            notaFortran = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota para FORTRAN", 
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
-            notaPascal = Double.parseDouble(msg.PedirDatos("Introduzca la nota para PASCAL", 
+            notaPascal = Double.parseDouble(Mensajes.pedirDatos("Introduzca la nota para PASCAL", 
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));            
         }        
     }    

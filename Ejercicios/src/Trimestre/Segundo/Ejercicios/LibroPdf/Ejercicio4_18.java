@@ -117,7 +117,10 @@ public class Ejercicio4_18 {
         }
     }
 
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Objeto que usaremos para controlar las cuetnas de un cliente
         CuentaCorriente cuentaCliente;

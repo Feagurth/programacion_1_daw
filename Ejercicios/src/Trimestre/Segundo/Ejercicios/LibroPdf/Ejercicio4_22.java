@@ -24,7 +24,10 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
  */
 public class Ejercicio4_22 {
     
-    public void Ejercicio()
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio()
     {
         // Creamos una cadena, la cual inicializaremos con los primeros valores
         // para crear una represetanción por columnas separadas por tabulaciones

@@ -54,16 +54,16 @@ public class Varios {
      * menos la longitud de valorCadena
      */
     public static String generarCadena(String caracter, int cantidad, String valorCadena) {
-        String resultado = "";
-
-            // Generamos una cadena con tantos caracteres repetidos como 
+        StringBuilder buf = new StringBuilder();
+        
+        // Generamos una cadena con tantos caracteres repetidos como 
         // cantidad necesitemos menos la longitud del texto que vamos a 
         // introducir
         for (int i = 0; i < cantidad - valorCadena.length(); i++) {
-            resultado += caracter;
+            buf.append(caracter);
         }
 
-        return resultado;
+        return buf.toString();
     }
 
 }

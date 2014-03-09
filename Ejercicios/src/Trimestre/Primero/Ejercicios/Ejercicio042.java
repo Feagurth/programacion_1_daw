@@ -14,58 +14,54 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
- * Calcular y escribir los cuadrados de una serie de números 
- * distintos de 0 leídos desde el teclado
+ * Calcular y escribir los cuadrados de una serie de números distintos de 0
+ * leídos desde el teclado
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio042 {
 
-    public void Ejercicio()
-    {
-    
-        // Objeto para mostrar y pedir información al usuario
-        Mensajes mensaje = new Mensajes();
-        
+    /**
+     * Ejercicio principal
+     */
+    public void ejercicio() {
+
         // Variables
         int num_numeros, numero, contador;
         String resultado = "";
-        
-    
+
         // Petición de datos al usuario
-        num_numeros = Integer.parseInt(mensaje.PedirDatos("¿Cantidad de "
-                + "números a introducir?", "Petición de Datos", 
+        num_numeros = Integer.parseInt(Mensajes.pedirDatos("¿Cantidad de "
+                + "números a introducir?", "Petición de Datos",
                 Mensajes.TipoMensaje.PREGUNTA));
-        
+
         // Inicializamos el contador
         contador = 0;
-        
-        do {            
-            
+
+        do {
+
             // Pedimos un valor al usuario
-            numero = Integer.parseInt(mensaje.PedirDatos("Introduzca un "
-                    + "valor", "Petición de Datos", 
+            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un "
+                    + "valor", "Petición de Datos",
                     Mensajes.TipoMensaje.PREGUNTA));
-            
+
             // Verificamos si el número es distinto de cero
-            if(numero != 0)
-            {
+            if (numero != 0) {
                 // Concatenamos resultados
                 resultado += Math.pow(numero, 2) + "\n";
             }
-            
+
             // Aumentamos el contador
             contador++;
         } while (contador != num_numeros);
-            
-        
+
         // Mostramos el resultado
-        mensaje.MostrarMensaje(resultado, "Información", 
-                Mensajes.TipoMensaje.INFORMACION);        
-    }    
+        Mensajes.mostrarMensaje(resultado, "Información",
+                Mensajes.TipoMensaje.INFORMACION);
+    }
 }

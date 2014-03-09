@@ -101,7 +101,7 @@ public class Ejercicio099 {
         Double totalRepre = 0.0;
         
         // Petición de datos al usuario
-        repreSel = msg.PedirDatos("Introduzca el nombre del representante a evaluar", 
+        repreSel = Mensajes.pedirDatos("Introduzca el nombre del representante a evaluar", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA);
 
        // Buscamos la posición de la zona seleccionada 
@@ -122,7 +122,7 @@ public class Ejercicio099 {
         }
 
        // Mostramos los resultados 
-       msg.MostrarMensaje("El total para el representante " + repreSel + " es: " + 
+       Mensajes.mostrarMensaje("El total para el representante " + repreSel + " es: " + 
                totalRepre, "Resultados", Mensajes.TipoMensaje.INFORMACION);        
        }
     }
@@ -141,7 +141,7 @@ public class Ejercicio099 {
         Double totalDia = 0.0;
         
         // Petición de datos al usuario
-        diaSel = msg.PedirDatos("Introduzca el día a evaluar", 
+        diaSel = Mensajes.pedirDatos("Introduzca el día a evaluar", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA);
        
        if(diaSel != null)
@@ -155,7 +155,7 @@ public class Ejercicio099 {
              }
 
            // Mostramos los resultados 
-           msg.MostrarMensaje("El total para el día " + diaSel + " es: " + 
+           Mensajes.mostrarMensaje("El total para el día " + diaSel + " es: " + 
                    totalDia, "Resultados", Mensajes.TipoMensaje.INFORMACION);        
        }
     }
@@ -177,7 +177,7 @@ public class Ejercicio099 {
         Double totalZona = 0.0;
         
         // Petición de datos al usuario
-        zonaSel = msg.PedirDatos("Introduzca el nombre de la zona a evaluar", 
+        zonaSel = Mensajes.pedirDatos("Introduzca el nombre de la zona a evaluar", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA);
 
        // Buscamos la posición de la zona seleccionada 
@@ -198,16 +198,13 @@ public class Ejercicio099 {
             }
 
             // Mostramos los resultados 
-            msg.MostrarMensaje("El total de la zona " + zonaSel + " es: " + totalZona, 
+            Mensajes.mostrarMensaje("El total de la zona " + zonaSel + " es: " + totalZona, 
                       "Resultados", Mensajes.TipoMensaje.INFORMACION);        
        }
     }
     
     private Double[][][] LeerDatos(String[] nombresZonas, String[] nombresRepresentantes, int numDias)
     {
-        // Objeto para pedir y mostrar datos al usuario
-        Mensajes msg = new Mensajes();
-    
         // Variable para almacenar los resultados de la toma de datos
         Double[][][] resultado = new Double[nombresRepresentantes.length][nombresZonas.length][numDias];
         
@@ -218,7 +215,7 @@ public class Ejercicio099 {
             for (int j = 0; j <= nombresZonas.length -1; j++) 
             {
                 for (int k = 0; k <= numDias - 1; k++) {
-                resultado[i][j][k] =Double.parseDouble(msg.PedirDatos("Introduzca "
+                resultado[i][j][k] =Double.parseDouble(Mensajes.pedirDatos("Introduzca "
                         + "las ventas de " + nombresRepresentantes[i] + " para "
                         + "la zona " + nombresZonas[j] + " el día " + (k + 1), 
                         "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
@@ -234,9 +231,6 @@ public class Ejercicio099 {
      */
     private int PintarMenu(){
         
-        // Objeto pare mostrar y leer datos del usuario
-        Mensajes msg = new Mensajes();
-        
         // Encadenamos el mensaje a mostrar al usuario
         String mensaje = "1.- Lectura de datos\n";
         mensaje += "2.- Total de ventas por zona\n";
@@ -245,7 +239,7 @@ public class Ejercicio099 {
         mensaje += "5.- Salir";
 
         // Mostramos el menú y pedimos que introduzca una opción
-        return Integer.parseInt(msg.PedirDatos(mensaje, "Opciones de Menú", 
+        return Integer.parseInt(Mensajes.pedirDatos(mensaje, "Opciones de Menú", 
                 Mensajes.TipoMensaje.PLANO));
     }
     
@@ -256,15 +250,13 @@ public class Ejercicio099 {
      */
     private String[] LeerRepresentantes(int num_representantes)
     {
-        // Objeto para mostrar y tomar datos del usuario
-        Mensajes msg = new Mensajes();
         String[] resultado = new String[num_representantes];
         
         // Iteramos para almacenar los nombres que introduzca el usuario en el 
         // array a devolver
         for (int i = 1; i <= num_representantes; i++) 
         {
-            resultado[i-1] = msg.PedirDatos("Introduzca el nombre del "
+            resultado[i-1] = Mensajes.pedirDatos("Introduzca el nombre del "
                     + "representante número " + i , "Petición de datos", 
                     Mensajes.TipoMensaje.PREGUNTA);
         }

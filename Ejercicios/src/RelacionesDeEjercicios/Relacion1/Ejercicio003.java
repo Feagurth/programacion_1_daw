@@ -28,6 +28,10 @@ import Utiles.PeticionDatos;
  */
 public class Ejercicio003 {
 
+
+    /**
+     * Clase para trabajar con coordenadas
+     */
     public class Punto {
 
         // Variables
@@ -164,13 +168,18 @@ public class Ejercicio003 {
                 case 8:
                     resultado = 1;
                     break;
+                default:
+                    resultado = 0;
             }
             return resultado;
         }
 
     }
 
-    public void Ejercicio() {
+    /**
+     * ejercicio principal
+     */
+    public void ejercicio() {
         // Petición de datos al usuario
         int x = PeticionDatos.pedirEntero("Introduzca la coordenada x del punto");
 
@@ -182,7 +191,7 @@ public class Ejercicio003 {
         // Volcamos el resultado a una variable y la usamos para procesar
         // el resultado en una cadena que mostrar al usuario
         int cuadrante = punto.valorCuadranteSimple();
-        String resultado = "";
+        String resultado;
 
         switch (cuadrante) {
             case 0:
@@ -200,10 +209,12 @@ public class Ejercicio003 {
             case 4:
                 resultado = "Cuarto Cuadrante";
                 break;
+            default:
+                resultado = "";
         }
 
         // Mostramos el resultado
-        Mensajes.MostrarMensaje("Punto (" + x + "," + y + ")\nCuadrante: " + 
+        Mensajes.mostrarMensaje("Punto (" + x + "," + y + ")\nCuadrante: " + 
                 resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }
