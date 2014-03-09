@@ -16,7 +16,9 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+import Utiles.Varios;
 
 /**
  * Elaborar un programa que reciba una fecha por teclado –dd, mm, aaaa-, así
@@ -126,37 +128,41 @@ public class Ejercicio002 {
     }
 
     public void Ejercicio() {
-        // Objeto para recibir información desde el teclado
-        Scanner entrada = new Scanner(System.in);
 
         // Variables
         int dia, mes, anyo;
-        String calendario;
         String resultado;
+        boolean control = false;
 
         do {
             // Petición de datos al usuario
-            System.out.print("Introduzca el valor numérico para el día: ");
-            dia = entrada.nextInt();
+            dia = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca "
+                    + "el valor numérico para el día");
 
-            System.out.print("Introduzca el valor numérico para el mes: ");
-            mes = entrada.nextInt();
+            mes = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca "
+                    + "el valor numérico para el mes");
 
-            System.out.print("Introduzca el valor numérico para el año: ");
-            anyo = entrada.nextInt();
-        } while (!EsFechaValida(dia, mes, anyo));
+            anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor "
+                    + "numérico para el año");
 
-        calendario = "";
-        do {
-            calendario = entrada.nextLine().toLowerCase();
-            System.out.print("\n¿Calendario Juliano o Gregoriano? (j/g): ");
-        } while (!"j".equals(calendario) && !"g".equals(calendario));
+            if (EsFechaValida(dia, mes, anyo)) {
+                control = true;
+            } else {
+                Mensajes.MostrarMensaje("La fecha introducida es inválida",
+                        Mensajes.TipoMensaje.ERROR);
+            }
+
+        } while (!control);
+
+        String calendario = PeticionDatos.pedirConsentimiento("¿Calendario "
+                + "Juliano o Gregoriano? [j/g]", new String[]{"j", "g"});
 
         // Calculamos el valor del día de la semana
         resultado = DiaSemana(dia, mes, anyo, calendario.charAt(0));
 
         // Mostramos la información al usuario
-        System.out.printf("\nEl %s/%s/%d fue %s\n", (dia < 9 ? "0" : "") + dia, (mes < 9 ? "0" : "") + mes, anyo, resultado);
-
+        Mensajes.MostrarMensaje(String.format("El %s/%s/%d fue %s\n",
+                Varios.fechaDDMMAAAA(dia, mes, anyo, "/")),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

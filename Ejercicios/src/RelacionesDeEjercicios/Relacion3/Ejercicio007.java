@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -40,17 +41,18 @@ public class Ejercicio007 {
 
         // Creamos las matrices nesarias
         // Dos para recoger los datos del usuario
-        System.out.println("Introduzca los datos para la primera matriz");
-        int[][] matriz1 = crearMatriz(valorX, valorY);
+        int[][] matriz1 = crearMatriz(valorX, valorY, "Primera matriz");
         
-        System.out.println("Introduzca los datos para la segunda matriz");
-        int[][] matriz2 = crearMatriz(valorX, valorY);
+        int[][] matriz2 = crearMatriz(valorX, valorY, "Segunda matriz");
 
         // Comparamos las matrices y mostramos el resultado
         if (matricesIguales(matriz1, matriz2)) {
-            System.out.println("Las matrices son iguales");
+            Mensajes.MostrarMensaje("Las matrices son iguales", 
+                    Mensajes.TipoMensaje.INFORMACION);
         } else {
-            System.out.println("Las matrices no son iguales");
+            Mensajes.MostrarMensaje("Las matrices no son iguales", 
+                    Mensajes.TipoMensaje.INFORMACION);
+
         }
     }
 
@@ -61,15 +63,16 @@ public class Ejercicio007 {
      * @param alto Alto de la matriz
      * @return Matriz con valores
      */
-    private int[][] crearMatriz(int ancho, int alto) {
+    private int[][] crearMatriz(int ancho, int alto, String mensaje) {
         // Creamos una matriz para almacenar los datos
         int[][] matrizInicial = new int[alto][ancho];
 
         // Pedimos datos al usuario
         for (int i = 0; i < alto; i++) {
             for (int j = 0; j < ancho; j++) {
-                matrizInicial[i][j] = PeticionDatos.pedirEntero("Introduce el "
-                        + "valor para la posición [" + i + "," + j + "]");
+                matrizInicial[i][j] = PeticionDatos.pedirEntero(mensaje + 
+                        "\nIntroduce el valor para la posición "
+                        + "[" + i + "," + j + "]");
             }
         }
 

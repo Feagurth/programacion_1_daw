@@ -16,9 +16,10 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Scanner;
 
 /**
  * Implementa tres funciones que permitan averiguar los valores de e^(x), cos(x)
@@ -154,41 +155,40 @@ public class Ejercicio010 {
 
     public void Ejercicio() {
 
-        // Objeto leer datos del teclado
-        Scanner scanner = new Scanner(System.in);
-
         // Variables
         Double numero;
         int iterac;
-
+        
         // Pedimos el número de iteraciones que van a la realizar los algoritmos
         // para acercarnos al resultado
-        System.out.print("Introduzca el número de iteraciones para "
-                + "calcular los valores: ");
-        iterac = scanner.nextInt();
+        iterac = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número "
+                + "de iteraciones para calcular los valores");
 
         // Pedimos al usuario el valor del exponente
-        System.out.print("Introduzca el valor para el exponente de e^x: ");
-        numero = scanner.nextDouble();
+        numero = PeticionDatos.pedirReal("Introduzca el valor para el exponente "
+                + "de e^x");
+        
         // Mostramos resultados
-        System.out.print("e^" + numero + ": " + CalcularEx(numero, iterac, 30).doubleValue());
+        Mensajes.MostrarMensaje("e^" + numero + ": " + 
+                CalcularEx(numero, iterac, 30).doubleValue(), 
+                Mensajes.TipoMensaje.INFORMACION);
         
         // Pedimos al usuario el angulo para calcular el seno
-        System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
-                + "sen(x): ");
-        numero = Math.toRadians(scanner.nextDouble());
+        numero = Math.toRadians(PeticionDatos.pedirReal("\nIntroduzca el valor "
+                + "del angulo en grados para calcular sen(x)"));
 
         // Mostramos el resultado
-        System.out.print("Sen(" + numero + "): " + CalcularSeno(numero, iterac, 30).doubleValue());
+        Mensajes.MostrarMensaje("Sen(" + numero + "): " + 
+                CalcularSeno(numero, iterac, 30).doubleValue(), 
+                Mensajes.TipoMensaje.INFORMACION);
 
         // Pedimos al usuario el angulo para calcular el coseno
-        System.out.print("\nIntroduzca el valor del angulo en grados para calcular "
-                + "cos(x): ");
-        numero = Math.toRadians(scanner.nextDouble());
+        numero = Math.toRadians(PeticionDatos.pedirReal("\nIntroduzca el valor "
+                + "del angulo en grados para calcular cos(x)"));
 
         // Mostramos el resultado
-        System.out.print("Cos(" + numero + "): " + CalcularCoseno(numero, iterac, 30).doubleValue());
-        System.out.println("");
-
+        Mensajes.MostrarMensaje("Cos(" + numero + "): " + 
+                CalcularCoseno(numero, iterac, 30).doubleValue(), 
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

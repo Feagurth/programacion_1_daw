@@ -16,8 +16,10 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 import Utiles.Validaciones;
+import Utiles.Varios;
 
 /**
  * Una farmacia desea almacenar sus productos en una estructura de registros.
@@ -182,8 +184,8 @@ public class Ejercicio002 {
 
         @Override
         /**
-         * Método para devolver una representación en cadena de los valores
-         * que contiene el objeto
+         * Método para devolver una representación en cadena de los valores que
+         * contiene el objeto
          */
         public String toString() {
             return String.format("Medicamento{codigo=%s, nombre=%s, "
@@ -216,7 +218,7 @@ public class Ejercicio002 {
         String nombre;
         int descripcion;
         String laboratorio;
-        String proveedor;
+        String proveedor = "";
         float precio;
         float porcentajeIVA;
         int stock;
@@ -233,17 +235,24 @@ public class Ejercicio002 {
 
             nombre = PeticionDatos.pedirCadena("Introduzca el nombre del medicamento");
 
+            // Usaremos la variable proveedor para almacenar temporalmente estos valores
+            // y ahorrarons declarar una variable más pues no contendrá los valores
+            // mucho tiempo
+            laboratorio = "";
+
             // Iteramos por todos los valores del enumerador para mostrar las posibilidades de selección
             // al usuario
             for (Medicamento.TipoDescripcion tipoDescripcion : Medicamento.TipoDescripcion.values()) {
-                System.out.println("[" + tipoDescripcion.getValue() + "] " + tipoDescripcion.getString());
+
+                laboratorio += "[" + tipoDescripcion.getValue() + "] " + tipoDescripcion.getString() + "\n";
             }
 
             // Pedimos que introduzca la descripción del medicamento, y limitaremos
             // los valores de entrada desde el cero hasta un valor menos del tamaño
             // de los valores del enumerador, para que, de este modo se puedan
             // elegir todos los tipos de descripciones
-            descripcion = PeticionDatos.pedirEnteroRango("Introduzca la descripción del medicamento", 0, Medicamento.TipoDescripcion.values().length - 1);
+            laboratorio += "\nIntroduzca la descripción del medicamento";
+            descripcion = PeticionDatos.pedirEnteroRango(laboratorio, 0, Medicamento.TipoDescripcion.values().length - 1);
 
             laboratorio = PeticionDatos.pedirCadena("Introduzca el laboratorio del medicamento");
 
@@ -257,11 +266,11 @@ public class Ejercicio002 {
 
             // Iteramos preguntando los datos de la fechas hasta introducir una válida           
             do {
-                diaFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el dia de caducidad del medicamento");
+                diaFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el dia de caducidad del medicamento");
 
-                mesFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el mes de caducidad del medicamento");
+                mesFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el mes de caducidad del medicamento");
 
-                anyoFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el año de caducidad del medicamento");
+                anyoFechaCaducidad = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el año de caducidad del medicamento");
             } while (!Validaciones.validarDato(
                     diaFechaCaducidad + "/" + mesFechaCaducidad + "/" + anyoFechaCaducidad,
                     Validaciones.TipoValidacion.FECHA_DDMMAAAA));
@@ -276,25 +285,32 @@ public class Ejercicio002 {
             registros[contador] = registro;
         }
 
+        String resultado;
+
         // Iteramos mostrando los resultados
         for (Medicamento registro : registros) {
 
-            System.out.println("Datos del medicamento " + registro.nombre);
-            System.out.println("Código: " + registro.codigo);
-            System.out.println("Nombre: " + registro.nombre);
-            System.out.println("Descripción: " + registro.descripcion.getString());
-            System.out.println("Laboratorio: " + registro.laboratorio);
-            System.out.println("Proveedor: " + registro.proveedor);
-            System.out.println("Precio: " + registro.precio);
-            System.out.println("% IVA: " + registro.porcentajeIVA);
-            System.out.println("Stock: " + registro.stock);
-            System.out.println("Fecha Caducidad: " + registro.diaFechaCaducidad
-                    + "/" + registro.mesFechaCaducidad + "/"
-                    + registro.anyoFechaCaducidad);
+            resultado = "Datos del medicamento " + registro.nombre;
+            resultado += "\nCódigo: " + registro.codigo;
+            resultado += "\nNombre: " + registro.nombre;
+            resultado += "\nDescripción: " + registro.descripcion.getString();
+            resultado += "\nLaboratorio: " + registro.laboratorio;
+            resultado += "\nProveedor: " + registro.proveedor;
+            resultado += "\nPrecio: " + registro.precio;
+            resultado += "\nIVA: " + registro.porcentajeIVA;
+            resultado += "\nStock: " + registro.stock;
+            resultado += "\nFecha Caducidad: " + 
+                    Varios.fechaDDMMAAAA(registro.diaFechaCaducidad, 
+                            registro.mesFechaCaducidad, 
+                            registro.anyoFechaCaducidad, 
+                            "/");
+                    
 
             // Mostramos el resultado del método toString de la clase
-            System.out.println("");
-            System.out.println(registro.toString());
+            resultado += "\n";
+            resultado += "\n" + registro.toString();
+
+            Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
         }
     }
 }

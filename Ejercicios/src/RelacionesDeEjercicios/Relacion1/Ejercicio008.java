@@ -16,11 +16,12 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
- * Distribuciones bidimendional
+ * Distribuciones bidimendionales
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -128,10 +129,10 @@ public class Ejercicio008 {
          * Constructor para la clase
          *
          * @param longitud Tamaño de la distribución bidimensional
-         * @param aleatorio Si genera una matriz bidimensional aleatoria o 
-         * usa la establecida en el ejercicio
+         * @param aleatorio Si genera una matriz bidimensional aleatoria o usa
+         * la establecida en el ejercicio
          */
-        public DistribucionBidimensional(int longitud, Boolean aleatorio ) {
+        public DistribucionBidimensional(int longitud, Boolean aleatorio) {
 
             // Objeto para generar números aleatorios
             Random random = new Random();
@@ -142,13 +143,13 @@ public class Ejercicio008 {
             // Creamos una matriz de tamaño longitud x 2 para 
             // almacenar los datos
             if (aleatorio) {
-                distribucion = new double[this.longitud][2];
+                distribucion = new double[2][this.longitud];
 
-            // Iteramos por toda la matriz y generamos numeros aleatorios para
+                // Iteramos por toda la matriz y generamos numeros aleatorios para
                 // rellenarla
                 for (double[] distribucion1 : distribucion) {
-                    for (int j = 0; j < 2; j++) {
-                        distribucion1[j] = random.nextInt(100) +1;
+                    for (int j = 0; j < 8; j++) {
+                        distribucion1[j] = random.nextInt(200) + 1;
                     }
                 }
             } else {
@@ -322,66 +323,71 @@ public class Ejercicio008 {
             // Devolvemos el resultado
             return resultado;
         }
-        
+
         /**
          * Función para estimar el peso a partir de una altura
+         *
          * @param altura Altura para la que se quiere estimar el peso
          * @return Peso estimado para la altura introducida
          */
-        private Double estimarPeso(Double altura)
-        {
+        private Double estimarPeso(Double altura) {
             // Calculado según la siguiente formula
             // MediaY + valorCoeficienteCorrelacion(altura - MediaX)
-            return (mediaY() + 
-                    valorCoeficienteCorrelacion() * (altura - mediaX()));
+            return (mediaY()
+                    + valorCoeficienteCorrelacion() * (altura - mediaX()));
         }
     }
 
     public void Ejercicio() {
-        
-        // Objeto para pedir datos desde teclado
-        Scanner entrada = new Scanner(System.in);
-        
+
         // Variables
         double valorAltura;
+        String resultado = "";
+        String generacionAleatoria;
         
+        generacionAleatoria = PeticionDatos.pedirConsentimiento("¿Desea generar "
+                + "datos aleatorios? [s/n]", new String[]{"s","n"});
+
         // Creamos el objeto con el que trabajemos
-        DistribucionBidimensional distro = new DistribucionBidimensional(8, false);
+        DistribucionBidimensional distro = new DistribucionBidimensional(8, 
+                (generacionAleatoria.matches("s")));
 
         // Imprimimos la matriz
-        System.out.print(distro.imprimirMatriz());
+        resultado += distro.imprimirMatriz();
 
-        // Mostramos los datos del centro de gravedad
-        System.out.print("El centro de gravedad de la distribución es: "
-                + distro.centroDeGravedad());
+        // Concatenamos los datos del centro de gravedad
+        resultado += "\nEl centro de gravedad de la distribución es: "
+                + distro.centroDeGravedad();
 
-        // Mostramos los datos de la desviación típica de X
-        System.out.print("\nLa desviación típica de X es: "
-                + distro.valorDesviacionTipicaX());
+        // Concatenamos los datos de la desviación típica de X
+        resultado += "\nLa desviación típica de X es: "
+                + distro.valorDesviacionTipicaX();
 
-        // Mostramos los datos de la desviación típica de Y
-        System.out.print("\nLa desviación típica de Y es: "
-                + distro.valorDesviacionTipicaY());
-        
-        // Mostramos los datos la covarianza de la distribución
-        System.out.print("\nLa covarianza de la distribución es: "
-                + distro.valorCovarianza());
+        // Concatenamos los datos de la desviación típica de Y
+        resultado += "\nLa desviación típica de Y es: "
+                + distro.valorDesviacionTipicaY();
 
-        // Mostramos los datos del coeficiente de correlación
-        System.out.print("\nEl valor del coeficiente de correlación es: "
-                + distro.valorCoeficienteCorrelacion());
-        
-        // Mostramos la interpretacón del coeficiente de correlación
-        System.out.print("\n" + distro.interpretarCoeficienteCorrelacion());
+        // Concatenamos los datos la covarianza de la distribución
+        resultado += "\nLa covarianza de la distribución es: "
+                + distro.valorCovarianza();
 
-        
+        // Concatenamos los datos del coeficiente de correlación
+        resultado += "\nEl valor del coeficiente de correlación es: "
+                + distro.valorCoeficienteCorrelacion();
+
+        // Concatenamos la interpretacón del coeficiente de correlación
+        resultado += "\n" + distro.interpretarCoeficienteCorrelacion();
+
+        // Mostramos los resultados
+        Mensajes.MostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+
         // Petición de datos al usuario
-        System.out.print("Introduzca una altura para estimar el peso: ");
-        valorAltura = entrada.nextDouble();
-        
+        valorAltura = PeticionDatos.pedirRealPositivoNoCero("Introduzca "
+                + "una altura en centímetros para estimar el peso");
+
         // Calculamos el peso estimado basdo en la inforamción introducida por el usuario
-        System.out.print("El peso estimado es: " + distro.estimarPeso(valorAltura));
-        
-        System.out.println("");
+        Mensajes.MostrarMensaje("El peso estimado es: "
+                + distro.estimarPeso(valorAltura),
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

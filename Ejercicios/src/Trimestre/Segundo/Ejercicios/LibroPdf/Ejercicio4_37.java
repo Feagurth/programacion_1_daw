@@ -21,6 +21,7 @@ import Utiles.PeticionDatos;
 /**
  * Clase para realizar el ejercicio 4.37 del libro de texto Como Programar en
  * Java 7ed Deitel
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio4_37 {
@@ -30,7 +31,7 @@ public class Ejercicio4_37 {
         String numero;
 
         // Petición de datos al usuario
-        numero = String.valueOf(PeticionDatos.pedirEnteroCadenaLongitud("Introduzca un entero de 4 digitos", 4));
+        numero = PeticionDatos.pedirCadenaSoloNumeros("Introduzca un entero de 4 digitos", 4);
 
         // Codificamos el valor
         numero = codificar(numero);

@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -41,9 +42,12 @@ public class Ejercicio006 {
         // Pasamos la matriz a la función de verificación y mostramos el 
         // resultado
         if (esCuadradoMagico(matriz)) {
-            System.out.println("La matriz introducida es un cuadrado mágico");
+            Mensajes.MostrarMensaje("La matriz introducida es un cuadrado mágico", 
+                    Mensajes.TipoMensaje.INFORMACION);
         } else {
-            System.out.println("La matriz introducida no es un cuadrado mágico");
+            Mensajes.MostrarMensaje("La matriz introducida no es un cuadrado mágico", 
+                    Mensajes.TipoMensaje.INFORMACION);
+
         }
 
     }

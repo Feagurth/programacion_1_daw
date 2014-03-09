@@ -16,11 +16,13 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Crear la clase TablaMultiplicar cuya interfaz nos permita: a) Calcular la
- * tabla de multiplicar b) Mostrarla de forma estructurada por pantalla
+ * Crear la clase TablaMultiplicar cuya interfaz nos permita: 
+ *      a) Calcular la tabla de multiplicar 
+ *      b) Mostrarla de forma estructurada por pantalla
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -77,20 +79,26 @@ public class Ejercicio005 {
 
     public void Ejercicio() {
 
-        // Objeto para recibir datos por teclado
-        Scanner entrada = new Scanner(System.in);
-        
         // Petición de datos al usuario
-        System.out.print("Introduzca el número cuya tabla quiera mostrar: ");
-        int numero = entrada.nextInt();
-        
-        System.out.print("Introduzca la cantidad de operaciones a mostrar: ");
-        int iteraciones = entrada.nextInt();
-        
+        int numero = PeticionDatos.pedirEntero("Introduzca el número cuya tabla "
+                + "quiera mostrar");
+
+        int iteraciones = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca "
+                + "la cantidad de operaciones a mostrar");
+
         // Creamos el objeto
         TablaDeMultiplicar tabla = new TablaDeMultiplicar(numero);
 
         // Mostramos los resultados
-        System.out.println(tabla.generarTabla(iteraciones));
+        // Preguntamos si queremos mostrar el resultado a través de la consola 
+        // o de una ventana por si se han pedido demasiados resultados que generen
+        // una ventana demasiado grande como para no ver el botón de aceptar
+        if (PeticionDatos.pedirConsentimiento("Mostrar el resultado por "
+                + "consola [s/n]", new String[]{"s", "n"}).equals("s")) {
+            System.out.println(tabla.generarTabla(iteraciones));
+        } else {
+            Mensajes.MostrarMensaje(tabla.generarTabla(iteraciones), "Resultado",
+                    Mensajes.TipoMensaje.INFORMACION, false);
+        }
     }
 }

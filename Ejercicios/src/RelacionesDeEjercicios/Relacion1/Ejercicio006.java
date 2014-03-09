@@ -16,7 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Crear un programa en Java que convierta un número natural (menor a 4000) en
@@ -204,19 +205,17 @@ public class Ejercicio006 {
     }
 
     public void Ejercicio() {
-        // Objeto para leer datos desde el teclado
-        Scanner scanner = new Scanner(System.in);
-
         // Variable para almacenar el número introducido por el usuario
         int numero;
 
         // Pedimos al usuario un número y lo almacenamos en la variable
         // destinada a ello
-        System.out.print("Introduzca un número natural: ");
-        numero = scanner.nextInt();
+        numero = PeticionDatos.pedirEnteroRango("Introduzca un número "
+                + "entre 1 y 3999", 1, 3999);
 
         // Mostramos el resultado
-        System.out.printf("El valor de %d en números romanos es %s\n",
-                numero, ArabigoARomano(numero));
+        Mensajes.MostrarMensaje("El valor de " + numero + " en números romanos "
+                + "es: " + ArabigoARomano(numero), 
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

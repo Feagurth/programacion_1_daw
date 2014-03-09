@@ -138,6 +138,16 @@ public class Ejercicio105 {
         public float getComision() {
             return comision;
         }
+        
+        /**
+         * Función pare devolver el valor del sueldo más la comisión
+         *
+         * @return
+         */
+        public float getSueldoComision() {
+            return this.sueldoBase + this.comision;
+        }
+        
     }
 
     public void Ejercicio() {
@@ -231,6 +241,7 @@ public class Ejercicio105 {
             System.out.println("Sueldo Base: " + vendedor.sueldoBase);
             System.out.println("Total Ventas Anual: " + vendedor.totalAnual);
             System.out.println("Comisión : " + vendedor.comision);
+            System.out.println("Sueldo con Comisión: " + vendedor.getSueldoComision());
             System.out.println("");
         }
     }

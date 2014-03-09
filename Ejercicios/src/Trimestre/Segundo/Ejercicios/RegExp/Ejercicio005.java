@@ -16,6 +16,7 @@
  */
 package Trimestre.Segundo.Ejercicios.RegExp;
 
+import Utiles.Varios;
 import java.util.Scanner;
 
 /**
@@ -153,8 +154,8 @@ public class Ejercicio005 {
         }
 
         // Muestra de resultados
-        System.out.println("El día siguiente al introducido es: " + (dia < 9 ? "0" : "") + dia + "/"
-                + (mes < 9 ? "0" : "") + mes + "/" + anyo);
+        System.out.println("El día siguiente al introducido es: " 
+                + Varios.fechaDDMMAAAA(dia, mes, anyo, "/"));
     }
 
     /**

@@ -16,7 +16,9 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+import Utiles.Varios;
 
 /**
  * A partir de una fecha introducida por teclado con el formato DÍA, MES, AÑO,
@@ -69,21 +71,15 @@ public class Ejercicio001 {
 
     public void Ejercicio() {
 
-        // Objeto para la lectura de datos desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variables
         int dia, mes, anyo;
 
         // Lectura de datos
-        System.out.print("Introduzca el día: ");
-        dia = entrada.nextInt();
+        dia = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el día");
 
-        System.out.print("Introduzca el mes: ");
-        mes = entrada.nextInt();
+        mes = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el mes");
 
-        System.out.print("Introduzca el año: ");
-        anyo = entrada.nextInt();
+        anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el año");
 
         // Verificamos si la fecha introducida es válida
         if (EsFechaValida(dia, mes, anyo)) {
@@ -96,10 +92,16 @@ public class Ejercicio001 {
                 case 7:
                 case 8:
                 case 10:
+                    // Comprobamos si el dia introducido es el último dia del mes
                     if (dia == 31) {
+                        // Si lo es empezamos un mes nuevo
                         dia = 1;
+
+                        // Y sumamos uno al mes
                         mes += 1;
                     } else {
+                        // Si no es es último día del mes, simplemente
+                        // sumamos 1 a los dias                        
                         dia += 1;
                     }
                     break;
@@ -107,19 +109,28 @@ public class Ejercicio001 {
                 case 6:
                 case 9:
                 case 11:
+                    // Mismo proceso que para los meses de 31 dias
                     if (dia == 30) {
                         dia = 1;
                         mes += 1;
                     } else {
+                        // Si no es es último día del mes, simplemente
+                        // sumamos 1 a los dias                        
                         dia += 1;
                     }
                     break;
                 case 12:
+                    // Si es el último dia del mes del último mes
                     if (dia == 31) {
+                        // Iniiciamos un nuevo año
                         dia = 1;
                         mes = 1;
+
+                        // Sumamos uno al año
                         anyo += 1;
                     } else {
+                        // Si no es es último día del mes, simplemente
+                        // sumamos 1 a los dias
                         dia += 1;
                     }
                     break;
@@ -129,24 +140,38 @@ public class Ejercicio001 {
                     // poder calcular los rangos de fecha en el mes de Febrero
                     int apoyoBisiesto = 0;
 
+                    // Comprobamos si es un año bisiesto
                     if (!EsAnyoBisiesto(anyo)) {
+                        // Si no es así, cambiamos el valor a 1 para ayudar
+                        // en la compración de los dias de Febrero
                         apoyoBisiesto = 1;
                     }
 
+                    // Comprobamos si es el último dia de Febrero
                     if (dia == (29 - apoyoBisiesto)) {
+
+                        // Iniciamos nuevo mes                        
                         dia = 1;
+
+                        // Sumamos uno a los meses
                         mes += 1;
                     } else {
+                        // Si no es es último día del mes, simplemente
+                        // sumamos 1 a los dias
+
                         dia += 1;
                     }
             }
 
             // Muestra de resultados
-            System.out.println("El día siguiente al introducido es: " + (dia < 9 ? "0" : "") + dia + "/"
-                    + (mes < 9 ? "0" : "") + mes + "/" + anyo);
+            String resultado = "El día siguiente al introducido es: "
+                    + Varios.fechaDDMMAAAA(dia, mes, anyo, "/");
+
+            Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
         } else {
             // Mostramos mensaje de error
-            System.out.println("La fecha intrododucida no es válida");
+            Mensajes.MostrarMensaje("La fecha intrododucida no es válida",
+                    Mensajes.TipoMensaje.ERROR);
         }
 
     }

@@ -17,6 +17,8 @@
 
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
+
 /**
  * Supongamos que existen N ciudades en la red ferroviaria de un país, y que sus
  * nombres están almacenados en un vector CIUDAD. Diseñar un algoritmo en el que
@@ -57,21 +59,21 @@ public class Ejercicio008 {
         };
 
         String cadena;
+        String resultado = "";
 
         // Iteramos el array que contiene el nombre de las ciudades
         // que nos servirá para recorrer la horizontal del array de 
         // conexiones
         for (int i = 0; i < arrayNombreCiudades.length; i++) {
 
-            // Mostramos los datos de la cabecera, que contiene
+            // Concatenamos los datos de la cabecera, que contiene
             // el nombre de la ciudad y una raya separadora
-            System.out.println("");
-            System.out.println("Ciudad: " + arrayNombreCiudades[i]);
-            System.out.println("==================================");
+            resultado += "Ciudad: " + arrayNombreCiudades[i];
+            resultado += "\n==================================";
             
-            // Imprimimos el texto enlaza con: y dejamos  la linea lista para
+            // Concatenamos el texto enlaza con: y dejamos  la linea lista para
             // imprimir las conexiones con la provincia
-            System.out.print("Enlaza con: ");
+            resultado += "\nEnlaza con: ";
 
             // Reseteamos el valor de la variable cadena
             cadena = "";
@@ -93,9 +95,11 @@ public class Ejercicio008 {
             // cadena acabada en coma
             cadena = cadena.substring(0, cadena.length() - 2);
 
-            // Imprimimos la cadena y un retorno de carro
-            System.out.print(cadena);
-            System.out.println("");
+            // Concatenamos la cadena y unos retorno de carro
+            resultado += "\n" + cadena + "\n\n";
         }
+        
+        // Mostramos los resultados
+        Mensajes.MostrarMensaje(resultado,Mensajes.TipoMensaje.INFORMACION);
     }
 }

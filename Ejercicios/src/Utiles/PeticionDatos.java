@@ -16,8 +16,6 @@
  */
 package Utiles;
 
-import java.util.Scanner;
-
 /**
  * Clase para la petición y validación y control de datos al usuario
  *
@@ -32,18 +30,12 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static int pedirEntero(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
-
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -54,53 +46,23 @@ public class PeticionDatos {
     }
 
     public static int pedirEnteroRango(String cadena, int valorMinimo, int valorMaximo) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
-
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO)
                 || Integer.valueOf(resultado) < valorMinimo
-                ||  Integer.valueOf(resultado) > valorMaximo);
+                || Integer.valueOf(resultado) > valorMaximo);
 
         // Devolvemos el resultado
         return Integer.valueOf(resultado);
     }
 
-    public static String pedirEnteroCadenaLongitud(String cadena, int longitud) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
-        // Variable
-        String resultado;
-
-        do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
-
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
-
-            // Seguimos iteranndo mientras no se valide
-            // como correcto el texto introducido
-        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO)
-                || resultado.length() != longitud);
-
-        // Devolvemos el resultado
-        return resultado;
-    }    
-    
-    
     /**
      * Método para pedir y validar la entrada de un entero por parte del usuario
      *
@@ -108,18 +70,12 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static int pedirEnteroPositivo(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
-
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -136,22 +92,39 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static int pedirEnteroPositivoNoCero(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
-
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
         } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO_POSITIVO_NO_0));
+
+        // Devolvemos el resultado
+        return Integer.valueOf(resultado);
+    }
+
+    /**
+     * Método para pedir y validar la entrada de un entero por parte del
+     * usuario. Permite introducir números con ceros como primer dígito
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static int pedirEnteroPositivoNoCeroExtendido(String cadena) {
+        // Variable
+        String resultado;
+
+        do {
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.ENTERO_POSITIVO_NO_0_EXT));
 
         // Devolvemos el resultado
         return Integer.valueOf(resultado);
@@ -165,18 +138,12 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static String pedirCadena(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
-
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -193,19 +160,39 @@ public class PeticionDatos {
      * @param cadena Mensaje que se mostrará el usuario al pedir el valor
      * @return El valor validado introducido por el usuario
      */
-    public static String pedirCadenaSoloLetras(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
+    public static String pedirCadenaNumeroSimbolos(String cadena) {
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS));
+
+        // Devolvemos el resultado
+        return resultado;
+    }    
+    
+    
+    /**
+     * Método para pedir y validar la entrada de una cadena por parte del
+     * usuario. Solo admite la introducción de letras y del espacio en blanco
+     * como caracteres
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static String pedirCadenaSoloLetras(String cadena) {
+        // Variable
+        String resultado;
+
+        do {
+
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -216,24 +203,91 @@ public class PeticionDatos {
     }
 
     /**
+     * Método para pedir y validar la entrada de una cadena por parte del
+     * usuario. Solo admite la introducción de numeros como caracteres
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static String pedirCadenaSoloNumeros(String cadena) {
+        // Variable
+        String resultado;
+
+        do {
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS));
+
+        // Devolvemos el resultado
+        return resultado;
+    }
+    
+    /**
+     * Método para pedir y validar la entrada de una cadena por parte del
+     * usuario. Solo admite la introducción de numeros como caracteres
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @param longitud Tamaño que tiene que tener el número para ser validado
+     * @return El valor validado introducido por el usuario
+     */
+    public static String pedirCadenaSoloNumeros(String cadena, int longitud) {
+        // Variable
+        String resultado;
+
+        do {
+
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)
+                || resultado.length() != longitud);
+
+        // Devolvemos el resultado
+        return resultado;
+    }
+
+    /**
+     * Método para pedir y validar la entrada de una cadena por parte del
+     * usuario. Solo admite la introducción de letras y números
+     *
+     * @param cadena Mensaje que se mostrará el usuario al pedir el valor
+     * @return El valor validado introducido por el usuario
+     */
+    public static String pedirCadenaSoloLetrasNumeros(String cadena) {
+        // Variable
+        String resultado;
+
+        do {
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
+
+            // Seguimos iteranndo mientras no se valide
+            // como correcto el texto introducido
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA_SOLO_LETRAS_NUMEROS));
+
+        // Devolvemos el resultado
+        return resultado;
+    }    
+    
+    /**
      * Método para pedir y validar la entrada de un real por parte del usuario
      *
      * @param cadena Mensaje que se mostrará el usuario al pedir el valor
      * @return El valor validado introducido por el usuario
      */
     public static double pedirReal(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido            
@@ -251,18 +305,13 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static double pedirRealPositivo(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido                        
@@ -272,7 +321,7 @@ public class PeticionDatos {
         return Double.valueOf(resultado.replace(",", "."));
     }
 
-   /**
+    /**
      * Método para pedir y validar la entrada de un real positivo por parte del
      * usuario
      *
@@ -280,30 +329,24 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static double pedirRealPositivoNoCero(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido                        
-        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.REAL_POSITIVO) 
+        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.REAL_POSITIVO)
                 || resultado.equals("0")
                 || resultado.equals("0.0"));
 
         // Devolvemos el resultado
         return Double.valueOf(resultado.replace(",", "."));
     }
-    
-    
+
     /**
      * Método para validar una petición de consentimiento para realizar una
      * acción
@@ -314,19 +357,14 @@ public class PeticionDatos {
      * array de valores
      */
     public static String pedirConsentimiento(String cadena, String[] valores) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
         boolean validado = false;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Comprobamos que la cadena contenga alguno de los valores de
             // consentimiento almacenados en el array
@@ -357,18 +395,13 @@ public class PeticionDatos {
      * @return DNI validado
      */
     public static String pedirDNI(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -385,18 +418,13 @@ public class PeticionDatos {
      * @return El valor validado introducido por el usuario
      */
     public static String pedirBinario(String cadena) {
-        // Objeto para pedir valores al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Variable
         String resultado;
 
         do {
-            // Mostramos el mensaje especificado al usuario
-            System.out.print(cadena + ": ");
 
-            // Recogemos lo introducido por el usuario
-            resultado = entrada.nextLine();
+            // Realizamos una petición de datos la usuario
+            resultado = Mensajes.PedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
 
             // Seguimos iteranndo mientras no se valide
             // como correcto el texto introducido
@@ -404,7 +432,6 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         return resultado;
-    }    
-    
-    
+    }
+
 }

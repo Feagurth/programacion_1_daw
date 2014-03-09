@@ -17,7 +17,7 @@
 
 package RelacionesDeEjercicios.Relacion4;
 
-import java.util.Scanner;
+import Utiles.PeticionDatos;
 
 /**
  * Crear expresiones regulares para validar: 
@@ -40,9 +40,6 @@ public class Ejercicio003 {
     
     public void Ejercicio()
     {
-        // Objeto pare pedir datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
-    
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos
         String expresionRegular;
@@ -50,10 +47,13 @@ public class Ejercicio003 {
         // Variable para almacenar los valores que introducirá el usuario por 
         // teclado
         String cadena;
+        String apoyo;
                 
         // Apartado a
-        System.out.println("a) Hora. Ten en cuenta los diferentes tipos de hora");
-        System.out.println("===================================================");
+        apoyo = "a) Hora. Ten en cuenta los diferentes tipos de hora";
+        apoyo += "\n===================================================";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
+        
         
         // Definimos la expresión regular que necesitamos
         // Validación de horas formato 24 horas HH:MM o h:m
@@ -66,9 +66,7 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
@@ -76,9 +74,9 @@ public class Ejercicio003 {
         
         
         // Apartado b
-        System.out.println("");
-        System.out.println("b) Tarjeta de crédito");
-        System.out.println("=====================");
+        apoyo = "b) Tarjeta de crédito";
+        apoyo += "\n==================";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
         
         // Definimos la expresión regular que necesitamos
         expresionRegular = "(^[0-9]{13,16}$)"; // Tarjetas de credito de 13 a 16 números sin guiones ni espacios en blanco        
@@ -105,20 +103,17 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!cadena.matches(expresionRegular));            
         
         // Apartado c
-        System.out.println("");
-        System.out.println("c) Número de teléfono. Ten en cuenta si el número "
-                + "es o no internacional");
-        System.out.println("=================================================="
-                + "=====================");
+        apoyo = "c) Número de teléfono. Ten en cuenta si el número es o no internacional";
+        apoyo += "\n====================================================================";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
+        
         
         // Definimos la expresión regular que necesitamos
         // Validación de número de telefono para los siguientes formatos
@@ -134,20 +129,18 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
-
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
+            
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!cadena.matches(expresionRegular));                    
         
         
         // Apartado d
-        System.out.println("");
-        System.out.println("d) Código postal");
-        System.out.println("================");
-        
+        apoyo = "d) Código postal";
+        apoyo += "\n=============";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
+      
         // Definimos la expresión regular que necesitamos
         expresionRegular = "^[0-9]{5}$";        
         
@@ -155,9 +148,7 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
@@ -165,9 +156,9 @@ public class Ejercicio003 {
         
         
         // Apartado e
-        System.out.println("");
-        System.out.println("e) CIF");
-        System.out.println("======");
+        apoyo = "e) CIF";
+        apoyo += "\n===";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
         
         // Definimos la expresión regular que necesitamos
                             // Validación para clave entidad empezando por ABEH
@@ -181,18 +172,17 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!cadena.matches(expresionRegular));                            
         
         // Apartado f
-        System.out.println("");
-        System.out.println("f) Números enteros");
-        System.out.println("==================");
+        apoyo = "f) Números enteros";
+        apoyo += "\n===============";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
+
         
         // Definimos la expresión regular que necesitamos
         expresionRegular = "^(\\+|-)?[0-9]+$";
@@ -201,18 +191,16 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!cadena.matches(expresionRegular));                                    
         
         // Apartado g
-        System.out.println("");
-        System.out.println("f) Números reales");
-        System.out.println("=================");
+        apoyo = "g) Números reales";
+        apoyo += "\n===============";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
         
         // Definimos la expresión regular que necesitamos
         expresionRegular = "^[-]?([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$";
@@ -221,33 +209,30 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!cadena.matches(expresionRegular));     
         
         // Apartado h
-        System.out.println("");
-        System.out.println("h) Dirección MAC o dirección");
-        System.out.println("física (suponemos que cada pareja de números \n" +
-        "hexadecimales van separados por “:”). Por ejemplo 00:54:56:01:00:A0 \n" +
-        "(podría ser también 00-54-56-01-00-A0)");
-        System.out.println("================================================");
+        apoyo = "h) Dirección MAC o dirección física";
+        apoyo += "\n(suponemos que cada pareja de números \n" +
+                    "hexadecimales van separados por “:”). Por ejemplo 00:54:56:01:00:A0 \n" +
+                    "(podría ser también 00-54-56-01-00-A0)";
+        apoyo += "\n=================================";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
+
         
         // Definimos la expresión regular que necesitamos
-        expresionRegular = "^(([0-9]{2}|[ABCDEF]{2}|[0-9][ABCDEF]|[ABCDEF][0-9])[:|\\-]){5}"
-                + "([0-9]{2}|[ABCDEF]{2}|[0-9][ABCDEF]|[ABCDEF][0-9])$";
+        expresionRegular = "^(([0-9]{2}|[ABCDEF]{2}|[0-9][ABCDEF]|[ABCDEF][0-9])"
+                + "[:|\\-]){5}([0-9]{2}|[ABCDEF]{2}|[0-9][ABCDEF]|[ABCDEF][0-9])$";
         
         // Iteramos hasta que se cumpla la validación
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
@@ -255,10 +240,10 @@ public class Ejercicio003 {
         
         
         // Apartado i
-        System.out.println("");
-        System.out.println("i) Etiqueta img del lenguaje HTML");
-        System.out.println("=================================");
-        
+        apoyo = "i) Etiqueta img del lenguaje HTML";
+        apoyo += "\n==============================";
+        apoyo += "\nIntroduzca un valor para probar la expresión regular";
+
         // Definimos la expresión regular que necesitamos
         expresionRegular = "^(<[ ]?([iI][mM][Gg])([0-9a-zA-Z =\"])*>)|(<[ ]?([iI][mM][Gg])([0-9a-zA-Z =\"])*/>)$";
         
@@ -266,9 +251,7 @@ public class Ejercicio003 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca un valor para probar la expresión "
-                    + "regular: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos(apoyo);            
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando

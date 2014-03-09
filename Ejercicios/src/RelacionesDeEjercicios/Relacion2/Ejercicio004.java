@@ -16,7 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Escribe una aplicación que muestre la siguiente figura de rombo. Puedes
@@ -29,9 +30,6 @@ import java.util.Scanner;
 public class Ejercicio004 {
 
     public void Ejercicio() {
-        // Objeto para recibir datos desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variables
         int alto;
         String resultado = "";
@@ -39,10 +37,12 @@ public class Ejercicio004 {
         do {
 
             // Petición de datos al usuario
-            System.out.print("Introduzca un número entero impar para definir el ancho "
-                    + "máximo del rombo dibujado: ");
+            alto = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca un número "
+                    + "entero impar\npara definir el ancho máximo del rombo "
+                    + "dibujado");
 
-            alto = entrada.nextInt();
+            // Verificamos que el número sea impar para que el triángulo se 
+            // dibuje correctamente
         } while (alto % 2 == 0);
 
         for (int i = 1; i <= ((alto / 2) + 1); i++) {
@@ -73,7 +73,10 @@ public class Ejercicio004 {
 
         // Mostramos resultados. Se muestra tb por consola pues en un 
         // cuando de mensaje no queda bien alineado
-        System.out.print(resultado);
+        System.out.println(resultado);
+        
+        Mensajes.MostrarMensaje(resultado, "Resultado",
+                Mensajes.TipoMensaje.INFORMACION, true);
 
     }
 }

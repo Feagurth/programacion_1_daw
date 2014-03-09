@@ -16,11 +16,14 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Crear la clase Triángulo cuya interfaz nos permita a) Saber el área b)
- * Conocer el lado mayor c) Saber si es equilátero
+ * Crear la clase Triángulo cuya interfaz nos permita 
+ *      a) Saber el área 
+ *      b) Conocer el lado mayor 
+ *      c) Saber si es equilátero
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -153,31 +156,46 @@ public class Ejercicio002 {
 
     public void Ejercicio() {
 
-        // Objeto para pedir información por teclado
-        Scanner entrada = new Scanner(System.in);
-
+        // Variables
         float lado1, lado2, lado3;
-
+        
         // Petición de datos al usuario
-        System.out.print("Introduzca el valor del primer lado del triangulo : ");
-        lado1 = entrada.nextFloat();
+        lado1 = (float) PeticionDatos.pedirRealPositivoNoCero("Introduzca el valor del primer lado del triangulo");
 
-        System.out.print("Introduzca el valor del segundo lado del triangulo : ");
-        lado2 = entrada.nextFloat();
+        lado2 = (float) PeticionDatos.pedirRealPositivoNoCero("Introduzca el valor del segundo lado del triangulo");
 
-        System.out.print("Introduzca el valor del tercer lado del triangulo : ");
-        lado3 = entrada.nextFloat();
+        lado3 = (float) PeticionDatos.pedirRealPositivoNoCero("Introduzca el valor del tercer lado del triangulo");
 
         // Creamos el objeto
         Triangulo triangulo = new Triangulo(lado1, lado2, lado3);
+        
+        
 
         // Mostramos los resultados
-        System.out.println(triangulo.isValido() ? "Es un triangulo válido" : "No es un triangulo válido");
+        // Verficamos si es un triángulo válido
+        if (triangulo.isValido()) {
+            Mensajes.MostrarMensaje("Es un triangulo válido", 
+                    Mensajes.TipoMensaje.INFORMACION);
 
-        System.out.print("El lado mayor mide: " + triangulo.ladoMayor() + "\n");
+            // Comprobamos si es equilátero
+            if (triangulo.esEquilatero()) {
+                Mensajes.MostrarMensaje("Es un triangulo equilátero", 
+                        Mensajes.TipoMensaje.INFORMACION);
+            } else {
+                Mensajes.MostrarMensaje("No es un triangulo equilátero", 
+                        Mensajes.TipoMensaje.INFORMACION);
+            }
 
-        System.out.print("Area: " + triangulo.valorArea() + "\n");
-
+            // Mostramos su lado mayor y su area
+            Mensajes.MostrarMensaje("El lado mayor mide: " + 
+                    triangulo.ladoMayor(), Mensajes.TipoMensaje.INFORMACION);
+            
+            Mensajes.MostrarMensaje("Area: " + triangulo.valorArea(), 
+                    Mensajes.TipoMensaje.INFORMACION);
+        } else {
+            // Si no es válido, mostramos un mensaje
+            Mensajes.MostrarMensaje("No es un triangulo válido", 
+                    Mensajes.TipoMensaje.ERROR);
+        }
     }
-
 }

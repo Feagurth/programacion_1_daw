@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
@@ -267,26 +268,30 @@ public class Ejercicio001 {
             // vendedores creado anteriormente
             vendedores[loop] = vendedor;
 
-            System.out.println("");
-
         }
 
+        String resultado;
+        
         // Iteramos para ver los resultados del todos los vendedores que haya 
         // en el array de vendedores
         for (Vendedor vendedor : vendedores) {
 
-            System.out.println("Datos del vendedor: " + vendedor.getNombre() + " "
-                    + vendedor.getApellidos());
-            System.out.println("DNI: " + vendedor.getDNI());
-            System.out.println("Zona: " + vendedor.getZona());
-            System.out.println("Sueldo Base: " + vendedor.getSueldoBase());
-            System.out.println("Total Ventas Anual: " + vendedor.getTotalAnual());
-            System.out.println("Comisión : " + vendedor.getComision());
-            System.out.println("Sueldo con Comisión: " + vendedor.getSueldoComision());
-            System.out.println("");
+            
+            
+            resultado = "Datos del vendedor: " + vendedor.getNombre() + " " 
+                    + vendedor.getApellidos();
+            resultado += "\nDNI: " + vendedor.getDNI();
+            resultado += "\nZona: " + vendedor.getZona();
+            resultado += "\nSueldo Base: " + vendedor.getSueldoBase();
+            resultado += "\nTotal Ventas Anual: " + vendedor.getTotalAnual();
+            resultado += "\nComisión : " + vendedor.getComision();
+            resultado += "\nSueldo con Comisión: " + vendedor.getSueldoComision();
+            resultado += "\n";
 
-            System.out.println("ToString: " + vendedor.toString());
+            resultado += "\nToString: " + vendedor.toString();
 
+            Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+            
         }
     }
 }

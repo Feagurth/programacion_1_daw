@@ -16,16 +16,21 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Confeccionar una clase que represente un empleado. Nos interesa recoger su
  * nombre, sueldo y turno (mañana o tarde). Confeccionar una interfaz que nos
- * permita: a) Inicializar datos b) Imprimir sus datos c) Saber si debe pagar
- * impuestos (si el sueldo supera a 3000) Suponer que hay una empresa que tiene
- * 8 trabajadores, realizar además un programa que permita saber el gasto en el
- * sueldo por turnos, sabiendo que: Hay dos turnos: Mañana y Tarde La empresa
- * tiene 4 trabajadores por la mañana y 4 por la tarde
+ * permita: 
+ *      a) Inicializar datos 
+ *      b) Imprimir sus datos 
+ *      c) Saber si debe pagar impuestos (si el sueldo supera a 3000)
+ *
+ * Suponer que hay una empresa que tiene 8 trabajadores, realizar además un
+ * programa que permita saber el gasto en el sueldo por turnos, sabiendo que:
+ * Hay dos turnos: Mañana y Tarde La empresa tiene 4 trabajadores por la mañana
+ * y 4 por la tarde
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -110,9 +115,6 @@ public class Ejercicio004 {
 
     public void Ejercicio() {
 
-        // Objeto para leer datos del usuario
-        Scanner scanner;
-
         // Array para almacenar los empleados
         Empleado[] arrayEmpleados = new Empleado[8];
 
@@ -122,22 +124,18 @@ public class Ejercicio004 {
         // Iteramos para preguntar los datos de los empleados y almacenarlos
         for (int i = 0; i < 8; i++) {
 
-             scanner = new Scanner(System.in);
-            
             // Los 4 primeros empleados serán los del turno de mañana
             // y los siguientes los de la tarde
-            System.out.print("Introduzca el nombre del trabajador "
-                    + "para el turno de " + ((i < 4) ? "mañana" : "tarde") + ": ");
-            nombre = scanner.nextLine();
-            
-            
-            System.out.print("Introduzca el sueldo del trabajador "
-                    + "para el turno de " + ((i < 4) ? "mañana" : "tarde") + ": ");
+            nombre = PeticionDatos.pedirCadena("Introduzca el nombre del "
+                    + "trabajador para el turno "
+                    + "de " + ((i < 4) ? "mañana" : "tarde"));
 
-            sueldo = scanner.nextFloat();
+            sueldo = (float) PeticionDatos.pedirRealPositivoNoCero("Introduzca "
+                    + "el sueldo del trabajador para el turno "
+                    + "de " + ((i < 4) ? "mañana" : "tarde"));
 
             // Creamos el empleado y lo almacenamos en el array
-            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i < 4 ? 'm' : 't'));            
+            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i < 4 ? 'm' : 't'));
         }
 
         // Creamos los acumuladores y los inicializamos
@@ -153,8 +151,121 @@ public class Ejercicio004 {
             }
         }
 
-        // Mostramos resultados
-        System.out.println("El total del sueldo de la mañana es: " + sueldoMañana);
-        System.out.println("El total del sueldo de la tarde es: " + sueldoTarde);
+        String menu = "";
+        int valorMenu;
+
+        // Mostramos un menú con opciones para el usuario
+        menu += "Introduzca una opción para continuar\n";
+        menu += "------------------------------------\n";
+        menu += "[1] Imprimir los datos de un trabajador\n";
+        menu += "[2] Saber si un trabajador debe pagar impuestos\n";
+        menu += "[3] Mostrar el sueldo total de los trabajadores de la mañana\n";
+        menu += "[4] Mostrar el sueldo total de los trabajadores de la tarde\n";
+        menu += "[0] Salir\n\n";
+
+        valorMenu = PeticionDatos.pedirEnteroRango(menu, 0, 4);
+
+        String valorNombre;
+        String valorTurno;
+        int localizador;
+
+        while (valorMenu != 0) {
+            switch (valorMenu) 
+            {
+                // Opción de menú numero 1
+                case 1: {
+                    // Pedimos el nombre del trabajador y el turno al usuario
+                    valorNombre = PeticionDatos.pedirCadena("Introduzca el nombre del trabajador");
+                    valorTurno = PeticionDatos.pedirConsentimiento("Introduzca "
+                            + "el turno [m/t]", new String[]{"m", "t"});
+
+                    // Intentamos localizar al trabajador
+                    localizador = localizarTrabajador(arrayEmpleados, valorNombre, valorTurno);
+
+                    // Verificamos si lo hemos localizado
+                    if (localizador >= 0) {
+
+                        // Si lo hemos localizado, comprobamos si paga impuestos
+                        // y mostramos el mensaje adecuado
+                        Mensajes.MostrarMensaje(arrayEmpleados[localizador].imprimirDatos(), Mensajes.TipoMensaje.INFORMACION);
+                    } else {
+                        Mensajes.MostrarMensaje("No se ha podido localizar al "
+                                + "trabajador en el turno especificado",
+                                Mensajes.TipoMensaje.ERROR);
+                    }
+                    break;
+                }
+
+                // Opción de menú numero 2
+                case 2: {
+
+                    // Pedimos el nombre del trabajador y el turno al usuario
+                    valorNombre = PeticionDatos.pedirCadena("Introduzca el nombre del trabajador");
+                    valorTurno = PeticionDatos.pedirConsentimiento("Introduzca "
+                            + "el turno [m/t]", new String[]{"m", "t"});
+
+                    // Intentamos localizar al trabajador
+                    localizador = localizarTrabajador(arrayEmpleados, valorNombre, valorTurno);
+
+                    // Verificamos si lo hemos localizado
+                    if (localizador >= 0) {
+
+                        // Si lo hemos localizado, comprobamos si paga impuestos
+                        // y mostramos el mensaje adecuado
+                        if (arrayEmpleados[localizador].pagaImpuestos()) {
+                            Mensajes.MostrarMensaje("El trabajador "
+                                    + valorNombre + " debe pagar impuestos",
+                                    Mensajes.TipoMensaje.INFORMACION);
+                        } else {
+                            Mensajes.MostrarMensaje("El trabajador "
+                                    + valorNombre + " no debe pagar impuestos",
+                                    Mensajes.TipoMensaje.INFORMACION);
+
+                        }
+                    } else {
+                        Mensajes.MostrarMensaje("No se ha podido localizar al "
+                                + "trabajador en el turno especificado",
+                                Mensajes.TipoMensaje.ERROR);
+                    }
+                    break;
+                }
+                
+                // Opción de menú numero 3
+                case 3: {
+                    Mensajes.MostrarMensaje("El total del sueldo de la mañana es: "
+                            + sueldoMañana, Mensajes.TipoMensaje.INFORMACION);
+                    break;
+
+                }
+                // Opción de menú numero 4
+                case 4: {
+                    Mensajes.MostrarMensaje("El total del sueldo de la tarde es: "
+                            + sueldoTarde, Mensajes.TipoMensaje.INFORMACION);
+                    break;
+                }
+            }
+            
+            valorMenu = PeticionDatos.pedirEnteroRango(menu, 0, 4);
+        }
     }
+
+    /**
+     * Método para localizar a un trabajador buscando por el nombre. Devolverá
+     * el primer trabajador con ese nombre en el turno indicado
+     *
+     * @param array Array donde están almacenados los trabajadores
+     * @param nombre Nombre del trabajador a buscar
+     * @param turno Turno del trabajador
+     * @return Devuelve la posición del trabajador en el array
+     */
+    private int localizarTrabajador(Empleado[] array, String nombre, String turno) {
+        for (int i = (turno.equals("m") ? 0 : 4); i < array.length - (turno.equals("m") ? 4 : 0); i++) {
+            if (array[i].getNombre().equals(nombre)) {
+                return i;
+            }
+        }
+        return -1;
+
+    }
+
 }

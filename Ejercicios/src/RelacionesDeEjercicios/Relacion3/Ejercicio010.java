@@ -16,8 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * (Sistemas de reserva de una aerolínea). Una pequeña aerolínea acaba de
@@ -142,13 +142,17 @@ public class Ejercicio010 {
      * @param asiento Numero de asiento del billete
      * @param primeraClase Especifca si el billete es de primera clase
      */
-    private void imprimirPaseAbordaje(String usuario, int asiento, boolean primeraClase) {
-        System.out.println("============================================");
-        System.out.println("Nombre: " + usuario);
-        System.out.println("Nº Asiento: " + asiento);
-        System.out.println("Tipo Reserva: "
-                + (primeraClase ? "Primera Clase" : "Económica"));
-        System.out.println("============================================");
+    private String imprimirPaseAbordaje(String usuario, int asiento, boolean primeraClase) {
+        String resultado;
+
+        resultado = "============================================";
+        resultado += "\nNombre: " + usuario;
+        resultado += "\nNº Asiento: " + asiento;
+        resultado += "\nTipo Reserva: "
+                + (primeraClase ? "Primera Clase" : "Económica");
+        resultado += "\n============================================";
+
+        return resultado;
     }
 
     public void Ejercicio() {
@@ -159,19 +163,8 @@ public class Ejercicio010 {
         int numAsiento;
         int cantidadAsientos = 10;
         int cantidadAsientosPrimera = 5;
+        String apoyo;
 
-        /*
-         do {
-         // Pedimos al usuario el número de asientos que tendrá el sistema de 
-         // reservas en total
-         cantidadAsientos = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de asientos reservables");
-
-         // Pedimos al usuario el número de asientos de primera clase que 
-         // tendrá el sistema de reservas en total
-         cantidadAsientosPrimera = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de asientos de Primera Clase");
-            
-         } while (cantidadAsientos <= cantidadAsientosPrimera);
-         */
         // Creamos un objeto SistemaReservas para gestionar las reservas        
         SistemaReservas reservas = new SistemaReservas(cantidadAsientos, cantidadAsientosPrimera);
 
@@ -180,9 +173,10 @@ public class Ejercicio010 {
             nombreUsuario = PeticionDatos.pedirCadena("Introduzca su nombre");
 
             // Pedimos al usuario el tipo de reserva
-            System.out.println("1 Primera Clase");
-            System.out.println("2 Económico");
-            tipoReserva = PeticionDatos.pedirEnteroRango("Introduzca el tipo de reserva", 1, 2);
+            apoyo = "1 Primera Clase";
+            apoyo += "\n2 Económico";
+            apoyo += "\nIntroduzca el tipo de reserva";
+            tipoReserva = PeticionDatos.pedirEnteroRango(apoyo, 1, 2);
 
             // Verificamos que hay asientos para el tipo de reserva seleccionado
             if (reservas.verificarAsiento((tipoReserva == 1))) {
@@ -193,7 +187,12 @@ public class Ejercicio010 {
 
                 // Imprimimos el pasaje de abordaje con los datos que 
                 // tenemos almacenados
-                imprimirPaseAbordaje(nombreUsuario, numAsiento, tipoReserva == 1);
+                Mensajes.MostrarMensaje(
+                        imprimirPaseAbordaje(
+                                nombreUsuario,
+                                numAsiento,
+                                tipoReserva == 1),
+                        Mensajes.TipoMensaje.INFORMACION);
 
             } else {
 
@@ -217,7 +216,8 @@ public class Ejercicio010 {
                 // Si la respuesa es negativa, mostramos la respuesta 
                 // especificada
                 if (respuesta.equals("n")) {
-                    System.out.println("El próximo vuelo sale en 3 horas");
+                    Mensajes.MostrarMensaje("El próximo vuelo sale en 3 horas",
+                            Mensajes.TipoMensaje.INFORMACION);
                 } else {
 
                     // Si la respuesta es positiva, reservamos un asiento
@@ -227,7 +227,12 @@ public class Ejercicio010 {
 
                     // Imprimimos el pase de abordaje con los datos que 
                     // tenemos almacenados
-                    imprimirPaseAbordaje(nombreUsuario, numAsiento, tipoReserva != 1);
+                    Mensajes.MostrarMensaje(
+                            imprimirPaseAbordaje(
+                                    nombreUsuario, 
+                                    numAsiento, 
+                                    tipoReserva != 1), 
+                            Mensajes.TipoMensaje.INFORMACION);
                 }
             }
 
@@ -236,11 +241,12 @@ public class Ejercicio010 {
 
         // Si no quedan asientos libres, el programa se da por finalizado.
         // Mostramos un mensaje informativo
-        System.out.println("");
-        System.out.println("============================================");
-        System.out.println("Lo sentimos, no quedan asientos libres");
-        System.out.println("El próximo vuelo sale en 3 horas");
-        System.out.println("============================================");
+        apoyo = "============================================";
+        apoyo += "\nLo sentimos, no quedan asientos libres";
+        apoyo += "\nEl próximo vuelo sale en 3 horas";
+        apoyo += "\n============================================";
+        
+        Mensajes.MostrarMensaje(apoyo, Mensajes.TipoMensaje.AVISO);
 
     }
 }

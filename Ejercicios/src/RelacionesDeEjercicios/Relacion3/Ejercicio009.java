@@ -16,7 +16,10 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
+import Utiles.Varios;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -314,7 +317,8 @@ public class Ejercicio009 {
 
             // Iteramos el array de datos para concatenar los valores
             for (int i = 1; i <= arrayDatos.length; i++) {
-                salida += arrayDatos[i - 1] + "\t";
+                //salida += String.format("%5s", arrayDatos[i - 1]);
+                salida += arrayDatos[i - 1] + Varios.generarCadena(" ", 3, String.valueOf(arrayDatos[i - 1]));
 
                 // Si la iteración es múltiplo de 10, introducimos un 
                 // salto de línea
@@ -380,34 +384,38 @@ public class Ejercicio009 {
             distro = new DistribucionEstadistica(valores);
         }
 
+        String resultado = "";
+        
+        
         // Mostramos la distribución estadística con la que trabajaremos
-        System.out.println(distro.toString());
+        resultado += distro.toString();
 
         // Mostramos resultados
-        System.out.println("");
-        System.out.println("Resultados");
-        System.out.println("==========");
-        System.out.println("");
+        resultado += "\nResultados";
+        resultado += "\n==========";
 
-        System.out.println("Media: " + distro.media());
+        resultado += "\nMedia: " + distro.media();
 
-        System.out.print("Moda: ");
+        resultado += "\nModa: ";
 
         Object[] modas = distro.moda();
 
         for (Object moda : modas) {
-            System.out.print(moda + " ");
+            resultado += moda + " ";
         }
 
-        System.out.println("");
+        resultado += "\n";
 
-        System.out.println("Mediana: " + distro.mediana());
+        resultado += "\nMediana: " + distro.mediana();
 
-        System.out.println("Rango: " + distro.rango());
+        resultado += "\nRango: " + distro.rango();
 
-        System.out.println("Varianza: " + distro.varianza());
+        resultado += "\nVarianza: " + distro.varianza();
 
-        System.out.println("Desviación Típica: " + distro.desviacionTipica());
+        resultado += "\nDesviación Típica: " + distro.desviacionTipica();
 
+        
+        Mensajes.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true, new Dimension(40, 40));
     }
 }

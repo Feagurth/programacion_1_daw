@@ -16,12 +16,15 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Crear una clase para cada poliedro que permita: a) Almacenar la arista b)
- * Calcular el volumen c) Calcular el área Crear un programa de prueba que
- * inicialice poliedros y muestre el área y volumen de cada uno de ellos.
+ * Calcular el volumen c) Calcular el área
+ *
+ * Crear un programa de prueba que inicialice poliedros y muestre el área y
+ * volumen de cada uno de ellos.
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -48,6 +51,7 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve el área del tetraedro
+         *
          * @return Área del tetraedro
          */
         public double getArea() {
@@ -56,12 +60,13 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve al volumen del tetraedro
+         *
          * @return El volumen del tetraedro
          */
         public double getVolumen() {
             return volumen;
         }
-        
+
         /**
          * Constructor de la clase tetraedro
          *
@@ -95,6 +100,7 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve el área del cubo
+         *
          * @return Área del tetraedro
          */
         public double getArea() {
@@ -103,12 +109,13 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve al volumen del cubo
+         *
          * @return El volumen del cubo
          */
         public double getVolumen() {
             return volumen;
         }
-        
+
         /**
          * Constructor de la clase cubo
          *
@@ -120,7 +127,7 @@ public class Ejercicio009 {
             this.volumen = Math.pow(arista, 3);
         }
     }
-    
+
     /**
      * Clase para trabajar con un octaedro
      */
@@ -142,6 +149,7 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve el área del octaedro
+         *
          * @return Área del octaedro
          */
         public double getArea() {
@@ -150,12 +158,13 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve al volumen del octaedro
+         *
          * @return El volumen del octaedro
          */
         public double getVolumen() {
             return volumen;
         }
-        
+
         /**
          * Constructor de la clase octaedro
          *
@@ -167,7 +176,7 @@ public class Ejercicio009 {
             this.volumen = ((Math.pow(arista, 3) * Math.sqrt(2)) / 3);
         }
     }
-        
+
     /**
      * Clase para trabajar con un dodecaedro
      */
@@ -189,6 +198,7 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve el área del dodecaedro
+         *
          * @return Área del dodecaedro
          */
         public double getArea() {
@@ -197,25 +207,27 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve al volumen del dodecaedro
+         *
          * @return El volumen del dodecaedro
          */
         public double getVolumen() {
             return volumen;
         }
-        
+
         /**
          * Constructor de la clase dodecaedro
+         *
          * @param arista Arista del dodecaedro
          */
         public Dodecaedro(float arista) {
             this.arista = arista;
-            this.area = ((3 * Math.pow(arista, 2) * 
-                    Math.sqrt(25 + (10 * Math.sqrt(5)))));            
-            this.volumen = ((Math.pow(arista, 3) / 4) * 
-                    (15 + (7 * Math.sqrt(5))));
+            this.area = ((3 * Math.pow(arista, 2)
+                    * Math.sqrt(25 + (10 * Math.sqrt(5)))));
+            this.volumen = ((Math.pow(arista, 3) / 4)
+                    * (15 + (7 * Math.sqrt(5))));
         }
     }
-        
+
     /**
      * Clase para trabajar con un icosaedro
      */
@@ -237,6 +249,7 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve el área del icosaedro
+         *
          * @return Área del icosaedro
          */
         public double getArea() {
@@ -245,64 +258,67 @@ public class Ejercicio009 {
 
         /**
          * Función que devuelve al volumen del icosaedro
+         *
          * @return El volumen del icosaedro
          */
         public double getVolumen() {
             return volumen;
         }
-        
+
         /**
          * Constructor de la clase icosaedro
+         *
          * @param arista Arista del icosaedro
          */
         public Icosaedro(float arista) {
             this.arista = arista;
-            
+
             this.area = (5 * arista * Math.sqrt(3));
-            this.volumen = (((5 * Math.pow(arista, 3) / 12) * 
-                    (3 + Math.sqrt(5))));
+            this.volumen = (((5 * Math.pow(arista, 3) / 12)
+                    * (3 + Math.sqrt(5))));
         }
     }
-        
+
     public void Ejercicio() {
 
-        // Objeto para recoger datos por teclado
-        Scanner entrada = new Scanner(System.in);
-        
+        String resultado = "";
+
         // Petición de datos al usuario
-        System.out.print("Introduzca el valor de la arista de los polígonos: ");
-        float arista = entrada.nextFloat();
-        
+        float arista = (float) PeticionDatos.pedirRealPositivoNoCero("Introduzca"
+                + " el valor de la arista de los polígonos");
+
         // Objetos
         Tetraedro tetra = new Tetraedro(arista);
         Cubo cubo = new Cubo(arista);
         Octaedro octa = new Octaedro(arista);
         Dodecaedro dode = new Dodecaedro(arista);
         Icosaedro ico = new Icosaedro(arista);
-        
+
         // Datos del tetraedro
-        System.out.println("- Tetraedro -");
-        System.out.println("Area : " + tetra.getArea());
-        System.out.println("Volumen : " + tetra.getVolumen());
+        resultado += "Tetraedro";
+        resultado += "\nArea : " + tetra.getArea();
+        resultado += "\nVolumen : " + tetra.getVolumen();
 
         // Datos del cubo
-        System.out.println("- Cubo -");
-        System.out.println("Area : " + cubo.getArea());
-        System.out.println("Volumen : " + cubo.getVolumen());
-        
+        resultado += "\n\nCubo";
+        resultado += "\nArea : " + cubo.getArea();
+        resultado += "\nVolumen : " + cubo.getVolumen();
+
         // Datos del octaedro
-        System.out.println("- Octaedro -");
-        System.out.println("Area : " + octa.getArea());
-        System.out.println("Volumen : " + octa.getVolumen());
-        
+        resultado += "\n\nOctaedro";
+        resultado += "\nArea : " + octa.getArea();
+        resultado += "\nVolumen : " + octa.getVolumen();
+
         // Datos del dodecaedro
-        System.out.println("- Dodecaedro -");
-        System.out.println("Area : " + dode.getArea());
-        System.out.println("Volumen : " + dode.getVolumen());
-        
+        resultado += "\n\nDodecaedro";
+        resultado += "\nArea : " + dode.getArea();
+        resultado += "\nVolumen : " + dode.getVolumen();
+
         // Datos del icosaedro
-        System.out.println("- Icosaedro -");
-        System.out.println("Area : " + ico.getArea());
-        System.out.println("Volumen : " + ico.getVolumen());
+        resultado += "\n\nIcosaedro";
+        resultado += "\nArea : " + ico.getArea();
+        resultado += "\nVolumen : " + ico.getVolumen();
+
+        Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }

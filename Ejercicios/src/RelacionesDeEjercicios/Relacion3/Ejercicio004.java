@@ -16,8 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion3;
 
+import Utiles.Mensajes;
 import Utiles.PeticionDatos;
-import java.util.Scanner;
 
 /**
  * Visualizar la matriz traspuesta de una matriz M de 6 x 7 elementos
@@ -80,25 +80,26 @@ public class Ejercicio004 {
 
     /**
      * Método que nos permite mostrar una matriz
-     *
-     * @param matriz Matriz a mostrar
+     * @param matriz Matriz a formar
+     * @return Cadena con la matriz formateada
      */
-    private void mostrarMatriz(int[][] matriz) {
+    private String mostrarMatriz(int[][] matriz) {
+        String resultado = "";
+        
         for (int[] matriz1 : matriz) {
             for (int j = 0; j < matriz[1].length; j++) {
-                System.out.printf("\t" + matriz1[j]);
+                resultado += String.format("\t%s", matriz1[j]);
             }
-            System.out.println("");
+            resultado+= "\n";
         }
 
+        return resultado;
     }
 
     public void Ejercicio() {
-        // Objeto para pedir datos al usuario desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variables
         int tamanyoX, tamanyoY;
+        String resultado;
 
         // Pedimos datos al usuario
         tamanyoX = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el ancho de la matriz");
@@ -116,14 +117,18 @@ public class Ejercicio004 {
         matrizFinal = transponerMatriz(matrizInicial);
 
         // Pintamos la matriz inicial
-        System.out.println("Matriz Inicial");
+        resultado = "Matriz Inicial\n";
 
-        mostrarMatriz(matrizInicial);
+        resultado += mostrarMatriz(matrizInicial);
 
+        resultado += "\n";
+        
         // Pintamos la matriz final
-        System.out.println("Matriz Final");
+        resultado += "Matriz Final\n";
 
-        mostrarMatriz(matrizFinal);
+        resultado += mostrarMatriz(matrizFinal);
 
+        // Mostramos los resultados
+        Mensajes.MostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }

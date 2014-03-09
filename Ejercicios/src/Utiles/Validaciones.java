@@ -29,6 +29,7 @@ public class Validaciones {
     private static final String ENTERO_POSITIVO = "^(\\+)?[0-9]+$";
     private static final String ENTERO_NEGATIVO = "^-[0-9]+$";
     private static final String ENTERO_POSITIVO_NO_0 = "^[1-9]([0-9]+)?$";
+    private static final String ENTERO_POSITIVO_NO_0_EXT = "([0-9]+)?$";
     private static final String ENTERO_NEGATIVO_NO_0 = "^-[1-9]([0-9]+)?$";
     private static final String REAL = "^[-]?([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$";
     private static final String REAL_POSITIVO = "^([1-9]{1}[0-9]{0,}([\\.|\\,][0-9]{1,})?|0([\\.|\\,][0-9]{1,})?|[\\.|\\,][0-9]{1,})$";
@@ -70,6 +71,12 @@ public class Validaciones {
     
     private static final String BINARIO = "^[0-1]+$";
     
+    private static final String CADENA_SOLO_NUMEROS = "^[0-9]+$";
+    
+    private static final String CADENA_NUMEROS_SIMBOLOS = "^[a-zA-Z0-9 -<>/_.,:;(){}]+$";
+    
+    private static final String CADENA_SOLO_LETRAS_NUMEROS = "^[a-zA-Z0-9]+$";
+    
     
     /**
      * Tipos de validaciones que se pueden llevar a cabo
@@ -80,7 +87,8 @@ public class Validaciones {
         ENTERO_NEGATIVO(5), ENTERO_POSITIVO_NO_0(6), ENTERO_NEGATIVO_NO_0(7), REAL(8),
         REAL_POSITIVO(9), REAL_NEGATIVO(10), USUARIO(11), PASSWORD(12),
         FECHA_DDMMAA(13), FECHA_DDMMAAAA(14), CADENA_NUMEROS(15), DNI(16), 
-        BINARIO(17);
+        BINARIO(17), ENTERO_POSITIVO_NO_0_EXT(18), CADENA_SOLO_NUMEROS(19), 
+        CADENA_NUMEROS_SIMBOLOS(20), CADENA_SOLO_LETRAS_NUMEROS(21);
 
         private final int value;
 
@@ -135,6 +143,14 @@ public class Validaciones {
                 return dato.matches(DNI);
             case BINARIO:
                 return dato.matches(BINARIO);
+            case ENTERO_POSITIVO_NO_0_EXT:
+                return dato.matches(ENTERO_POSITIVO_NO_0_EXT);
+            case CADENA_SOLO_NUMEROS:
+                return dato.matches(CADENA_SOLO_NUMEROS);
+            case CADENA_NUMEROS_SIMBOLOS:
+                return dato.matches(CADENA_NUMEROS_SIMBOLOS);
+            case CADENA_SOLO_LETRAS_NUMEROS:
+                return dato.matches(CADENA_SOLO_LETRAS_NUMEROS);
             default:
                 return false;
         }

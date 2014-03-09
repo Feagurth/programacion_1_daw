@@ -16,7 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion4;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Elaborar un programa que controle la introducción de la matrícula. Tener en
@@ -28,9 +29,6 @@ import java.util.Scanner;
 public class Ejercicio004 {
 
     public void Ejercicio() {
-        // Objeto pare pedir datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos
         String expresionRegular;
@@ -56,13 +54,15 @@ public class Ejercicio004 {
         // Iteramos hasta que se cumpla la validación
         do {
             // Pedimos datos al usuario
-            System.out.println("Introduzca una matrícula: ");
-            cadena = entrada.nextLine();
+            cadena = PeticionDatos.pedirCadenaNumeroSimbolos("Introduzca una matrícula");
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         } while (!cadena.matches(expresionRegular));
 
+        // Mostramos mensaje
+        Mensajes.MostrarMensaje("Matrícula válida",
+                Mensajes.TipoMensaje.INFORMACION);
     }
 
 }

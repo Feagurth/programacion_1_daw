@@ -16,7 +16,9 @@
  */
 package RelacionesDeEjercicios.Relacion2;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+import java.awt.Dimension;
 
 /**
  * Calcula el valor de PI a partir de la serie infinita 4 - 4/3 + 4/5 - 4/7 +
@@ -27,31 +29,28 @@ import java.util.Scanner;
 public class Ejercicio005 {
 
     public void Ejercicio() {
-        // Objeto para leer información desde el teclado
-        Scanner entrada = new Scanner(System.in);
 
         // Variables
         int iteraciones;
         float valorPi = 0;
         boolean controlSuma = true;
-
-        do {
-            // Pedimos al usuario el número de iteraciones para calcular el valor 
-            // de pi
-            System.out.print("Introduzca el número de iteraciones a realizar para "
-                    + "calcular el valor de PI: ");
-            iteraciones = entrada.nextInt();
-        } while (iteraciones <= 0);
-
         int contador = 1;
+        String resultado = "";
+
+        // Pedimos al usuario el número de iteraciones para calcular el valor 
+        // de pi
+        iteraciones = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca "
+                + "el número de iteraciones a realizar\npara calcular "
+                + "el valor de PI");
+
+        resultado += String.format("%10s\t%s\n", "Iteracion", "PI");
 
         // Iteramos desde 1 hasta el numero de iteraciones multiplicada por 2
         // con incremento de 2. Esto nos permite realizar tantas operaciones
         // como quiere el usuario, mientras que el valor de i será el de todos
         // los números impares que queramos
         for (int i = 1; i < iteraciones * 2; i += 2, contador++) {
-            
-            
+
             // Comprobamos si tenemos que sumar o restar
             if (controlSuma) {
                 valorPi += (4f / i);
@@ -62,12 +61,15 @@ public class Ejercicio005 {
             // realize la operación contraria a la actual
             controlSuma = !controlSuma;
 
-            System.out.println("El valor de PI con " + contador
-                    + (contador == 1 ? " iteración: " : " iteraciones: ") 
-                    + valorPi);
+            resultado += String.format("%10s\t%8f\n", 
+                    String.valueOf(contador), valorPi);
+
         }
 
         // Mostramos el resultado al usuario
-        System.out.println("El valor final de PI es: " + valorPi);
+        resultado += "\nEl valor final de PI es: " + valorPi;
+        
+        Mensajes.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true, new Dimension(20, 30));
     }
 }

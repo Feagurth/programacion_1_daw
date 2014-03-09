@@ -17,6 +17,8 @@
 
 package RelacionesDeEjercicios.Relacion2;
 
+import Utiles.Mensajes;
+
 /**
  * Escribe una aplicación que muestre los siguientes patrones por separado, uno 
  * debajo del otro. Utiliza ciclos for para generar los patrones. Todos los 
@@ -60,13 +62,21 @@ public class Ejercicio008 {
      */
     private void apartadoA()
     {
-        System.out.println("Apartado A");
+        String resultado = "";
+        
+        resultado += "Apartado A\n";
+        
         for (int i = 1; i <= 10; i++) {
             for (int j = 0; j < i; j++) {
-                System.out.print("*");
+                resultado += "*";
             }
-            System.out.println();
+            resultado += "\n";
         }
+        
+        // Mostramos el resultado por consola y por mensaje emergente
+        System.out.println(resultado);
+        Mensajes.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true);            
     }
 
     /**
@@ -75,13 +85,20 @@ public class Ejercicio008 {
     
     private void apartadoB()
     {
-        System.out.println("Apartado B");
+        String resultado = "";
+        
+        resultado += "Apartado B\n";
         for (int i = 10; i >= 1; i--) {
             for (int j = i; j > 0; j--) {
-                System.out.print("*");
+                resultado += "*";
             }
-            System.out.println();
+            resultado += "\n";
         }
+
+        // Mostramos el resultado por consola y por mensaje emergente
+        System.out.println(resultado);
+        Mensajes.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true);        
     }
     
     /**
@@ -89,20 +106,26 @@ public class Ejercicio008 {
      */
     private void apartadoC()
     {
-        System.out.println("Apartado C");
+        String resultado = "";
+        
+        resultado += "Apartado C\n";
         for (int i = 1; i <= 10; i++) {
             for (int j = 1; j <= 10; j++) {
                 if(j >= i)
                 {
-                    System.out.print("*");
+                    resultado += "*";
                 }
                 else
                 {
-                    System.out.print(" ");                
+                    resultado += " ";                
                 }
             }
-            System.out.println();
+            resultado += "\n";
         }
+        // Mostramos el resultado por consola y por mensaje emergente
+        System.out.println(resultado);
+        Mensajes.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true);        
     }
     
     /**
@@ -110,19 +133,26 @@ public class Ejercicio008 {
      */
     private void apartadoD()
     {
-        System.out.println("Apartado D");
+        String resultado = "";
+        
+        resultado += "Apartado D\n";
         for (int i = 1; i <= 10; i++) {
             for (int j = 1; j <= 10; j++) {
                 if(j <= 10 - i)
                 {
-                    System.out.print(" ");
+                    resultado += " ";
                 }
                 else
                 {
-                    System.out.print("*");                
+                    resultado += "*";                
                 }
             }
-            System.out.println();
+            resultado += "\n";
         }
+        
+        // Mostramos el resultado por consola y por mensaje emergente
+        System.out.println(resultado);
+        Mensajes.MostrarMensaje(resultado, "Resultado", 
+                Mensajes.TipoMensaje.INFORMACION, true);
     }        
 }

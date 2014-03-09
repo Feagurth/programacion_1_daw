@@ -16,7 +16,8 @@
  */
 package RelacionesDeEjercicios.Relacion4;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Crearos una expresión regular para verificar la fecha con el 
@@ -51,24 +52,19 @@ public class Ejercicio001 {
         String validaFecha = validaMeses31 + "|" + validaMeses30 + "|" + 
                 validaFebrero + "|" + validaFebreroBis;
 
-        // Objeto para pedir datos por teclado al usuario
-        Scanner entrada;
-
         // Variable para almacenar la fecha
         String fecha;
 
         do {
-            // Creamos el objeto
-            entrada = new Scanner(System.in);
-
             // Pedimos datos al usuario
-            System.out.print("Introduzca una fecha valida [dd/mm/aa]: ");
-            fecha = entrada.nextLine();
+            fecha = PeticionDatos.pedirCadenaNumeroSimbolos("Introduzca una fecha "
+                    + "valida [dd/mm/aa]");
 
             // Comprobamos si la fecha es correcta usando expresiones regulares
         } while (!fecha.matches(validaFecha));
 
         // Mostramos el resultado       
-        System.out.println("La fecha " + fecha + " es una fecha válida");
+        Mensajes.MostrarMensaje("La fecha " + fecha + " es una fecha válida", 
+                Mensajes.TipoMensaje.INFORMACION);
     }
 }

@@ -14,61 +14,59 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package RelacionesDeEjercicios.Relacion2;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Una compañía desea transmitir datos a través del teléfono, pero le preocupa 
- * que sus teléfonos puedan estar intervenidos. Te ha pedido que escribas un 
- * programa que cifre los datos, de manera que éstos puedan transmitirse con 
- * más seguridad. Todos los datos se transmiten como ente-ros de cuatro dígitos
- *      a) La aplicación debe leer un entero de cuatro dígitos introducido por 
- *      el usuario y cifrarlo de la siguiente manera:
+ * Una compañía desea transmitir datos a través del teléfono, pero le preocupa
+ * que sus teléfonos puedan estar intervenidos. Te ha pedido que escribas un
+ * programa que cifre los datos, de manera que éstos puedan transmitirse con más
+ * seguridad. Todos los datos se transmiten como enteros de cuatro dígitos 
+ *      a) La aplicación debe leer un entero de cuatro dígitos introducido por el
+ *      usuario y cifrarlo de la siguiente manera: 
  *          i) Reemplazar cada dígito con el resultado de sumar 7 al dígito y 
- *          obtener el residuo después de dividir el nuevo valor entre 10
+ *          obtener el residuo después de dividir el nuevo valor entre 10 
  *          ii) Luego intercambia el primer dígito con el tercero, intercambia 
- *          el segundo dígito con el cuarto.
- *      b) Simular un canal de transmisión de información con el procedimiento 
- *      de cifrado, es decir:
- *          i) En el origen:
- *              (1) Se lee el número a transmitir
- *              (2) Se cifra
- *          ii) En el destino
- *              (1) Se descifra
- *              (2) Se imprime
- * 
+ *          el segundo dígito con el cuarto. b) Simular un canal de transmisión 
+ *          de información con el procedimiento de cifrado, es decir: 
+ *              i) En el origen: 
+ *                  (1) Se lee el número a transmitir 
+ *                  (2) Se cifra 
+ *              ii) En el destino:
+ *                  (1) Se descifra 
+ *                  (2) Se imprime
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio003 {
-    
-    public void Ejercicio() {
-        // Objeto para leer datos desde el teclado
-        Scanner entrada = new Scanner(System.in);
 
+    public void Ejercicio() {
         // Variable para almacenar los datos introducidos por el usuario
         String numero;
 
         // Petición de datos al usuario
-        System.out.print("Introduzca un entero de 4 digitos: ");
-        numero = entrada.nextLine();
+        numero = PeticionDatos.pedirCadenaSoloNumeros("Introduzca un entero de 4 digitos", 4);
 
         // Codificamos el valor
         numero = codificar(numero);
 
         // Mostramos en número codificado
-        System.out.println("El valor codificado es: " + numero);
+        Mensajes.MostrarMensaje("El valor codificado es: " + numero, 
+                Mensajes.TipoMensaje.INFORMACION);
 
         // Descodificamos el numero codificado
         numero = decodificar(numero);
 
         // Mostramos el número descodificado
-        System.out.println("El valor descodificado es: " + numero);
+        Mensajes.MostrarMensaje("El valor descodificado es: " + numero, 
+                Mensajes.TipoMensaje.INFORMACION);
     }
 
     /**
      * Función para decodificar un valor numérico como una cadena
+     *
      * @param valorNumero valor numérico a codificar
      * @return Cadena codificada
      */
@@ -100,6 +98,7 @@ public class Ejercicio003 {
 
     /**
      * Función para decodificar un valor numérico codificado a su valor original
+     *
      * @param valorNumero valor numérico a descodificar
      * @return Valor descodificado
      */
@@ -143,5 +142,5 @@ public class Ejercicio003 {
 
         // Devolvemos la cadena sin codificar
         return apoyo2.toString();
-    }        
+    }
 }

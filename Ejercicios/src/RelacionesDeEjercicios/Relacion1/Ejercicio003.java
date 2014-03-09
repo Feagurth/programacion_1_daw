@@ -16,11 +16,13 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Crear la clase Punto con una interfaz que nos permita: a) Almacenar las
- * coordenadas b) Saber en qué cuadrante está
+ * Crear la clase Punto con una interfaz que nos permita: 
+ *          a) Almacenar las coordenadas 
+ *          b) Saber en qué cuadrante está
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -69,8 +71,8 @@ public class Ejercicio003 {
          * está en el segundo cuadrante 3 si está en el tercer cuadrante 4 si
          * está en el cuarto cuadrante 5 si está en la intersección entre el
          * primer cuadrante y el segundo 6 si está en la intersección entre el
-         * segundo cuadrante y el tercero 7 si está en la intersección entre el
-         * tercer cuadrante y el cuarto 8 si está en la intersección entre el
+         * segundo cuadrante y el tercero 7 si está en la intersección entre
+         * eltercer cuadrante y el cuarto 8 si está en la intersección entre el
          * cuarto cuadrante y el primero
          */
         public int valorCuadranteExtendido() {
@@ -169,15 +171,10 @@ public class Ejercicio003 {
     }
 
     public void Ejercicio() {
-        // Objeto para recoger información desde el teclado
-        Scanner entrada = new Scanner(System.in);
-
         // Petición de datos al usuario
-        System.out.print("Introduzca la coordenada x del punto: ");
-        int x = entrada.nextInt();
+        int x = PeticionDatos.pedirEntero("Introduzca la coordenada x del punto");
 
-        System.out.print("Introduzca la coordenada y del punto: ");
-        int y = entrada.nextInt();
+        int y = PeticionDatos.pedirEntero("Introduzca la coordenada y del punto");
 
         // Creación del objeto
         Punto punto = new Punto(x, y);
@@ -206,6 +203,7 @@ public class Ejercicio003 {
         }
 
         // Mostramos el resultado
-        System.out.println("Punto (" + x + "," + y + ") Cuadrante: " + resultado);
+        Mensajes.MostrarMensaje("Punto (" + x + "," + y + ")\nCuadrante: " + 
+                resultado, Mensajes.TipoMensaje.INFORMACION);
     }
 }

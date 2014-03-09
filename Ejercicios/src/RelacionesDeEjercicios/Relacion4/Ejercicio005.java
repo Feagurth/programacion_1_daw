@@ -17,7 +17,8 @@
 
 package RelacionesDeEjercicios.Relacion4;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
  * Crear un programa que valide la autenticación de un usuario. Es decir, 
@@ -34,9 +35,6 @@ public class Ejercicio005 {
     
     public void Ejercicio()
     {
-        // Objeto pare pedir datos al usuario por teclado
-        Scanner entrada = new Scanner(System.in);
-    
         // Variable para almacenar las distitnas expresiones regulares que 
         // usaremos para validar los datos
         String expresionRegular;
@@ -45,6 +43,7 @@ public class Ejercicio005 {
         // teclado
         String usuario;
         String password;
+        String apoyo;
                 
         // Definimos la expresión regular que necesitamos para validar el usuario
         // Validamos usuarios con una letra inicial y entre 5 o 15 caracteres más
@@ -55,8 +54,8 @@ public class Ejercicio005 {
         do
         {
             // Pedimos datos al usuario
-            System.out.print("Introduzca el nombre de usuario: ");
-            usuario = entrada.nextLine();
+            usuario = PeticionDatos.pedirCadenaSoloLetrasNumeros("Introduzca "
+                    + "el nombre de usuario");
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
@@ -70,18 +69,19 @@ public class Ejercicio005 {
         do
         {
             // Pedimos datos al usuario
-            System.out.println("Entre 8 y 10 caracteres, por lo menos un dígito "
+            apoyo = "Entre 8 y 10 caracteres, por lo menos un dígito "
                     + "y un alfanumérico, y no puede contener caracteres "
-                    + "espaciales.");
-            System.out.print("Introduzca el password: ");
-            password = entrada.nextLine();
+                    + "espaciales.\nIntroduzca el password";
+            password = PeticionDatos.pedirCadenaSoloLetrasNumeros(apoyo);
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
             // iterando
         }while(!password.matches(expresionRegular));        
         
-        System.out.println("Usuario: " + usuario);
-        System.out.println("Password: " + password);
+        apoyo = "Usuario: " + usuario;
+        apoyo += "\nPassword: " + password;
+        
+        Mensajes.MostrarMensaje(apoyo, Mensajes.TipoMensaje.INFORMACION);
     
     }
     

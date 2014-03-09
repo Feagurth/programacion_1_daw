@@ -16,16 +16,21 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
-import java.util.Scanner;
+import Utiles.Mensajes;
+import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Crear la clase Persona cuya interfaz nos permita: a) Almacenar el nombre, la
- * edad de una persona, nivel de estudios y sueldo i) Niveles de estudios (1)
- * Codificarlo como enumerado (2) Valores: ESO, BACHILLERATO, UNIVERSIDAD,
- * DOCTORADO b) Mostrar los datos cargados c) Indicar si es mayor de edad o no.
- * d) Si la edad es menor o igual a 28 y el nivel de estudios es mayor que tres
- * o bien, si la edad es menor de 30 y los ingresos superan los 28000 euros
- * entonces es un jasp (campo booleano).
+ * Crear la clase Persona cuya interfaz nos permita: 
+ *      a) Almacenar el nombre, laedad de una persona, nivel de estudios y sueldo 
+ *          i) Niveles de estudios 
+ *              (1) Codificarlo como enumerado 
+ *              (2) Valores: ESO, BACHILLERATO, UNIVERSIDAD, DOCTORADO 
+ *      b) Mostrar los datos cargados 
+ *      c) Indicar si es mayor de edad o no.
+ *      d) Si la edad es menor o igual a 28 y el nivel de estudios es mayor 
+ *      que tres bien, si la edad es menor de 30 y los ingresos superan los 
+ *      28000 euros entonces es un jasp (campo booleano).
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -171,24 +176,17 @@ public class Ejercicio001 {
     }
 
     public void Ejercicio() {
-        // Objeto para pedir datos al usuario
-        Scanner entrada = new Scanner(System.in);
-
         // Petición de datos al usuario
-        System.out.print("Nombre: ");
-        String nombre = entrada.nextLine();
-        
-        System.out.print("Edad: ");
-        int edad = entrada.nextInt();
+        String nombre = PeticionDatos.pedirCadena("Nombre");
 
-        System.out.print("Sueldo: ");
-        float sueldo = entrada.nextFloat();
+        int edad = PeticionDatos.pedirEnteroPositivoNoCero("Edad");
 
-        System.out.print("Nivel de Estudios [ESO(1), BACHILLERATO(2), UNIVERSIDAD(3), DOCTORADO(4)]: ");
+        float sueldo = (float) PeticionDatos.pedirRealPositivoNoCero("Sueldo");
+
         Persona.NivelEstudios nivelEstudios = null;
-        
-        switch(entrada.nextInt())
-        {
+
+        switch (PeticionDatos.pedirEnteroRango("Nivel de Estudios [ESO(1), "
+                + "BACHILLERATO(2), UNIVERSIDAD(3), DOCTORADO(4)]", 1, 4)) {
             case 1:
                 nivelEstudios = Persona.NivelEstudios.ESO;
                 break;
@@ -200,23 +198,29 @@ public class Ejercicio001 {
                 break;
             case 4:
                 nivelEstudios = Persona.NivelEstudios.DOCTORADO;
-                break;                      
+                break;
         }
-        
+
         // Creamos el objeto
         Persona persona = new Persona(
                 nombre, edad, sueldo, nivelEstudios);
 
         // Mostramos la información
-        System.out.println("Datos de la persona: " + persona.MostrarDatosPersona());
+        Mensajes.MostrarMensaje("Datos de la persona:\n " + 
+                persona.MostrarDatosPersona(), "Resultados", 
+                Mensajes.TipoMensaje.INFORMACION);
 
         // Mostramos si es mayor de edad
-        System.out.println((persona.EsMayorDeEdad()
-                ? "Es mayor de edad" : "No es mayor de edad"));
-
+        Mensajes.MostrarMensaje((persona.EsMayorDeEdad()? 
+                "Es mayor de edad" : 
+                "No es mayor de edad"), 
+                "Resultados", Mensajes.TipoMensaje.INFORMACION);        
+        
+        
         // Mostramos si es JASP
-        System.out.println(persona.EsJASP()
-                ? "Es JASP" : "No es JASP");
-
+        Mensajes.MostrarMensaje((persona.EsJASP()? 
+                "Es JASP" : 
+                "No es JASP"), 
+                "Resultados", Mensajes.TipoMensaje.INFORMACION);        
     }
 }

@@ -16,6 +16,7 @@
  */
 package RelacionesDeEjercicios.Relacion1;
 
+import Utiles.Mensajes;
 import java.util.Random;
 
 /**
@@ -41,10 +42,10 @@ public class Ejercicio007 {
 
         // Iteramos para las columnas
         for (int i = 0; i < 10; i++) {
-            
+
             // Iteramos para las filas
             for (int j = 0; j < 10; j++) {
-                
+
                 // Generamos un caracter a base de generar un numero aleatorio
                 // de o a 24 y sumando 97, lo que nos da un rango de 97 a 122
                 // que corresponde a las letras de a la z en minúscula en la 
@@ -62,7 +63,7 @@ public class Ejercicio007 {
 
                 // Guardamos el caracter en su posición correspondiente
                 array[i][j] = caracter;
-                
+
                 // Añadimos el caracter a la matriz de resultado con 
                 // una tabulación
                 resultado += caracter + "\t";
@@ -70,11 +71,12 @@ public class Ejercicio007 {
             // En el cambio de fila, introducimos un retorno de carro
             resultado += "\n";
         }
-        
+
         // Mostramos resultados
-        System.out.print(resultado);
-        System.out.print("\nCantidad de vocales: " + vocales);
-        System.out.print("\nCantidad de consonantes: " + consonantes);
-        System.out.println("");        
+        resultado += "\nCantidad de vocales: " + vocales;
+        resultado += "\nCantidad de consonantes: " + consonantes;
+        
+        Mensajes.MostrarMensaje(resultado,"Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        
     }
 }
