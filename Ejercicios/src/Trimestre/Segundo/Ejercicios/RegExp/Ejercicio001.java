@@ -181,7 +181,7 @@ public class Ejercicio001 {
                 // Opción de menú numero 1
                 case 1: {
                     // Pedimos el nombre del trabajador y el turno al usuario
-                    valorNombre = PeticionDatos.pedirCadena("Introduzca el nombre del trabajador");
+                    valorNombre = PeticionDatos.pedirCadenaSoloLetras("Introduzca el nombre del trabajador");
                     valorTurno = PeticionDatos.pedirConsentimiento("Introduzca "
                             + "el turno [m/t]", new String[]{"m", "t"});
 

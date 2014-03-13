@@ -78,9 +78,13 @@ public class Ejercicio005 {
         int dia, mes, anyo;
 
         // Lectura de datos
-        dia = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el día");
+        do {
+            dia = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el día");
+        } while (dia > 31);
 
-        mes = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el mes");
+        do {
+            mes = PeticionDatos.pedirEnteroPositivoNoCeroExtendido("Introduzca el mes");
+        } while (mes > 12);
 
         anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el año");
 

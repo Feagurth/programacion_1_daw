@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Segundo.Ejercicios.LibroPdf.Ejercicio3_12;
+import Trimestre.Segundo.Ejercicios.RegExp.Ejercicio005;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
@@ -36,7 +36,7 @@ public class Lanzador {
      */
     public static void main(String[] args) {
 
-        Ejercicio3_12 ejercicio = new Ejercicio3_12();
+        Ejercicio005 ejercicio = new Ejercicio005();
 
         ejercicio.ejercicio();
     }

@@ -56,7 +56,7 @@ public class Ejercicio005 {
         do
         {
             // Pedimos datos al usuario
-            usuario = PeticionDatos.pedirCadenaSoloLetrasNumeros("Introduzca "
+            usuario = PeticionDatos.pedirCadenaSoloLetras("Introduzca "
                     + "el nombre de usuario");
 
             // Verificamos si se cumple la validación, de no ser así, seguimos
@@ -65,7 +65,7 @@ public class Ejercicio005 {
         
         
         // Definimos la expresión regular que necesitamos para validar el usuario
-        expresionRegular = "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,10}$";
+        expresionRegular = "^[a-zA-Z ]+$";
                 
         // Iteramos hasta que se cumpla la validación
         do
