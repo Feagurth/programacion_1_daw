@@ -132,7 +132,7 @@ public class Ejercicio001 {
 
             // Los 4 primeros empleados serán los del turno de mañana
             // y los siguientes los de la tarde
-            nombre = PeticionDatos.pedirCadena("Introduzca el nombre del "
+            nombre = PeticionDatos.pedirCadenaSoloLetras("Introduzca el nombre del "
                     + "trabajador para el turno "
                     + "de " + ((i < 4) ? "mañana" : "tarde"));
 
@@ -206,7 +206,7 @@ public class Ejercicio001 {
                 case 2: {
 
                     // Pedimos el nombre del trabajador y el turno al usuario
-                    valorNombre = PeticionDatos.pedirCadena("Introduzca el nombre del trabajador");
+                    valorNombre = PeticionDatos.pedirCadenaSoloLetras("Introduzca el nombre del trabajador");
                     valorTurno = PeticionDatos.pedirConsentimiento("Introduzca "
                             + "el turno [m/t]", new String[]{"m", "t"});
 

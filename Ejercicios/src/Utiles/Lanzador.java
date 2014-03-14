@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Segundo.Ejercicios.RegExp.Ejercicio005;
+import RelacionesDeEjercicios.Relacion4.Ejercicio005;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla

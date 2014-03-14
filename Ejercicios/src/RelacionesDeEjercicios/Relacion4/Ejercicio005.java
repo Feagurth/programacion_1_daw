@@ -50,7 +50,7 @@ public class Ejercicio005 {
         // Definimos la expresión regular que necesitamos para validar el usuario
         // Validamos usuarios con una letra inicial y entre 5 o 15 caracteres más
         // quedando un nombre de usuario entre 8 y 16 letras
-        expresionRegular = "^[a-zA-Z]{1}[a-zA-Z0-9_]{7,15}$";
+        expresionRegular = "^[a-zA-Z ]+$";
                 
         // Iteramos hasta que se cumpla la validación
         do
@@ -65,7 +65,7 @@ public class Ejercicio005 {
         
         
         // Definimos la expresión regular que necesitamos para validar el usuario
-        expresionRegular = "^[a-zA-Z ]+$";
+        expresionRegular = "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,10}$";
                 
         // Iteramos hasta que se cumpla la validación
         do
