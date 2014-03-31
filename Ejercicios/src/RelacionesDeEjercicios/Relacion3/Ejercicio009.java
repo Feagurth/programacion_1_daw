@@ -132,7 +132,7 @@ public class Ejercicio009 {
                 if (lista.containsKey(arrayDatos[i])) {
                     // Si ya hay un registro para el valor actual del vector, 
                     // le sumamos uno
-                    lista.put(arrayDatos[i], lista.get(arrayDatos[i]).intValue() + 1);
+                    lista.put(arrayDatos[i], lista.get(arrayDatos[i]) + 1);
                 } else {
                     // Si no existe, creamos un registro nuevo en la lista 
                     // con valor 1

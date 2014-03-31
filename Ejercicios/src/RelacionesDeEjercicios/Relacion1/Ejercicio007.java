@@ -69,7 +69,7 @@ public class Ejercicio007 {
 
                 // Añadimos el caracter a la matriz de resultado con 
                 // una tabulación
-                resultado += caracter + "\t";
+                resultado += array[i][j] + "\t";
             }
             // En el cambio de fila, introducimos un retorno de carro
             resultado += "\n";

@@ -239,11 +239,11 @@ public class Ejercicio004 {
             this.anyoFechaCaducidad = anyoFechaCaducidad;
         }
 
-        @Override
         /**
-         * Método para devolver una representación en cadena de los valores que
-         * contiene el objeto
+         * Método para devolver una representación en cadena de los valores que contiene el objeto
+         * @return Cadena con los valores que contiene el objeto
          */
+        @Override
         public String toString() {
             return String.format("Medicamento{codigo=%s, nombre=%s, "
                     + "descripcion=%s, laboratorio=%s, proveedor=%s, precio=%s, "

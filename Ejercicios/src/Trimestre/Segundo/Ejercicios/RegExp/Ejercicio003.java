@@ -245,6 +245,10 @@ public class Ejercicio003 {
             return this.sueldoBase + this.comision;
         }
 
+        /**
+         * Método que devuelve el valor de las variables de la clase como una cadena
+         * @return Cadena con los valores del objeto
+         */
         @Override
         public String toString() {
 

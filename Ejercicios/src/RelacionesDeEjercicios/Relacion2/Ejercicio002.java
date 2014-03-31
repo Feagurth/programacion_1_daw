@@ -164,8 +164,8 @@ public class Ejercicio002 {
         resultado = DiaSemana(dia, mes, anyo, calendario.charAt(0));
 
         // Mostramos la información al usuario
-        Mensajes.mostrarMensaje(String.format("El %s/%s/%d fue %s\n",
-                Varios.fechaDDMMAAAA(dia, mes, anyo, "/")),
+        Mensajes.mostrarMensaje(String.format("El %s fue %s\n",
+                Varios.fechaDDMMAAAA(dia, mes, anyo, "/"), resultado),
                 Mensajes.TipoMensaje.INFORMACION);
     }
 }
