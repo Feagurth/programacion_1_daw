@@ -165,8 +165,12 @@ public class Ejercicio001 {
 
                         dia += 1;
                     }
+                    break;
                 }
                 default:
+                {
+                    break;
+                }
             }
 
             // Muestra de resultados

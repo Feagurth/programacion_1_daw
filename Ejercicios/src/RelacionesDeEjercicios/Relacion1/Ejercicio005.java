@@ -31,7 +31,7 @@ public class Ejercicio005 {
     /**
      * Clase para trabajar con tablas de multiplicar
      */
-    public class TablaDeMultiplicar {
+    static public class TablaDeMultiplicar {
 
         // Variable de instancia
         int numero;

@@ -39,7 +39,7 @@ public class Ejercicio004 {
     /**
      * Clase para trabajar con empleados
      */
-    public class Empleado {
+    static public class Empleado {
 
         // Variables de instancia
         String nombre;

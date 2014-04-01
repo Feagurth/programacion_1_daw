@@ -19,8 +19,8 @@ package Trimestre.Segundo.Ejercicios;
 import Utiles.Mensajes;
 
 /**
- * Implementar una función Redondeo(a,b), que devuelva el número a redondeado a
- * b decimales.
+ * Implementar una función redondeo(a,b), que devuelva el número a redondeado a
+ b decimales.
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -33,7 +33,7 @@ public class Ejercicio064 {
      * @param decimales Cantidad de decimales que tendrá el redondeo
      * @return Valor redondeado con los parámetros introducidos
      */
-    public float Redondeo(float numero, int decimales) {
+    public float redondeo(float numero, int decimales) {
         // Variables
         float resultado;
         int parteEntera, parteDecimal;
@@ -84,7 +84,7 @@ public class Ejercicio064 {
                 Mensajes.TipoMensaje.PREGUNTA));
 
         // Ejecutamos la función de redondeo
-        valor = Redondeo(valor, numDecimales);
+        valor = redondeo(valor, numDecimales);
 
         // Mostramos el resultado al usuario
         Mensajes.mostrarMensaje("El resultado es: " + valor, "Resultado",

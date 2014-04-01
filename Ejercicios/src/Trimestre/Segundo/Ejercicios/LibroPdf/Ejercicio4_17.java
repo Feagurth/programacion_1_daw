@@ -30,7 +30,7 @@ public class Ejercicio4_17 {
     /**
      * Clase para controlar los repostajes y el consumo en gasolina
      */
-    public class Repostajes {
+    static public class Repostajes {
 
         private final double kms;
         private final double litrosGasolina;

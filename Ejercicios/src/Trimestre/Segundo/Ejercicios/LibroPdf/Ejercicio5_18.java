@@ -32,10 +32,10 @@ public class Ejercicio5_18 {
         int monto; // Monto depositado al final de cada año
         int principal = 1000; // monto inicial antes de los intereses
         int tasa = 5; // tasa de interés
-        String salida;
+        StringBuilder buf = new StringBuilder();
         
         // Concatenamos los encabezados
-        salida = String.format("%s%20s\n", "Año", "Monto en deposito");
+        buf.append(String.format("%s%20s%n", "Año", "Monto en deposito"));
         
         // calcula el monto en deposito para cada uno de diez años
         for (int anio = 1; anio <= 10; anio++) 
@@ -44,11 +44,11 @@ public class Ejercicio5_18 {
             monto = (int)(principal * (Math.pow(1 + (tasa /100f), anio) * 100));
             
             // Concatenamos el año y el monto
-            salida += String.format("%4d%,20.2f\n", anio, (float)monto/100);
+            buf.append(String.format("%4d%,20.2f%n", anio, (float)monto/100));
         }
 
         // Mostramos el resultado
-        Mensajes.mostrarMensaje(salida, Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(buf.toString(), Mensajes.TipoMensaje.INFORMACION);
         
     }
 

@@ -58,10 +58,10 @@ public class Ejercicio2_28 {
         radio = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor del radio");
 
         // Concatenamos el valor del diametro
-        resultado += String.format("El diametro es: %d\n", 2 * radio);
+        resultado += String.format("El diametro es: %d%n", 2 * radio);
 
         // Concatenamos el valor de la circunferencia
-        resultado += String.format("La circunferencia es: %.2f\n", 2 * Math.PI * radio);
+        resultado += String.format("La circunferencia es: %.2f%n", 2 * Math.PI * radio);
 
         // Concatenamos el valor de la circunferencia
         resultado = String.format("El area es: %.2f", Math.PI * (Math.pow(radio, 2)));

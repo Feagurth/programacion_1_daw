@@ -44,7 +44,7 @@ public class Ejercicio006 {
     public void ejercicio() {
         // Variables 
         int tamanyo;
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
         tamanyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número "
                 + "limite para calcular los triples pitagóricos");
@@ -59,14 +59,14 @@ public class Ejercicio006 {
                     if (i * i == j * j + k * k) {
 
                         // Concatenamos los resultados
-                        resultado += String.format("%3d\t%3d\t%3d\n", i, j, k);
+                        resultado.append(String.format("%3d\t%3d\t%3d%n", i, j, k));
                     }
                 }
             }
         }
 
         // Muestra de resultados
-        Mensajes.mostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(30, 30));
     }
 }

@@ -38,7 +38,7 @@ public class Ejercicio005 {
         float valorPi = 0;
         boolean controlSuma = true;
         int contador = 1;
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
         // Pedimos al usuario el número de iteraciones para calcular el valor 
         // de pi
@@ -46,7 +46,7 @@ public class Ejercicio005 {
                 + "el número de iteraciones a realizar\npara calcular "
                 + "el valor de PI");
 
-        resultado += String.format("%10s\t%s\n", "Iteracion", "PI");
+        resultado.append(String.format("%10s\t%s%n", "Iteracion", "PI"));
 
         // Iteramos desde 1 hasta el numero de iteraciones multiplicada por 2
         // con incremento de 2. Esto nos permite realizar tantas operaciones
@@ -64,15 +64,16 @@ public class Ejercicio005 {
             // realize la operación contraria a la actual
             controlSuma = !controlSuma;
 
-            resultado += String.format("%10s\t%8f\n", 
-                    String.valueOf(contador), valorPi);
+            resultado.append(String.format("%10s\t%8f%n", 
+                    String.valueOf(contador), valorPi));
 
         }
 
         // Mostramos el resultado al usuario
-        resultado += "\nEl valor final de PI es: " + valorPi;
+        resultado.append("\nEl valor final de PI es: ");
+        resultado.append(valorPi);
         
-        Mensajes.mostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(20, 30));
     }
 }

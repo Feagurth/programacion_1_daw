@@ -42,7 +42,7 @@ public class Ejercicio3_13 {
     /**
      * Clase factura
      */
-    public class Factura {
+    static public class Factura {
 
         // Variables
         private String numeroPieza;

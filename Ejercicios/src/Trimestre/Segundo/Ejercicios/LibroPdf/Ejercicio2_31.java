@@ -35,59 +35,59 @@ public class Ejercicio2_31 {
 
         // Inicializamos el valor
         int valor = 0;
-        String resultado;
+        StringBuilder resultado = new StringBuilder();
 
         // Concatenamos el resultado
-        resultado = String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 1;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 2;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 3;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 4;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 5;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
         
         // Cambiamos el valor y concatenamos el resultado
         valor = 6;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 7;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 8;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 9;
-        resultado += String.format("%d\t%d\t%d\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n", valor, valor * valor, valor * valor * valor));
 
         // Cambiamos el valor y concatenamos el resultado
         valor = 10;
-        resultado += String.format("%d\t%d\t%d\n\n\n", valor, valor * valor, valor * valor * valor);
+        resultado.append(String.format("%d\t%d\t%d%n%n%n", valor, valor * valor, valor * valor * valor));
 
         // ó
         // Iteramos desde 1 hasta 10 y concatenamos los resultados
         for (int i = 0; i <= 10; i++) {
-            resultado += String.format("%d\t%d\t%d\n", i, i * i, i * i * i);
+            resultado.append(String.format("%d\t%d\t%d%n", i, i * i, i * i * i));
         }
         
         // Mostramos el resultado
-        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
     }
 
 }

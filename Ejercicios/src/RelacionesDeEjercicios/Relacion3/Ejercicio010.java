@@ -54,7 +54,7 @@ public class Ejercicio010 {
     /**
      * Clase para gestionar el sistema de reservas de una aerolínea
      */
-    public class SistemaReservas {
+    static public class SistemaReservas {
 
         // Los valores usaremos para gestionar el sistema de reservas
         private final boolean[] asientosAvion;

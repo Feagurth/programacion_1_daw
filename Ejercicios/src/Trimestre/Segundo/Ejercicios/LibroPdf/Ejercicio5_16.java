@@ -35,26 +35,25 @@ public class Ejercicio5_16 {
         // Variable para almacenar el numero elegido por el usuario
         int numero;
         
-        // Variable para mostrar el resultado
-        String resultado;
+        // Objeto para mostrar el resultado
+        StringBuilder buf;
                 
         // Iteramos tantas veces como números vamos a pedir al usuario
         for (int i = 0; i < 5; i++) {
             
+            // Definimos un objeto nuevo StringBuilder
+            buf = new StringBuilder();
+            
             // Pedimos el número al usuario
             numero = PeticionDatos.pedirEnteroRango("Introduzca un número entre 1 y 20", 1, 20);
                     
-            // Inicializamos la variable para que no acumule valores del número
-            // anterior
-            resultado = "";
-            
             // Iteramos hasta llegar al número selecionado por el usuario
             for (int j = 0; j < numero; j++) {
-                resultado +=  "*";                
+                buf.append("*");
             }
             
             // Mostramos el resultado
-            Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);
+            Mensajes.mostrarMensaje(buf.toString(), Mensajes.TipoMensaje.INFORMACION);
         }
     }
 }

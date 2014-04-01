@@ -33,7 +33,7 @@ public class Ejercicio009 {
     /**
      * Clase para trabajar con tetraedros
      */
-    public class Tetraedro {
+    static public class Tetraedro {
 
         // Variables de instancia
         private final float arista;
@@ -82,7 +82,7 @@ public class Ejercicio009 {
     /**
      * Clase para trabajar con un cubo
      */
-    public class Cubo {
+    static public class Cubo {
 
         // Variables de instancia
         private final float arista;
@@ -131,7 +131,7 @@ public class Ejercicio009 {
     /**
      * Clase para trabajar con un octaedro
      */
-    public class Octaedro {
+    static public class Octaedro {
 
         // Variables de instancia
         private final float arista;
@@ -180,7 +180,7 @@ public class Ejercicio009 {
     /**
      * Clase para trabajar con un dodecaedro
      */
-    public class Dodecaedro {
+    static public class Dodecaedro {
 
         // Variables de instancia
         private final float arista;
@@ -231,7 +231,7 @@ public class Ejercicio009 {
     /**
      * Clase para trabajar con un icosaedro
      */
-    public class Icosaedro {
+    static public class Icosaedro {
 
         // Variables de instancia
         private final float arista;

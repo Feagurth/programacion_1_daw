@@ -32,18 +32,18 @@ public class Ejercicio5_24 {
 
         // Variables
         final int alto = 9;
-        String resultado = "";
+        StringBuilder buf = new StringBuilder();
 
         for (int i = 1; i <= ((alto / 2) + 1); i++) {
             for (int k = 1; k <= alto / 2 - i + 1; k++) {
-                resultado += " ";
+                buf.append(" ");
             }
 
             // Iteramos para dibujar la parte superior del rombo
             for (int j = (alto / 2) - i + 2; j <= (alto / 2) + i; j++) {
-                resultado += "*";
+                buf.append("*");
             }
-            resultado += "\n";
+            buf.append("\n");
         }
 
         // Iteramos para dibujar la parte inferior del rombo
@@ -51,18 +51,18 @@ public class Ejercicio5_24 {
 
             // Imprimimos espacios
             for (int m = 1; m <= l; m++) {
-                resultado += " ";
+                buf.append(" ");
             }
             
             for (int n = l + 1; n <= alto - l; n++) {
-                resultado += "*";
+                buf.append("*");
             }
-            resultado += "\n";
+            buf.append("\n");
         }
         
         // Mostramos resultados. Se muestra tb por consola pues en un 
         // cuando de mensaje no queda bien alineado
-        System.out.print(resultado);
-        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        System.out.print(buf.toString());
+        Mensajes.mostrarMensaje(buf.toString(), "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
     }
 }

@@ -53,60 +53,60 @@ public class Ejercicio2_29 {
         String resultado;
 
         // Concatenamos el valor para A
-        resultado = String.format("El caracter %c tiene el valor %d\n",
+        resultado = String.format("El caracter %c tiene el valor %d%n",
                 'A', ((int) 'A'));
 
         // Concatenamos el valor para B
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", 'B', ((int) 'B'));
+                "El caracter %c tiene el valor %d%n", 'B', ((int) 'B'));
 
         // Concatenamos el valor para C
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", 'C', ((int) 'C'));
+                "El caracter %c tiene el valor %d%n", 'C', ((int) 'C'));
 
         // Concatenamos el valor para a
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", 'a', ((int) 'a'));
+                "El caracter %c tiene el valor %d%n", 'a', ((int) 'a'));
 
         // Concatenamos el valor para b
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", 'b', ((int) 'b'));
+                "El caracter %c tiene el valor %d%n", 'b', ((int) 'b'));
 
         // Concatenamos el valor para c
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", 'c', ((int) 'c'));
+                "El caracter %c tiene el valor %d%n", 'c', ((int) 'c'));
 
         // Concatenamos el valor para 0
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '0', ((int) '0'));
+                "El caracter %c tiene el valor %d%n", '0', ((int) '0'));
 
         // Concatenamos el valor para 1
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '1', ((int) '1'));
+                "El caracter %c tiene el valor %d%n", '1', ((int) '1'));
 
         // Concatenamos el valor para 2
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '2', ((int) '2'));
+                "El caracter %c tiene el valor %d%n", '2', ((int) '2'));
 
         // Concatenamos el valor para $
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '$', ((int) '$'));
+                "El caracter %c tiene el valor %d%n", '$', ((int) '$'));
 
         // Concatenamos el valor para *
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '*', ((int) '*'));
+                "El caracter %c tiene el valor %d%n", '*', ((int) '*'));
 
         // Concatenamos el valor para +
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '+', ((int) '+'));
+                "El caracter %c tiene el valor %d%n", '+', ((int) '+'));
 
         // Concatenamos el valor para /
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", '/', ((int) '/'));
+                "El caracter %c tiene el valor %d%n", '/', ((int) '/'));
 
         // Concatenamos el valor para el espacio en blanco
         resultado += String.format(
-                "El caracter %c tiene el valor %d\n", ' ', ((int) ' '));
+                "El caracter %c tiene el valor %d%n", ' ', ((int) ' '));
 
         // Imprimimos los resultados
         Mensajes.mostrarMensaje(resultado, Mensajes.TipoMensaje.INFORMACION);

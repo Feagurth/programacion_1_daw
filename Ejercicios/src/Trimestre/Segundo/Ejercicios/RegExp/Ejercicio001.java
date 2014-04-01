@@ -39,7 +39,7 @@ public class Ejercicio001 {
     /**
      * Clase para trabajar con empleados
      */
-    public class Empleado {
+    static public class Empleado {
 
         // Variables de instancia
         String nombre;
@@ -247,6 +247,10 @@ public class Ejercicio001 {
                 case 4: {
                     Mensajes.mostrarMensaje("El total del sueldo de la tarde es: "
                             + sueldoTarde, Mensajes.TipoMensaje.INFORMACION);
+                    break;
+                }
+                default:
+                {
                     break;
                 }
             }

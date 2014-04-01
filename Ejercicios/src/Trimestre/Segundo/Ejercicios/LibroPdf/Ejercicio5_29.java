@@ -78,7 +78,9 @@ public class Ejercicio5_29 {
                     break;
                 case 1:
                     resultado += "And a Partridge in a Pear Tree\n";
-                    break;                    
+                    break;       
+                default:
+                    break;
             }            
         }
         

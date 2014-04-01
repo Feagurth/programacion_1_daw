@@ -33,10 +33,12 @@ public class Ejercicio002 {
      * @param numero Número a convertir
      * @return Número convertido
      */
-    private String ArabigoARomano(int numero) {
+    private String arabigoARomano(int numero) {
         // Variables
-        String resultado = "";
         int resto = numero;
+        
+        // Creamos un objeto StringBuilder para concatener el resultado
+        StringBuilder buf = new StringBuilder();
 
         // Iteraremos realizando los calculos correspondientes
         // hasta que el resto sea 0. Comprobaremos si el resto es divisible
@@ -51,7 +53,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 1000;
-                    resultado += "M";
+                    buf.append("M");
                 } while (resto >= 1000);
             }
 
@@ -63,7 +65,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 900;
-                    resultado += "CM";
+                    buf.append("CM");
                 } while (resto >= 900);
             }
 
@@ -75,7 +77,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 500;
-                    resultado += "D";
+                    buf.append("D");
                 } while (resto >= 500);
             }
 
@@ -87,7 +89,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 400;
-                    resultado += "CD";
+                    buf.append("CD");
                 } while (resto >= 400);
             }
 
@@ -99,7 +101,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 100;
-                    resultado += "C";
+                    buf.append("C");
                 } while (resto >= 100);
             }
 
@@ -111,7 +113,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 90;
-                    resultado += "XC";
+                    buf.append("XC");
                 } while (resto >= 90);
             }
 
@@ -123,7 +125,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 50;
-                    resultado += "L";
+                    buf.append("L");
                 } while (resto >= 50);
             }
 
@@ -135,7 +137,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 40;
-                    resultado += "XL";
+                    buf.append("XL");                    
                 } while (resto >= 40);
             }
 
@@ -147,7 +149,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 10;
-                    resultado += "X";
+                    buf.append("X");
                 } while (resto >= 10);
             }
 
@@ -159,7 +161,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 9;
-                    resultado += "IX";
+                    buf.append("IX");
                 } while (resto >= 9);
             }
 
@@ -171,7 +173,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 5;
-                    resultado += "V";
+                    buf.append("V");
                 } while (resto >= 5);
             }
 
@@ -183,7 +185,7 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 4;
-                    resultado += "IV";
+                    buf.append("IV");
                 } while (resto >= 4);
             }
 
@@ -195,13 +197,13 @@ public class Ejercicio002 {
                 // podamos quitarle más al resto sin hacerlo negativo
                 do {
                     resto -= 1;
-                    resultado += "I";
+                    buf.append("I");
                 } while (resto >= 1);
             }
         } while (resto != 0);
 
         // Devolvemos el resultado
-        return resultado;
+        return buf.toString();
     }
 
     /**
@@ -218,7 +220,7 @@ public class Ejercicio002 {
 
         // Mostramos el resultado
         Mensajes.mostrarMensaje("El valor de " + numero + " en números romanos "
-                + "es: " + ArabigoARomano(numero),
+                + "es: " + arabigoARomano(numero),
                 Mensajes.TipoMensaje.INFORMACION);
     }
 }

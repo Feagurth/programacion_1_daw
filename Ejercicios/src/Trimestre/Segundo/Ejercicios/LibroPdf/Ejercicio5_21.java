@@ -33,7 +33,7 @@ public class Ejercicio5_21 {
     public void ejercicio() {
         // Variables 
         int tamanyo;
-        String resultado = "";
+        StringBuilder buf = new StringBuilder();
 
         // Petición de datos al usuario
         tamanyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el número de iteraciones");
@@ -48,14 +48,14 @@ public class Ejercicio5_21 {
                     if (i * i == j * j + k * k) {
                         
                         // Concatenamos los resultados
-                        resultado += String.format("%3d\t%3d\t%3d\n", i, j, k);
+                        buf.append(String.format("%3d\t%3d\t%3d%n", i, j, k));
                     }
                 }
             }
         }
         
         // Muestra de resultados
-        Mensajes.mostrarMensaje(resultado, "Información", 
+        Mensajes.mostrarMensaje(buf.toString(), "Información", 
                 Mensajes.TipoMensaje.INFORMACION, true, new Dimension(20, 40));
     }
 }

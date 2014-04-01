@@ -38,7 +38,7 @@ public class Ejercicio3_14 {
     /**
      * Clase para tratar con los empleados
      */
-    public class Empleado {
+    static public class Empleado {
 
         // Variables
         private String primerNombre;
@@ -134,7 +134,7 @@ public class Ejercicio3_14 {
         Empleado empleado = new Empleado(nombre, apellido, sueldoMensual);
 
         // Concatenamos el nombre y el apellido del trabajador
-        resultado = String.format("Trabajador: %s %s\n", 
+        resultado = String.format("Trabajador: %s %s%n", 
                 empleado.getPrimerNombre(), 
                 empleado.getApellidoPaterno());
         
@@ -154,7 +154,7 @@ public class Ejercicio3_14 {
                 empleado.getApellidoPaterno());
 
         // Concatenamos su sueldo antes del aumento del 10%
-        resultado += String.format("Antiguo sueldo anual: %.2f\n", 
+        resultado += String.format("Antiguo sueldo anual: %.2f%n", 
                 empleado.getSueldoMensual() * 12);
                 
         // Asignamos el sueldo un 10%

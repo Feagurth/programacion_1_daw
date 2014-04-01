@@ -36,7 +36,7 @@ public class Ejercicio003 {
      * Clase para almacenar los valores de ventas anuales de un producto mes a
      * mes
      */
-    public class VentaAnualProducto {
+    static public class VentaAnualProducto {
 
         private final String nombreProducto;
         private float[] ventasMensuales = new float[12];

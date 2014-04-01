@@ -20,7 +20,9 @@ import Utiles.Mensajes;
 
 /**
  * Clase para realizar el ejercicio 5.22 del libro de texto Como Programar en
- * Java 7ed Deitel*
+ * Java 7ed Deitel
+ *
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio5_22 {
@@ -31,48 +33,48 @@ public class Ejercicio5_22 {
     public void ejercicio() {
 
         int fila, columna;
-        String salida = "";
+        StringBuilder buf = new StringBuilder();
 
         for (fila = 1; fila <= 10; fila++) {
             for (columna = 1; columna <= fila; columna++) {
-                salida += '*';
+                buf.append("*");
             }
 
             for (int i = columna; i <= 15; i++) {
-                salida += ' ';
+                buf.append(" ");
             }
 
             for (columna = 10; columna >= fila; columna--) {
-                salida += '*';
+                buf.append("*");
             }
 
             for (int i = 0; i < 5 + fila; i++) {
-                salida += ' ';
+                buf.append(" ");
             }
 
             for (columna = 1; columna < fila; columna++) {
-                salida += ' ';
+                buf.append(" ");
             }
             for (columna = 10; columna >= fila; columna--) {
-                salida += '*';
+                buf.append("*");
             }
 
             for (int i = 0; i < 5; i++) {
-                salida += ' ';
+                buf.append(" ");
             }
 
             for (columna = 10; columna > fila; columna--) {
-                salida += ' ';
+                buf.append(" ");
             }
             for (columna = 1; columna <= fila; columna++) {
-                salida += '*';
+                buf.append("*");
             }
 
-            salida += "\n";                
-            
+            buf.append("\n");
+
         }
-        
-        System.out.println(salida);
-        Mensajes.mostrarMensaje(salida,"Información", Mensajes.TipoMensaje.INFORMACION, true);
+
+        System.out.println(buf.toString());
+        Mensajes.mostrarMensaje(buf.toString(), "Información", Mensajes.TipoMensaje.INFORMACION, true);
     }
 }

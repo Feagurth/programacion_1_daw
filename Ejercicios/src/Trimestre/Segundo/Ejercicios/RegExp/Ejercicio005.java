@@ -35,7 +35,7 @@ public class Ejercicio005 {
      * @param anyo Año a comprobar
      * @return Resultado de la comprobación
      */
-    private boolean EsAnyoBisiesto(int anyo) {
+    private boolean esAnyoBisiesto(int anyo) {
         // Para verificar si un año es bisiesto se tiene que verificar esta
         // condición
         return (anyo % 4 == 0) && ((anyo % 100 != 0) || (anyo % 400 == 0));
@@ -49,7 +49,7 @@ public class Ejercicio005 {
      * @param numAnyo Año
      * @return Resultado de la comprobación
      */
-    private boolean EsFechaValida(int numdia, int numMes, int numAnyo) {
+    private boolean esFechaValida(int numdia, int numMes, int numAnyo) {
         int[] dias = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
         // Comprobamos que los valores introducidos sean positivos
@@ -57,7 +57,7 @@ public class Ejercicio005 {
             return false;
         } else {
             // Verificamos si el año es bisiesto y si es febrero
-            if (EsAnyoBisiesto(numAnyo) && numMes == 2) {
+            if (esAnyoBisiesto(numAnyo) && numMes == 2) {
                 // Devolvemos la comprobación de si el dia está en los dias
                 // que tiene el mes mas 1 dia por ser bisiesto Febrero                
                 return numdia <= (dias[numMes - 1] + 1);
@@ -89,7 +89,7 @@ public class Ejercicio005 {
         anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el año");
 
         // Verificamos si la fecha introducida es válida
-        if (EsFechaValida(dia, mes, anyo)) {
+        if (esFechaValida(dia, mes, anyo)) {
 
             // Realizamos acciones segun el mes que sea y el dia en el que estemos
             switch (mes) {
@@ -148,7 +148,7 @@ public class Ejercicio005 {
                     int apoyoBisiesto = 0;
 
                     // Comprobamos si es un año bisiesto
-                    if (!EsAnyoBisiesto(anyo)) {
+                    if (!esAnyoBisiesto(anyo)) {
                         // Si no es así, cambiamos el valor a 1 para ayudar
                         // en la compración de los dias de Febrero
                         apoyoBisiesto = 1;
@@ -168,6 +168,11 @@ public class Ejercicio005 {
 
                         dia += 1;
                     }
+                    break;
+                default:
+                {
+                    break;
+                }
             }
 
             // Muestra de resultados

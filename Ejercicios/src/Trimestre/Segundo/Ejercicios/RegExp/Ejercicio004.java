@@ -76,6 +76,10 @@ public class Ejercicio004 {
                     case 2:
                         this.cadena = "Antipirético";
                         break;
+                    default:
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -295,17 +299,21 @@ public class Ejercicio004 {
 
             nombre = PeticionDatos.pedirCadena("Introduzca el nombre del medicamento");
 
-            // Usaremos la variable proveedor para almacenar temporalmente estos valores
-            // y ahorrarons declarar una variable más pues no contendrá los valores
-            // mucho tiempo
-            laboratorio = "";
-
+            // Creamos un objeto StringBuffer para concatenar los valoes de laboratorio
+            StringBuilder buf = new StringBuilder();
+            
             // Iteramos por todos los valores del enumerador para mostrar las posibilidades de selección
             // al usuario
             for (Medicamento.TipoDescripcion tipoDescripcion : Medicamento.TipoDescripcion.values()) {
-
-                laboratorio += "[" + tipoDescripcion.getValue() + "] " + tipoDescripcion.getString() + "\n";
+                buf.append("[");
+                buf.append(tipoDescripcion.getValue());
+                buf.append("] ");
+                buf.append(tipoDescripcion.getString());
+                buf.append("\n");
             }
+
+            // Asignamos el valor contruido al laboratorio
+            laboratorio = buf.toString();
 
             // Pedimos que introduzca la descripción del medicamento, y limitaremos
             // los valores de entrada desde el cero hasta un valor menos del tamaño

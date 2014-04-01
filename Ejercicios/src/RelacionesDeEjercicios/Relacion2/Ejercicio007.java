@@ -49,7 +49,7 @@ public class Ejercicio007 {
      * @param decimales Cantidad de decimales que tendrá el redondeo
      * @return Valor redondeado con los parámetros introducidos
      */
-    private double Redondeo(double numero, int decimales) {
+    private double redondeo(double numero, int decimales) {
         // Variables
         double resultado;
         int apoyoDecimales;
@@ -74,7 +74,7 @@ public class Ejercicio007 {
      * @return numero sin decimales
      */
     public int redondearAInteger(double valor) {
-        return (int) Redondeo(valor, 0);
+        return (int) redondeo(valor, 0);
     }
 
     /**
@@ -84,7 +84,7 @@ public class Ejercicio007 {
      * @return numero con un decimal
      */
     public double redondearADecimas(double valor) {
-        return Redondeo(valor, 1);
+        return redondeo(valor, 1);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Ejercicio007 {
      * @return numero con dos decimales
      */
     public double redondearACentesimas(double valor) {
-        return Redondeo(valor, 2);
+        return redondeo(valor, 2);
     }
 
     /**
@@ -104,7 +104,7 @@ public class Ejercicio007 {
      * @return numero con tres decimales
      */
     public double redondearAMilesimas(double valor) {
-        return Redondeo(valor, 3);
+        return redondeo(valor, 3);
     }
 
     /**
@@ -123,7 +123,7 @@ public class Ejercicio007 {
             // Mostramos la información a través de las funciones wrappers de la
             // función redondeo
             Mensajes.mostrarMensaje(
-            String.format("Original: %s\n0 Dec: %s\n1 Dec: %s\n2 Dec: %s\n3 Dec: %s\n",
+            String.format("Original: %s%n0 Dec: %s%n1 Dec: %s%n2 Dec: %s%n3 Dec: %s%n",
                     String.valueOf(valor),
                     String.valueOf(redondearAInteger(valor)),
                     String.valueOf(redondearADecimas(valor)),

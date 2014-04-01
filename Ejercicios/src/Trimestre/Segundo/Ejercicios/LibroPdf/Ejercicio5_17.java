@@ -58,6 +58,8 @@ public class Ejercicio5_17 {
                 case 5:
                     total += 6.78f;
                     break;
+                default:
+                    break;
             }
             
         // Si se cumple la condición salimos de la iteración    

@@ -42,7 +42,7 @@ public class Ejercicio001 {
      *
      * @author Luis Cabrerizo Gómez
      */
-    public class Vendedor {
+    static public class Vendedor {
 
         private String DNI;
         private String nombre;
@@ -131,22 +131,6 @@ public class Ejercicio001 {
          */
         public void setSueldoBase(float sueldoBase) {
             this.sueldoBase = sueldoBase;
-        }
-
-        /**
-         * Método para recuperar las ventas por meses de un vendedor
-         * @return Las ventas por meses de un vendedor
-         */
-        public float[] getVentasMes() {
-            return ventasMes;
-        }
-
-        /**
-         * Método para asignar las ventas por meses de un vendedor
-         * @param ventasMes El valor de las ventas por meses de un vendedor
-         */
-        public void setVentasMes(float[] ventasMes) {
-            this.ventasMes = ventasMes;
         }
 
         /**

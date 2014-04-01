@@ -18,6 +18,7 @@
 package Trimestre.Segundo.Ejercicios;
 
 import Utiles.Mensajes;
+import java.awt.Dimension;
 
 /**
  * Supongamos que existen N ciudades en la red ferroviaria de un país, y que sus
@@ -47,7 +48,6 @@ public class Ejercicio090 {
         // Sevilla -> {false}, {false}, {true},  {true},  {true},  {false}, {true},  {true};
         // Cadiz ->   {false}, {false}, {false}, {false}, {false}, {true},  {false}, {false};  
         // Huelva ->  {false}, {false}, {false}, {false}, {false}, {true},  {false}, {false};
-        
         // Creamos el array que va a contener las conexiones entre provincias
         //  Los valores indican si una provincia tiene conexion con otra
         boolean[][] arrayConexiones = new boolean[][]{
@@ -60,8 +60,8 @@ public class Ejercicio090 {
             {false, false, false, false, false, true, false, false},
             {false, false, false, false, false, true, false, false}
         };
-
-        String cadena;
+        
+        StringBuilder cadena;
         String resultado = "";
 
         // Iteramos el array que contiene el nombre de las ciudades
@@ -73,13 +73,13 @@ public class Ejercicio090 {
             // el nombre de la ciudad y una raya separadora
             resultado += "Ciudad: " + arrayNombreCiudades[i];
             resultado += "\n==================================";
-            
+
             // Concatenamos el texto enlaza con: y dejamos  la linea lista para
             // imprimir las conexiones con la provincia
             resultado += "\nEnlaza con: ";
 
             // Reseteamos el valor de la variable cadena
-            cadena = "";
+            cadena = new StringBuilder();
 
             // Iteramos de nuevo por el array de nombres de ciudades
             // para recorrer la vertical del array de conexiones
@@ -90,19 +90,19 @@ public class Ejercicio090 {
                 // arrayNombreCiudades[i] y arrayNombreCiudades[j]
                 if (arrayConexiones[i][j]) {
                     // Concatenamos el nombre de la ciudad al acumulador
-                    cadena += arrayNombreCiudades[j] + ", ";
+                    cadena.append(arrayNombreCiudades[j]);
+                    cadena.append(", ");
                 }
             }
 
             // Limpiamos los dos últimos caracteres para no tener la 
             // cadena acabada en coma
-            cadena = cadena.substring(0, cadena.length() - 2);
-
+            //cadena = cadena.substring(0, cadena.length() - 2);
             // Concatenamos la cadena y unos retorno de carro
-            resultado += "\n" + cadena + "\n\n";
+            resultado += "\n" + cadena.toString().substring(0, cadena.length() - 2) + "\n\n";
         }
-        
+
         // Mostramos los resultados
-        Mensajes.mostrarMensaje(resultado,Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true, new Dimension(30, 20));
     }
 }

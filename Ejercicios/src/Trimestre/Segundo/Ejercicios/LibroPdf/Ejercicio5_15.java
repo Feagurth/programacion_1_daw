@@ -43,20 +43,20 @@ public class Ejercicio5_15 {
      * Realiza el dibujo especificado en el apartado A
      */
     private void apartadoA() {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
-        resultado += "Apartado A\n";
+        resultado.append("Apartado A\n");
 
         for (int i = 1; i <= 10; i++) {
             for (int j = 0; j < i; j++) {
-                resultado += "*";
+                resultado.append("*");
             }
-            resultado += "\n";
+            resultado.append("\n");
         }
 
         // Mostramos el resultado por consola y por mensaje emergente
-        System.out.println(resultado);
-        Mensajes.mostrarMensaje(resultado, "Resultado",
+        System.out.println(resultado.toString());
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado",
                 Mensajes.TipoMensaje.INFORMACION, true);
     }
 
@@ -64,19 +64,19 @@ public class Ejercicio5_15 {
      * Realiza el dibujo especificado en el apartado B
      */
     private void apartadoB() {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
-        resultado += "Apartado B\n";
+        resultado.append("Apartado B\n");
         for (int i = 10; i >= 1; i--) {
             for (int j = i; j > 0; j--) {
-                resultado += "*";
+                resultado.append("*");
             }
-            resultado += "\n";
+            resultado.append("\n");
         }
 
         // Mostramos el resultado por consola y por mensaje emergente
-        System.out.println(resultado);
-        Mensajes.mostrarMensaje(resultado, "Resultado",
+        System.out.println(resultado.toString());
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado",
                 Mensajes.TipoMensaje.INFORMACION, true);
     }
 
@@ -84,22 +84,22 @@ public class Ejercicio5_15 {
      * Realiza el dibujo especificado en el apartado C
      */
     private void apartadoC() {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
-        resultado += "Apartado C\n";
+        resultado.append("Apartado C\n");
         for (int i = 1; i <= 10; i++) {
             for (int j = 1; j <= 10; j++) {
                 if (j >= i) {
-                    resultado += "*";
+                    resultado.append("*");
                 } else {
-                    resultado += " ";
+                    resultado.append(" ");
                 }
             }
-            resultado += "\n";
+            resultado.append("\n");
         }
         // Mostramos el resultado por consola y por mensaje emergente
-        System.out.println(resultado);
-        Mensajes.mostrarMensaje(resultado, "Resultado",
+        System.out.println(resultado.toString());
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado",
                 Mensajes.TipoMensaje.INFORMACION, true);
     }
 
@@ -107,23 +107,23 @@ public class Ejercicio5_15 {
      * Realiza el dibujo especificado en el apartado D
      */
     private void apartadoD() {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
-        resultado += "Apartado D\n";
+        resultado.append("Apartado D\n");
         for (int i = 1; i <= 10; i++) {
             for (int j = 1; j <= 10; j++) {
                 if (j <= 10 - i) {
-                    resultado += " ";
+                    resultado.append(" ");
                 } else {
-                    resultado += "*";
+                    resultado.append("*");
                 }
             }
-            resultado += "\n";
+            resultado.append("\n");
         }
 
         // Mostramos el resultado por consola y por mensaje emergente
-        System.out.println(resultado);
-        Mensajes.mostrarMensaje(resultado, "Resultado",
+        System.out.println(resultado.toString());
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado",
                 Mensajes.TipoMensaje.INFORMACION, true);
     }
 }

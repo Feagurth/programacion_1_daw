@@ -35,7 +35,7 @@ public class Ejercicio3_12 {
      * La clase Cuenta con un constructor para inicializar la variable de
      * instancia saldo.
      */
-    public class Cuenta {
+    static public class Cuenta {
 
         // variable de instancia que almacena el saldo
         private double saldo;
@@ -133,7 +133,7 @@ public class Ejercicio3_12 {
                 case 1: {
                     // Mostramos el saldo
                     Mensajes.mostrarMensaje(String.format("El saldo actual de "
-                            + "la cuenta es: %6.2f\n",
+                            + "la cuenta es: %6.2f%n",
                             cuenta.obtenerSaldo()),
                             Mensajes.TipoMensaje.INFORMACION);
                     break;
@@ -148,7 +148,7 @@ public class Ejercicio3_12 {
 
                     // Mostramos el saldo actualizado de la cuenta
                     Mensajes.mostrarMensaje(String.format("El saldo actual de "
-                            + "la cuenta es: %6.2f\n", cuenta.obtenerSaldo()),
+                            + "la cuenta es: %6.2f%n", cuenta.obtenerSaldo()),
                             Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }
@@ -161,7 +161,7 @@ public class Ejercicio3_12 {
 
                     // Mostramos el saldo actualizado de la cuenta
                     Mensajes.mostrarMensaje(String.format("El saldo actual de "
-                            + "la cuenta es: %6.2f\n", cuenta.obtenerSaldo()),
+                            + "la cuenta es: %6.2f%n", cuenta.obtenerSaldo()),
                             Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }

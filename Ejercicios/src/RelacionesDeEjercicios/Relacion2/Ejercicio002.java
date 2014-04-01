@@ -36,7 +36,7 @@ public class Ejercicio002 {
      * @param anyo Año a comprobar
      * @return Resultado de la comprobación
      */
-    private boolean EsAnyoBisiesto(int anyo) {
+    private boolean esAnyoBisiesto(int anyo) {
         // Para verificar si un año es bisiesto se tiene que verificar esta
         // condición
         return (anyo % 4 == 0) && ((anyo % 100 != 0) || (anyo % 400 == 0));
@@ -50,7 +50,7 @@ public class Ejercicio002 {
      * @param numAnyo Año
      * @return Resultado de la comprobación
      */
-    private boolean EsFechaValida(int numdia, int numMes, int numAnyo) {
+    private boolean esFechaValida(int numdia, int numMes, int numAnyo) {
         int[] dias = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
         // Comprobamos que los valores introducidos sean positivos
@@ -58,7 +58,7 @@ public class Ejercicio002 {
             return false;
         } else {
             // Verificamos si el año es bisiesto y si es febrero
-            if (EsAnyoBisiesto(numAnyo) && numMes == 2) {
+            if (esAnyoBisiesto(numAnyo) && numMes == 2) {
                 // Devolvemos la comprobación de si el dia está en los dias
                 // que tiene el mes mas 1 dia por ser bisiesto Febrero                
                 return numdia <= (dias[numMes - 1] + 1);
@@ -80,7 +80,7 @@ public class Ejercicio002 {
      * @param tipoCalendario Tipo de calendario, Juliano o Gregoriano
      * @return El día de la semana
      */
-    private String DiaSemana(int diaSel, int mesSel, int anyoSel, char tipoCalendario) {
+    private String diaSemana(int diaSel, int mesSel, int anyoSel, char tipoCalendario) {
         // Variables
         int d, m, y, temporal;
         String resultado = null;
@@ -121,6 +121,8 @@ public class Ejercicio002 {
             case 6:
                 resultado = "Sabado";
                 break;
+            default:
+                break;
         }
 
         // Devolvemos el resultado
@@ -148,7 +150,7 @@ public class Ejercicio002 {
             anyo = PeticionDatos.pedirEnteroPositivoNoCero("Introduzca el valor "
                     + "numérico para el año");
 
-            if (EsFechaValida(dia, mes, anyo)) {
+            if (esFechaValida(dia, mes, anyo)) {
                 control = true;
             } else {
                 Mensajes.mostrarMensaje("La fecha introducida es inválida",
@@ -161,10 +163,10 @@ public class Ejercicio002 {
                 + "Juliano o Gregoriano? [j/g]", new String[]{"j", "g"});
 
         // Calculamos el valor del día de la semana
-        resultado = DiaSemana(dia, mes, anyo, calendario.charAt(0));
+        resultado = diaSemana(dia, mes, anyo, calendario.charAt(0));
 
         // Mostramos la información al usuario
-        Mensajes.mostrarMensaje(String.format("El %s fue %s\n",
+        Mensajes.mostrarMensaje(String.format("El %s fue %s%n",
                 Varios.fechaDDMMAAAA(dia, mes, anyo, "/"), resultado),
                 Mensajes.TipoMensaje.INFORMACION);
     }

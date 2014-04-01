@@ -32,7 +32,7 @@ public class Ejercicio002 {
     /**
      * Clase para almacenar y trabajar con triángulos
      */
-    public class Triangulo {
+    static public class Triangulo {
 
         // Variables de instancia
         double lado1;

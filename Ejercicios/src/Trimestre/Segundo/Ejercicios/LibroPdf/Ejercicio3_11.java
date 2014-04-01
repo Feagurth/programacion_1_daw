@@ -38,7 +38,7 @@ public class Ejercicio3_11 {
     /**
      * La clase LibroCalificaciones con un constructor para inicializar el nombre del curso.
      */
-    public class LibroCalificaciones {
+    static public class LibroCalificaciones {
 
         private String nombreDelCurso; // nombre del curso para este LibroCalificaciones
         private String nombreInstructor; // nombre del instructor del curso
@@ -92,8 +92,8 @@ public class Ejercicio3_11 {
         // esta instrucción llama a obtenerNombreDelCurso para obtener el
             // nombre del curso que este LibroCalificaciones representa
             
-            Mensajes.mostrarMensaje(String.format("Bienvenido al Libro de calificaciones para\n%s!\n"
-                    + "Este curso es presentado por: %s\n", 
+            Mensajes.mostrarMensaje(String.format("Bienvenido al Libro de calificaciones para%n%s!%n"
+                    + "Este curso es presentado por: %s%n", 
                     obtenerNombreDelCurso(), 
                     getNombreInstructor()), 
                     Mensajes.TipoMensaje.INFORMACION);

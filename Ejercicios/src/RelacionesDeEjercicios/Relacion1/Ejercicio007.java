@@ -38,7 +38,7 @@ public class Ejercicio007 {
 
         int vocales = 0;
         int consonantes = 0;
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
         // Generador de numeros con los que generaremos los caracteres
         Random generador = new Random();
@@ -69,17 +69,20 @@ public class Ejercicio007 {
 
                 // Añadimos el caracter a la matriz de resultado con 
                 // una tabulación
-                resultado += array[i][j] + "\t";
+                resultado.append(array[i][j]);
+                resultado.append("\t");
             }
             // En el cambio de fila, introducimos un retorno de carro
-            resultado += "\n";
+            resultado.append("\n");
         }
 
         // Mostramos resultados
-        resultado += "\nCantidad de vocales: " + vocales;
-        resultado += "\nCantidad de consonantes: " + consonantes;
+        resultado.append("\nCantidad de vocales: ");
+        resultado.append(vocales);
+        resultado.append("\nCantidad de consonantes: ");
+        resultado.append(consonantes);
         
-        Mensajes.mostrarMensaje(resultado,"Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        Mensajes.mostrarMensaje(resultado.toString(),"Resultado", Mensajes.TipoMensaje.INFORMACION, true);
         
     }
 }

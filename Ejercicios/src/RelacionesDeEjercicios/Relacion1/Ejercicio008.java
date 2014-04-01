@@ -30,7 +30,7 @@ public class Ejercicio008 {
     /**
      * Clase para trabajar con distribuciones bidimensionales
      */
-    public class DistribucionBidimensional {
+    static public class DistribucionBidimensional {
 
         // Variable para almacena el tamaño de la distribución
         private final int longitud;
@@ -209,7 +209,7 @@ public class Ejercicio008 {
          */
         public String imprimirMatriz() {
             // Inicializamos la variable de retorno
-            String resultado = "";
+            StringBuilder resultado = new StringBuilder();
 
             // Iteramos 3 veces, la primera para disponer valores de posición
             // La segunda para disponer los valores de X
@@ -217,40 +217,43 @@ public class Ejercicio008 {
             for (int i = 0; i < 3; i++) {
                 switch (i) {
                     case 0:
-                        resultado += "i";
+                        resultado.append("i");
                         break;
                     case 1:
-                        resultado += "x";
+                        resultado.append("x");
                         break;
                     case 2:
-                        resultado += "y";
+                        resultado.append("y");
                         break;
                     default:
-                        resultado += "";
+                        resultado.append("");
                         break;
                 }
                 for (int j = 0; j < distribucion[0].length; j++) {
                     switch (i) {
                         case 0:
-                            resultado += "\t" + j;
+                            resultado.append("\t");
+                            resultado.append(j);
                             break;
                         case 1:
-                            resultado += "\t" + distribucion[0][j];
+                            resultado.append("\t");
+                            resultado.append(distribucion[0][j]);                            
                             break;
                         case 2:
-                            resultado += "\t" + distribucion[1][j];
+                            resultado.append("\t");
+                            resultado.append(distribucion[1][j]);                            
                             break;
                         default:
-                            resultado += "";
+                            resultado.append("");
                             break;
 
                     }
                 }
-                resultado += "\n";
+                resultado.append("\n");
             }
 
             // Devolvemos la cadena con la matriz formateada
-            return resultado;
+            return resultado.toString();
         }
 
         /**

@@ -32,7 +32,7 @@ public class Ejercicio003 {
     /**
      * Clase para trabajar con coordenadas
      */
-    public class Punto {
+    static public class Punto {
 
         // Variables
         int x;
