@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Primero.Ejercicios.Ejercicio099;
+import Trimestre.Primero.Ejercicios.Ejercicio053;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
@@ -36,7 +36,7 @@ public class Lanzador {
      */
     public static void main(String[] args) {
 
-        Ejercicio099 ejercicio = new Ejercicio099();
+        Ejercicio053 ejercicio = new Ejercicio053();
 
         ejercicio.ejercicio();
     }

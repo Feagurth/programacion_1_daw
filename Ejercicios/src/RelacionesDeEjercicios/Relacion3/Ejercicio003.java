@@ -380,7 +380,7 @@ public class Ejercicio003 {
         // Creamos e inicializamos un contador
         int contador = -1;
 
-        for (VentaAnualProducto ventasAnuale : ventasAnuales) {
+        for (VentaAnualProducto ventasAnuale : ventasAnuales) {            
             // Pedimos al usuario el nombre del producto
             nombreProducto = PeticionDatos.pedirCadena("Introduzca el nombre del producto");
 

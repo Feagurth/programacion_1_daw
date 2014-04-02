@@ -65,15 +65,14 @@ public class Ejercicio053 {
     private ResultadoDivision division(int dividendo, int divisor) {
         // Objeto para devolver el resultado
         ResultadoDivision result;
-        int cociente = 0, resto;
+        int cociente = 0, resto = dividendo;
 
         // Iteramos mientras que el divisor sea mayor que el resto
         do {
             // El resto será igual al dividendo menos el divisor
             // Y el resto resultante sera el dividendo de la siguiente 
             // iteración, donde el cociente aumentará en 1
-            resto = dividendo - divisor;
-            dividendo = resto;
+            resto = resto - divisor;            
             cociente++;
         } while (divisor <= resto);
 
