@@ -31,7 +31,7 @@ public class Ejercicio057 {
      * @param anyo Año a comprobar
      * @return Resultado de la comprobación
      */
-    private boolean EsAnyoBisiesto(int anyo) {
+    private boolean esAnyoBisiesto(int anyo) {
         // Para verificar si un año es bisiesto se tiene que verificar esta
         // condición
         return (anyo % 4 == 0) && ((anyo % 100 != 0) || (anyo % 400 == 0));
@@ -45,7 +45,7 @@ public class Ejercicio057 {
      * @param numAnyo Año
      * @return Resultado de la comprobación
      */
-    private boolean EsFechaValida(int numdia, int numMes, int numAnyo) {
+    private boolean esFechaValida(int numdia, int numMes, int numAnyo) {
         int[] dias = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
         // Comprobamos que los valores introducidos sean positivos
@@ -53,7 +53,7 @@ public class Ejercicio057 {
             return false;
         } else {
             // Verificamos si el año es bisiesto y si es febrero
-            if (EsAnyoBisiesto(numAnyo) && numMes == 2) {
+            if (esAnyoBisiesto(numAnyo) && numMes == 2) {
                 // Devolvemos la comprobación de si el dia está en los dias
                 // que tiene el mes mas 1 dia por ser bisiesto Febrero                
                 return numdia <= (dias[numMes - 1] + 1);
@@ -87,7 +87,7 @@ public class Ejercicio057 {
                 Mensajes.TipoMensaje.PREGUNTA));
 
         // Llamamos a la función
-        resultado = EsFechaValida(dia, mes, anyo);
+        resultado = esFechaValida(dia, mes, anyo);
 
         // Mostramos resultado
         Mensajes.mostrarMensaje("La fecha " + dia + "/" + mes + "/" + anyo

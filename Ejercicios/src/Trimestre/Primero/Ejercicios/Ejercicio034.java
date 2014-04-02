@@ -14,105 +14,91 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
- * Diseñar un algoritmo en el que a partir de una fecha introducida por 
- * teclado con el formato DÍA, MES, AÑO, se obtenga la fecha del día siguiente.
+ * Diseñar un algoritmo en el que a partir de una fecha introducida por teclado
+ * con el formato DÍA, MES, AÑO, se obtenga la fecha del día siguiente.
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio034 {
-    
+
     /**
      * Ejercicio principal
      */
-    public void ejercicio()
-    {
+    public void ejercicio() {
         // Variables
         int dia, mes, anyo, apoyoBisiesto;
-    
+
         // Lectura de datos
-        dia = Integer.parseInt(Mensajes.pedirDatos("Introduzca el día", 
+        dia = Integer.parseInt(Mensajes.pedirDatos("Introduzca el día",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-        
-        mes  = Integer.parseInt(Mensajes.pedirDatos("Introduzca el mes", 
+
+        mes = Integer.parseInt(Mensajes.pedirDatos("Introduzca el mes",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-        
-        anyo = Integer.parseInt(Mensajes.pedirDatos("Introduzca el año", 
+
+        anyo = Integer.parseInt(Mensajes.pedirDatos("Introduzca el año",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-        
-        
+
         // Realizamos acciones segun el mes que sea y el dia en el que estemos
-        switch(mes)
-        {
+        switch (mes) {
             case 1:
             case 3:
             case 5:
             case 7:
             case 8:
             case 10:
-                if(dia == 31)
-                {
+                if (dia == 31) {
                     dia = 1;
                     mes += 1;
-                }
-                else
-                {
-                    dia +=1;
+                } else {
+                    dia += 1;
                 }
                 break;
             case 4:
             case 6:
             case 9:
             case 11:
-                if(dia == 30)
-                {
+                if (dia == 30) {
                     dia = 1;
                     mes += 1;
-                }
-                else
-                {
-                    dia += 1;                
+                } else {
+                    dia += 1;
                 }
                 break;
             case 12:
-                if(dia == 31)
-                {
+                if (dia == 31) {
                     dia = 1;
                     mes = 1;
                     anyo += 1;
-                }
-                else
-                {
+                } else {
                     dia += 1;
                 }
                 break;
             case 2:
-                if(anyo % 4 == 0 && (anyo % 100 != 0 || anyo % 400 == 0))
-                {
+                if (anyo % 4 == 0 && (anyo % 100 != 0 || anyo % 400 == 0)) {
                     apoyoBisiesto = 0;
-                }
-                else
-                {
+                } else {
                     apoyoBisiesto = 1;
                 }
-            
-                if(dia == (29 - apoyoBisiesto))
-                {
+
+                if (dia == (29 - apoyoBisiesto)) {
                     dia = 1;
                     mes += 1;
-                }
-                else
-                {
+                } else {
                     dia += 1;
                 }
+                break;
+            default: {
+                break;
+            }
         }
-        
+
         // Muestra de resultados
-        Mensajes.mostrarMensaje("El dia siguiente es " + dia + "/" + mes + "/" + anyo, 
-                "Resultado", Mensajes.TipoMensaje.INFORMACION);                      
-    }    
+        Mensajes.mostrarMensaje("El dia siguiente es " + dia + "/" + mes + "/" + anyo,
+                "Resultado", Mensajes.TipoMensaje.INFORMACION);
+    }
 }

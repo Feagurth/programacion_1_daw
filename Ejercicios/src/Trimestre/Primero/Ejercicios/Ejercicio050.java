@@ -34,7 +34,7 @@ public class Ejercicio050 {
      * @param n Elemento n de la serie de Fibonacci
      * @return El valor del elemento n en la serie de Fibonacci
      */
-    private int Fibonacci(int n) {
+    private int fibonacci(int n) {
         // Variables de apoyo
         int f1 = 0, f2 = 1, f3 = 0;
 
@@ -70,7 +70,7 @@ public class Ejercicio050 {
     public void ejercicio() {
         // Variables
         int limite, crearSerie;
-        String resultadoSerie = "";
+        StringBuilder resultadoSerie = new StringBuilder();
 
         do {
             // Petición de datos al usuario
@@ -87,14 +87,14 @@ public class Ejercicio050 {
         if (crearSerie == 1) {
             // Muestra de resultados al usuario
             Mensajes.mostrarMensaje("El valor para " + limite + " es : "
-                    + String.valueOf(Fibonacci(limite)), "Resultado",
+                    + String.valueOf(fibonacci(limite)), "Resultado",
                     Mensajes.TipoMensaje.INFORMACION);
         } else {
 
             // Iteramos calculando los valores y añadiendolos a la variable
             for (int i = 0; i <= limite; i++) {
-                resultadoSerie += ((i == 0) ? "" : ", ") + String.valueOf(Fibonacci(i));
-
+                resultadoSerie.append(((i == 0) ? "" : ", "));
+                resultadoSerie.append(String.valueOf(fibonacci(i)));
             }
 
             // Muestra de resultados al usuario

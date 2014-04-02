@@ -84,16 +84,16 @@ public class Ejercicio092 {
      * @return Cadena con la matriz formateada
      */
     private String mostrarMatriz(int[][] matriz) {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         
         for (int[] matriz1 : matriz) {
             for (int j = 0; j < matriz[1].length; j++) {
-                resultado += String.format("\t%s", matriz1[j]);
+                resultado.append(String.format("\t%s", matriz1[j]));
             }
-            resultado+= "\n";
+            resultado.append("\n");
         }
 
-        return resultado;
+        return resultado.toString();
     }
 
     /**

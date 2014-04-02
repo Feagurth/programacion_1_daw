@@ -34,17 +34,17 @@ public class Ejercicio003
     {
         // Variables
         int numero = 3;
-        String cadena = "";
+        StringBuilder cadena = new StringBuilder();
         
         // Iteramos añadiendo los nuevos numeros a la variable cadena que 
         // mostrará los resultados
         while (numero <=99) 
         {            
-            cadena += numero + " ";
+            cadena.append(String.format("%d ", numero));
             numero = numero +3;
         }       
         
         // Muestra de resultados al usuario
-        Mensajes.mostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(cadena.toString(), "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

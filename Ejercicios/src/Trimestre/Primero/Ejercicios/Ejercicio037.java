@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
 
 /**
- * Analizar los distintos métodos de realizar la suma de T números introducidos 
+ * Analizar los distintos métodos de realizar la suma de T números introducidos
  * por teclado (desde, mientras, repetir)
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Ejercicio037 {
@@ -29,107 +29,107 @@ public class Ejercicio037 {
     /**
      * Ejercicio principal
      */
-    public void ejercicio(){
+    public void ejercicio() {
         // Variables
         int opcion;
         String mensaje;
-        
+
         mensaje = "Introduzca su selección\n";
         mensaje += "1.- Bucle for\n";
         mensaje += "2.- Bucle while\n";
         mensaje += "3.- Bucle do while\n";
         mensaje += "4.- Salir";
-        
-        
+
         // Iteración hasta que se cumpla la condición de salida
-        do
-        {
+        do {
             // Petición de datos
-            opcion = Integer.parseInt(Mensajes.pedirDatos(mensaje, 
+            opcion = Integer.parseInt(Mensajes.pedirDatos(mensaje,
                     "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-            
+
             // Se realiza un método u otro dependiendo de la opción elegida
-            switch(opcion)
-            {
+            switch (opcion) {
                 case 1:
                     ejercicio_desde();
                     break;
                 case 2:
                     ejercicio_mientras();
-                    break;                    
+                    break;
                 case 3:
                     ejercicio_repetir();
-                    break;                    
+                    break;
+                default: {
+                    break;
+                }
             }
-        }while(opcion != 4);
-    
-    }    
-    
+        } while (opcion != 4);
+
+    }
+
     /**
      * Ejercicio con bucle for
      */
-    private void ejercicio_desde(){
+    private void ejercicio_desde() {
 
         // Variables
         int suma = 0, numero;
-        
+
         // Petición de datos
-        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-        
+
         // Iteramos
         for (int i = 1; i <= numero; i++) {
             suma += i;
         }
-    
+
         // Muestra de resultados
-        Mensajes.mostrarMensaje("La suma es: " + suma, 
+        Mensajes.mostrarMensaje("La suma es: " + suma,
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);
     }
-    
+
     /**
      * Ejercicio con bucle while
      */
-    private void ejercicio_mientras(){
+    private void ejercicio_mientras() {
 
         // Variables
-        int suma = 0, numero, contador= 1;
-        
+        int suma = 0, numero, contador = 1;
+
         // Petición de datos
-        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-        
+
         // Iteramos
-        while (contador <= numero) {   
+        while (contador <= numero) {
             suma += contador;
             contador++;
         }
-    
+
         // Muestra de resultados
-        Mensajes.mostrarMensaje("La suma es: " + suma, 
+        Mensajes.mostrarMensaje("La suma es: " + suma,
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);
-    }    
-    
+    }
+
     /**
      * Ejercicio con bucle do while
      */
-    private void ejercicio_repetir(){
+    private void ejercicio_repetir() {
 
         // Variables
         int suma = 0, numero, contador = 0;
-        
+
         // Petición de datos
-        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
+        numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número",
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
-        
+
         // Iteramos
-        do{            
+        do {
             contador++;
             suma += contador;
-        }while(contador != numero);
-    
+        } while (contador != numero);
+
         // Muestra de resultados
-        Mensajes.mostrarMensaje("La suma es: " + suma, 
+        Mensajes.mostrarMensaje("La suma es: " + suma,
                 "Resultados", Mensajes.TipoMensaje.INFORMACION);
-    }           
+    }
 }

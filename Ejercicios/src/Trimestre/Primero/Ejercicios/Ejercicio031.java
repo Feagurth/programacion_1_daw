@@ -38,7 +38,7 @@ public class Ejercicio031 {
         
         // Iteramos mientras la potencia de 2 del contador sea distinta 
         // del numero introducido
-        while (Math.pow(contador, 2) != numero) 
+            while(Math.abs(Math.pow(contador, 2) - numero) !=  0)
         {            
 
             // Si la potencia de dos del contador es superior al numero 

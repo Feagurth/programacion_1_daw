@@ -47,7 +47,7 @@ public class Ejercicio062 {
             if(n>= m && n > 0)
             {
                 // Se calcula el resultado y se muestra al usuario
-                resultado = Factorial(n) / (((Factorial(m)) * Factorial(n-m)));
+                resultado = factorial(n) / (((factorial(m)) * factorial(n-m)));
 
                 Mensajes.mostrarMensaje("El resultado es " + resultado, 
                         "Resultado", Mensajes.TipoMensaje.INFORMACION);
@@ -65,7 +65,7 @@ public class Ejercicio062 {
      * @param numero valor al que calcular el factorial
      * @return Devuelve el resultado de la factorización de número
      */
-    private double Factorial(int numero)
+    private double factorial(int numero)
     {
         // Iniciamos la variable que devolverá el resultado
         int resultado = 1;

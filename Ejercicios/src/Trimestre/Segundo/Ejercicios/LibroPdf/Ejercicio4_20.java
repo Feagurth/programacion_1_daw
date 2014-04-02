@@ -30,7 +30,7 @@ public class Ejercicio4_20 {
     /**
      * Clase para controlar el sueldo de los empleados
      */
-    public class Salario {
+    static public class Salario {
 
         private final int numHorasTrabajadas;
         private final double precioHoraTrabajo;

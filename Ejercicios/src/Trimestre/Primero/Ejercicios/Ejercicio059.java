@@ -31,7 +31,7 @@ public class Ejercicio059 {
      * @param iteraciones Número de iteraciones a realizar
      * @return Valor aproximado de pi
      */
-    private float CalcularPiMetodoA(int iteraciones)
+    private float calcularPiMetodoA(int iteraciones)
     {
         float resultado = 0f;
         int contador = 1;
@@ -61,7 +61,7 @@ public class Ejercicio059 {
      * @param iteraciones Número de iteraciones
      * @return Valor aproximado de Pi
      */
-    private float CalcularPiMetodoB(int iteraciones)
+    private float calcularPiMetodoB(int iteraciones)
     {
         float resultado = 0;
     
@@ -81,7 +81,7 @@ public class Ejercicio059 {
      * @param iteraciones Número de iteraciones
      * @return Valor aproximado de pi
      */
-    private float CalcularPiMetodoC(int iteraciones)
+    private float calcularPiMetodoC(int iteraciones)
     {
         // Variables
         int apoyo1 = 2, apoyo2 = 1;
@@ -127,21 +127,21 @@ public class Ejercicio059 {
                 Mensajes.TipoMensaje.PREGUNTA));
                 
         // Ejecutamos el primer método
-        pi = CalcularPiMetodoA(ciclos);
+        pi = calcularPiMetodoA(ciclos);
         
         // Mostramos el resultado
         Mensajes.mostrarMensaje("Metodo A - Pi: " + pi, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);    
         
         // Ejecutamos el segundo método
-        pi = CalcularPiMetodoB(ciclos);
+        pi = calcularPiMetodoB(ciclos);
         
         // Mostramos el resultado
         Mensajes.mostrarMensaje("Metodo B - Pi: " + pi, "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);    
         
         // Ejecutamos el tercer  método
-        pi = CalcularPiMetodoC(ciclos);
+        pi = calcularPiMetodoC(ciclos);
         
         // Mostramos el resultado
         Mensajes.mostrarMensaje("Metodo C - Pi: " + pi, "Resultado", 

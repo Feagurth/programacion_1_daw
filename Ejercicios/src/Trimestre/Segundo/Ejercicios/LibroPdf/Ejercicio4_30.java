@@ -18,6 +18,7 @@ package Trimestre.Segundo.Ejercicios.LibroPdf;
 
 import Utiles.Mensajes;
 import Utiles.PeticionDatos;
+import java.util.Locale;
 
 /**
  * Clase para realizar el ejercicio 4.30 del libro de texto Como Programar en
@@ -60,7 +61,7 @@ public class Ejercicio4_30 {
 
         // Quitamos espacios en blanco si los hubiese y pasamos a minúscula
         // todo el texto
-        palindromo = palindromo.replace(" ", "").toLowerCase();
+        palindromo = palindromo.replace(" ", "").toLowerCase(Locale.getDefault());
 
         // Iteramos a lo largo de la cadena
         do {

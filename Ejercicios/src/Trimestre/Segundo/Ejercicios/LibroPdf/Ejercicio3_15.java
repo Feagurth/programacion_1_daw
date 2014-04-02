@@ -37,7 +37,7 @@ public class Ejercicio3_15 {
     /**
      * Clase para tratar con la fecha
      */
-    public class Fecha {
+    static public class Fecha {
 
         // Variables
         private int dia;
@@ -144,7 +144,7 @@ public class Ejercicio3_15 {
         Fecha fecha = new Fecha(dia, mes, anyo);
 
         // Hacemos que muestre la fecha
-        Mensajes.mostrarMensaje(String.format("La fecha introducida es: %s\n",
+        Mensajes.mostrarMensaje(String.format("La fecha introducida es: %s%n",
                 fecha.mostrarFecha()),
                 Mensajes.TipoMensaje.INFORMACION);
     }

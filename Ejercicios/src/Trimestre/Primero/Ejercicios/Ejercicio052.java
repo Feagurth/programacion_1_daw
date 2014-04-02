@@ -39,7 +39,7 @@ public class Ejercicio052 {
         
         
         // Muestra de resultados
-        Mensajes.mostrarMensaje("El valor absoluto es: " + ValorAbsoluto(valor), 
+        Mensajes.mostrarMensaje("El valor absoluto es: " + valorAbsoluto(valor), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }    
     
@@ -48,7 +48,7 @@ public class Ejercicio052 {
      * @param numero Número del que queremos obtener el valor absoluto
      * @return Valor absoluto del número introducido
      */
-    private int ValorAbsoluto(int numero)
+    private int valorAbsoluto(int numero)
     {
         // Comprobamos si es mayor que cero(positivo)
         // Si lo es, lo devolvemos tal cual, si no, lo devolvemos 

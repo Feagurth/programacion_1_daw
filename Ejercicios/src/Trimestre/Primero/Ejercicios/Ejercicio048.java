@@ -17,6 +17,7 @@
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
+import java.util.Locale;
 
 /**
  * Algoritmo que reciba una fecha por teclado dd, mm, aaaa, así como el día de
@@ -49,10 +50,10 @@ public class Ejercicio048 {
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
 
         calendario = Mensajes.pedirDatos("¿Calendario Juliano o Gregoriano? (j/g)",
-                "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA).toLowerCase().charAt(0);
+                "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA).toLowerCase(Locale.getDefault()).charAt(0);
 
         // Calculamos el valor del día de la semana
-        resultado = DiaSemana(dia, mes, anyo, calendario);
+        resultado = diaSemana(dia, mes, anyo, calendario);
 
         // Mostramos la información al usuario
         Mensajes.mostrarMensaje("El dia " + dia + "/" + mes + "/" + anyo + " fue "
@@ -70,7 +71,7 @@ public class Ejercicio048 {
      * @param tipoCalendario Tipo de calendario, Juliano o Gregoriano
      * @return El día de la semana
      */
-    private String DiaSemana(int diaSel, int mesSel, int anyoSel, char tipoCalendario) {
+    private String diaSemana(int diaSel, int mesSel, int anyoSel, char tipoCalendario) {
         // Variables
         int d, m, y, temporal;
         String resultado = null;
@@ -110,6 +111,8 @@ public class Ejercicio048 {
                 break;
             case 6:
                 resultado = "Sabado";
+                break;
+            default:
                 break;
         }
 

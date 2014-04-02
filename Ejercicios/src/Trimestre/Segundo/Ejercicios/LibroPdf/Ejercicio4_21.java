@@ -30,7 +30,7 @@ public class Ejercicio4_21 {
     /**
      * Clase para encontrar el número mayor en un array
      */
-    public class NumeroMayor {
+    static public class NumeroMayor {
 
         // Variables
         private final int[] NUMEROS;
@@ -51,7 +51,7 @@ public class Ejercicio4_21 {
          * @param numeros array con los valores a comparar
          */
         public NumeroMayor(int[] numeros) {
-            this.NUMEROS = numeros;
+            this.NUMEROS = numeros.clone();
 
             // Inicializamos con el primer valor del array
             numeroMayor = this.NUMEROS[0];

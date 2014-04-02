@@ -42,7 +42,7 @@ public class Ejercicio105 {
      *
      * @author Luis Cabrerizo Gómez
      */
-    public class Vendedor {
+    static public class Vendedor {
 
         private String DNI;
         private String nombre;
@@ -138,7 +138,7 @@ public class Ejercicio105 {
          * @return Las ventas por meses de un vendedor
          */
         public float[] getVentasMes() {
-            return ventasMes;
+            return ventasMes.clone();
         }
 
         /**
@@ -146,7 +146,7 @@ public class Ejercicio105 {
          * @param ventasMes El valor de las ventas por meses de un vendedor
          */
         public void setVentasMes(float[] ventasMes) {
-            this.ventasMes = ventasMes;
+            this.ventasMes = ventasMes.clone();
         }
 
         /**

@@ -26,7 +26,7 @@ import Utiles.Mensajes;
  */
 public class Ejercicio054 {
 
-    private Coordenadas CoordenadasPolares(double radio, double angulo) {
+    private Coordenadas coordenadasPolares(double radio, double angulo) {
 
         // Variables
         double valorX, valorY;
@@ -59,7 +59,7 @@ public class Ejercicio054 {
                 Mensajes.TipoMensaje.PREGUNTA));
 
         // llamamos la función
-        resultado = CoordenadasPolares(radio, angulo);
+        resultado = coordenadasPolares(radio, angulo);
 
         // Mostramos resultados
         Mensajes.mostrarMensaje("La coordenada es: (" + resultado.getX()

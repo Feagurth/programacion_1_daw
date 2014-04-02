@@ -18,6 +18,7 @@
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
+import java.awt.Dimension;
 
 /**
  * Visualizar los múltiplos de 4 comprendidos entre 4 y N, donde N es un 
@@ -33,17 +34,16 @@ public class Ejercicio026 {
     
         // Variables
         int numero;
-        String cadena = "";
+        StringBuilder cadena = new StringBuilder();
         
         numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca el limite de la secuencia", 
                 "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
         
         for (int i = 4; i <= numero; i += 4) {
-            cadena += i + " ";
+            cadena.append(String.format("%d ", i));
         }
-        
-        
-        Mensajes.mostrarMensaje(cadena, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+                
+        Mensajes.mostrarMensaje(cadena.toString(), "Resultado", Mensajes.TipoMensaje.INFORMACION, true, new Dimension(15, 1));
     }
     
 }

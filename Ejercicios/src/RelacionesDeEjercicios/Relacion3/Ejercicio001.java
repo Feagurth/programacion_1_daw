@@ -49,7 +49,7 @@ public class Ejercicio001 {
         private String apellidos;
         private String zona;
         private float sueldoBase;
-        private float ventasMes[];
+        private final float ventasMes[];
         private float totalAnual;
         private float comision;
 

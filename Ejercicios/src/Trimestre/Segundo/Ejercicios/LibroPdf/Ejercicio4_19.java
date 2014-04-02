@@ -30,9 +30,9 @@ public class Ejercicio4_19 {
     /**
      * Clase para calcular las comisiones de un vendedor
      */
-    public class CalculoComisiones {
+    static public class CalculoComisiones {
 
-        private final double PAGA_SEMANAL = 200f;
+        static private final double PAGA_SEMANAL = 200f;
 
         // Variables que necesita la clase
         private final double paga;
@@ -54,7 +54,7 @@ public class Ejercicio4_19 {
          */
         public CalculoComisiones(double valorVentas) {
             this.valorVentas = valorVentas;
-            this.paga = (this.valorVentas * 0.09) + this.PAGA_SEMANAL;
+            this.paga = (this.valorVentas * 0.09) + CalculoComisiones.PAGA_SEMANAL;
         }
     }
 
@@ -98,6 +98,10 @@ public class Ejercicio4_19 {
                 }
                 case 4: {
                     vendido = 350.89f;
+                    break;
+                }
+                default:
+                {
                     break;
                 }
             }

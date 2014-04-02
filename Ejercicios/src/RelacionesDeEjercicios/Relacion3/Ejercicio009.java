@@ -47,7 +47,7 @@ public class Ejercicio009 {
     /**
      * Clase para trabajar con distribuciones estadísticas
      */    
-    public class DistribucionEstadistica {
+    static public class DistribucionEstadistica {
 
         // Array para almacenar los datos de la distribución estadística
         int[] arrayDatos;
@@ -58,7 +58,14 @@ public class Ejercicio009 {
          * @param valores Datos que forman parte de la distribución estadística
          */
         public DistribucionEstadistica(int[] valores) {
-            this.arrayDatos = valores;
+            if(valores != null)
+            {
+                this.arrayDatos = valores.clone();
+            }
+            else
+            {
+                this.arrayDatos = null;
+            }
         }
 
         /**
@@ -146,8 +153,7 @@ public class Ejercicio009 {
             // Recorremos el listado de valores
             for (Map.Entry<Integer, Integer> entry : lista.entrySet()) {
 
-                // Recogemos el valor de la clave y su valor
-                Integer clave = entry.getKey();
+                // Recogemos el valor
                 Integer valor = entry.getValue();
 
                 // Comprobamos el valor con el valor de control
@@ -310,25 +316,28 @@ public class Ejercicio009 {
          */
         @Override
         public String toString() {
-            String salida = "";
+            StringBuilder salida = new StringBuilder();
 
-            salida += "Distribución estadística\n";
-            salida += "========================\n\n";
+            salida.append("Distribución estadística\n");
+            salida.append("========================\n\n");
 
+            
+            
             // Iteramos el array de datos para concatenar los valores
             for (int i = 1; i <= arrayDatos.length; i++) {
                 //salida += String.format("%5s", arrayDatos[i - 1]);
-                salida += arrayDatos[i - 1] + Varios.generarCadena(" ", 3, String.valueOf(arrayDatos[i - 1]));
+                salida.append(arrayDatos[i - 1]);
+                salida.append(Varios.generarCadena(" ", 3, String.valueOf(arrayDatos[i - 1])));
 
                 // Si la iteración es múltiplo de 10, introducimos un 
                 // salto de línea
                 if (i % 10 == 0) {
-                    salida += "\n";
+                    salida.append("\n");
                 }
             }
 
             // Devolvemos el resultado
-            return salida;
+            return salida.toString();
         }
 
     }
@@ -400,10 +409,15 @@ public class Ejercicio009 {
 
         Object[] modas = distro.moda();
 
+        StringBuilder buf = new StringBuilder();
+        
         for (Object moda : modas) {
-            resultado += moda + " ";
+            buf.append(moda);
+            buf.append(" ");
         }
 
+        resultado += buf.toString();
+        
         resultado += "\n";
 
         resultado += "\nMediana: " + distro.mediana();

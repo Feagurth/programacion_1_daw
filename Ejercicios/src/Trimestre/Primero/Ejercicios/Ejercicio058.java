@@ -46,7 +46,7 @@ public class Ejercicio058 {
                 + "el exponente", "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
         // Ejecutamos la función de potenciación
-        resultado = Potencia(base, exponente);
+        resultado = potencia(base, exponente);
         
         // Mostramos el resultado
         Mensajes.mostrarMensaje("El resultado es: " + resultado, "Resultado", 
@@ -59,7 +59,7 @@ public class Ejercicio058 {
      * @param valorExponente Valor del exponente
      * @return Resultado de la operación
      */
-    private Double Potencia(Double valorBase, int valorExponente)
+    private Double potencia(Double valorBase, int valorExponente)
     {
         Double resultado;
         

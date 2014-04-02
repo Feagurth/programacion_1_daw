@@ -43,7 +43,7 @@ public class Ejercicio005
         String nombre;
         int minutos, segundos;
         double media;
-        String cadena;
+        StringBuilder cadena;
 
         // Petición de datos al usuario
         nombre = Mensajes.pedirDatos("Introduzca el nombre del corredor", 
@@ -61,15 +61,17 @@ public class Ejercicio005
         // Mientras que los minutos y los segundos sean distintos de cero
         while (segundos != 0 && minutos != 0) 
         {            
-            cadena = nombre + " -> " + minutos + ":" + segundos + "\n";
+             cadena = new StringBuilder();
+            
+            cadena.append(String.format("%s -> %d:%d%n", nombre, minutos, segundos));
             
             // Calulo de media
             segundos = segundos + (minutos * 60);
             media = (RECORRIDO / (double)segundos);
             
-            cadena += "Su media es de : " + media;
+            cadena.append(String.format("Su media es de : %,.2f", media));
             
-            Mensajes.mostrarMensaje(cadena, "Resultados", 
+            Mensajes.mostrarMensaje(cadena.toString(), "Resultados", 
                     Mensajes.TipoMensaje.INFORMACION);
             
         // Petición de datos al usuario

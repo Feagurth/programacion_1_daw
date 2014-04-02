@@ -18,6 +18,8 @@
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
+import Utiles.PeticionDatos;
+import java.util.Locale;
 
 /**
  * Se desea un algoritmo que realice la operación de suma o resta de dos 
@@ -43,8 +45,9 @@ public class Ejercicio038 {
         numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el segundo número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        operacion = Mensajes.pedirDatos("Introduzca la operación [S/R]", 
-                "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA).toUpperCase().charAt(0);
+        operacion = PeticionDatos.pedirConsentimiento("Introduzca la operación [S/R]", 
+                new String[]{"S", "R"})
+                .toUpperCase(Locale.getDefault()).charAt(0);
 
         // Realizamos una operación u otra dependiendo de la opción seleccionada
         if (operacion == 'S') {

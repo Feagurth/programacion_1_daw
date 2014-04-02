@@ -60,7 +60,7 @@ public class Ejercicio005 {
      */
     private String mostrarResultadoSuma(int[][] matrizSumando1,
             int[][] matrizSumando2, int[][] resultado) {
-        String salida = "";
+            StringBuilder salida = new StringBuilder();
 
         // Iteramos primero por la altura de la matriz
         for (int i = 0; i < matrizSumando1.length; i++) {
@@ -68,50 +68,49 @@ public class Ejercicio005 {
             // Iteramos ahora la primera matriz mostrando sus valores
             for (int j = 0; j < matrizSumando1[0].length; j++) {
                 System.out.print("\t" + matrizSumando1[i][j]);
-                salida += String.format("\t%s", matrizSumando1[i][j]);
+                salida.append(String.format("\t%s", matrizSumando1[i][j]));
             }
 
             // Calculamos si estamos a la mitad de la altura de las matrices
             // para colocar el simbolo de sumar, si no simplemente ponemos
             // las tabulaciones
-            if (i == Math.round(matrizSumando1.length / 2)) {
+            if (i == matrizSumando1.length / 2) {
                 System.out.print("\t + \t");
-                salida += String.format("\t + \t", "");
+                salida.append("\t + \t");
             } else {
                 System.out.print("\t\t");
-                salida += String.format("\t\t", "");
+                salida.append("\t\t");
             }
 
             // Iteramos ahora la segunda matriz mostrando sus valores
             for (int j = 0; j < matrizSumando2[0].length; j++) {
                 System.out.print("\t" + matrizSumando2[i][j]);
-                salida += String.format("\t%s", matrizSumando2[i][j]);
+                salida.append(String.format("\t%s", matrizSumando2[i][j]));
             }
 
             // Calculamos si estamos a la mitad de la altura de las matrices
             // para colocar el simbolo igual, si no simplemente ponemos
             // las tabulaciones
-            if (i == Math.round(matrizSumando2.length / 2)) {
+            if (i == matrizSumando2.length / 2) {
                 System.out.print("\t = \t");
-                salida += String.format("\t = \t", "");
+                salida.append("\t = \t");
             } else {
                 System.out.print("\t\t");
-                salida += String.format("\t\t", "");
+                salida.append("\t\t");
             }
 
             // Iteramos finalmente la matriz resultado mostrando sus valores
             for (int j = 0; j < resultado[0].length; j++) {
                 System.out.print("\t" + resultado[i][j]);
-                salida += String.format("\t%s", resultado[i][j]);
+                salida.append(String.format("\t%s", resultado[i][j]));
             }
 
             // Añadimos un retorno de carro
             System.out.println("");
-            salida += "\n";
-
+            salida.append("\n");
         }
 
-        return salida;
+        return salida.toString();
     }
 
     /**

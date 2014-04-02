@@ -14,43 +14,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
+import Utiles.PeticionDatos;
 
 /**
- * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0. 
- * El algoritmo debe terminar con un valor cero que no se debe imprimir. 
+ * Diseñar un algoritmo que lea e imprima una serie de números distintos de 0.
+ * El algoritmo debe terminar con un valor cero que no se debe imprimir.
  * Finalmente se desea obtener la cantidad de valores leídos distintos de 0
- * 
+ *
  * @author Luis Cabrerizo Gómez
  */
-public class Ejercicio002 
-{
+public class Ejercicio002 {
+
     /**
-    * Ejercicio principal
-    */
-    public void ejercicio()
-    {
+     * Ejercicio principal
+     */
+    public void ejercicio() {
         // Variables
         int contador = 0;
         int numero = -1;
-        String cadena = "";
-    
+        StringBuilder cadena = new StringBuilder();
+
         // Comprobamos que el número introducido es distinto de cero
-        while (numero != 0) 
-        {            
-            numero = Integer.parseInt(Mensajes.pedirDatos("Introduzca un número", 
-                    "Petición de datos", Mensajes.TipoMensaje.PREGUNTA));
-            
-            cadena += numero + " ";
-            contador++;
+        while (numero != 0) {
+            numero = PeticionDatos.pedirEntero("Introduzca un número\n0 para salir");
+
+            if (numero != 0) {
+                cadena.append(numero);
+                cadena.append(" ");
+                contador++;
+            }
         }
-        cadena += "\n" + "Número de valores introducidos: " + contador;
-        
-        Mensajes.mostrarMensaje(cadena, "Resultados", Mensajes.TipoMensaje.INFORMACION);
-        
-        
+        cadena.append("\n");
+        cadena.append("Número de valores introducidos: ");
+        cadena.append(contador);
+
+        Mensajes.mostrarMensaje(cadena.toString(), "Resultados", Mensajes.TipoMensaje.INFORMACION);
+
     }
 }

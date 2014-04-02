@@ -33,7 +33,7 @@ public class Ejercicio063 {
      * @param valor Numero del que se quiere calcular el factorial
      * @return Valor del factorial
      */
-    private BigDecimal Factorial(int valor) {
+    private BigDecimal factorial(int valor) {
 
         // Inicializamos la variable
         BigDecimal resultado = BigDecimal.ONE;
@@ -52,7 +52,7 @@ public class Ejercicio063 {
      * @param valor Valor del exponente de e
      * @return Resultado de e^ valor
      */
-    private float CalcularEx(double valor, int iteraciones) {
+    private float calcularEx(double valor, int iteraciones) {
         // Variables        
         float resultado = 0;
 
@@ -60,7 +60,7 @@ public class Ejercicio063 {
         // dividiendo por el factorial del valor de la iteración el 
         // número elevado al valor de la iteración
         for (int i = 2; i <= iteraciones; i++) {
-            resultado += Math.pow(valor, i) / Factorial(i).floatValue();
+            resultado += Math.pow(valor, i) / factorial(i).floatValue();
         }
 
         // Añadimos 1 + el valor del número
@@ -76,7 +76,7 @@ public class Ejercicio063 {
      * @param valor Valor al que calcular el coseno
      * @return Coseno del valor
      */
-    private float CalcularCoseno(double valor, int iteraciones) {
+    private float calcularCoseno(double valor, int iteraciones) {
         // Variables
         float resultado = 1;
 
@@ -85,10 +85,10 @@ public class Ejercicio063 {
             // Si la iteración es par, sumamos, si no, restamos
             if (i % 2 == 0) {
                 resultado += (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i).floatValue());
+                        / factorial(2 * i).floatValue());
             } else {
                 resultado -= (Math.pow(valor, (2 * i))
-                        / Factorial(2 * i).floatValue());
+                        / factorial(2 * i).floatValue());
             }
         }
 
@@ -101,7 +101,7 @@ public class Ejercicio063 {
      * @param valor Valor al que calcular el seno
      * @return Seno del valor
      */
-    private float CalcularSeno(double valor, int iteraciones) {
+    private float calcularSeno(double valor, int iteraciones) {
         // Variables
         float resultado = (float)valor;
 
@@ -111,10 +111,10 @@ public class Ejercicio063 {
             // Si la iteración es par sumamos, si es impar, restamos
             if (i % 2 == 0) {
                 resultado += Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1).floatValue();
+                        / factorial((2 * i) + 1).floatValue();
             } else {
                 resultado -= Math.pow(valor, ((2 * i) + 1))
-                        / Factorial((2 * i) + 1).floatValue();
+                        / factorial((2 * i) + 1).floatValue();
             }
         }
         
@@ -140,15 +140,15 @@ public class Ejercicio063 {
     
         // Muestra de resultados al usuario
         Mensajes.mostrarMensaje("e^" + numero + ": " + 
-                CalcularEx(numero, iterac), 
+                calcularEx(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
         Mensajes.mostrarMensaje("Cos(" + numero + "): " + 
-                CalcularCoseno(numero, iterac), 
+                calcularCoseno(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
         Mensajes.mostrarMensaje("Sen(" + numero + "): " + 
-                CalcularSeno(numero, iterac), 
+                calcularSeno(numero, iterac), 
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 }

@@ -74,7 +74,7 @@ public class Ejercicio4_38 {
                 resultado += 1;
             } else {
                 // Para el resto es igual a 1/ factorial de la iteración
-                resultado += Math.pow(valorPotencia, i) / Factorial(i);
+                resultado += Math.pow(valorPotencia, i) / factorial(i);
             }
         }
 
@@ -99,7 +99,7 @@ public class Ejercicio4_38 {
                 resultado += 1;
             } else {
                 // Para el resto es igual a 1/ factorial de la iteración
-                resultado += 1 / Factorial(i);
+                resultado += 1 / factorial(i);
             }
         }
 
@@ -113,7 +113,7 @@ public class Ejercicio4_38 {
      * @param numero valor al que calcular el factorial
      * @return Devuelve el resultado de la factorización de número
      */
-    private double Factorial(int numero) {
+    private double factorial(int numero) {
         // Iniciamos la variable que devolverá el resultado
         int resultado = 1;
 

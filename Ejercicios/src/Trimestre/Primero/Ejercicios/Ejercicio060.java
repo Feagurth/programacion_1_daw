@@ -32,7 +32,7 @@ public class Ejercicio060 {
      * @param valorNumero Número al que calcular la suma de sus divisores
      * @return Suma de los divisores del número
      */
-    private int SumaDivisores(int valorNumero) {
+    private int sumaDivisores(int valorNumero) {
         // Variables
         int suma = 0;
 
@@ -62,7 +62,7 @@ public class Ejercicio060 {
 
         // Mostrar resultados
         Mensajes.mostrarMensaje("La suma de los divisores de " + numero + " es: "
-                + SumaDivisores(numero), "Resultado", Mensajes.TipoMensaje.INFORMACION);
+                + sumaDivisores(numero), "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }
 
 }

@@ -32,7 +32,7 @@ public class Ejercicio055 {
      * @param valor Numero del que se quiere calcular el factorial
      * @return Valor del factorial
      */
-    private BigDecimal Factorial(int valor) {
+    private BigDecimal factorial(int valor) {
         
         // Inicializamos la variable
         BigDecimal resultado = BigDecimal.ONE;
@@ -58,7 +58,7 @@ public class Ejercicio055 {
 
         // Mostramos información al usuario
         Mensajes.mostrarMensaje("El factorial de " + numero + " es " + 
-                Factorial(numero).stripTrailingZeros().toEngineeringString()
+                factorial(numero).stripTrailingZeros().toEngineeringString()
                 ,
                 "Resultado", Mensajes.TipoMensaje.INFORMACION);
     }

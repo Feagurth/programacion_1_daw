@@ -52,7 +52,7 @@ public class Ejercicio003 {
 
             // Asignamos los valores
             this.nombreProducto = nombreProducto;
-            this.ventasMensuales = ventasMensuales;
+            this.ventasMensuales = ventasMensuales.clone();
 
             // Iteramos las ventas mensuales para conseguir el total del año
             for (float ventaMes : ventasMensuales) {
@@ -96,36 +96,36 @@ public class Ejercicio003 {
      * Clase diseñada para albergar todas las ventas de productos de un año y
      * mostrar los resultados de forma maquetada
      */
-    public class SistemaDeVentas {
+    static public class SistemaDeVentas {
 
         private final String[] ARRAY_MESES = new String[]{"Enero", "Febrero", "Marzo", "Abril",
             "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
             "Noviembre", "Diciembre"};
 
-        private final String CADENA_TOTAL_PRODUCTO = "Total Producto";
+        private static final String CADENA_TOTAL_PRODUCTO = "Total Producto";
 
         private final VentaAnualProducto[] ventasAnuales;
 
         /**
          * Método para recuperar todas las ventas anuales de productos
+         *
          * @return Todas las ventas anuales de los productos
          */
         public VentaAnualProducto[] getVentasAnuales() {
-            return ventasAnuales;
+            return ventasAnuales.clone();
         }
 
         /**
          * Método para recuperar todas las ventas anuales de un producto
+         *
          * @param posicion Posición del producto en el array de ventas anuales
          * @return Toads las ventas anuales de un producto
          */
         public VentaAnualProducto getVentaAnualProducto(int posicion) {
             if (posicion <= ventasAnuales.length - 1) {
                 return ventasAnuales[posicion];
-            }
-            else
-            {
-                return null;                
+            } else {
+                return null;
             }
         }
 
@@ -135,12 +135,13 @@ public class Ejercicio003 {
          * @param ventasAnuales Un array con las ventas de los productos del año
          */
         public SistemaDeVentas(VentaAnualProducto[] ventasAnuales) {
-            this.ventasAnuales = ventasAnuales;
+            this.ventasAnuales = ventasAnuales.clone();
         }
 
         /**
          * Método que nos permite mostrar por pantalla los datos de ventas
          * anuales formateados con un diseño en forma de rejilla
+         *
          * @return Cadena formateada con los resultados
          */
         public String mostrarResultadosAnuales() {
@@ -164,12 +165,21 @@ public class Ejercicio003 {
             // en blanco
             linea = Varios.generarCadena(" ", 30, "");
 
+            // Cremaos un objeto StringBuilder para concatenar en el interior
+            // del bucle
+            StringBuilder buf = new StringBuilder();
+
             // A continuación iteramos por el array de meses, concatenando a la 
             // linea una barra, el valor del nombre del mes y los espacios 
             // necesarios para llegar a 15 caracteres
             for (String mes : ARRAY_MESES) {
-                linea += "| " + mes + Varios.generarCadena(" ", 15, mes);
+                buf.append("| ");
+                buf.append(mes);
+                buf.append(Varios.generarCadena(" ", 15, mes));
             }
+
+            // Volcamos el contenido
+            linea += buf.toString();
 
             // Para finalizar contatenamos una barra más y la cadena del total del 
             // producto formateada a 15 espacios en blanco
@@ -211,14 +221,19 @@ public class Ejercicio003 {
                 linea += "| " + producto.getNombreProducto()
                         + Varios.generarCadena(" ", 28, producto.getNombreProducto());
 
+                
+                // Declaramos un nuevo StringBuilder
+                buf = new StringBuilder();
+                
                 // A continuación iteramos por el array de meses
                 for (int i = 0; i < ARRAY_MESES.length; i++) {
 
                     // Y concatenamos a la linea las ventas mensuales del producto
-                    // para el mes correspondiente a la iteración actual
-                    linea += "| " + producto.getVentasMensual(i)
-                            + Varios.generarCadena(" ", 15,
-                                    String.valueOf(producto.getVentasMensual(i)));
+                    // para el mes correspondiente a la iteración actual                    
+                    buf.append("| ");
+                    buf.append(producto.getVentasMensual(i));
+                    buf.append(Varios.generarCadena(" ", 15,
+                                    String.valueOf(producto.getVentasMensual(i))));
 
                     // Aumentamos el acumulador de ventas mensuales 
                     totales[i] += producto.getVentasMensual(i);
@@ -237,6 +252,9 @@ public class Ejercicio003 {
                     }
 
                 }
+                
+                // Volcamos el contenido
+                linea += buf.toString();
 
                 // Para finalizad concatenamos el producto total de ventas para 
                 // el año formateado a 15 espacios en blanco 
@@ -274,17 +292,24 @@ public class Ejercicio003 {
 
             // Concatenamos los valores de Total Mes formateado a 25 espacios en blanco
             linea += "| " + "Total mes" + Varios.generarCadena(" ", 28, "Total mes");
-
+            
+            // Objeto StringBuilder para concatenar en bucles
+            buf = new StringBuilder();
+            
             // Iteramos una vez más por el array de meses concatenando los resultados
             for (int i = 0; i < ARRAY_MESES.length; i++) {
 
                 // Concatenamos los valores antes generados formateados a 15 
                 // espacios en blanco
-                linea += "| " + totales[i]
-                        + Varios.generarCadena(" ", 15, String.valueOf(totales[i]));
+                buf.append("| ");
+                buf.append(totales[i]);
+                buf.append(Varios.generarCadena(" ", 15, String.valueOf(totales[i])));
 
             }
 
+            // Volcamos el contenido
+            linea += buf.toString();
+            
             // Finalmente concatenamos tb el total del año
             linea += "| " + totales[12]
                     + Varios.generarCadena(" ", 15, String.valueOf(totales[12])) + " |";
@@ -302,21 +327,27 @@ public class Ejercicio003 {
             linea = "| " + "Producto más vendido"
                     + Varios.generarCadena(" ", 28, "Producto más vendido");
 
+            // Objeto StringBuilder para concatenar en bucles
+            buf = new StringBuilder();
+            
             // Iteramos una vez más por el array de meses
             for (int i = 0; i < ARRAY_MESES.length; i++) {
 
                 // Concatenemos el nombre del producto más vendido formateado
                 // a 15 espacios en blanco
-                linea += "| " + ventasAnuales[masVendido[i]].getNombreProducto()
-                        + Varios.generarCadena(" ", 15,
-                                ventasAnuales[masVendido[i]].getNombreProducto());
+                buf.append("| ");
+                buf.append(ventasAnuales[masVendido[i]].getNombreProducto());
+                buf.append(Varios.generarCadena(" ", 15,ventasAnuales[masVendido[i]].getNombreProducto()));
 
             }
 
+            // Volcamos el resultado
+            linea += buf.toString();
+            
             // Concatenemoas el último cajón sin psarle valores ninguno y generando
             // simplemente 15 espacios en blanco
             linea += "| " + Varios.generarCadena(" ", 15, "") + " |";
-            
+
             // Imprimimos la linea
             resultado += "\n" + linea;
 
@@ -324,7 +355,7 @@ public class Ejercicio003 {
             linea = Varios.generarCadena("-", 253, "");
 
             resultado += "\n" + linea;
-            
+
             return resultado;
         }
     }
@@ -349,8 +380,7 @@ public class Ejercicio003 {
         // Creamos e inicializamos un contador
         int contador = -1;
 
-        for (VentaAnualProducto ventaAnual : ventasAnuales) {
-
+        for (VentaAnualProducto ventasAnuale : ventasAnuales) {
             // Pedimos al usuario el nombre del producto
             nombreProducto = PeticionDatos.pedirCadena("Introduzca el nombre del producto");
 
@@ -370,15 +400,11 @@ public class Ejercicio003 {
                 ventaMeses[contadorMeses] = (float) PeticionDatos.pedirRealPositivo("Introduzca la ventas del producto para " + mes);
             }
 
-            // Creamos el objeto correspondiente a las ventas anuales del 
-            // producto
-            ventaAnual = new VentaAnualProducto(nombreProducto, ventaMeses);
-
             // Aumentamos el contador
             contador++;
 
             // Guardamos el objeto en el array de ventas anuales del producto
-            ventasAnuales[contador] = ventaAnual;
+            ventasAnuales[contador] = new VentaAnualProducto(nombreProducto, ventaMeses);
         }
 
         // Creamos un nuevo objeto de Sistema de ventas al cual pasaremos en su
@@ -387,6 +413,6 @@ public class Ejercicio003 {
 
         // Mostramos los resultados formateados
         System.out.println(sistemaDeVentas.mostrarResultadosAnuales());
-        
+
     }
 }

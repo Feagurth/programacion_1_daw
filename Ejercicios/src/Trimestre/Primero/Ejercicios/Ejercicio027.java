@@ -18,6 +18,7 @@
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
+import java.awt.Dimension;
 
 /**
  * Realizar un diagrama que permita realizar un contador e imprimir 
@@ -32,14 +33,14 @@ public class Ejercicio027 {
     public void ejercicio(){
         
         // Variables
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         
         for (int i = 1; i <= 100; i++) {
-            resultado += i + " ";
+            resultado.append(String.format("%d ", i));
         }
 
         // Muestra de resultados
-        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado", Mensajes.TipoMensaje.INFORMACION, true, new Dimension(10, 1));
     
     }
     

@@ -33,28 +33,28 @@ public class Ejercicio5_14 {
     public void ejercicio() {
         double monto; // Monto depositado al final de cada año
         double principal; // monto inicial antes de los intereses
-        String cadena;
+        StringBuilder cadena = new StringBuilder();
 
         // Petición de datos al usuario
         principal = PeticionDatos.pedirRealPositivoNoCero("Introduzca el valor del monto inicial");
         
         // Preparamos los encabezados
-        cadena = String.format("s%20s\n", "Anio", "Monto en deposito");
+        cadena.append(String.format("%s%20s%n", "Anio", "Monto en deposito"));
         // calcula el monto en deposito para cada uno de diez años
         for (int i = 5; i < 11; i++) {
             
-            cadena += String.format("\nInteres: %,1.2f\n", (i/100f));
+            cadena.append(String.format("%nInteres: %,1.2f%n", (i/100f)));
             
             for (int anio = 1; anio <= 10; anio++) {
                 // calcula el nuevo monto para el año especificado
                 monto = calculoDeInteres(principal, (i/100f), anio);
 
-                cadena += String.format("%4d%,20.2f\n", anio, monto);
+                cadena.append(String.format("%4d%,20.2f%n", anio, monto));
             }
         }
         
         // Mostramos el resultado
-        Mensajes.mostrarMensaje(cadena, "Información", 
+        Mensajes.mostrarMensaje(cadena.toString(), "Información", 
                 Mensajes.TipoMensaje.INFORMACION, true, 
                 new Dimension(40, 40));
     }

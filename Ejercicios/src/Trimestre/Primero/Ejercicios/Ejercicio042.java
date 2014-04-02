@@ -17,6 +17,7 @@
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
+import java.awt.Dimension;
 
 /**
  * Calcular y escribir los cuadrados de una serie de números distintos de 0
@@ -33,7 +34,7 @@ public class Ejercicio042 {
 
         // Variables
         int num_numeros, numero, contador;
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
         // Petición de datos al usuario
         num_numeros = Integer.parseInt(Mensajes.pedirDatos("¿Cantidad de "
@@ -53,7 +54,7 @@ public class Ejercicio042 {
             // Verificamos si el número es distinto de cero
             if (numero != 0) {
                 // Concatenamos resultados
-                resultado += Math.pow(numero, 2) + "\n";
+                resultado.append(String.format("%d - %.0f%n", numero, Math.pow(numero, 2)));
             }
 
             // Aumentamos el contador
@@ -61,7 +62,7 @@ public class Ejercicio042 {
         } while (contador != num_numeros);
 
         // Mostramos el resultado
-        Mensajes.mostrarMensaje(resultado, "Información",
-                Mensajes.TipoMensaje.INFORMACION);
+        Mensajes.mostrarMensaje(resultado.toString(), "Información",
+                Mensajes.TipoMensaje.INFORMACION, true, new Dimension(10, 3));
     }
 }

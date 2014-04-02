@@ -30,15 +30,14 @@ public class Ejercicio013 {
     */
     public void ejercicio(){
         // Variable para concatenar los resultados
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         
         for (int i = 0; i < 11; i++) {
-            resultado += "La potencia de dos de " + i + " es :" + 
-                    (int)Math.pow(2,i) + "\n";
+            resultado.append(String.format("La potencia de dos de %d es: %.0f%n", i, Math.pow(2,i)));
         }
         
         // Muestra de resultados al usuario
-        Mensajes.mostrarMensaje(resultado, "Resultado", 
+        Mensajes.mostrarMensaje(resultado.toString(), "Resultado", 
                 Mensajes.TipoMensaje.INFORMACION);
     }
     

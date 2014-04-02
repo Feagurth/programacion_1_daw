@@ -149,7 +149,7 @@ public class Ejercicio3_14 {
         resultado = "Se ha aumentado el sueldo del empleado un 10%\n";
         
         // Concatenamos los datos del trabajador
-        resultado += String.format("Trabajador: %s %s\n", 
+        resultado += String.format("Trabajador: %s %s%n", 
                 empleado.getPrimerNombre(), 
                 empleado.getApellidoPaterno());
 

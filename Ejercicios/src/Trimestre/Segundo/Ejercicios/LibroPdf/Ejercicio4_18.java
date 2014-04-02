@@ -30,7 +30,7 @@ public class Ejercicio4_18 {
     /**
      * Clase para controlar la cuenta de un cliente, así como su crédito
      */
-    public class CuentaCorriente {
+    static public class CuentaCorriente {
 
         // Variables para la clase
         private final int numeroCuenta;

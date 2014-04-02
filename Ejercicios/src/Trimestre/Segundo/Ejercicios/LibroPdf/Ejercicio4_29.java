@@ -43,7 +43,7 @@ public class Ejercicio4_29 {
         resultado = pintarCuadrado(tamanyoLado);
 
         // Muestra de resultado en consola
-        System.out.print(resultado);
+        System.out.print(resultado);        
     }
 
     /**
@@ -52,7 +52,7 @@ public class Ejercicio4_29 {
      * @return Cadena con el cuadrado formado listo para imprimir
      */
     private String pintarCuadrado(int lado) {
-        String salida = "";
+        StringBuilder salida = new StringBuilder();
 
         // Iteramos 2 veces una por cada lado del cuadrado
         for (int i = 0; i < lado; i++) {
@@ -61,18 +61,18 @@ public class Ejercicio4_29 {
                 // Comprobamos si la iteración pertenece a la primera o 
                 // la última fila
                 if (i == 0 || i == lado - 1) {
-                    salida += "*";
+                    salida.append("*");
                 } else // Comprobamos si es la primera o la ultima columna
                 if (j == 0 || j == lado - 1) {
-                    salida += "*";
+                    salida.append("*");
                 } else {
-                    salida += " ";
+                    salida.append(" ");
                 }
             }
             // Añadimos un retorno de carro al final de cada linea
-            salida += "\n";
+            salida.append("\n");
         }
         // Devolvemos el resultado
-        return salida;
+        return salida.toString();
     }
 }
