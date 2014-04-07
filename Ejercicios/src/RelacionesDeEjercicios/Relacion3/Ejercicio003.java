@@ -363,6 +363,7 @@ public class Ejercicio003 {
     /**
      * Ejercicio principal
      */
+    
     public void ejercicio() {
         // Variables
         int numProductos;

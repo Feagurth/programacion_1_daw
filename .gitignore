@@ -261,3 +261,5 @@ pip-log.txt
 /PruebaImportStatic/nbproject/private/
 /PruebaIncremento/nbproject/private/
 /PruebaEmpleadoPorComision/nbproject/private/
+/DivisionEntreCeroSinManejoDeExcepciones/nbproject/private/
+/DivisionEntreCeroConManejoDeExcepciones/nbproject/private/
