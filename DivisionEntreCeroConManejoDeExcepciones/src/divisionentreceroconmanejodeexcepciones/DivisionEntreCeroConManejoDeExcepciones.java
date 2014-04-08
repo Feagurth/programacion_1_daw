@@ -23,11 +23,12 @@ public class DivisionEntreCeroConManejoDeExcepciones {
 // demuestra cómo se lanza una excepción cuando ocurre una división entre cero
 
     public static int cociente(int numerador, int denominador)
-            throws ArithmeticException{
+            throws ArithmeticException {
+        {
+            return numerador / denominador; // posible división entre cero
 
-        return numerador / denominador; // posible división entre cero
-
-    } // fin del método cociente
+        } // fin del método cociente
+    }
 
     public static void main(String args[]) {
         Scanner explorador = new Scanner(System.in); // objeto Scanner para entrada
