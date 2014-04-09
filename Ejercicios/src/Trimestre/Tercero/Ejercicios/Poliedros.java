@@ -20,23 +20,23 @@ import Utiles.Mensajes;
 import Utiles.PeticionDatos;
 
 /**
- * Intefaz para la clase Polígono
+ * Intefaz para la clase poliedro
  *
  * @author Luis Cabrerizo Gómez
  */
-interface InterfazPoligonos {
+interface InterfazPoliedros {
 
     /**
-     * Método para calcular el área del polígono
+     * Método para calcular el área del poliedro
      *
-     * @return El área del polígono
+     * @return El área del poliedro
      */
     public abstract double area();
 
     /**
-     * Método para calcular el volumen del polígono
+     * Método para calcular el volumen del poliedro
      *
-     * @return El volumen del polígono
+     * @return El volumen del poliedro
      */
     public abstract double volumen();
 
@@ -50,44 +50,44 @@ interface InterfazPoligonos {
 }
 
 /**
- * Clase abstracta para calcular áreas y volúmenes de polígonos
+ * Clase abstracta para calcular áreas y volúmenes de poliedro
  *
  * @author Luis Cabrerizo Gómez
  */
-abstract class Poligono implements InterfazPoligonos {
+abstract class Poliedro implements InterfazPoliedros {
 
     final double arista;
 
     /**
-     * Devuelve el valor de la arista del polígono
+     * Devuelve el valor de la arista del poliedro
      *
-     * @return El valor de la arista del polígono
+     * @return El valor de la arista del poliedro
      */
     public double getArista() {
         return arista;
     }
 
     /**
-     * Constructor de la clase Polígono
+     * Constructor de la clase poliedro
      *
-     * @param arista Valor de la arista del polígono
+     * @param arista Valor de la arista del poliedro
      */
-    public Poligono(double arista) {
+    public Poliedro(double arista) {
         this.arista = arista;
     }
 
     /**
-     * Método para calcular el área del polígono
+     * Método para calcular el área del poliedro
      *
-     * @return El área del polígono
+     * @return El área del poliedro
      */
     @Override
     public abstract double area();
 
     /**
-     * Método para calcular el volumen del polígono
+     * Método para calcular el volumen del poliedro
      *
-     * @return El volumen del polígono
+     * @return El volumen del poliedro
      */
     @Override
     public abstract double volumen();
@@ -109,7 +109,7 @@ abstract class Poligono implements InterfazPoligonos {
  *
  * @author Luis Cabrerizo Gómez
  */
-class Tetraedro extends Poligono {
+class Tetraedro extends Poliedro {
 
     /**
      * Constructor de la clase tetraedro
@@ -157,7 +157,7 @@ class Tetraedro extends Poligono {
  *
  * @author Luis Cabrerizo Gómez
  */
-class Cubo extends Poligono {
+class Cubo extends Poliedro {
 
     /**
      * Constructor de la clase cubo
@@ -205,7 +205,7 @@ class Cubo extends Poligono {
  *
  * @author Luis Cabrerizo Gómez
  */
-class Octaedro extends Poligono {
+class Octaedro extends Poliedro {
 
     /**
      * Constructor de la clase octaedro
@@ -253,7 +253,7 @@ class Octaedro extends Poligono {
  *
  * @author Luis Cabrerizo Gómez
  */
-class Dodecaedro extends Poligono {
+class Dodecaedro extends Poliedro {
 
     /**
      * Constructor de la clase Dodecaedro
@@ -301,7 +301,7 @@ class Dodecaedro extends Poligono {
  *
  * @author Luis Cabrerizo Gómez
  */
-class Icosaedro extends Poligono {
+class Icosaedro extends Poliedro {
 
     /**
      * Constructor de la clase Icosaedro
@@ -344,11 +344,11 @@ class Icosaedro extends Poligono {
 }
 
 /**
- * Clase para calcular el área y volumen de diversos polígonos
+ * Clase para calcular el área y volumen de diversos poliedros
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Poligonos {
+public class Poliedros {
 
     /**
      * Ejercicio principal
@@ -363,12 +363,12 @@ public class Poligonos {
         int arista = PeticionDatos.
                 pedirEnteroPositivoNoCero("Introduzca el valor de la arista");
 
-        // Creamos objetos para cada uno de los polígonos que vamos a calcular
-        Poligono tetra = new Tetraedro(arista);
-        Poligono cubo = new Cubo(arista);
-        Poligono octa = new Octaedro(arista);
-        Poligono dode = new Dodecaedro(arista);
-        Poligono ico = new Icosaedro(arista);
+        // Creamos objetos para cada uno de los poliedro que vamos a calcular
+        Poliedro tetra = new Tetraedro(arista);
+        Poliedro cubo = new Cubo(arista);
+        Poliedro octa = new Octaedro(arista);
+        Poliedro dode = new Dodecaedro(arista);
+        Poliedro ico = new Icosaedro(arista);
 
         // Concatenamos los resultados en la variable a tal efecto
         resultado += tetra.toString() + "\n";
@@ -378,7 +378,7 @@ public class Poligonos {
         resultado += ico.toString() + "\n";
 
         // Mostramos el resultado al usuario
-        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION, true);
+        Mensajes.mostrarMensaje(resultado, "Resultado", Mensajes.TipoMensaje.INFORMACION);
 
     }
 

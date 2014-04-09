@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Tercero.Ejercicios.Poligonos;
+import Trimestre.Tercero.Ejercicios.Poliedros;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
@@ -36,7 +36,7 @@ public class Lanzador {
      */
     public static void main(String[] args) {
 
-        Poligonos ejercicio = new Poligonos();
+        Poliedros ejercicio = new Poliedros();
 
         ejercicio.ejercicio();
     }
