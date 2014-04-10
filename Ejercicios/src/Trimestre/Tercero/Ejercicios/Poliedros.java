@@ -31,14 +31,14 @@ interface InterfazPoliedros {
      *
      * @return El área del poliedro
      */
-    public abstract double area();
+    double area();
 
     /**
      * Método para calcular el volumen del poliedro
      *
      * @return El volumen del poliedro
      */
-    public abstract double volumen();
+    double volumen();
 
     /**
      * Método para devolver los valores de la clase como una cadena de texto
@@ -46,7 +46,7 @@ interface InterfazPoliedros {
      * @return Cadena de texto con los valores de la clase
      */
     @Override
-    public abstract String toString();
+    String toString();
 }
 
 /**

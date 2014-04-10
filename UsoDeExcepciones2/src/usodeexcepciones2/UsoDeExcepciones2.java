@@ -20,8 +20,7 @@ public class UsoDeExcepciones2 {
             lanzaExcepcion();
         } catch (Exception e) {
             System.err.println("La excepción se manejó en main");
-        }
-        
+        }        
     }
 
     private static void lanzaExcepcion() throws Exception{
@@ -35,6 +34,5 @@ public class UsoDeExcepciones2 {
         {
             System.err.println("Finally lanzaExcepcion");
         }        
-    }
-    
+    }    
 }
