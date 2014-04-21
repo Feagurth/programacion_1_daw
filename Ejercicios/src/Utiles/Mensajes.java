@@ -209,6 +209,7 @@ public class Mensajes {
         mostrarMensaje(mensaje, titulo, tipoMensaje, false);
     }
 
+
     /**
      * Función para pedir datos al usuario
      *
@@ -216,6 +217,7 @@ public class Mensajes {
      * @param titulo Título de la ventana
      * @param tipoMensaje Tipo de mensaje que se mostrará
      * @return Datos introducidos por el usuario
+     * @deprecated Usar PeticionDatos
      */
     @Deprecated
     public static String pedirDatos(String mensaje, String titulo, TipoMensaje tipoMensaje) {
