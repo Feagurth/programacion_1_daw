@@ -217,6 +217,7 @@ public class Mensajes {
      * @param tipoMensaje Tipo de mensaje que se mostrará
      * @return Datos introducidos por el usuario
      */
+    @Deprecated
     public static String pedirDatos(String mensaje, String titulo, TipoMensaje tipoMensaje) {
         String cadena;
 

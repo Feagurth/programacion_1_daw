@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Trimestre.Tercero.Ejercicios;
+package RelacionesDeEjercicios.Relacion5;
 
 import Utiles.Mensajes;
 import Utiles.PeticionDatos;
@@ -344,11 +344,19 @@ class Icosaedro extends Poliedro {
 }
 
 /**
- * Clase para calcular el área y volumen de diversos poliedros
+ * Implementar una jerarquía de clases que recoja: 
+ * a. Poliedros ? Tetraedro, cubo, octaedro, dodecaedro icosaedro 
+ * b. Aspectos a tener en cuenta: 
+ *      I. Superclase ? Poliedros 
+ *      II. Subclases ? Tetraedro, Cubo, Octaedro, Dodecaedro e Icosaedro 
+ * c. Fórmulas (a ? arista del poliedro): 
+ * d. Usar el polimorfismo (método toString, métodos de cálculo de áreas y volúmenes, 
+ * matrices de poliedros …) 
+ * e. Crear un programa que cree instancias de objetos 
  *
  * @author Luis Cabrerizo Gómez
  */
-public class Poliedros {
+public class Ejercicio002 {
 
     /**
      * Ejercicio principal

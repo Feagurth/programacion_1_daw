@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Tercero.Ejercicios.Poliedros;
+import RelacionesDeEjercicios.Relacion5.Ejercicio003;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
@@ -36,7 +36,7 @@ public class Lanzador {
      */
     public static void main(String[] args) {
 
-        Poliedros ejercicio = new Poliedros();
+        Ejercicio003 ejercicio = new Ejercicio003();
 
         ejercicio.ejercicio();
     }
