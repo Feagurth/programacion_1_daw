@@ -155,7 +155,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("%s %s%nNúmero de Seguro Social: %s",
+            return String.format("Nombre: %s %s%nNúmero de Seguro Social: %s",
                     getPrimerNombre(), getApellidoPaterno(), getNumeroSeguroSocial());
         }
     }
@@ -183,7 +183,7 @@ public class Ejercicio003 {
          *
          * @param salarioSemanal
          */
-        private void setSalarioSemanal(double salarioSemanal) {
+        public final void setSalarioSemanal(double salarioSemanal) {
             this.salarioSemanal = salarioSemanal < 0.0 ? 0 : salarioSemanal;
         }
 
@@ -207,7 +207,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("Empleado Asalariado: %s\n%s: $%,.2f",
+            return String.format("Empleado Asalariado%n%s\n%s: $%,.2f",
                     super.toString(), "Salario Semanal", getSalarioSemanal());
         }
 
@@ -246,7 +246,7 @@ public class Ejercicio003 {
          *
          * @param sueldo El sueldo del trabajador por hora
          */
-        private void setSueldo(double sueldo) {
+        public final void setSueldo(double sueldo) {
             this.sueldo = (sueldo < 0.0) ? 0.0 : sueldo;
         }
 
@@ -265,7 +265,7 @@ public class Ejercicio003 {
          *
          * @param horas Número de horas asignadas al trabajador
          */
-        private void setHoras(double horas) {
+        public final void setHoras(double horas) {
             this.horas = (horas >= 0.0 && horas <= 168.0) ? horas : 0.0;
         }
 
@@ -291,7 +291,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("Empleado Por Horas: %s%n%s: $%,.2f%n%s: %,.2f",
+            return String.format("Empleado Por Horas%n%s%n%s: $%,.2f%n%s: %,.2f",
                     super.toString(), "Sueldo Por Horas", getSueldo(), "Horas Trabajadas", getHoras());
         }
 
@@ -338,7 +338,7 @@ public class Ejercicio003 {
          *
          * @param ventasBrutas Valor de las ventas asignadas al empleado
          */
-        private void setVentasBrutas(double ventasBrutas) {
+        public final void setVentasBrutas(double ventasBrutas) {
             this.ventasBrutas = (ventasBrutas > 0 ? ventasBrutas : 0);
         }
 
@@ -357,7 +357,7 @@ public class Ejercicio003 {
          * @param tarifaComision El valor de la tarifa de comisión de un
          * empleado
          */
-        private void setTarifaComision(double tarifaComision) {
+        public final void setTarifaComision(double tarifaComision) {
             this.tarifaComision = (tarifaComision > 0.0 && tarifaComision < 1.0 ? tarifaComision : 0);
         }
 
@@ -383,7 +383,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("Empleado Por Comision: %s%n%s: $%,.2f%n%s: %,.2f",
+            return String.format("Empleado Por Comision%n%s%n%s: $%,.2f%n%s: %,.2f",
                     super.toString(), "Ventas Brutas", getVentasBrutas(), "Tarifa Comisión", getTarifaComision());
         }
 
@@ -420,7 +420,7 @@ public class Ejercicio003 {
          *
          * @param salarioBase Salario base del empleado
          */
-        private void setSalarioBase(double salarioBase) {
+        public final void setSalarioBase(double salarioBase) {
             this.salarioBase = (salarioBase < 0.0 ? 0.0 : salarioBase);
         }
 
@@ -491,7 +491,7 @@ public class Ejercicio003 {
          *
          * @param numeroArticulo El número de artículo
          */
-        private void setNumeroArticulo(String numeroArticulo) {
+        public final void setNumeroArticulo(String numeroArticulo) {
             this.numeroArticulo = numeroArticulo;
         }
 
@@ -509,7 +509,7 @@ public class Ejercicio003 {
          *
          * @param descripcionPieza Descripción de la pieza
          */
-        private void setDescripcionPieza(String descripcionPieza) {
+        public final void setDescripcionPieza(String descripcionPieza) {
             this.descripcionPieza = descripcionPieza;
         }
 
@@ -527,7 +527,7 @@ public class Ejercicio003 {
          *
          * @param cantidad Cantidad de artículos de la factura
          */
-        private void setCantidad(int cantidad) {
+        public final void setCantidad(int cantidad) {
             this.cantidad = (cantidad < 0 ? 0 : cantidad);
         }
 
@@ -545,7 +545,7 @@ public class Ejercicio003 {
          *
          * @param precioPorArticulo El precio por artículo
          */
-        private void setPrecioPorArticulo(double precioPorArticulo) {
+        public final void setPrecioPorArticulo(double precioPorArticulo) {
             this.precioPorArticulo = precioPorArticulo;
         }
 
@@ -581,7 +581,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("Numero Artículo: %s%n"
+            return String.format("Factura%nNumero Artículo: %s%n"
                     + "Descripción: %s%n"
                     + "Cantidad: %s%n"
                     + "Precio Por Artículo: %s",
@@ -596,27 +596,70 @@ public class Ejercicio003 {
      * Módulo principal de la clase Ejercicio003
      */
     public void ejercicio() {
+
+        // Creamos un array de objetos PorPagar
         PorPagar objetosPorPagar[] = new PorPagar[6];
 
+        // Creamos una varible double para almacenar el salario base de los 
+        // objetos de tipo EmpleadoBaseMasComision para hacer el incremento
+        // del salario más legible
+        double salarioBase;
+
+        // Creamos los objetos especificados y rellenamos con ellos el array
+        // Dos objetos factura
         objetosPorPagar[0] = new Factura("12345", "Asiento", 2, 375.00);
         objetosPorPagar[1] = new Factura("23648", "Llanta", 4, 79.95);
+
+        // Un objeto EmpleadoAsalariado
         objetosPorPagar[2] = new EmpleadoAsalariado("Tomás", "Garcia", "111-11-1111", 800.00);
+
+        // Un objeto EmpleadoPorHoras
         objetosPorPagar[3] = new EmpleadoPorHoras("Ana", "Torres", "222-22-2222", 1150.50, 50);
+
+        // Un onjeto EmpleadoPorComision
         objetosPorPagar[4] = new EmpleadoPorComision("Antonio", "Gonzalez", "333-33-3333", 1000.50, 0.15);
+
+        // Un objeto EmpleadoBaseMasComision
         objetosPorPagar[5] = new EmpleadoBaseMasComision("Maria", "Sanchez", "444-44-4444", 750.50, 800, 0.25);
 
-        
+        // Definimos un objeto StringBuilder para poder crear la salida de datos al usuario
         StringBuilder mensaje = new StringBuilder("Facturas y empleados procesados polilmórficamente\n");
+        mensaje.append("---------------------------------------------------------------------------\n");
 
+        // Iteramos por el array de objetos PorPagar con un for mejorado
         for (PorPagar porPagar : objetosPorPagar) {
 
+            // Concatenamos la salida de su método ToString de los objetos por los
+            // que iteramos y concatenemoas la cantidad a pagar a cada uno
             mensaje.append(String.format("%s%n%s: $%,.2f%n%n", porPagar.toString(), "Pago Vencido", porPagar.obtenerMontoPago()));
             mensaje.append("\n");
-        }        
-                
+
+            // Verificamos si el objeto de la iteración es una instancia
+            // de EmpleadoBaseMasComision
+            if (porPagar instanceof EmpleadoBaseMasComision) {
+                // Guardamos el salario base inicial en la variable que creamos
+                // a tal efecto haciendo un casting del objeto PorPagar
+                salarioBase = ((EmpleadoBaseMasComision) porPagar).getSalarioBase();
+
+                // Aumentamos el sueldo en un 10%
+                salarioBase *= 1.10;
+
+                // Asignamos en nuevo salario base al objeto mediente un casting
+                ((EmpleadoBaseMasComision) porPagar).setSalarioBase(salarioBase);
+
+                // Concatenamos un mensaje de advertencia de que hemos aumentado
+                // el sueldo y concatenamos la misma salida que usammos anteriormente
+                mensaje.append("Empleado con sueldo base aumentado un 10%\n");
+                mensaje.append("------------------------------------------------------------------\n");
+
+                mensaje.append(String.format("%s%n%s: $%,.2f%n%n", porPagar.toString(), "Pago Vencido", porPagar.obtenerMontoPago()));
+                mensaje.append("\n");
+            }
+        }
+
+        // Mostramos la información resultante al usuario
         Mensajes.mostrarMensaje(mensaje.toString(), "Información", Mensajes.TipoMensaje.INFORMACION, true, new Dimension(60, 30));
-        
-        
+
     }
 
 }
