@@ -207,7 +207,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("Empleado Asalariado%n%s\n%s: $%,.2f",
+            return String.format("Empleado Asalariado%n%s%n%s: $%,.2f",
                     super.toString(), "Salario Semanal", getSalarioSemanal());
         }
 
@@ -458,7 +458,7 @@ public class Ejercicio003 {
          */
         @Override
         public String toString() {
-            return String.format("%s %s\n%s: %.2f",
+            return String.format("%s %s%n%s: %.2f",
                     "Con Sueldo Base",
                     super.toString(),
                     "Salario Base",
@@ -470,7 +470,7 @@ public class Ejercicio003 {
     /**
      * Clase para definir facturas
      */
-    public class Factura implements PorPagar {
+    public static class Factura implements PorPagar {
 
         private String numeroArticulo;
         private String descripcionPieza;

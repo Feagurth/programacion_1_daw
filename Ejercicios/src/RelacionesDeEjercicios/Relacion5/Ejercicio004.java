@@ -38,19 +38,19 @@ public class Ejercicio004 {
     /**
      * Clase para capturar excepciones. Hereda de la clase Excepcion
      */
-    public class ExcepcionA extends Exception {
+    public static class ExcepcionA extends Exception {
     }
 
     /**
      * Clase para capturar excepciones. Hereda de la clase ExcepcionA
      */
-    public class ExcepcionB extends ExcepcionA {
+    public static class ExcepcionB extends ExcepcionA {
     }
 
     /**
      * Clase para capturar excepciones. Hereda de la clase ExcepcionB
      */
-    public class ExcepcionC extends ExcepcionB {
+    public static class ExcepcionC extends ExcepcionB {
     }
 
     /**
@@ -97,9 +97,9 @@ public class Ejercicio004 {
      * @param Capturada Clase de error que se captura
      * @return Una cadena con los valores de captura de las clases
      */
-    public static String mensaje(String Captura, String Capturada) {
+    private static String mensaje(String Captura, String Capturada) {
 
-        return String.format("\nClase que captura: %s - Clase capturada: %s",
+        return String.format("%nClase que captura: %s - Clase capturada: %s",
                 Captura,
                 Capturada);
     }
