@@ -40,7 +40,6 @@ public class Ejercicio006 {
     /**
      * Método principal de la clase Ejercicio006
      */
-    @SuppressWarnings("unchecked")
     public void ejercicio()
     {
         /**

@@ -102,8 +102,9 @@ public class Ejercicio005 {
         // Preguntamos si queremos mostrar el resultado a través de la consola 
         // o de una ventana por si se han pedido demasiados resultados que generen
         // una ventana demasiado grande como para no ver el botón de aceptar
-        if (PeticionDatos.pedirConsentimiento("Mostrar el resultado por "
-                + "consola [s/n]", new String[]{"s", "n"}).equals("s")) {
+        
+        if(Mensajes.pedirConfirmacion("¿Desea mostrar el resultado por consola?", "Pregunta"))
+        {
             System.out.println(tabla.generarTabla(iteraciones));
         } else {
             Mensajes.mostrarMensaje(tabla.generarTabla(iteraciones), "Resultado",

@@ -37,19 +37,19 @@ public class Mensajes {
         /**
          * Valor para error
          */
-        ERROR, 
+        ERROR,
         /**
          * Valor para información
          */
-        INFORMACION, 
+        INFORMACION,
         /**
          * Valor para aviso
          */
-        AVISO, 
+        AVISO,
         /**
          * Valor para pregunta
          */
-        PREGUNTA, 
+        PREGUNTA,
         /**
          * Valor para aviso plano
          */
@@ -108,7 +108,7 @@ public class Mensajes {
 
             // Hacemos que no sea editable
             area.setEditable(false);
-           
+
             area.setFont(new Font("Courier", Font.PLAIN, 12));
 
             // Le introducimos el texto
@@ -127,8 +127,8 @@ public class Mensajes {
      * @param titulo Título de la ventana
      * @param tipoMensaje Tipo de mensaje que se mostrará
      * @param newTextArea Permite indicar si se creará un JTextArea al crear el
-     * @param tamanyoMaximo  Permite especificar el tamaño máximo de la ventana en filas y columnas
-     * mensaje
+     * @param tamanyoMaximo Permite especificar el tamaño máximo de la ventana
+     * en filas y columnas mensaje
      */
     public static void mostrarMensaje(String mensaje, String titulo, TipoMensaje tipoMensaje, boolean newTextArea, Dimension tamanyoMaximo) {
         if (!newTextArea) {
@@ -152,7 +152,7 @@ public class Mensajes {
 
                 area.setColumns(tamanyoMaximo.width);
                 area.setRows(tamanyoMaximo.height);
-                
+
                 // wrap a scrollpane around it
                 JScrollPane scrollPane = new JScrollPane(area);
 
@@ -209,7 +209,6 @@ public class Mensajes {
         mostrarMensaje(mensaje, titulo, tipoMensaje, false);
     }
 
-
     /**
      * Función para pedir datos al usuario
      *
@@ -217,9 +216,7 @@ public class Mensajes {
      * @param titulo Título de la ventana
      * @param tipoMensaje Tipo de mensaje que se mostrará
      * @return Datos introducidos por el usuario
-     * @deprecated Usar PeticionDatos
      */
-    @Deprecated
     public static String pedirDatos(String mensaje, String titulo, TipoMensaje tipoMensaje) {
         String cadena;
 
@@ -230,6 +227,19 @@ public class Mensajes {
         } while (cadena == null);
 
         return cadena;
+    }
+
+    /**
+     * Método que nos permite mostrar al usuario un mensaje con la intención de 
+     * que confirme una acción.
+     * @param mensaje Mensaje a mostrar al usuario
+     * @param cabecera Mensaje de la cabecera de la ventana
+     * @return Verdadero si el usuario pulsa si, falso si pulsa no
+     */
+    public static boolean pedirConfirmacion(String mensaje, String cabecera) {
+
+        return (JOptionPane.showConfirmDialog(null,mensaje, cabecera, JOptionPane.YES_NO_OPTION) == 0);
+        
     }
 
     /**
