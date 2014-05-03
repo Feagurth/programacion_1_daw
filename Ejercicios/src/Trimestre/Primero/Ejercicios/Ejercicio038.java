@@ -36,7 +36,7 @@ public class Ejercicio038 {
     
         // Variables
         int  numero1, numero2;
-        char operacion;
+        int operacion;
         
         // Petición de datos
         numero1 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el primer número", 
@@ -45,12 +45,10 @@ public class Ejercicio038 {
         numero2 = Integer.parseInt(Mensajes.pedirDatos("Introduzca el segundo número", 
                 "Petición de Datos", Mensajes.TipoMensaje.PREGUNTA));
         
-        operacion = PeticionDatos.pedirConsentimiento("Introduzca la operación [S/R]", 
-                new String[]{"S", "R"})
-                .toUpperCase(Locale.getDefault()).charAt(0);
+        operacion = Mensajes.pedirConfirmacion("Seleccione una operación", new String[]{"Suma", "Resta"});
 
         // Realizamos una operación u otra dependiendo de la opción seleccionada
-        if (operacion == 'S') {
+        if (operacion == 0) {
             numero1 = numero1 + numero2;
         }
         else

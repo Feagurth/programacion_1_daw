@@ -201,24 +201,24 @@ public class Ejercicio010 {
 
                 // Si no hay asientos para el tipo de reserva seleccionado
                 // preguntaremos si el usuario quiere reservar en el otro tipo
-                // de reservas. Para almacenar la respuesta creamos un 
-                // objeto String
-                String respuesta;
+                // de reservas. Para almacenar la respuesta creamos una variable
+                // booleana
+                String pregunta;
+                boolean resultado;
 
                 // Realizamos la pregunta clase al usuario
-                respuesta = ("No quedan asientos libres en "
+                pregunta = ("No quedan asientos libres en "
                         + (tipoReserva == 1 ? "Primera Clase\n" : "clase económica\n"));
 
-                respuesta += ("¿Desea reservar asiento en "
-                        + (tipoReserva == 1 ? "clase económica" : "Primera Clase")
-                        + " [s/n]: ");
+                pregunta += ("¿Desea reservar asiento en "
+                        + (tipoReserva == 1 ? "clase económica" : "Primera Clase"));
 
-                // Almacenamos la respuesta
-                respuesta = PeticionDatos.pedirConsentimiento(respuesta, new String[]{"s", "n"});
+                // Almacenamos el resultado
+                resultado = Mensajes.pedirConfirmacion(pregunta);
 
                 // Si la respuesa es negativa, mostramos la respuesta 
                 // especificada
-                if (respuesta.equals("n")) {
+                if (!resultado) {
                     Mensajes.mostrarMensaje("El próximo vuelo sale en 3 horas",
                             Mensajes.TipoMensaje.INFORMACION);
                 } else {

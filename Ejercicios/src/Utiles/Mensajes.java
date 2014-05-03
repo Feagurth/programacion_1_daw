@@ -18,6 +18,8 @@ package Utiles;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -230,19 +232,6 @@ public class Mensajes {
     }
 
     /**
-     * Método que nos permite mostrar al usuario un mensaje con la intención de 
-     * que confirme una acción.
-     * @param mensaje Mensaje a mostrar al usuario
-     * @param cabecera Mensaje de la cabecera de la ventana
-     * @return Verdadero si el usuario pulsa si, falso si pulsa no
-     */
-    public static boolean pedirConfirmacion(String mensaje, String cabecera) {
-
-        return (JOptionPane.showConfirmDialog(null,mensaje, cabecera, JOptionPane.YES_NO_OPTION) == 0);
-        
-    }
-
-    /**
      * Función para pedir datos al usuario. Genera títulos automáticos
      * dependiendo del tipo de mensaje
      *
@@ -272,6 +261,56 @@ public class Mensajes {
         }
 
         return pedirDatos(mensaje, titulo, tipoMensaje);
+    }
+
+    /**
+     * Método que nos permite mostrar al usuario un mensaje con la intención de
+     * que confirme una acción.
+     *
+     * @param mensaje Mensaje a mostrar al usuario
+     * @return Verdadero si el usuario pulsa si, falso si pulsa no
+     */
+    public static boolean pedirConfirmacion(String mensaje) {
+
+        return (JOptionPane.showConfirmDialog(null, mensaje, "Pregunta", JOptionPane.YES_NO_OPTION) == 0);
+
+    }
+
+    /**
+     * Método que nos permite mostrar la usuario un mensaje con la intención de
+     * que confirme una acción seleccionando entre distintas opciones
+     *
+     * @param mensaje Mensaje que se va a mostrar al usuario
+     * @param valores Valores que puede seleccionar el usuario
+     * @return Devuelve un entero correspondiente a la posición en el vector de
+     * valores de la opción seleccionada
+     */
+    public static int pedirConfirmacion(String mensaje, Object[] valores) {
+
+        return JOptionPane.showOptionDialog(null, mensaje, "Pregunta", JOptionPane.YES_OPTION, parseTipoMensaje(TipoMensaje.PREGUNTA), null, valores, valores[0]);
+    }
+
+    /**
+     * Método que nos permite mostrar la usuario un mensaje con la intención de
+     * que confirme una acción seleccionando entre distintas opciones de una
+     * lista
+     *
+     * @param mensaje Mensaje que se va a mostrar al usuario
+     * @param valores Valores que puede seleccionar el usuario en la lista
+     * @return Devuelve un entero correspondiente a la posición en el vector de
+     * valores de la opción seleccionada
+     */
+    public static int pedirConfirmacionLista(String mensaje, Object[] valores) {
+
+        // Mostramos una pantalla con la información al usuario
+        Object salida = JOptionPane.showInputDialog(null, mensaje, "Pregunta", parseTipoMensaje(TipoMensaje.PREGUNTA), null, valores, valores[0]);
+
+        // Convertimos el array de valores de la lista en una objeto lista
+        List<Object> lista = Arrays.asList(valores);
+
+         // Buscamos el indice del objeto seleccionado por el usuario en la lista
+        // y lo devolvemos
+        return lista.indexOf(salida);
     }
 
 }

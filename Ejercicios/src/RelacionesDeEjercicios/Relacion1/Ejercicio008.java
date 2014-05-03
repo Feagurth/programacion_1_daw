@@ -359,14 +359,16 @@ public class Ejercicio008 {
         // Variables
         double valorAltura;
         String resultado = "";
-        String generacionAleatoria;
+        boolean generacionAleatoria;
 
-        generacionAleatoria = PeticionDatos.pedirConsentimiento("¿Desea generar "
-                + "datos aleatorios? [s/n]", new String[]{"s", "n"});
 
+        generacionAleatoria = Mensajes.pedirConfirmacion("¿Desea generar "
+                + "datos aleatorios?", "Pregunta");
+        
+        
         // Creamos el objeto con el que trabajemos
-        DistribucionBidimensional distro = new DistribucionBidimensional(8,
-                (generacionAleatoria.matches("s")));
+        DistribucionBidimensional distro = new DistribucionBidimensional(8, 
+                generacionAleatoria);
 
         // Imprimimos la matriz
         resultado += distro.imprimirMatriz();

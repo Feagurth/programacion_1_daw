@@ -16,8 +16,6 @@
  */
 package Utiles;
 
-import java.util.Locale;
-
 /**
  * Clase para la petición y validación y control de datos al usuario
  *
@@ -50,7 +48,8 @@ public class PeticionDatos {
     /**
      * Método que nos permite pedir y validar un número entero comprendido entre
      * 2 números como valores máximo y mínimo
-     * @param cadena El mensaje que se le mostrará al usuario para pedir los 
+     *
+     * @param cadena El mensaje que se le mostrará al usuario para pedir los
      * datos
      * @param valorMinimo Valor mínimo que debe tener el dato introducido
      * @param valorMaximo Valor máximo que debe tener el dato introducido
@@ -185,9 +184,8 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         return resultado;
-    }    
-    
-    
+    }
+
     /**
      * Método para pedir y validar la entrada de una cadena por parte del
      * usuario. Solo admite la introducción de letras y del espacio en blanco
@@ -235,7 +233,7 @@ public class PeticionDatos {
         // Devolvemos el resultado
         return resultado;
     }
-    
+
     /**
      * Método para pedir y validar la entrada de una cadena por parte del
      * usuario. Solo admite la introducción de numeros como caracteres
@@ -283,8 +281,8 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         return resultado;
-    }    
-    
+    }
+
     /**
      * Método para pedir y validar la entrada de un real por parte del usuario
      *
@@ -330,7 +328,7 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         resultado = resultado.replace(",", ".");
-        
+
         return Double.valueOf(resultado);
     }
 
@@ -358,47 +356,6 @@ public class PeticionDatos {
 
         // Devolvemos el resultado
         return Double.valueOf(resultado.replace(",", "."));
-    }
-
-    /**
-     * Método para validar una petición de consentimiento para realizar una
-     * acción
-     *
-     * @param cadena Cadena que se mostrará al usuario
-     * @param valores Valores que puede tomar la cadena para ser validada
-     * @return Verdadero si es un caracter que concuerde con algún valor del
-     * array de valores
-     */
-    public static String pedirConsentimiento(String cadena, String[] valores) {
-        // Variable
-        String resultado;
-        boolean validado = false;
-
-        do {
-
-            // Realizamos una petición de datos la usuario
-            resultado = Mensajes.pedirDatos(cadena, "Petición de datos", Mensajes.TipoMensaje.PREGUNTA);
-
-            // Comprobamos que la cadena contenga alguno de los valores de
-            // consentimiento almacenados en el array
-            for (String valor : valores) {
-                if (resultado.toLowerCase(new Locale("es")).contains(valor.toLowerCase(new Locale("es")))) {
-                    validado = true;
-                    break;
-                }
-            }
-
-            // Verificamos que solo sea un caracter
-            if (resultado.length() > 1) {
-                validado = false;
-            }
-
-            // Seguimos iteranndo mientras no se valide
-            // como correcto el texto introducido                        
-        } while (!Validaciones.validarDato(resultado, Validaciones.TipoValidacion.CADENA) || !validado);
-
-        // Devolvemos el resultado
-        return resultado;
     }
 
     /**

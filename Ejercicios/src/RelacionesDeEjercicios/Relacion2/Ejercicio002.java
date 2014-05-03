@@ -77,10 +77,10 @@ public class Ejercicio002 {
      * @param diaSel Día seleccionado
      * @param mesSel Mes seleccionado
      * @param anyoSel Año Seleccionado
-     * @param tipoCalendario Tipo de calendario, Juliano o Gregoriano
+     * @param tipoCalendario Tipo de calendario, 0 para Gregoriano y 1 para Juliano
      * @return El día de la semana
      */
-    private String diaSemana(int diaSel, int mesSel, int anyoSel, char tipoCalendario) {
+    private String diaSemana(int diaSel, int mesSel, int anyoSel, int tipoCalendario) {
         // Variables
         int d, m, y, temporal;
         String resultado = null;
@@ -91,7 +91,7 @@ public class Ejercicio002 {
         m = mesSel + (12 * d) - 2;
 
         // Dependiendo del tipo de calendario, realizaremos unas operaciones u otras
-        if (tipoCalendario == 'j') {
+        if (tipoCalendario == 1) {
             temporal = (5 + diaSel + y + (y / 4) + ((31 * m) / 12)) % 7;
         } else {
             temporal = (diaSel + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
@@ -159,11 +159,11 @@ public class Ejercicio002 {
 
         } while (!control);
 
-        String calendario = PeticionDatos.pedirConsentimiento("¿Calendario "
-                + "Juliano o Gregoriano? [j/g]", new String[]{"j", "g"});
+        int calendario = Mensajes.pedirConfirmacion("Seleccione un calendario", 
+                new Object[]{"Gregoriano", "Juliano"});
 
         // Calculamos el valor del día de la semana
-        resultado = diaSemana(dia, mes, anyo, calendario.charAt(0));
+        resultado = diaSemana(dia, mes, anyo, calendario);
 
         // Mostramos la información al usuario
         Mensajes.mostrarMensaje(String.format("El %s fue %s%n",

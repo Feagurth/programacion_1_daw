@@ -348,7 +348,7 @@ public class Ejercicio009 {
     public void ejercicio() {
 
         // Respuesta del usuario
-        String respuesta;
+        boolean respuesta;
         int valor;
 
         // Creamos el objeto
@@ -356,12 +356,10 @@ public class Ejercicio009 {
 
         // Preguntamos al usuairo si quiere introducir los datos manualmente
         // o generarlos de forma pseudoaleatoria
-        respuesta = PeticionDatos.pedirConsentimiento(
-                "¿Desea generar datos aleatorios? [s/n]",
-                new String[]{"s", "n"});
+        respuesta = Mensajes.pedirConfirmacion("¿Desea generar datos aleatorios?");
 
         // Si la respuesta es afirmativa
-        if (respuesta.equalsIgnoreCase("s")) {
+        if (respuesta) {
 
             valor = PeticionDatos.pedirEnteroPositivoNoCero("¿Cuantos valores desea generar?");
 

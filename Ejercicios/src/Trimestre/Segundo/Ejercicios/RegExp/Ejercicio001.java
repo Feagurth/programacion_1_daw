@@ -18,6 +18,7 @@ package Trimestre.Segundo.Ejercicios.RegExp;
 
 import Utiles.Mensajes;
 import Utiles.PeticionDatos;
+import java.util.Locale;
 
 /**
  * Confeccionar una clase que represente un empleado. Nos interesa recoger su
@@ -44,7 +45,7 @@ public class Ejercicio001 {
         // Variables de instancia
         String nombre;
         float sueldo;
-        char turno;
+        int turno;
 
         /**
          * Función que nos devuelve el nombre del empleado
@@ -67,9 +68,9 @@ public class Ejercicio001 {
         /**
          * Función que nos devuelve el turno del empleado
          *
-         * @return M: Mañana T: Tarde
+         * @return 0: Mañana 1: Tarde
          */
-        public char getTurno() {
+        public int getTurno() {
             return turno;
         }
 
@@ -80,7 +81,7 @@ public class Ejercicio001 {
          * @param sueldo
          * @param turno
          */
-        public Empleado(String nombre, float sueldo, char turno) {
+        public Empleado(String nombre, float sueldo, int turno) {
             this.nombre = nombre;
             this.sueldo = sueldo;
             this.turno = turno;
@@ -97,7 +98,7 @@ public class Ejercicio001 {
 
             // Concatenamos los datos del empleado
             resultado += "Nombre: " + this.nombre;
-            resultado += "\nTurno: " + (this.turno == 'm' || this.turno == 'M'
+            resultado += "\nTurno: " + (this.turno == 0
                     ? "Mañana" : "Tarde");
 
             resultado += "\nSueldo: " + this.sueldo;
@@ -141,7 +142,7 @@ public class Ejercicio001 {
                     + "de " + ((i < 4) ? "mañana" : "tarde"));
 
             // Creamos el empleado y lo almacenamos en el array
-            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i < 4 ? 'm' : 't'));
+            arrayEmpleados[i] = new Empleado(nombre, sueldo, (i < 4 ? 0 : 1));
         }
 
         // Creamos los acumuladores y los inicializamos
@@ -150,7 +151,7 @@ public class Ejercicio001 {
         // Iteramos por el arrray y almacenamos los valores de lo sueldos
         // en sus correspondientes acumuladores
         for (int i = 0; i < 8; i++) {
-            if (arrayEmpleados[i].getTurno() == 'm') {
+            if (arrayEmpleados[i].getTurno() == 0) {
                 sueldoMañana += arrayEmpleados[i].getSueldo();
             } else {
                 sueldoTarde += arrayEmpleados[i].getSueldo();
@@ -172,18 +173,18 @@ public class Ejercicio001 {
         valorMenu = PeticionDatos.pedirEnteroRango(menu, 0, 4);
 
         String valorNombre;
-        String valorTurno;
+        int valorTurno;
         int localizador;
 
         while (valorMenu != 0) {
-            switch (valorMenu) 
-            {
+            switch (valorMenu) {
                 // Opción de menú numero 1
                 case 1: {
                     // Pedimos el nombre del trabajador y el turno al usuario
                     valorNombre = PeticionDatos.pedirCadenaSoloLetras("Introduzca el nombre del trabajador");
-                    valorTurno = PeticionDatos.pedirConsentimiento("Introduzca "
-                            + "el turno [m/t]", new String[]{"m", "t"});
+
+                    valorTurno = Mensajes.pedirConfirmacion("Introduzca el turno del trabajador",
+                            new String[]{"Turno de mañana", "Turno de tarde"});
 
                     // Intentamos localizar al trabajador
                     localizador = localizarTrabajador(arrayEmpleados, valorNombre, valorTurno);
@@ -207,8 +208,8 @@ public class Ejercicio001 {
 
                     // Pedimos el nombre del trabajador y el turno al usuario
                     valorNombre = PeticionDatos.pedirCadenaSoloLetras("Introduzca el nombre del trabajador");
-                    valorTurno = PeticionDatos.pedirConsentimiento("Introduzca "
-                            + "el turno [m/t]", new String[]{"m", "t"});
+
+                    valorTurno = Mensajes.pedirConfirmacion("Introduzca el turno del trabajador", new String[]{"Turno de mañana", "Turno de tarde"});
 
                     // Intentamos localizar al trabajador
                     localizador = localizarTrabajador(arrayEmpleados, valorNombre, valorTurno);
@@ -235,7 +236,7 @@ public class Ejercicio001 {
                     }
                     break;
                 }
-                
+
                 // Opción de menú numero 3
                 case 3: {
                     Mensajes.mostrarMensaje("El total del sueldo de la mañana es: "
@@ -249,12 +250,11 @@ public class Ejercicio001 {
                             + sueldoTarde, Mensajes.TipoMensaje.INFORMACION);
                     break;
                 }
-                default:
-                {
+                default: {
                     break;
                 }
             }
-            
+
             valorMenu = PeticionDatos.pedirEnteroRango(menu, 0, 4);
         }
     }
@@ -268,9 +268,10 @@ public class Ejercicio001 {
      * @param turno Turno del trabajador
      * @return Devuelve la posición del trabajador en el array
      */
-    private int localizarTrabajador(Empleado[] array, String nombre, String turno) {
-        for (int i = (turno.equals("m") ? 0 : 4); i < array.length - (turno.equals("m") ? 4 : 0); i++) {
-            if (array[i].getNombre().equals(nombre)) {
+    private int localizarTrabajador(Empleado[] array, String nombre, int turno) {
+        for (int i = (turno == 0 ? 0 : 4); i < array.length - (turno == 0 ? 4 : 0); i++) {
+            if (array[i].getNombre().toLowerCase(Locale.getDefault()).equals(
+                    nombre.toLowerCase(Locale.getDefault()))) {
                 return i;
             }
         }
