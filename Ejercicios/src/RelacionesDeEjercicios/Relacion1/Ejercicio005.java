@@ -103,7 +103,7 @@ public class Ejercicio005 {
         // o de una ventana por si se han pedido demasiados resultados que generen
         // una ventana demasiado grande como para no ver el botón de aceptar
         
-        if(Mensajes.pedirConfirmacion("¿Desea mostrar el resultado por consola?", "Pregunta"))
+        if(Mensajes.pedirConfirmacion("¿Desea mostrar el resultado por consola?"))
         {
             System.out.println(tabla.generarTabla(iteraciones));
         } else {

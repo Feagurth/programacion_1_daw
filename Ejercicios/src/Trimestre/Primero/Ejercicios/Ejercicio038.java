@@ -18,8 +18,6 @@
 package Trimestre.Primero.Ejercicios;
 
 import Utiles.Mensajes;
-import Utiles.PeticionDatos;
-import java.util.Locale;
 
 /**
  * Se desea un algoritmo que realice la operación de suma o resta de dos 

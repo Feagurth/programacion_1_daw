@@ -363,7 +363,7 @@ public class Ejercicio008 {
 
 
         generacionAleatoria = Mensajes.pedirConfirmacion("¿Desea generar "
-                + "datos aleatorios?", "Pregunta");
+                + "datos aleatorios?");
         
         
         // Creamos el objeto con el que trabajemos
