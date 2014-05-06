@@ -6,6 +6,7 @@
 package Calculadora;
 
 import java.awt.Image;
+import java.awt.List;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,16 +16,18 @@ import java.math.RoundingMode;
  * @author Super
  */
 public class FormCalculadora extends javax.swing.JFrame {
-
+    
     private BigDecimal ultimoValor = BigDecimal.ZERO;
     private BigDecimal valorAcumulado = BigDecimal.ZERO;
     private String ultimaOperacion = "";
     private boolean nuevoNumero = false;
+    private List listaParentesis;
 
     /**
      * Creates new form FormCalculadora
      */
     public FormCalculadora() {
+        this.listaParentesis = new List();
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
         this.setIconImage(icon);
@@ -116,7 +119,7 @@ public class FormCalculadora extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(txtHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 13, Short.MAX_VALUE)
+                .addComponent(txtHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
         );
@@ -139,6 +142,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnValorAbsoluto.setText("|x|");
 
         btnPi.setText("π");
+        btnPi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPiActionPerformed(evt);
+            }
+        });
 
         btnXCuadrado.setText("x^2");
 
@@ -154,6 +162,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnE.setText("e");
+        btnE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEActionPerformed(evt);
+            }
+        });
 
         btnYElevadoX.setText("y^x");
 
@@ -342,6 +355,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnParentesis.setText("( )");
+        btnParentesis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnParentesisActionPerformed(evt);
+            }
+        });
 
         btnMas.setText("+");
         btnMas.addActionListener(new java.awt.event.ActionListener() {
@@ -351,6 +369,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnIgual.setText("=");
+        btnIgual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIgualActionPerformed(evt);
+            }
+        });
 
         btnMenos.setText("-");
         btnMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -499,7 +522,12 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPorcentajeActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        ultimaOperacion = "";
+        ultimoValor = BigDecimal.ZERO;
+        valorAcumulado = BigDecimal.ZERO;
+        nuevoNumero = false;
+        txtHistorial.setText("");
+        txtResultado.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnDividirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDividirActionPerformed
@@ -511,7 +539,10 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMultiplicarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+        String valor = txtResultado.getText();
+        if (valor.length() > 0) {
+            txtResultado.setText(valor.substring(0, valor.length() - 1));
+        }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnSieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSieteActionPerformed
@@ -567,61 +598,82 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCeroActionPerformed
 
     private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
-
+        
         BigDecimal valor = new BigDecimal(txtResultado.getText());
         valor = valor.multiply(BigDecimal.valueOf(-1));
         
         txtResultado.setText(valor.toString());
     }//GEN-LAST:event_btnMasMenosActionPerformed
 
-    private void operacionPulsada(String valorOperacion) {
+    private void btnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIgualActionPerformed
+        operar(txtResultado.getText(), "=");
+    }//GEN-LAST:event_btnIgualActionPerformed
 
-        if (txtResultado.getText().contains(".")) {
-            ultimoValor =  new BigDecimal(txtResultado.getText());
+    private void btnParentesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentesisActionPerformed
+        
+    }//GEN-LAST:event_btnParentesisActionPerformed
 
-            switch (ultimaOperacion) {
-                case "+": {
-                    valorAcumulado = valorAcumulado.add(ultimoValor);
-                    break;
-                }
-                case "-": {
-                    valorAcumulado = valorAcumulado.subtract(ultimoValor);
-                    break;
-                }
-                case "*": {
-                    valorAcumulado = valorAcumulado.multiply(ultimoValor);
-                    break;
-                }
-                case "/": {
-                    valorAcumulado = valorAcumulado.divide(ultimoValor, 20, RoundingMode.HALF_DOWN);
-                    break;
-                }
-                default: {
-                    valorAcumulado = ultimoValor;
-                }
+    private void btnPiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiActionPerformed
+        
+                
+    }//GEN-LAST:event_btnPiActionPerformed
 
+    private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
+        
+    }//GEN-LAST:event_btnEActionPerformed
+    
+    private void operar(String valor, String operacion) {
+        
+        ultimoValor = new BigDecimal(valor);
+        
+        switch (ultimaOperacion) {
+            case "+": {
+                valorAcumulado = valorAcumulado.add(ultimoValor);
+                break;
             }
-
-            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
-            txtResultado.setText(((Double) (valorAcumulado.doubleValue())).toString());
-            nuevoNumero = true;
-
-        } else {
-            ultimoValor =  new BigDecimal(txtResultado.getText());
+            case "-": {
+                valorAcumulado = valorAcumulado.subtract(ultimoValor);
+                break;
+            }
+            case "*": {
+                valorAcumulado = valorAcumulado.multiply(ultimoValor);
+                break;
+            }
+            case "/": {
+                valorAcumulado = valorAcumulado.divide(ultimoValor, 20, RoundingMode.HALF_DOWN);
+                break;
+            }
+            default: {
+                valorAcumulado = ultimoValor;
+            }
         }
-
-        ultimaOperacion = valorOperacion;
-
+        
+        if (!"=".equals(operacion)) {
+            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + operacion + " ");
+        } else {
+            txtHistorial.setText("");
+        }
+        
+        txtResultado.setText(valorAcumulado.toString());
+        nuevoNumero = true;
+        
+        ultimaOperacion = operacion;
     }
-
+    
+    private void operacionPulsada(String valorOperacion) {
+        
+        operar(txtResultado.getText(), valorOperacion);
+        
+    }
+    
     private void numeroPulsado(String valorNumero) {
-
+        
         if (nuevoNumero) {
             txtResultado.setText("");
             nuevoNumero = false;
         }
         txtResultado.setText(txtResultado.getText() + valorNumero);
-
+        
     }
 
     /**

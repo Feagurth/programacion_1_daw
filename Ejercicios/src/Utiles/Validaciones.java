@@ -64,20 +64,20 @@ public class Validaciones {
             + "([-./])(02|2)([-./])([0-9][0-9][2468][048]))|((29)"
             + "([-./])(02|2)([-./])([0-9][0-9][13579][26])))";
 
-    
     private static final String CADENA_NUMEROS = "^[a-zA-Z0-9 ]+$";
-    
+
     private static final String DNI = "(([X-Z]{1})([-]?)(\\d{7})([-]?)([A-Z]{1}))|((\\d{8})([-]?)([A-Z]{1}))";
-    
+
     private static final String BINARIO = "^[0-1]+$";
-    
+
     private static final String CADENA_SOLO_NUMEROS = "^[0-9]+$";
-    
+
     private static final String CADENA_NUMEROS_SIMBOLOS = "^[a-zA-Z0-9 -<>/_.,:;(){}]+$";
-    
+
     private static final String CADENA_SOLO_LETRAS_NUMEROS = "^[a-zA-Z0-9]+$";
-    
-    
+
+    private static final String NUMERO = "[-+]?\\d*\\.?\\d+";
+
     /**
      * Tipos de validaciones que se pueden llevar a cabo
      */
@@ -86,19 +86,19 @@ public class Validaciones {
         /**
          * Valor para cadena
          */
-        CADENA(0), 
+        CADENA(0),
         /**
          * Valor para cadena de mayúsculas
          */
-        CADENA_MAY(1), 
+        CADENA_MAY(1),
         /**
          * Valor para cadena en minúsculas
          */
-        CADENA_MIN(2), 
+        CADENA_MIN(2),
         /**
          * Valor para enteros
          */
-        ENTERO(3), 
+        ENTERO(3),
         /**
          * Valor para enteros positivos
          */
@@ -106,15 +106,15 @@ public class Validaciones {
         /**
          * Valor para enteros negativos
          */
-        ENTERO_NEGATIVO(5), 
+        ENTERO_NEGATIVO(5),
         /**
          * Valor para enteros positivos excepto cero
          */
-        ENTERO_POSITIVO_NO_0(6), 
+        ENTERO_POSITIVO_NO_0(6),
         /**
          * Valor para enteros negativos excepto cero
          */
-        ENTERO_NEGATIVO_NO_0(7), 
+        ENTERO_NEGATIVO_NO_0(7),
         /**
          * Valor para números reales
          */
@@ -122,15 +122,15 @@ public class Validaciones {
         /**
          * Valor para reales positivos
          */
-        REAL_POSITIVO(9), 
+        REAL_POSITIVO(9),
         /**
          * Valor para reales negativos
          */
-        REAL_NEGATIVO(10), 
+        REAL_NEGATIVO(10),
         /**
          * Valor para usuario
          */
-        USUARIO(11), 
+        USUARIO(11),
         /**
          * Valor para password
          */
@@ -138,39 +138,43 @@ public class Validaciones {
         /**
          * Valor para fecha DDMMAA
          */
-        FECHA_DDMMAA(13), 
+        FECHA_DDMMAA(13),
         /**
          * Valor para fecha DDMMAAAA
          */
-        FECHA_DDMMAAAA(14), 
+        FECHA_DDMMAAAA(14),
         /**
          * Valor para cadena con números
          */
-        CADENA_NUMEROS(15), 
+        CADENA_NUMEROS(15),
         /**
          * Valor para DNI
          */
-        DNI(16), 
+        DNI(16),
         /**
          * Valor para binario
          */
-        BINARIO(17), 
+        BINARIO(17),
         /**
          * Valor para enteros positivos sin cero extendido
          */
-        ENTERO_POSITIVO_NO_0_EXT(18), 
+        ENTERO_POSITIVO_NO_0_EXT(18),
         /**
          * Valor para cadena de números
          */
-        CADENA_SOLO_NUMEROS(19), 
+        CADENA_SOLO_NUMEROS(19),
         /**
          * Valor para cadena de números y símbolos
          */
-        CADENA_NUMEROS_SIMBOLOS(20), 
+        CADENA_NUMEROS_SIMBOLOS(20),
         /**
          * Valor para cadena de letras y números exclusivamente
          */
-        CADENA_SOLO_LETRAS_NUMEROS(21);
+        CADENA_SOLO_LETRAS_NUMEROS(21),
+        /**
+         * Valor para cadena de números
+         */
+        NUMERO(22);
 
         private final int value;
 
@@ -181,7 +185,8 @@ public class Validaciones {
     }
 
     /**
-     * Método para validar datos 
+     * Método para validar datos
+     *
      * @param dato Dato a validar
      * @param tipoValidacion Tipo de validación que se llevara a cabo
      * @return Verdadero si valida, falso si no valida
@@ -204,21 +209,21 @@ public class Validaciones {
             case ENTERO_POSITIVO_NO_0:
                 return dato.matches(ENTERO_POSITIVO_NO_0);
             case ENTERO_NEGATIVO_NO_0:
-                return dato.matches(ENTERO_NEGATIVO_NO_0);                
+                return dato.matches(ENTERO_NEGATIVO_NO_0);
             case REAL:
-                return dato.matches(REAL);   
+                return dato.matches(REAL);
             case REAL_POSITIVO:
-                return dato.matches(REAL_POSITIVO);   
+                return dato.matches(REAL_POSITIVO);
             case REAL_NEGATIVO:
-                return dato.matches(REAL_NEGATIVO);   
+                return dato.matches(REAL_NEGATIVO);
             case USUARIO:
-                return dato.matches(USUARIO);   
+                return dato.matches(USUARIO);
             case PASSWORD:
-                return dato.matches(PASSWORD);   
+                return dato.matches(PASSWORD);
             case FECHA_DDMMAA:
-                return dato.matches(FECHA_DDMMAA);   
+                return dato.matches(FECHA_DDMMAA);
             case FECHA_DDMMAAAA:
-                return dato.matches(FECHA_DDMMAAAA);   
+                return dato.matches(FECHA_DDMMAAAA);
             case CADENA_NUMEROS:
                 return dato.matches(CADENA_NUMEROS);
             case DNI:
@@ -233,6 +238,8 @@ public class Validaciones {
                 return dato.matches(CADENA_NUMEROS_SIMBOLOS);
             case CADENA_SOLO_LETRAS_NUMEROS:
                 return dato.matches(CADENA_SOLO_LETRAS_NUMEROS);
+            case NUMERO:
+                return dato.matches(NUMERO);
             default:
                 return false;
         }

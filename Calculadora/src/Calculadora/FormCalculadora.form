@@ -96,7 +96,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="txtHistorial" pref="13" max="32767" attributes="0"/>
+                  <Component id="txtHistorial" min="-2" pref="21" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtResultado" pref="26" max="32767" attributes="0"/>
               </Group>
@@ -239,6 +239,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x3c0;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnXCuadrado">
           <Properties>
@@ -267,6 +270,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="e"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnYElevadoX">
           <Properties>
@@ -522,6 +528,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="( )"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParentesisActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnMas">
           <Properties>
@@ -535,6 +544,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="="/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIgualActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnMenos">
           <Properties>
