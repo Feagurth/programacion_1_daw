@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Calculadora;
+
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  *
@@ -12,11 +16,18 @@ package Calculadora;
  */
 public class FormCalculadora extends javax.swing.JFrame {
 
+    private BigDecimal ultimoValor = BigDecimal.ZERO;
+    private BigDecimal valorAcumulado = BigDecimal.ZERO;
+    private String ultimaOperacion = "";
+    private boolean nuevoNumero = false;
+
     /**
      * Creates new form FormCalculadora
      */
     public FormCalculadora() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
+        setIconImage(icon);
     }
 
     /**
@@ -30,7 +41,8 @@ public class FormCalculadora extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        txtResultado = new javax.swing.JLabel();
+        txtHistorial = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         btnFactorizar = new javax.swing.JButton();
@@ -85,19 +97,26 @@ public class FormCalculadora extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel2.setText("jLabel2");
-        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtResultado.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+
+        txtHistorial.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        txtHistorial.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(txtHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -216,8 +235,18 @@ public class FormCalculadora extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnUno.setText("1");
+        btnUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnoActionPerformed(evt);
+            }
+        });
 
         btnCuatro.setText("4");
+        btnCuatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCuatroActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("C");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,16 +256,46 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnSiete.setText("7");
+        btnSiete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSieteActionPerformed(evt);
+            }
+        });
 
         btnCero.setText("0");
+        btnCero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCeroActionPerformed(evt);
+            }
+        });
 
         btnDos.setText("2");
+        btnDos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDosActionPerformed(evt);
+            }
+        });
 
         btnCinco.setText("5");
+        btnCinco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCincoActionPerformed(evt);
+            }
+        });
 
         btnPunto.setText(".");
+        btnPunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuntoActionPerformed(evt);
+            }
+        });
 
         btnOcho.setText("8");
+        btnOcho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOchoActionPerformed(evt);
+            }
+        });
 
         btnDividir.setText("/");
         btnDividir.addActionListener(new java.awt.event.ActionListener() {
@@ -246,12 +305,32 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnTres.setText("3");
+        btnTres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTresActionPerformed(evt);
+            }
+        });
 
         btnSeis.setText("6");
+        btnSeis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeisActionPerformed(evt);
+            }
+        });
 
         btnMasMenos.setText("+/-");
+        btnMasMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasMenosActionPerformed(evt);
+            }
+        });
 
         btnNueve.setText("9");
+        btnNueve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNueveActionPerformed(evt);
+            }
+        });
 
         btnMultiplicar.setText("*");
         btnMultiplicar.addActionListener(new java.awt.event.ActionListener() {
@@ -263,10 +342,20 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnParentesis.setText("( )");
 
         btnMas.setText("+");
+        btnMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasActionPerformed(evt);
+            }
+        });
 
         btnIgual.setText("=");
 
         btnMenos.setText("-");
+        btnMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setText("←");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -287,7 +376,7 @@ public class FormCalculadora extends javax.swing.JFrame {
                     .addComponent(btnSiete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCero, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCinco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -308,7 +397,7 @@ public class FormCalculadora extends javax.swing.JFrame {
                     .addComponent(btnMenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,16 +501,132 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnDividirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDividirActionPerformed
-        // TODO add your handling code here:
+        operacionPulsada("/");
     }//GEN-LAST:event_btnDividirActionPerformed
 
     private void btnMultiplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplicarActionPerformed
-        // TODO add your handling code here:
+        operacionPulsada("*");
     }//GEN-LAST:event_btnMultiplicarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnSieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSieteActionPerformed
+        numeroPulsado("7");
+    }//GEN-LAST:event_btnSieteActionPerformed
+
+    private void btnOchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOchoActionPerformed
+        numeroPulsado("8");
+    }//GEN-LAST:event_btnOchoActionPerformed
+
+    private void btnNueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNueveActionPerformed
+        numeroPulsado("9");
+    }//GEN-LAST:event_btnNueveActionPerformed
+
+    private void btnCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuatroActionPerformed
+        numeroPulsado("4");
+    }//GEN-LAST:event_btnCuatroActionPerformed
+
+    private void btnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoActionPerformed
+        numeroPulsado("5");
+    }//GEN-LAST:event_btnCincoActionPerformed
+
+    private void btnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeisActionPerformed
+        numeroPulsado("6");
+    }//GEN-LAST:event_btnSeisActionPerformed
+
+    private void btnUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoActionPerformed
+        numeroPulsado("1");
+    }//GEN-LAST:event_btnUnoActionPerformed
+
+    private void btnDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDosActionPerformed
+        numeroPulsado("2");
+    }//GEN-LAST:event_btnDosActionPerformed
+
+    private void btnTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTresActionPerformed
+        numeroPulsado("3");
+    }//GEN-LAST:event_btnTresActionPerformed
+
+    private void btnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasActionPerformed
+        operacionPulsada("+");
+    }//GEN-LAST:event_btnMasActionPerformed
+
+    private void btnMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosActionPerformed
+        operacionPulsada("-");
+    }//GEN-LAST:event_btnMenosActionPerformed
+
+    private void btnPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntoActionPerformed
+        numeroPulsado(".");
+    }//GEN-LAST:event_btnPuntoActionPerformed
+
+    private void btnCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroActionPerformed
+        numeroPulsado("0");
+    }//GEN-LAST:event_btnCeroActionPerformed
+
+    private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
+        BigDecimal prueba = new BigDecimal(10);
+        
+        prueba = prueba.add(new BigDecimal(1));
+        
+        
+        
+        txtResultado.setText(prueba.toString());
+        
+        prueba = prueba.divide(new BigDecimal(3), 20, RoundingMode.HALF_DOWN);
+        
+        txtResultado.setText(prueba.toString());
+    }//GEN-LAST:event_btnMasMenosActionPerformed
+
+    private void operacionPulsada(String valorOperacion) {
+
+        if (txtResultado.getText().contains(".")) {
+            ultimoValor =  new BigDecimal(txtResultado.getText());
+
+            switch (ultimaOperacion) {
+                case "+": {
+                    valorAcumulado = valorAcumulado.add(ultimoValor);
+                    break;
+                }
+                case "-": {
+                    valorAcumulado = valorAcumulado.subtract(ultimoValor);
+                    break;
+                }
+                case "*": {
+                    valorAcumulado = valorAcumulado.multiply(ultimoValor);
+                    break;
+                }
+                case "/": {
+                    valorAcumulado = valorAcumulado.divide(ultimoValor, 20, RoundingMode.HALF_DOWN);
+                    break;
+                }
+                default: {
+                    valorAcumulado = ultimoValor;
+                }
+
+            }
+
+            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
+            txtResultado.setText(((Double) (valorAcumulado.doubleValue())).toString());
+            nuevoNumero = true;
+
+        } else {
+            ultimoValor =  new BigDecimal(txtResultado.getText());
+        }
+
+        ultimaOperacion = valorOperacion;
+
+    }
+
+    private void numeroPulsado(String valorNumero) {
+
+        if (nuevoNumero) {
+            txtResultado.setText("");
+            nuevoNumero = false;
+        }
+        txtResultado.setText(txtResultado.getText() + valorNumero);
+
+    }
 
     /**
      * @param args the command line arguments
@@ -439,19 +644,14 @@ public class FormCalculadora extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormCalculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormCalculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormCalculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormCalculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new FormCalculadora().setVisible(true);
             }
@@ -494,12 +694,13 @@ public class FormCalculadora extends javax.swing.JFrame {
     private javax.swing.JButton btnValorAbsoluto;
     private javax.swing.JButton btnXCuadrado;
     private javax.swing.JButton btnYElevadoX;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel txtHistorial;
+    private javax.swing.JLabel txtResultado;
     // End of variables declaration//GEN-END:variables
 }
