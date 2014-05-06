@@ -27,7 +27,9 @@ public class FormCalculadora extends javax.swing.JFrame {
     public FormCalculadora() {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
-        setIconImage(icon);
+        this.setIconImage(icon);
+        this.setTitle("Calculadora");
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -565,17 +567,11 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCeroActionPerformed
 
     private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
-        BigDecimal prueba = new BigDecimal(10);
+
+        BigDecimal valor = new BigDecimal(txtResultado.getText());
+        valor = valor.multiply(BigDecimal.valueOf(-1));
         
-        prueba = prueba.add(new BigDecimal(1));
-        
-        
-        
-        txtResultado.setText(prueba.toString());
-        
-        prueba = prueba.divide(new BigDecimal(3), 20, RoundingMode.HALF_DOWN);
-        
-        txtResultado.setText(prueba.toString());
+        txtResultado.setText(valor.toString());
     }//GEN-LAST:event_btnMasMenosActionPerformed
 
     private void operacionPulsada(String valorOperacion) {
