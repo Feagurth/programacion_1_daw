@@ -19,7 +19,6 @@ package Calculadora;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 /**
  * Clase para crear una calculadora
@@ -618,11 +617,13 @@ public class FormCalculadora extends javax.swing.JFrame {
 
     private void btnPiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiActionPerformed
         numeroPulsado("Pi");
+        nuevoNumero = true;
 
     }//GEN-LAST:event_btnPiActionPerformed
 
     private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
         numeroPulsado("e");
+        nuevoNumero = true;
     }//GEN-LAST:event_btnEActionPerformed
 
     /**
