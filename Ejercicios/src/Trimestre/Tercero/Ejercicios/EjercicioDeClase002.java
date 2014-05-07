@@ -130,28 +130,55 @@ public class EjercicioDeClase002 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Evento de para el menú de cambio de tamaño a 640x480
+     * @param evt Evento
+     */
     private void mnu640ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu640ActionPerformed
+        // Al seleccionar el menú, cambiamos el tamaño a 640x480
         this.setSize(640, 480);
     }//GEN-LAST:event_mnu640ActionPerformed
-
+    /**
+     * Evento de para el menú de cambio de tamaño a 800x600
+     * @param evt Evento
+     */
     private void mnu800ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu800ActionPerformed
+        // Al seleccionar el menú, cambiamos el tamaño a 800x600
         this.setSize(800, 600);
     }//GEN-LAST:event_mnu800ActionPerformed
-
+    /**
+     * Evento de para el menú de cambio de tamaño a 1024x768
+     * @param evt Evento
+     */
     private void mnu1024ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu1024ActionPerformed
+        // Al seleccionar el menú, cambiamos el tamaño a 1024x768
         this.setSize(1024, 768);
     }//GEN-LAST:event_mnu1024ActionPerformed
-
+    /**
+     * Evento de para el menú de cambio de color a rojo
+     * @param evt Evento
+     */
     private void mnuRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRojoActionPerformed
+        // Al seleccionar el menú, cambiamos el color de fondo a rojo, 
+        // seleccionando el panel contenedor del formulario
         this.getContentPane().setBackground(Color.RED);
     }//GEN-LAST:event_mnuRojoActionPerformed
-
+    /**
+     * Evento de para el menú de cambio de color a verde
+     * @param evt Evento
+     */
     private void mnuVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVerdeActionPerformed
+        // Al seleccionar el menú, cambiamos el color de fondo a verde, 
+        // seleccionando el panel contenedor del formulario
         this.getContentPane().setBackground(Color.GREEN);
     }//GEN-LAST:event_mnuVerdeActionPerformed
-
+    /**
+     * Evento de para el menú de cambio de color a azul
+     * @param evt Evento
+     */
     private void mnuAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAzulActionPerformed
+        // Al seleccionar el menú, cambiamos el color de fondo a azul, 
+        // seleccionando el panel contenedor del formulario
         this.getContentPane().setBackground(Color.BLUE);
     }//GEN-LAST:event_mnuAzulActionPerformed
 
@@ -171,19 +198,14 @@ public class EjercicioDeClase002 extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase002.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase002.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase002.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EjercicioDeClase002.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new EjercicioDeClase002().setVisible(true);
             }

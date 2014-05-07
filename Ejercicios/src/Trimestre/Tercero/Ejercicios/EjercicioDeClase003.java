@@ -32,7 +32,13 @@ public class EjercicioDeClase003 extends javax.swing.JFrame implements ItemListe
      */
     public EjercicioDeClase003() {
         initComponents();
+        
+        // ASginamos el listener implementado al combo de colores
         cmbColores.addItemListener(this);
+        
+        // Hacemos una selección rapida para forzar a ejecutar el evento
+        // asignado al combo y mostrar el texto para el primer valor que contiene
+        // el combo
         cmbColores.setSelectedIndex(1);
         cmbColores.setSelectedIndex(0);
     }
@@ -102,19 +108,14 @@ public class EjercicioDeClase003 extends javax.swing.JFrame implements ItemListe
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase003.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase003.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase003.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EjercicioDeClase003.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new EjercicioDeClase003().setVisible(true);
             }
@@ -126,10 +127,17 @@ public class EjercicioDeClase003 extends javax.swing.JFrame implements ItemListe
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField txtSeleccion;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Evento para el cambio de valor en el combo
+     * @param ie Evento
+     */
     @Override
     public void itemStateChanged(ItemEvent ie) {
+        
+        // Comprobamos que el evento viene del combo
         if (ie.getSource() == cmbColores) {
+            
+            // Modificamos el texto del cuadro de texto con el contenido del combo
             txtSeleccion.setText(cmbColores.getSelectedItem().toString());
         }
 

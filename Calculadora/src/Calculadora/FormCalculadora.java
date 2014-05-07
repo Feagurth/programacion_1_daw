@@ -1,33 +1,39 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package Calculadora;
 
 import java.awt.Image;
-import java.awt.List;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.ArrayList;
 
 /**
+ * Clase para crear una calculadora
  *
- * @author Super
+ * @author Luis Cabrerizo Gómez
  */
 public class FormCalculadora extends javax.swing.JFrame {
-    
-    private BigDecimal ultimoValor = BigDecimal.ZERO;
-    private BigDecimal valorAcumulado = BigDecimal.ZERO;
-    private String ultimaOperacion = "";
+
     private boolean nuevoNumero = false;
-    private List listaParentesis;
 
     /**
      * Creates new form FormCalculadora
      */
     public FormCalculadora() {
-        this.listaParentesis = new List();
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
         this.setIconImage(icon);
@@ -522,9 +528,6 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPorcentajeActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        ultimaOperacion = "";
-        ultimoValor = BigDecimal.ZERO;
-        valorAcumulado = BigDecimal.ZERO;
         nuevoNumero = false;
         txtHistorial.setText("");
         txtResultado.setText("");
@@ -598,83 +601,29 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCeroActionPerformed
 
     private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
-        
+
         BigDecimal valor = new BigDecimal(txtResultado.getText());
         valor = valor.multiply(BigDecimal.valueOf(-1));
-        
+
         txtResultado.setText(valor.toString());
     }//GEN-LAST:event_btnMasMenosActionPerformed
 
     private void btnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIgualActionPerformed
-        operar(txtResultado.getText(), "=");
+        operar(txtHistorial.getText() + txtResultado.getText());
     }//GEN-LAST:event_btnIgualActionPerformed
 
     private void btnParentesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentesisActionPerformed
-        
+        operacionPulsada("(");
     }//GEN-LAST:event_btnParentesisActionPerformed
 
     private void btnPiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiActionPerformed
-        
-                
+        numeroPulsado("Pi");
+
     }//GEN-LAST:event_btnPiActionPerformed
 
     private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
-        
+        numeroPulsado("e");
     }//GEN-LAST:event_btnEActionPerformed
-    
-    private void operar(String valor, String operacion) {
-        
-        ultimoValor = new BigDecimal(valor);
-        
-        switch (ultimaOperacion) {
-            case "+": {
-                valorAcumulado = valorAcumulado.add(ultimoValor);
-                break;
-            }
-            case "-": {
-                valorAcumulado = valorAcumulado.subtract(ultimoValor);
-                break;
-            }
-            case "*": {
-                valorAcumulado = valorAcumulado.multiply(ultimoValor);
-                break;
-            }
-            case "/": {
-                valorAcumulado = valorAcumulado.divide(ultimoValor, 20, RoundingMode.HALF_DOWN);
-                break;
-            }
-            default: {
-                valorAcumulado = ultimoValor;
-            }
-        }
-        
-        if (!"=".equals(operacion)) {
-            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + operacion + " ");
-        } else {
-            txtHistorial.setText("");
-        }
-        
-        txtResultado.setText(valorAcumulado.toString());
-        nuevoNumero = true;
-        
-        ultimaOperacion = operacion;
-    }
-    
-    private void operacionPulsada(String valorOperacion) {
-        
-        operar(txtResultado.getText(), valorOperacion);
-        
-    }
-    
-    private void numeroPulsado(String valorNumero) {
-        
-        if (nuevoNumero) {
-            txtResultado.setText("");
-            nuevoNumero = false;
-        }
-        txtResultado.setText(txtResultado.getText() + valorNumero);
-        
-    }
 
     /**
      * @param args the command line arguments
@@ -751,4 +700,69 @@ public class FormCalculadora extends javax.swing.JFrame {
     private javax.swing.JLabel txtHistorial;
     private javax.swing.JLabel txtResultado;
     // End of variables declaration//GEN-END:variables
+
+    private String operar(String operaciones) {
+
+        String operadores[] = {"(", "*", "/", "+", "-"};
+        char array[] = operaciones.replace(" ", "").toCharArray();
+        
+        for (String operador : operadores) {
+
+            for (char c : array) {
+
+            }
+        }
+
+        return "";
+
+    }
+
+    private void operacionPulsada(String valorOperacion) {
+
+        if (valorOperacion.equals("(")) {
+            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
+            String hist = txtHistorial.getText().trim();
+
+            int count = hist.length() - hist.replace("(", "").length();
+            int count2 = hist.length() - hist.replace(")", "").length();
+
+            if ("+-*/(".indexOf(hist.charAt(hist.length() - 1)) == -1) {
+                if ("0123456789)".indexOf(hist.charAt(hist.length() - 1)) != -1) {
+                    if (count > count2) {
+                        txtHistorial.setText(txtHistorial.getText() + ")");
+                    }
+                }
+            } else {
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + "(");
+            }
+
+        } else {
+            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
+        }
+        txtResultado.setText("");
+        nuevoNumero = true;
+
+    }
+
+    private void numeroPulsado(String valorNumero) {
+
+        if (nuevoNumero) {
+            txtResultado.setText("");
+            nuevoNumero = false;
+        }
+
+        switch (valorNumero) {
+            case "Pi":
+                txtResultado.setText(txtResultado.getText() + Math.PI);
+                break;
+            case "e":
+                txtResultado.setText(txtResultado.getText() + Math.E);
+                break;
+            default:
+                txtResultado.setText(txtResultado.getText() + valorNumero);
+                break;
+        }
+
+    }
+
 }

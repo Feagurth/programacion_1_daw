@@ -31,9 +31,15 @@ public class EjercicioDeClase001 extends javax.swing.JFrame implements ActionLis
      * Creates new form EjercicioClase001
      */
     public EjercicioDeClase001() {
+        
+        // Quitamos el gestor de capas
         setLayout(null);
         initComponents();
+        
+        // Marcamos un radio button como seleccionado
         rdoSuma.setSelected(true);
+        
+        // Añadimos el ActionListener implementado a los dos radio buttons
         rdoSuma.addActionListener(this);
         rdoResta.addActionListener(this);
         
@@ -165,13 +171,7 @@ public class EjercicioDeClase001 extends javax.swing.JFrame implements ActionLis
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase001.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase001.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase001.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EjercicioDeClase001.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -198,22 +198,34 @@ public class EjercicioDeClase001 extends javax.swing.JFrame implements ActionLis
     private javax.swing.JTextField txtSumando2;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Evento para controlar los radio buttons
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
+        
+        // Comprobamos si los valores introducidos en los cuadros de texto son números
         if(Validaciones.validarDato(txtSumando1.getText(), Validaciones.TipoValidacion.NUMERO) && 
            Validaciones.validarDato(txtSumando2.getText(), Validaciones.TipoValidacion.NUMERO))
         {
+            
+            // Creamos un objeto BigDecimal con el valor del primer cuadro de texto
             BigDecimal resultado = new BigDecimal(txtSumando1.getText());
             
+            // Si es suma
             if(rdoSuma.isSelected())
             {
+                // Sumamos el valor del primero al segundo
                 resultado = resultado.add(new BigDecimal(txtSumando2.getText()));
             }
             else
             {
+                // Restamos el valor del segundo al primero
                 resultado = resultado.subtract(new BigDecimal(txtSumando2.getText()));
             }
             
+            // Mostramos el resultado en el cuadro de texto
             txtResultado.setText(resultado.toString());
             
         }
