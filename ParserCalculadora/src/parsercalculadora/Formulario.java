@@ -7,7 +7,10 @@ package parsercalculadora;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -37,7 +40,7 @@ public class Formulario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTextField1.setText("4*3/2+1");
+        jTextField1.setText("4 * 3 / 2 + 1");
 
         jButton1.setText("Go!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,93 +118,87 @@ public class Formulario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private String parser(String cadena) {
+
+        BigDecimal numero1 = null;
+
         String operaciones[] = {"*", "/", "+", "-"};
         cadena = cadena.replace(" ", "");
+        ArrayList valor = cadenaALista(cadena);
 
         do {
             for (String operacion : operaciones) {
 
-                int pos1 = cadena.indexOf(operacion);
-                int pos2 = 0;
-                int pos3 = 0;
+                if (valor.contains(operacion)) {
+                    int pos1 = valor.indexOf(operacion);
+                    int pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false);
+                    int pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                if (pos1 != -1) {
-                    String ladoIzq = cadena.substring(0, pos1);
-                    String ladoDer = cadena.substring(pos1 + 1, cadena.length());
-
-                    if (stringContainsItemFromList(ladoIzq, operaciones)) {
-                        pos2 = ultimaOperacion(ladoIzq, operaciones, false);
-                        ladoIzq = cadena.substring(pos2, pos1);
-
-                        System.out.println(ladoIzq);
-                    }
-
-                    if (stringContainsItemFromList(ladoDer, operaciones)) {
-                        pos3 = ultimaOperacion(ladoDer, operaciones, true);
-                        ladoDer = cadena.substring(pos1 + 1, (pos3 + pos1 + 1));
-                        System.out.println(ladoDer);
-                    }
-
-                    BigDecimal numero1 = new BigDecimal(ladoIzq);
-                    BigDecimal numero2 = new BigDecimal(ladoDer);
+                    System.out.println(pos1 + " - " + pos2 + " - " + pos3);
 
                     switch (operacion) {
-                        case "+":
-                            numero1 = numero1.add(numero2);
+                        case "+": {
+                            numero1 = new BigDecimal(valor.get(pos2).toString());
+                            numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
                             break;
-                        case "-":
-                            numero1 = numero1.subtract(numero2);
+                        }
+                        case "-": {
+                            numero1 = new BigDecimal(valor.get(pos2).toString());
+                            numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
                             break;
-                        case "*":
-                            numero1 = numero1.multiply(numero2);
+                        }
+                        case "*": {
+                            numero1 = new BigDecimal(valor.get(pos2).toString());
+                            numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
                             break;
-                        case "/":
-                            numero1 = numero1.divide(numero2, 20, RoundingMode.HALF_DOWN);
+                        }
+                        case "/": {
+                            numero1 = new BigDecimal(valor.get(pos2).toString());
+                            numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), 20, RoundingMode.HALF_DOWN);
                             break;
+                        }
                     }
 
-                    if (pos2 == 0 && pos3 == 0) {
-                        cadena = numero1.toString();
-                    } else if (pos2 == 0) {
-                        cadena = cadena.replace(cadena.substring(0, pos3 + pos1 + 1), numero1.toString());
-                    } else if (pos3 == 0) {
-                        cadena = cadena.replace(cadena.substring(pos2, cadena.length()), numero1.toString());
-                    } else {
-                        cadena = cadena.replace(cadena.substring(pos1 - pos2 + 1, pos3 + pos1 + 1), numero1.toString());
-                    }
+                    valor.set(pos2, numero1.toString());
+                    valor.removeAll(valor.subList(pos2 + 1, pos3 + 1));
+                    valor.trimToSize();
+
                 }
             }
-        } while (stringContainsItemFromList(cadena, operaciones));
+
+        } while (!valor.containsAll(Arrays.asList(operaciones)));
 
         return cadena;
     }
 
-    private static int ultimaOperacion(String cadena, String[] operaciones, boolean izqDer) {
-        int salida = -1;
+    private static ArrayList cadenaALista(String valor) {
+        ArrayList<String> chars = new ArrayList<>();
+        for (char c : valor.toCharArray()) {
+            chars.add(c + "");
+        }
+
+        return chars;
+    }
+
+    private static int buscarOperacion(List valores, String[] operaciones, boolean izqDer) {
+        int salida = (izqDer ? valores.size() : 0);
 
         for (String operacion : operaciones) {
-            if (!izqDer) {
 
-                if (salida < cadena.lastIndexOf(operacion)) {
-                    salida = cadena.lastIndexOf(operacion);
+            if (!izqDer) {
+                if (salida < valores.lastIndexOf(operacion)) {
+                    salida = valores.lastIndexOf(operacion);
                 }
             } else {
-                if (salida < cadena.indexOf(operacion)) {
-                    salida = cadena.indexOf(operacion);
+                if (valores.indexOf(operacion) != -1) {
+                    if (salida > valores.indexOf(operacion)) {
+
+                        salida = valores.indexOf(operacion);
+                    }
                 }
             }
+
         }
 
-        return (izqDer ? salida : salida + 1);
+        return salida;
     }
-
-    private static boolean stringContainsItemFromList(String inputString, String[] items) {
-        for (String item : items) {
-            if (inputString.contains(item)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

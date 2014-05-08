@@ -3,29 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pruebacreararchivotexto;
+
+package pruebaleerarchivotexto;
 
 /**
  *
  * @author Super
  */
-public class PruebaCrearArchivoTexto {
+public class PruebaLeerArchivoTexto {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        LeerArchivoTexto leer = new LeerArchivoTexto();
         
-        CrearArchivoTexto aplicacion = new CrearArchivoTexto();
-        
-        aplicacion.abrirArchivo();
-        
-        aplicacion.agregarRegistro();
-        
-        aplicacion.cerrarArchivo();
-        
-        
-
+        leer.abrirArchivo();
+        leer.leerRegistros();
+        leer.cerrarArchivo();
     }
-
+    
 }
