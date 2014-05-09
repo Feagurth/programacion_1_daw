@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public class Formulario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTextField1.setText("4 * 3 / 2 + 1");
+        jTextField1.setText("4+1*2");
 
         jButton1.setText("Go!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,48 +129,50 @@ public class Formulario extends javax.swing.JFrame {
         do {
             for (String operacion : operaciones) {
 
-                if (valor.contains(operacion)) {
-                    int pos1 = valor.indexOf(operacion);
-                    int pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false);
-                    int pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+                do {
+                    if (valor.contains(operacion)) {
+                        int pos1 = valor.indexOf(operacion);
+                        int pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false);
+                        int pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                    System.out.println(pos1 + " - " + pos2 + " - " + pos3);
+                        System.out.println(pos1 + " - " + pos2 + " - " + pos3);
 
-                    switch (operacion) {
-                        case "+": {
-                            numero1 = new BigDecimal(valor.get(pos2).toString());
-                            numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
-                            break;
+                        switch (operacion) {
+                            case "+": {
+                                numero1 = new BigDecimal(valor.get(pos2).toString());
+                                numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
+                                break;
+                            }
+                            case "-": {
+                                numero1 = new BigDecimal(valor.get(pos2).toString());
+                                numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
+                                break;
+                            }
+                            case "*": {
+                                numero1 = new BigDecimal(valor.get(pos2).toString());
+                                numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
+                                break;
+                            }
+                            case "/": {
+                                numero1 = new BigDecimal(valor.get(pos2).toString());
+                                numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), 20, RoundingMode.HALF_DOWN);
+                                break;
+                            }
                         }
-                        case "-": {
-                            numero1 = new BigDecimal(valor.get(pos2).toString());
-                            numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
-                            break;
-                        }
-                        case "*": {
-                            numero1 = new BigDecimal(valor.get(pos2).toString());
-                            numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
-                            break;
-                        }
-                        case "/": {
-                            numero1 = new BigDecimal(valor.get(pos2).toString());
-                            numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), 20, RoundingMode.HALF_DOWN);
-                            break;
-                        }
+
+                        valor.set(pos2, numero1.toString());
+                        valor.subList(pos2 + 1, pos3 + 1).clear();
+                        valor.trimToSize();
+
                     }
-
-                    valor.set(pos2, numero1.toString());
-                    valor.removeAll(valor.subList(pos2 + 1, pos3 + 1));
-                    valor.trimToSize();
-
-                }
+                } while (valor.contains(operacion));
             }
+        } while (!Collections.disjoint(valor, Arrays.asList(operaciones)));
 
-        } while (!valor.containsAll(Arrays.asList(operaciones)));
-
-        return cadena;
+        return valor.get(0).toString();
     }
 
+    
     private static ArrayList cadenaALista(String valor) {
         ArrayList<String> chars = new ArrayList<>();
         for (char c : valor.toCharArray()) {
