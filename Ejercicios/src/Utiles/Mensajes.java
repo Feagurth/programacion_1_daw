@@ -18,11 +18,18 @@ package Utiles;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 /**
  * Clase de ayuda para peticiones y muestra de datos con ventanas
@@ -30,6 +37,12 @@ import javax.swing.JTextArea;
  * @author Luis Cabrerizo Gómez
  */
 public class Mensajes {
+
+    /**
+     * Variable para almacenar el resultado de la opción seleccionada en el
+     * método mostrarMenu
+     */
+    private static int result;
 
     /**
      * Enumerador para contener los tipos de mensajes a mostrar
@@ -308,9 +321,80 @@ public class Mensajes {
         // Convertimos el array de valores de la lista en una objeto lista
         List<Object> lista = Arrays.asList(valores);
 
-         // Buscamos el indice del objeto seleccionado por el usuario en la lista
+        // Buscamos el indice del objeto seleccionado por el usuario en la lista
         // y lo devolvemos
         return lista.indexOf(salida);
+    }
+
+    /**
+     * Método para mostrar un menú mediante radiobuttons
+     *
+     * @param mensaje Mensaje a mostrar en el agrupamiento de radiobuttons
+     * @param titulo Titulo de la ventana
+     * @param tipoMensaje Tipo de mensaje que mostrará la ventana
+     * @param opciones Mensajes a mostrar en los distintos radiobuttons
+     * @return El valor del índice de los radio buttons pulsados
+     */
+    public static int mostrarMenu(String mensaje, String titulo, TipoMensaje tipoMensaje, final Object[] opciones) {
+
+        // Creamos un Jpanel donde introducir los botones de radio
+        JPanel panel = new JPanel();
+
+        // Le ponemos un borde con título y asignamos el mensaje al mismo
+        panel.setBorder(new TitledBorder(mensaje));
+
+        // Definimos el Layout del panel como un layout en grid de tantas filas
+        // como objetos tengamos en el array opciones y de 1 sola columna de ancho
+        // forzando de este modo a un ajuste en vertical
+        panel.setLayout(new GridLayout(opciones.length, 1));
+
+        // Creamos un grupo de botones
+        ButtonGroup grupo = new ButtonGroup();
+
+        // Y un JRadioButton
+        JRadioButton radio;
+
+        // Iteramos por los valores almacenados en opciones
+        for (Object opcion : opciones) {
+
+            // Creamos un radio button nuevo con el texto correspondiente a la
+            // opción de la iteración
+            radio = new JRadioButton(opcion.toString());
+
+            // Agregamos un listener que definimos justo despues
+            radio.addActionListener(new ActionListener() {
+
+                /**
+                 * Evento que se lanza al seleccionar un radiobutton
+                 *
+                 * @param e Valor de la variable de evento
+                 */
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    // Creamos una lista a partir del array de opciones
+                    List lista = Arrays.asList(opciones);
+
+                    // Buscamos el indice en la lista del contenido del 
+                    // radiobutton pulsado
+                    result = lista.indexOf(e.getActionCommand());
+                }
+            });
+
+            // Añadimos el nuevo radiobutton al grupo de botones y al panel
+            grupo.add(radio);
+            panel.add(radio);
+        }
+
+        // Lanzamos un diálogo de opciones pasándole el panel creado y el título
+        // como parte de sus valores de configuración
+        JOptionPane.showMessageDialog(null, panel, titulo, parseTipoMensaje(tipoMensaje));
+
+
+        // Finalmente devolvemos el valor modificado en el evento de los radio
+        // buttons
+        return result;
+
     }
 
 }

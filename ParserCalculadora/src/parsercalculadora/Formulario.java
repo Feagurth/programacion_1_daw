@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -106,6 +105,7 @@ public class Formulario extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Formulario().setVisible(true);
             }
@@ -119,7 +119,7 @@ public class Formulario extends javax.swing.JFrame {
 
     private String parser(String cadena) {
 
-        BigDecimal numero1 = null;
+        BigDecimal numero1 = BigDecimal.ZERO;
 
         String operaciones[] = {"*", "/", "+", "-"};
         cadena = cadena.replace(" ", "");

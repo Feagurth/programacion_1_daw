@@ -91,5 +91,4 @@ public class ConsultaCredito {
         entrada.close();
 
     }
-
 }

@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import Trimestre.Tercero.Ejercicios.EjercicioDeClase004;
+import Trimestre.Tercero.Ejercicios.EjercicioDeClase005;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
@@ -36,10 +36,12 @@ public class Lanzador {
      */
     public static void main(String[] args) {
 
-        EjercicioDeClase004 ejercicio = new EjercicioDeClase004();
+        EjercicioDeClase005 ejercicio = new EjercicioDeClase005();
 
-        //ejercicio.ejercicio();
-        ejercicio.setVisible(true);
+        ejercicio.ejercicio();
+        //ejercicio.setVisible(true);
+
+
 
     }
 }
