@@ -23,6 +23,8 @@ public class Formulario extends javax.swing.JFrame {
      */
     public Formulario() {
         initComponents();
+        jButton1ActionPerformed(null);
+
     }
 
     /**
@@ -40,7 +42,7 @@ public class Formulario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTextField1.setText("4+1*2");
+        jTextField1.setText("14+1*2+((3*4)-1)");
 
         jButton1.setText("Go!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,38 +124,64 @@ public class Formulario extends javax.swing.JFrame {
 
         BigDecimal numero1 = BigDecimal.ZERO;
 
-        String operaciones[] = {"*", "/", "+", "-"};
+        int pos1;
+        int pos2 = 0;
+        int pos3 = 0;
+
+        String operaciones[] = {"(", ")", "*", "/", "+", "-"};
         cadena = cadena.replace(" ", "");
-        ArrayList valor = cadenaALista(cadena);
+        ArrayList valor = cadenaALista(cadena, operaciones);
 
         do {
             for (String operacion : operaciones) {
 
                 do {
                     if (valor.contains(operacion)) {
-                        int pos1 = valor.indexOf(operacion);
-                        int pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false);
-                        int pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                        System.out.println(pos1 + " - " + pos2 + " - " + pos3);
 
                         switch (operacion) {
+                            case "(": {
+
+                                pos1 = valor.lastIndexOf(operacion);
+                                pos2 = pos1;
+                                pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
+
+                                numero1 = new BigDecimal(parser(listaACadena(valor.subList(pos2 + 1, pos3))));
+
+                                break;
+                            }
+
                             case "+": {
+                                pos1 = valor.indexOf(operacion);
+                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
                                 numero1 = new BigDecimal(valor.get(pos2).toString());
                                 numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
                                 break;
                             }
                             case "-": {
+                                pos1 = valor.indexOf(operacion);
+                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
                                 numero1 = new BigDecimal(valor.get(pos2).toString());
                                 numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
                                 break;
                             }
                             case "*": {
+                                pos1 = valor.indexOf(operacion);
+                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
                                 numero1 = new BigDecimal(valor.get(pos2).toString());
                                 numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
                                 break;
                             }
                             case "/": {
+                                pos1 = valor.indexOf(operacion);
+                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
                                 numero1 = new BigDecimal(valor.get(pos2).toString());
                                 numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), 20, RoundingMode.HALF_DOWN);
                                 break;
@@ -172,13 +200,35 @@ public class Formulario extends javax.swing.JFrame {
         return valor.get(0).toString();
     }
 
-    
-    private static ArrayList cadenaALista(String valor) {
-        ArrayList<String> chars = new ArrayList<>();
-        for (char c : valor.toCharArray()) {
-            chars.add(c + "");
+    private static String listaACadena(List lista) {
+        String cadena = "";
+
+        for (Object object : lista) {
+            cadena = cadena.concat(object + "");
         }
 
+        return cadena;
+    }
+
+    private static ArrayList cadenaALista(String valor, String[] operaciones) {
+        ArrayList<String> chars = new ArrayList<>();
+        String cadena = "";
+        for (char c : valor.toCharArray()) {
+            if (Arrays.asList(operaciones).contains(c + "")) {
+
+                if (!cadena.equals("")) {
+                    chars.add(cadena);
+                }
+
+                cadena = "";
+                chars.add(c + "");
+            } else {
+                cadena = cadena.concat(c + "");
+            }
+        }
+        if (!cadena.equals("")) {
+            chars.add(cadena);
+        }
         return chars;
     }
 
@@ -202,6 +252,7 @@ public class Formulario extends javax.swing.JFrame {
 
         }
 
-        return salida;
+        return (salida == 0 ? -1 : salida);
     }
+
 }
