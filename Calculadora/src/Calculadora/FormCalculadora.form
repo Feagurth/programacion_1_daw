@@ -89,7 +89,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="txtResultado" max="32767" attributes="0"/>
+              <Component id="txtResultado" alignment="0" max="32767" attributes="0"/>
               <Component id="txtHistorial" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -98,7 +98,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="txtHistorial" min="-2" pref="21" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtResultado" pref="26" max="32767" attributes="0"/>
+                  <Component id="txtResultado" min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -219,6 +219,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Sin"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSenoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLogNeperiano">
           <Properties>
@@ -257,6 +260,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCosenoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRaizCuadrada">
           <Properties>
@@ -288,6 +294,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Tan"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTangenteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPorcentaje">
           <Properties>

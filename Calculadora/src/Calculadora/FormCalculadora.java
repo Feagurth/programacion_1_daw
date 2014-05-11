@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 public class FormCalculadora extends javax.swing.JFrame {
 
     private boolean nuevoNumero = false;
+    private boolean nuevaOperacion = false;
 
     /**
      * Creates new form FormCalculadora
@@ -126,7 +127,7 @@ public class FormCalculadora extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(txtHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -139,6 +140,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnSeno.setText("Sin");
+        btnSeno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSenoActionPerformed(evt);
+            }
+        });
 
         btnLogNeperiano.setText("Ln");
 
@@ -158,6 +164,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnLogaritmo.setText("Log");
 
         btnCoseno.setText("Cos");
+        btnCoseno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCosenoActionPerformed(evt);
+            }
+        });
 
         btnRaizCuadrada.setText("√");
         btnRaizCuadrada.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +189,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnInversa.setText("1/x");
 
         btnTangente.setText("Tan");
+        btnTangente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTangenteActionPerformed(evt);
+            }
+        });
 
         btnPorcentaje.setText("%");
         btnPorcentaje.addActionListener(new java.awt.event.ActionListener() {
@@ -528,6 +544,7 @@ public class FormCalculadora extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         nuevoNumero = false;
+        nuevaOperacion = true;
         txtHistorial.setText("");
         txtResultado.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -608,7 +625,10 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMasMenosActionPerformed
 
     private void btnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIgualActionPerformed
-        operar(txtHistorial.getText() + txtResultado.getText());
+        txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
+        txtResultado.setText(operar(txtHistorial.getText()));
+        nuevoNumero = true;
+        nuevaOperacion = true;
     }//GEN-LAST:event_btnIgualActionPerformed
 
     private void btnParentesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentesisActionPerformed
@@ -617,14 +637,24 @@ public class FormCalculadora extends javax.swing.JFrame {
 
     private void btnPiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiActionPerformed
         numeroPulsado("Pi");
-        nuevoNumero = true;
 
     }//GEN-LAST:event_btnPiActionPerformed
 
     private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
         numeroPulsado("e");
-        nuevoNumero = true;
     }//GEN-LAST:event_btnEActionPerformed
+
+    private void btnSenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenoActionPerformed
+        operacionPulsada("Sin");
+    }//GEN-LAST:event_btnSenoActionPerformed
+
+    private void btnCosenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCosenoActionPerformed
+        operacionPulsada("Cos");
+    }//GEN-LAST:event_btnCosenoActionPerformed
+
+    private void btnTangenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTangenteActionPerformed
+        operacionPulsada("Tan");
+    }//GEN-LAST:event_btnTangenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -704,48 +734,67 @@ public class FormCalculadora extends javax.swing.JFrame {
 
     private String operar(String operaciones) {
 
-        String operadores[] = {"(", "*", "/", "+", "-"};
-        char array[] = operaciones.replace(" ", "").toCharArray();
-        
-        for (String operador : operadores) {
+        String resultado = ParserCalculadora.parser(operaciones);
 
-            for (char c : array) {
-
-            }
-        }
-
-        return "";
-
+        return resultado;
     }
 
     private void operacionPulsada(String valorOperacion) {
 
-        if (valorOperacion.equals("(")) {
-            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
-            String hist = txtHistorial.getText().trim();
+        if (nuevaOperacion) {
+            txtResultado.setText("");
+            txtHistorial.setText("");
+            nuevaOperacion = false;
+        }
 
-            int count = hist.length() - hist.replace("(", "").length();
-            int count2 = hist.length() - hist.replace(")", "").length();
+        switch (valorOperacion) {
+            case "(":
+            {
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
+                String hist = txtHistorial.getText().trim();
 
-            if ("+-*/(".indexOf(hist.charAt(hist.length() - 1)) == -1) {
-                if ("0123456789)".indexOf(hist.charAt(hist.length() - 1)) != -1) {
-                    if (count > count2) {
-                        txtHistorial.setText(txtHistorial.getText() + ")");
+                int count = hist.length() - hist.replace("(", "").length();
+                int count2 = hist.length() - hist.replace(")", "").length();
+
+                if (hist.length() != 0 && "+-*/(".indexOf(hist.charAt(hist.length() - 1)) == -1) {
+                    if ("0123456789)".indexOf(hist.charAt(hist.length() - 1)) != -1) {
+                        if (count > count2) {
+                            txtHistorial.setText(txtHistorial.getText() + ")");
+                        }
                     }
+                } else {
+                    txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + "(");
                 }
-            } else {
-                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + "(");
+                break;
+            }
+            case "Cos":
+            case "Sin":
+            case "Tan":
+            {
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + "( ");
+                break;
+            }
+                    
+            default:               
+            {
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
+                break;
             }
 
-        } else {
-            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
         }
+
         txtResultado.setText("");
         nuevoNumero = true;
 
     }
 
     private void numeroPulsado(String valorNumero) {
+
+        if (nuevaOperacion) {
+            txtResultado.setText("");
+            txtHistorial.setText("");
+            nuevaOperacion = false;
+        }
 
         if (nuevoNumero) {
             txtResultado.setText("");
