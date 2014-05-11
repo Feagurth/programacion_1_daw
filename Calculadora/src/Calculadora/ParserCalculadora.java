@@ -32,12 +32,13 @@ public class ParserCalculadora {
     public static String parser(String cadena) {
 
         BigDecimal numero1 = BigDecimal.ZERO;
+        final int precision = 20;
 
         int pos1;
         int pos2 = 0;
         int pos3 = 0;
 
-        String operaciones[] = {"(", ")", "S", "C", "T", "*", "/", "+", "-"};
+        String operaciones[] = {"(", ")", "!", "l", "L", "s", "Q", "S", "C", "T", "*", "/", "+", "-"};
 
         cadena = cadena.replace(" ", "");
 
@@ -62,6 +63,41 @@ public class ParserCalculadora {
 
                                 break;
                             }
+                            case "s":
+                            case "l":
+                            case "L":
+                            case "!":
+                            case "Q": {
+                                pos1 = valor.indexOf(operacion);
+                                pos2 = pos1;
+                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                switch (operacion) {
+                                    case "!": {
+                                        numero1 = factorial(Double.valueOf(valor.get(pos3).toString()));
+                                        break;
+                                    }
+                                    case "Q": {
+                                        numero1 = new BigDecimal(Math.sqrt(Double.valueOf(valor.get(pos3).toString())));
+                                        break;
+                                    }
+                                    case "l": {
+                                        numero1 = new BigDecimal(Math.log(Double.valueOf(valor.get(pos3).toString())));
+                                        break;
+                                    }
+                                    case "L": {
+                                        numero1 = new BigDecimal(Math.log10(Double.valueOf(valor.get(pos3).toString())));
+                                        break;
+                                    }
+                                    case "s": {
+                                        numero1 = new BigDecimal(Math.pow((Double.valueOf(valor.get(pos3).toString())), 2));
+                                        break;
+                                    }
+
+                                }
+
+                                break;
+                            }
                             case "T":
                             case "C":
                             case "S": {
@@ -80,13 +116,10 @@ public class ParserCalculadora {
                                         numero = Math.cos(Math.toRadians(numero));
                                         break;
                                     }
-                                    case "T":
-                                    {
+                                    case "T": {
                                         numero = Math.tan(Math.toRadians(numero));
                                         break;
-                                    
                                     }
-
                                 }
                                 numero1 = new BigDecimal(numero);
 
@@ -125,7 +158,7 @@ public class ParserCalculadora {
                                 pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
                                 numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), 10, RoundingMode.HALF_DOWN);
+                                numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), precision, RoundingMode.HALF_DOWN);
                                 break;
                             }
                         }
@@ -140,7 +173,7 @@ public class ParserCalculadora {
         } while (!Collections.disjoint(valor, Arrays.asList(operaciones)));
 
         numero1 = new BigDecimal(valor.get(0).toString());
-        numero1 = numero1.divide(BigDecimal.ONE, 10, RoundingMode.DOWN);
+        numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.HALF_DOWN);
 
         return numero1.stripTrailingZeros().toPlainString();
     }
@@ -206,8 +239,22 @@ public class ParserCalculadora {
         salida = salida.replace("Sin", "S");
         salida = salida.replace("Cos", "C");
         salida = salida.replace("Tan", "T");
+        salida = salida.replace("Fact", "!");
+        salida = salida.replace("Sqrt", "Q");
+        salida = salida.replace("Ln", "l");
+        salida = salida.replace("Log", "L");
+        salida = salida.replace("Sqr", "s");
 
         return salida;
     }
 
+    public static BigDecimal factorial(double n) {
+        BigDecimal factorial = BigDecimal.ONE;
+
+        for (int i = 1; i <= n; i++) {
+            factorial = factorial.multiply(BigDecimal.valueOf(i));
+        }
+
+        return factorial;
+    }
 }

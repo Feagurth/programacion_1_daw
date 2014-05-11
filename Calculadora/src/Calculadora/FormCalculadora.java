@@ -18,6 +18,8 @@ package Calculadora;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.math.BigDecimal;
 
 /**
@@ -37,8 +39,13 @@ public class FormCalculadora extends javax.swing.JFrame {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
         this.setIconImage(icon);
+        this.setFocusable(true);
+        this.requestFocus();
         this.setTitle("Calculadora");
         this.setLocationRelativeTo(null);
+        KeyListener controlTeclado = new ControlTeclado();
+        this.addKeyListener(controlTeclado);
+
     }
 
     /**
@@ -147,6 +154,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnLogNeperiano.setText("Ln");
+        btnLogNeperiano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogNeperianoActionPerformed(evt);
+            }
+        });
 
         btnEElevadoX.setText("e^x");
 
@@ -160,8 +172,18 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnXCuadrado.setText("x^2");
+        btnXCuadrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXCuadradoActionPerformed(evt);
+            }
+        });
 
         btnLogaritmo.setText("Log");
+        btnLogaritmo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogaritmoActionPerformed(evt);
+            }
+        });
 
         btnCoseno.setText("Cos");
         btnCoseno.addActionListener(new java.awt.event.ActionListener() {
@@ -531,11 +553,11 @@ public class FormCalculadora extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFactorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorizarActionPerformed
-        // TODO add your handling code here:
+        operacionPulsada("Fact");
     }//GEN-LAST:event_btnFactorizarActionPerformed
 
     private void btnRaizCuadradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaizCuadradaActionPerformed
-        // TODO add your handling code here:
+        operacionPulsada("Sqrt");
     }//GEN-LAST:event_btnRaizCuadradaActionPerformed
 
     private void btnPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPorcentajeActionPerformed
@@ -656,6 +678,18 @@ public class FormCalculadora extends javax.swing.JFrame {
         operacionPulsada("Tan");
     }//GEN-LAST:event_btnTangenteActionPerformed
 
+    private void btnLogNeperianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogNeperianoActionPerformed
+        operacionPulsada("Ln");
+    }//GEN-LAST:event_btnLogNeperianoActionPerformed
+
+    private void btnLogaritmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogaritmoActionPerformed
+        operacionPulsada("Log");
+    }//GEN-LAST:event_btnLogaritmoActionPerformed
+
+    private void btnXCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXCuadradoActionPerformed
+        operacionPulsada("Sqr");
+    }//GEN-LAST:event_btnXCuadradoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -748,8 +782,7 @@ public class FormCalculadora extends javax.swing.JFrame {
         }
 
         switch (valorOperacion) {
-            case "(":
-            {
+            case "(": {
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
                 String hist = txtHistorial.getText().trim();
 
@@ -767,16 +800,19 @@ public class FormCalculadora extends javax.swing.JFrame {
                 }
                 break;
             }
+            case "Sqr":
+            case "Ln":
+            case "Log":
+            case "Fact":
+            case "Sqrt":
             case "Cos":
             case "Sin":
-            case "Tan":
-            {
-                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + "( ");
+            case "Tan": {
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + "(");
                 break;
             }
-                    
-            default:               
-            {
+
+            default: {
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
                 break;
             }
@@ -785,6 +821,7 @@ public class FormCalculadora extends javax.swing.JFrame {
 
         txtResultado.setText("");
         nuevoNumero = true;
+        this.requestFocus();
 
     }
 
@@ -813,6 +850,94 @@ public class FormCalculadora extends javax.swing.JFrame {
                 break;
         }
 
+        this.requestFocus();
+
     }
 
+    public class ControlTeclado implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            switch (e.getKeyChar()) {
+                case '1': {
+                    btnUnoActionPerformed(null);
+                    break;
+                }
+                case '2': {
+                    btnDosActionPerformed(null);
+                    break;
+                }
+                case '3': {
+                    btnTresActionPerformed(null);
+                    break;
+                }
+                case '4': {
+                    btnCuatroActionPerformed(null);
+                    break;
+                }
+                case '5': {
+                    btnCincoActionPerformed(null);
+                    break;
+                }
+                case '6': {
+                    btnSeisActionPerformed(null);
+                    break;
+                }
+                case '7': {
+                    btnSieteActionPerformed(null);
+                    break;
+                }
+                case '8': {
+                    btnOchoActionPerformed(null);
+                    break;
+                }
+                case '9': {
+                    btnNueveActionPerformed(null);
+                    break;
+                }
+                case '0': {
+                    btnCeroActionPerformed(null);
+                    break;
+                }
+                case '.': {
+                    btnPuntoActionPerformed(null);
+                    break;
+                }
+                case '+': {
+                    btnMasActionPerformed(null);
+                    break;
+                }
+                case '-': {
+                    btnMenosActionPerformed(null);
+                    break;
+                }
+                case '*': {
+                    btnMultiplicarActionPerformed(null);
+                    break;
+                }
+                case '/': {
+                    btnDividirActionPerformed(null);
+                    break;
+                }
+                default:
+                     {
+                        if (e.getKeyCode() == 0) {
+                            btnIgualActionPerformed(null);
+                        }
+                        break;
+                    }
+
+            }
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
 }

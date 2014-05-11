@@ -227,6 +227,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ln"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogNeperianoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEElevadoX">
           <Properties>
@@ -250,11 +253,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="x^2"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXCuadradoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLogaritmo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Log"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogaritmoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCoseno">
           <Properties>
