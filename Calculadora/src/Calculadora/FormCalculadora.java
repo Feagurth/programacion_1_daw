@@ -29,21 +29,41 @@ import java.math.BigDecimal;
  */
 public class FormCalculadora extends javax.swing.JFrame {
 
+    // Variables de estado para comprobar si se introduce una nueva operación
+    // o un nuevo número
     private boolean nuevoNumero = false;
     private boolean nuevaOperacion = false;
 
     /**
-     * Creates new form FormCalculadora
+     * Crea un nuevo formulario FormCalculadora
      */
     public FormCalculadora() {
         initComponents();
+
+        // Creamos un objeto Icon a partir de la imagen guardada en el proyecto
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
+
+        // Asignamos el icono creado al JFrame
         this.setIconImage(icon);
+
+        // Le permitimos que coja el fojo
         this.setFocusable(true);
+
+        // Y se lo asignamos para permitir que salten eventos al pulsar los 
+        // botones del teclado
         this.requestFocus();
+
+        // Ponemos un título a la ventana
         this.setTitle("Calculadora");
+
+        // Y le decimos que se situe en el centro de la pantalla al iniciar
         this.setLocationRelativeTo(null);
+
+        // Creamos una objeto de tipo KeyListener para controlar el teclado
         KeyListener controlTeclado = new ControlTeclado();
+
+        // Asignamos el keylistener al JFrame para permitirnos controlar
+        // las pulsaciones en el teclado
         this.addKeyListener(controlTeclado);
 
     }
@@ -209,6 +229,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnYElevadoX.setText("y^x");
 
         btnInversa.setText("1/x");
+        btnInversa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInversaActionPerformed(evt);
+            }
+        });
 
         btnTangente.setText("Tan");
         btnTangente.addActionListener(new java.awt.event.ActionListener() {
@@ -552,143 +577,327 @@ public class FormCalculadora extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento para la pulsación del botón de factorización
+     *
+     * @param evt Evento
+     */
     private void btnFactorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorizarActionPerformed
         operacionPulsada("Fact");
     }//GEN-LAST:event_btnFactorizarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de raíz cuadrada
+     *
+     * @param evt Evento
+     */
     private void btnRaizCuadradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaizCuadradaActionPerformed
         operacionPulsada("Sqrt");
     }//GEN-LAST:event_btnRaizCuadradaActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de porcentaje
+     *
+     * @param evt Evento
+     */
     private void btnPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPorcentajeActionPerformed
-        // TODO add your handling code here:
+        if (verificarOperacion()) {
+            operacionPulsada("%");
+        }
     }//GEN-LAST:event_btnPorcentajeActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de reiniciar (clear)
+     *
+     * @param evt Evento
+     */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // Reiniciamos las variables de estado y los cuadros de texto a su estado
+        // original
         nuevoNumero = false;
         nuevaOperacion = true;
         txtHistorial.setText("");
         txtResultado.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
-
+    /**
+     * Evento para la pulsación del botón de división
+     *
+     * @param evt Evento
+     */
     private void btnDividirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDividirActionPerformed
         operacionPulsada("/");
     }//GEN-LAST:event_btnDividirActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de multiplicación
+     *
+     * @param evt Evento
+     */
     private void btnMultiplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplicarActionPerformed
         operacionPulsada("*");
     }//GEN-LAST:event_btnMultiplicarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de borrado
+     *
+     * @param evt Evento
+     */
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // Guardamos el valor del cuadro de texto de resultado a una variable
+        // para trabajar con él
         String valor = txtResultado.getText();
+
+        // Si su longitud no es nula, quitamos un caracter y lo asignamos
+        // de nuevo al cuadro de texto de resultado
         if (valor.length() > 0) {
             txtResultado.setText(valor.substring(0, valor.length() - 1));
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 7
+     *
+     * @param evt Evento
+     */
     private void btnSieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSieteActionPerformed
         numeroPulsado("7");
     }//GEN-LAST:event_btnSieteActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 8
+     *
+     * @param evt Evento
+     */
     private void btnOchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOchoActionPerformed
         numeroPulsado("8");
     }//GEN-LAST:event_btnOchoActionPerformed
-
+    /**
+     * Evento para la pulsación del botón del número 9
+     *
+     * @param evt Evento
+     */
     private void btnNueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNueveActionPerformed
         numeroPulsado("9");
     }//GEN-LAST:event_btnNueveActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 4
+     *
+     * @param evt Evento
+     */
     private void btnCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuatroActionPerformed
         numeroPulsado("4");
     }//GEN-LAST:event_btnCuatroActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 5
+     *
+     * @param evt Evento
+     */
     private void btnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoActionPerformed
         numeroPulsado("5");
     }//GEN-LAST:event_btnCincoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 6
+     *
+     * @param evt Evento
+     */
     private void btnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeisActionPerformed
         numeroPulsado("6");
     }//GEN-LAST:event_btnSeisActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 1
+     *
+     * @param evt Evento
+     */
     private void btnUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoActionPerformed
         numeroPulsado("1");
     }//GEN-LAST:event_btnUnoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 2
+     *
+     * @param evt Evento
+     */
     private void btnDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDosActionPerformed
         numeroPulsado("2");
     }//GEN-LAST:event_btnDosActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 3
+     *
+     * @param evt
+     */
     private void btnTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTresActionPerformed
         numeroPulsado("3");
     }//GEN-LAST:event_btnTresActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de suma
+     *
+     * @param evt Evento
+     */
     private void btnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasActionPerformed
         operacionPulsada("+");
     }//GEN-LAST:event_btnMasActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de resta
+     *
+     * @param evt Evento
+     */
     private void btnMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosActionPerformed
         operacionPulsada("-");
     }//GEN-LAST:event_btnMenosActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de punto decimal
+     *
+     * @param evt
+     */
     private void btnPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntoActionPerformed
         numeroPulsado(".");
     }//GEN-LAST:event_btnPuntoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número 0
+     *
+     * @param evt Evento
+     */
     private void btnCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroActionPerformed
         numeroPulsado("0");
     }//GEN-LAST:event_btnCeroActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de negativo
+     *
+     * @param evt Evento
+     */
     private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
 
+        //TODO: Realizar codigo para comprobar que el texto a hacer negativo puede ser transformado un número
+        // Pasamos el valor del cuadro de texto resultado a un variable BigDecimal
         BigDecimal valor = new BigDecimal(txtResultado.getText());
+
+        // Multiplicamos su valor por -1
         valor = valor.multiply(BigDecimal.valueOf(-1));
 
+        // Guardamos el resultado en el cuadro de texto correspondiente
         txtResultado.setText(valor.toString());
     }//GEN-LAST:event_btnMasMenosActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de igual
+     *
+     * @param evt Evento
+     */
     private void btnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIgualActionPerformed
+
+        //TODO: Realizar codigo comprobar que es una cadena de operaciones válidas (paréntesis cerrados y demás zarandajas)
+        // Concatenamos al historial el valor del campo resultado
         txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
+
+        // Enviamos el historial conteniendo la cadena de operaciones a la 
+        // función operar y asignamos el resultado a cuadro de texto resultado
         txtResultado.setText(operar(txtHistorial.getText()));
+
+        // Lo siguiente que se introduzca en la calculadora será una nueva 
+        // operación o un nuevo número
         nuevoNumero = true;
         nuevaOperacion = true;
     }//GEN-LAST:event_btnIgualActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de paréntesis
+     *
+     * @param evt Evento
+     */
     private void btnParentesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentesisActionPerformed
         operacionPulsada("(");
     }//GEN-LAST:event_btnParentesisActionPerformed
 
+    /**
+     * Evento para la pulsación del botón del número Pi
+     *
+     * @param evt Evento
+     */
     private void btnPiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiActionPerformed
         numeroPulsado("Pi");
 
     }//GEN-LAST:event_btnPiActionPerformed
-
+    /**
+     * Evento para la pulsación del botón del número e
+     *
+     * @param evt Evento
+     */
     private void btnEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEActionPerformed
         numeroPulsado("e");
     }//GEN-LAST:event_btnEActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de seno
+     *
+     * @param evt Evento
+     */
     private void btnSenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenoActionPerformed
         operacionPulsada("Sin");
     }//GEN-LAST:event_btnSenoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de coseno
+     *
+     * @param evt Evento
+     */
     private void btnCosenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCosenoActionPerformed
         operacionPulsada("Cos");
     }//GEN-LAST:event_btnCosenoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de tangente
+     *
+     * @param evt Evento
+     */
     private void btnTangenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTangenteActionPerformed
         operacionPulsada("Tan");
     }//GEN-LAST:event_btnTangenteActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de logaritmo neperiano
+     *
+     * @param evt Evento
+     */
     private void btnLogNeperianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogNeperianoActionPerformed
         operacionPulsada("Ln");
     }//GEN-LAST:event_btnLogNeperianoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de logaritmo en base 10
+     *
+     * @param evt Evento
+     */
     private void btnLogaritmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogaritmoActionPerformed
         operacionPulsada("Log");
     }//GEN-LAST:event_btnLogaritmoActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de elevar al cuadrado
+     *
+     * @param evt Evento
+     */
     private void btnXCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXCuadradoActionPerformed
         operacionPulsada("Sqr");
     }//GEN-LAST:event_btnXCuadradoActionPerformed
+
+    /**
+     * Evento para la pulsación del botón de inversa de un número
+     *
+     * @param evt Evento
+     */
+    private void btnInversaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInversaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInversaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -766,36 +975,78 @@ public class FormCalculadora extends javax.swing.JFrame {
     private javax.swing.JLabel txtResultado;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método que se encarga de pedir el resultado de la cadena de operaciones
+     *
+     * @param operaciones Cadena de texto con las operaciones a realizar
+     * @return Una cadena con el valor de las operaciones
+     */
     private String operar(String operaciones) {
 
+        // Llemamos al método parser de la clase ParserCalculadora
+        // pasándole la cadena de operaciones a realizar
         String resultado = ParserCalculadora.parser(operaciones);
 
+        // Devolvemos el resultado
         return resultado;
     }
 
+    /**
+     * Método pare permitirnos realizar las acciones pertinentes a la hora de
+     * introducir una operación en la calculadora
+     *
+     * @param valorOperacion La operación introducida
+     */
     private void operacionPulsada(String valorOperacion) {
 
+        // Comprobamos si es una nueva operación la que se introduce
         if (nuevaOperacion) {
+
+            // Si lo es, reseteamos los cuadros de texto y reseteamos el valor
+            // de la variable de control
             txtResultado.setText("");
             txtHistorial.setText("");
             nuevaOperacion = false;
         }
 
+        // Comprobamos el valor de la operación y realizamos acciones en 
+        // consecuencia
         switch (valorOperacion) {
             case "(": {
+
+                // Concatenamos el paréntesis al historial
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
+
+                // Guardamos el historial sin espacios al final en una variable 
+                // para trabajar con el sin modificarlo
                 String hist = txtHistorial.getText().trim();
 
+                // Contamos el número de paréntesis abiertos y cerrados que 
+                // tenemos en el historial
                 int count = hist.length() - hist.replace("(", "").length();
                 int count2 = hist.length() - hist.replace(")", "").length();
 
+                // Verificamos si la longitud del historial es mayor de cero y 
+                // que  el último carácter no es un paréntesis abierto o una 
+                // operación tras la cual puede haber un paréntesis abierto
                 if (hist.length() != 0 && "+-*/(".indexOf(hist.charAt(hist.length() - 1)) == -1) {
+
+                    // Si el historial no es nuevo o el último caracter no es 
+                    // una operación que permita un paréntesis, comprobamos si
+                    // el último carácter es un dígito.
                     if ("0123456789)".indexOf(hist.charAt(hist.length() - 1)) != -1) {
+
+                        // Si lo es, comprobamos si hay más paréntesis abiertos
+                        // que paréntesis cerrados
                         if (count > count2) {
+
+                            // Si es así, ponemos un paréntesis cerrado
                             txtHistorial.setText(txtHistorial.getText() + ")");
                         }
                     }
                 } else {
+                    // Si el historial es nuevo o la última operación permite un
+                    // paréntesis abierto, ponemos uno
                     txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + "(");
                 }
                 break;
@@ -808,36 +1059,63 @@ public class FormCalculadora extends javax.swing.JFrame {
             case "Cos":
             case "Sin":
             case "Tan": {
+                // En estos casos, concatenamos al cuadro de historial, su valor actual mas el valor de la operación
+                // con un parentesis al final, forzando encapsular las operaciones entre paréntesis
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + "(");
                 break;
             }
 
             default: {
+                // En estos casos, concatenamos al cuadro de historial, su valor actual mas el valor de la operación
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
                 break;
             }
 
         }
 
+        // Limpiamos el valor que hubiese en el cuadro de texto de resultado
         txtResultado.setText("");
+
+        // Tras introducir la operación, indicamos que a continuación se 
+        /// introducirá un nuevo número
         nuevoNumero = true;
+
+        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
+        // de teclado        
         this.requestFocus();
 
     }
 
+    /**
+     * Método que nos permite realizar las acciones pertinentes al pulsar un
+     * botón correspondiente a un número
+     *
+     * @param valorNumero Número pulsado
+     */
     private void numeroPulsado(String valorNumero) {
 
+        // Comprobamos si es una nueva operación
         if (nuevaOperacion) {
+
+            // Si lo es, reseteamos los cuadros de texto y reseteamos el valor
+            // de la variable de control
             txtResultado.setText("");
             txtHistorial.setText("");
             nuevaOperacion = false;
         }
 
+        // Comprobamos si se introduce un nuevo número, esto es, un número despues
+        // de haber introducido una operación
         if (nuevoNumero) {
+
+            // Si lo es, reseteamos el cuadro de texto del resultado y el valor
+            // de la variable de control
             txtResultado.setText("");
             nuevoNumero = false;
         }
 
+        // Varificamos el valor del número introducido y concatenamos su valor
+        // al cuadro de texto del resultado
         switch (valorNumero) {
             case "Pi":
                 txtResultado.setText(txtResultado.getText() + Math.PI);
@@ -850,14 +1128,41 @@ public class FormCalculadora extends javax.swing.JFrame {
                 break;
         }
 
+        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
+        // de teclado
         this.requestFocus();
 
     }
 
+    /**
+     * Método para verificar que se puede pulsar el botón de una operación
+     *
+     * @return Verdadero si se puede pulsar, falso si no se puede
+     */
+    private boolean verificarOperacion() {
+        boolean resultado = false;
+
+        return resultado;
+    }
+
+    /**
+     * Claes para capturar los eventos de teclado al pulsar teclas
+     */
     public class ControlTeclado implements KeyListener {
 
         @Override
         public void keyTyped(KeyEvent e) {
+
+        }
+
+        /**
+         * Método para capturar la pulsación de una tecla del teclado
+         * @param e Evento
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+            // Comprobamos que tecla se ha pulsado y ejecutamos el evento
+            // correspondiente al botón de la calculadora
             switch (e.getKeyChar()) {
                 case '1': {
                     btnUnoActionPerformed(null);
@@ -919,25 +1224,21 @@ public class FormCalculadora extends javax.swing.JFrame {
                     btnDividirActionPerformed(null);
                     break;
                 }
-                default:
-                     {
-                        if (e.getKeyCode() == 0) {
-                            btnIgualActionPerformed(null);
-                        }
-                        break;
+                default: {
+                    // Comprobamos si hemos pulsado el intro para realizar
+                    // la operación
+                    if (e.getKeyCode() == 0) {
+                        btnIgualActionPerformed(null);
                     }
+                    break;
+                }
 
             }
         }
 
         @Override
-        public void keyPressed(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
         public void keyReleased(KeyEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
         }
     }
 }
