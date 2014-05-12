@@ -601,7 +601,7 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPorcentajeActionPerformed
-        if (verificarOperacion()) {
+        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "%")) {
             operacionPulsada("%");
         }
     }//GEN-LAST:event_btnPorcentajeActionPerformed
@@ -777,15 +777,16 @@ public class FormCalculadora extends javax.swing.JFrame {
      */
     private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
 
-        //TODO: Realizar codigo para comprobar que el texto a hacer negativo puede ser transformado un número
-        // Pasamos el valor del cuadro de texto resultado a un variable BigDecimal
-        BigDecimal valor = new BigDecimal(txtResultado.getText());
+        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "neg")) {
+            // Pasamos el valor del cuadro de texto resultado a un variable BigDecimal
+            BigDecimal valor = new BigDecimal(txtResultado.getText());
 
-        // Multiplicamos su valor por -1
-        valor = valor.multiply(BigDecimal.valueOf(-1));
+            // Multiplicamos su valor por -1
+            valor = valor.multiply(BigDecimal.valueOf(-1));
 
-        // Guardamos el resultado en el cuadro de texto correspondiente
-        txtResultado.setText(valor.toString());
+            // Guardamos el resultado en el cuadro de texto correspondiente
+            txtResultado.setText(valor.toString());
+        }
     }//GEN-LAST:event_btnMasMenosActionPerformed
 
     /**
@@ -1064,7 +1065,10 @@ public class FormCalculadora extends javax.swing.JFrame {
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + "(");
                 break;
             }
-
+            case "%": {
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + valorOperacion + " ");
+                break;
+            }
             default: {
                 // En estos casos, concatenamos al cuadro de historial, su valor actual mas el valor de la operación
                 txtHistorial.setText(txtHistorial.getText() + txtResultado.getText() + " " + valorOperacion + " ");
@@ -1139,10 +1143,62 @@ public class FormCalculadora extends javax.swing.JFrame {
      *
      * @return Verdadero si se puede pulsar, falso si no se puede
      */
-    private boolean verificarOperacion() {
-        boolean resultado = false;
+    private boolean verificarOperacion(String resultado, String historial, String operacion) {
 
-        return resultado;
+        // Definimos una constante para almacenar la expresión regular
+        // para verificar la entrada de números
+        final String NUMERO = "[-+]?\\d*\\.?\\d+";
+
+        // Definimos e inicializamos la variable de resultado
+        boolean salida = false;
+
+        // Limpiamos los espacios en blanco para facilitar la detección de 
+        // operaciones
+        resultado = resultado.replace(" ", "");
+
+        // Verificamos el tipo de operación
+        switch (operacion) {
+
+            // Si es el tanto por ciento
+            case "%": {
+
+                // Comprobamos si el texto en el cuadro de resultado es un número                
+                if (resultado.matches(NUMERO)) {
+
+                    // Si lo es, se puede poner el tanto por ciento
+                    salida = true;
+                } else {
+
+                    // Si no es un número, comprobamos si la última operación
+                    // introducida es un paréntesis de cierre
+                    if (historial.length() > 0 && historial.charAt(historial.length() - 1) == ')') {
+
+                        // Si es así podemos poner el tanto por ciento
+                        salida = true;
+                    }
+                }
+                break;
+            }
+            // Si el botón de número negativos
+            case "neg":            
+            {
+                // Comprobamos que lo que hay en el cuadro de texto de resultados
+                // es un número
+                if(resultado.matches(NUMERO))
+                {
+                    salida = true;
+                }
+                break;
+            }
+
+        }
+
+        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
+        // de teclado
+        this.requestFocus();
+        
+        // Devolvemos el resultado
+        return salida;
     }
 
     /**
@@ -1157,6 +1213,7 @@ public class FormCalculadora extends javax.swing.JFrame {
 
         /**
          * Método para capturar la pulsación de una tecla del teclado
+         *
          * @param e Evento
          */
         @Override

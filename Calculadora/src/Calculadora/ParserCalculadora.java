@@ -52,7 +52,7 @@ public class ParserCalculadora {
 
         // Operaciones admitidas por el parseador
         // Las operaciones van ordenados por jerarquía de operaciones
-        String operaciones[] = {"(", ")", "!", "s", "Q", "l", "L", "S", "C", "T", "*", "/", "+", "-"};
+        String operaciones[] = {"(", ")", "!", "s", "Q", "l", "L", "S", "C", "T", "%", "*", "/", "+", "-"};
 
         // Eliminamos los espacios en blanco
         cadena = cadena.replace(" ", "");
@@ -194,15 +194,35 @@ public class ParserCalculadora {
 
                                 break;
                             }
-                            case "+": {
+                            case "%": {
                                 // Buscamos el índice de la operación
                                 pos1 = valor.indexOf(operacion);
-                                
+
                                 // Buscamos la operación anterior y nos 
                                 // posicionamos en el siguiente elemento de la 
                                 // lista
                                 pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                // Buscamos la operación posterior y nos posicionamos
+                                // en el elemento anterior
+                                pos3 = pos1;
                                 
+                                // Convertimos los números de antes y despues de
+                                // la operación a BigDecimal y operamos con ellos
+                                numero1 = new BigDecimal(valor.get(pos2).toString());
+                                numero1 = numero1.divide(new BigDecimal("100"), precision, RoundingMode.DOWN);                                
+                                
+                                break;
+                            }
+                            case "+": {
+                                // Buscamos el índice de la operación
+                                pos1 = valor.indexOf(operacion);
+
+                                // Buscamos la operación anterior y nos 
+                                // posicionamos en el siguiente elemento de la 
+                                // lista
+                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
                                 // Buscamos la operación posterior y nos posicionamos
                                 // en el elemento anterior
                                 pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
@@ -216,12 +236,12 @@ public class ParserCalculadora {
                             case "-": {
                                 // Buscamos el índice de la operación
                                 pos1 = valor.indexOf(operacion);
-                                
+
                                 // Buscamos la operación anterior y nos 
                                 // posicionamos en el siguiente elemento de la 
                                 // lista                                
                                 pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-                                
+
                                 // Buscamos la operación posterior y nos posicionamos
                                 // en el elemento anterior                                
                                 pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
@@ -235,12 +255,12 @@ public class ParserCalculadora {
                             case "*": {
                                 // Buscamos el índice de la operación
                                 pos1 = valor.indexOf(operacion);
-                                
+
                                 // Buscamos la operación anterior y nos 
                                 // posicionamos en el siguiente elemento de la 
                                 // lista                                                                
                                 pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-                                
+
                                 // Buscamos la operación posterior y nos posicionamos
                                 // en el elemento anterior                                                                
                                 pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
@@ -254,12 +274,12 @@ public class ParserCalculadora {
                             case "/": {
                                 // Buscamos el índice de la operación
                                 pos1 = valor.indexOf(operacion);
-                                
+
                                 // Buscamos la operación anterior y nos 
                                 // posicionamos en el siguiente elemento de la 
                                 // lista                                                                                                
                                 pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-                                
+
                                 // Buscamos la operación posterior y nos posicionamos
                                 // en el elemento anterior                                                                                                
                                 pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
