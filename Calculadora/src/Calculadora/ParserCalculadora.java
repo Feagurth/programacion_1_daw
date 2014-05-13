@@ -21,6 +21,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -52,10 +53,12 @@ public class ParserCalculadora {
 
         // Operaciones admitidas por el parseador
         // Las operaciones van ordenados por jerarquía de operaciones
-        String operaciones[] = {"(", ")", "!", "s", "Q", "l", "L", "S", "C", "T", "%", "*", "/", "+", "-"};
+        String operaciones[] = {"N", "(", ")", "!", "s", "Q", "l", "L", "S", "C", "T", "%", "*", "/", "+", "-"};
 
         // Eliminamos los espacios en blanco
         cadena = cadena.replace(" ", "");
+
+        cadena = transformarNegativos(cadena);
 
         // Transformamos las representaciones de las las funciones a letras
         // entendibles por el parseador
@@ -80,6 +83,24 @@ public class ParserCalculadora {
                         // Si lo está realizaremos busquedas específicas para
                         // cada una de las operaciones
                         switch (operacion) {
+
+                            case "N": {
+                                // Buscamos el índice de la primera operación en la lista
+                                pos1 = valor.indexOf(operacion);
+
+                                // Igualamos la posición de corte anterior a la 
+                                // posición de la operación
+                                pos2 = pos1;
+
+                                // Buscamos cualquiera que sea la siguiente operación de la lista
+                                // desde el índice de la primera operación y el final de la lista
+                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                numero1 = new BigDecimal(valor.get(pos3).toString());
+                                numero1 = numero1.multiply(new BigDecimal("-1"));
+                                break;
+
+                            }
 
                             // Si la operación seleccionada es un paréntesis
                             case "(": {
@@ -206,12 +227,12 @@ public class ParserCalculadora {
                                 // Buscamos la operación posterior y nos posicionamos
                                 // en el elemento anterior
                                 pos3 = pos1;
-                                
+
                                 // Convertimos los números de antes y despues de
                                 // la operación a BigDecimal y operamos con ellos
                                 numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.divide(new BigDecimal("100"), precision, RoundingMode.DOWN);                                
-                                
+                                numero1 = numero1.divide(new BigDecimal("100"), precision, RoundingMode.DOWN);
+
                                 break;
                             }
                             case "+": {
@@ -320,6 +341,31 @@ public class ParserCalculadora {
 
         // Devolvemos el resultado
         return numero1.stripTrailingZeros().toPlainString();
+    }
+
+
+    private static String transformarNegativos(String cadena) {
+
+        String signos[] = {"N", "(", "!", "s", "Q", "l", "L", "S", "C", "T", "%", "*", "/", "+", "-"};
+        
+        for (int i = 0; i < cadena.length(); i++) {
+            if (cadena.charAt(i) == '-') {
+                if (i == 0 || Arrays.asList(signos).contains(String.valueOf(cadena.charAt(i - 1)))) {
+                    int siguiente = cadena.length();
+
+                    for (int j = i + 1; j < cadena.length(); j++) {
+                        if (Arrays.asList(signos).contains(String.valueOf(cadena.charAt(j)))) {
+                            siguiente = j;
+                            break;
+                        }
+                    }
+                    cadena = (cadena.substring(0, i) + "N(" + cadena.substring(i + 1, siguiente) + ")" + cadena.substring(siguiente, cadena.length()));
+
+                }
+            }
+        }
+
+        return cadena;
     }
 
     /**
@@ -442,7 +488,6 @@ public class ParserCalculadora {
                     }
                 }
             }
-
         }
 
         // Si el resultado es cero, eso quiero decir que no había operación
