@@ -183,6 +183,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnEElevadoX.setText("e^x");
 
         btnValorAbsoluto.setText("|x|");
+        btnValorAbsoluto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValorAbsolutoActionPerformed(evt);
+            }
+        });
 
         btnPi.setText("π");
         btnPi.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +232,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnYElevadoX.setText("y^x");
+        btnYElevadoX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYElevadoXActionPerformed(evt);
+            }
+        });
 
         btnInversa.setText("1/x");
         btnInversa.addActionListener(new java.awt.event.ActionListener() {
@@ -888,7 +898,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnXCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXCuadradoActionPerformed
-        operacionPulsada("Sqr");
+        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "^2")) {
+            operacionPulsada("^2");
+        }
     }//GEN-LAST:event_btnXCuadradoActionPerformed
 
     /**
@@ -899,6 +911,17 @@ public class FormCalculadora extends javax.swing.JFrame {
     private void btnInversaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInversaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInversaActionPerformed
+
+    private void btnYElevadoXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYElevadoXActionPerformed
+        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "^")) {
+            operacionPulsada("^");
+        }
+
+    }//GEN-LAST:event_btnYElevadoXActionPerformed
+
+    private void btnValorAbsolutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorAbsolutoActionPerformed
+        operacionPulsada("Abs");
+    }//GEN-LAST:event_btnValorAbsolutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1052,6 +1075,7 @@ public class FormCalculadora extends javax.swing.JFrame {
                 }
                 break;
             }
+            case "Abs":
             case "Sqr":
             case "Ln":
             case "Log":
@@ -1159,6 +1183,10 @@ public class FormCalculadora extends javax.swing.JFrame {
         // Verificamos el tipo de operación
         switch (operacion) {
 
+            // Si es una potencia
+            case "^":
+            // Si es una potencia de 2           
+            case "^2":
             // Si es el tanto por ciento
             case "%": {
 
@@ -1190,7 +1218,6 @@ public class FormCalculadora extends javax.swing.JFrame {
                 }
                 break;
             }
-
         }
 
         // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
