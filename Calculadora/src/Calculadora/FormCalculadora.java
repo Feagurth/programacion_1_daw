@@ -21,6 +21,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Clase para crear una calculadora
@@ -39,6 +40,12 @@ public class FormCalculadora extends javax.swing.JFrame {
      */
     public FormCalculadora() {
         initComponents();
+
+        // Asignamos una precisión específica a las divisiones de la calculadora
+        ParserCalculadora.setPrecision(15);
+
+        // Eliminamos el gestor de capas que haya predefinido
+        this.setLayout(null);
 
         // Creamos un objeto Icon a partir de la imagen guardada en el proyecto
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
@@ -140,14 +147,18 @@ public class FormCalculadora extends javax.swing.JFrame {
         txtResultado.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
         txtHistorial.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        txtHistorial.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        txtHistorial.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        txtHistorial.setMinimumSize(new java.awt.Dimension(0, 550));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(txtHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +192,11 @@ public class FormCalculadora extends javax.swing.JFrame {
         });
 
         btnEElevadoX.setText("e^x");
+        btnEElevadoX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEElevadoXActionPerformed(evt);
+            }
+        });
 
         btnValorAbsoluto.setText("|x|");
         btnValorAbsoluto.addActionListener(new java.awt.event.ActionListener() {
@@ -611,7 +627,7 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPorcentajeActionPerformed
-        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "%")) {
+        if (ParserCalculadora.verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "%")) {
             operacionPulsada("%");
         }
     }//GEN-LAST:event_btnPorcentajeActionPerformed
@@ -787,7 +803,7 @@ public class FormCalculadora extends javax.swing.JFrame {
      */
     private void btnMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMenosActionPerformed
 
-        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "neg")) {
+        if (ParserCalculadora.verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "neg")) {
             // Pasamos el valor del cuadro de texto resultado a un variable BigDecimal
             BigDecimal valor = new BigDecimal(txtResultado.getText());
 
@@ -898,7 +914,7 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnXCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXCuadradoActionPerformed
-        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "^2")) {
+        if (ParserCalculadora.verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "^2")) {
             operacionPulsada("^2");
         }
     }//GEN-LAST:event_btnXCuadradoActionPerformed
@@ -913,7 +929,7 @@ public class FormCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInversaActionPerformed
 
     private void btnYElevadoXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYElevadoXActionPerformed
-        if (verificarOperacion(txtResultado.getText(), txtHistorial.getText(), "^")) {
+        if (ParserCalculadora.verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "^")) {
             operacionPulsada("^");
         }
 
@@ -922,6 +938,23 @@ public class FormCalculadora extends javax.swing.JFrame {
     private void btnValorAbsolutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorAbsolutoActionPerformed
         operacionPulsada("Abs");
     }//GEN-LAST:event_btnValorAbsolutoActionPerformed
+
+    private void btnEElevadoXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEElevadoXActionPerformed
+        if (ParserCalculadora.verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "e^")) {
+            {
+                // Pasamos el valor del cuadro de texto resultado a un variable BigDecimal
+                BigDecimal valor = new BigDecimal(Math.E);
+
+                // Multiplicamos su valor por -1
+                valor = valor.pow(Integer.parseInt(txtResultado.getText()));
+                valor = valor.divide(BigDecimal.ONE, 15, RoundingMode.DOWN);
+
+                // Guardamos el resultado en el cuadro de texto correspondiente
+                txtResultado.setText(valor.toString());
+            }
+        }
+
+    }//GEN-LAST:event_btnEElevadoXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1009,10 +1042,20 @@ public class FormCalculadora extends javax.swing.JFrame {
 
         // Llemamos al método parser de la clase ParserCalculadora
         // pasándole la cadena de operaciones a realizar
-        String resultado = ParserCalculadora.parser(operaciones);
+        Resultado resultado = ParserCalculadora.parser(operaciones);
 
-        // Devolvemos el resultado
-        return resultado;
+        // Comprobamos si hay algún mensaje a mostrar al usuario
+        if (resultado.mensaje.equals("")) {
+            // Si no lo hay, devolvemos el resultado
+            return resultado.resultado;
+        } else {
+            // Si lo hay limpiamos y mostramos el mensaje
+            txtResultado.setText("");
+            txtHistorial.setText("");
+            nuevaOperacion = true;
+            nuevoNumero = true;
+            return resultado.mensaje;
+        }
     }
 
     /**
@@ -1160,72 +1203,6 @@ public class FormCalculadora extends javax.swing.JFrame {
         // de teclado
         this.requestFocus();
 
-    }
-
-    /**
-     * Método para verificar que se puede pulsar el botón de una operación
-     *
-     * @return Verdadero si se puede pulsar, falso si no se puede
-     */
-    private boolean verificarOperacion(String resultado, String historial, String operacion) {
-
-        // Definimos una constante para almacenar la expresión regular
-        // para verificar la entrada de números
-        final String NUMERO = "[-+]?\\d*\\.?\\d+";
-
-        // Definimos e inicializamos la variable de resultado
-        boolean salida = false;
-
-        // Limpiamos los espacios en blanco para facilitar la detección de 
-        // operaciones
-        resultado = resultado.replace(" ", "");
-
-        // Verificamos el tipo de operación
-        switch (operacion) {
-
-            // Si es una potencia
-            case "^":
-            // Si es una potencia de 2           
-            case "^2":
-            // Si es el tanto por ciento
-            case "%": {
-
-                // Comprobamos si el texto en el cuadro de resultado es un número                
-                if (resultado.matches(NUMERO)) {
-
-                    // Si lo es, se puede poner el tanto por ciento
-                    salida = true;
-                } else {
-
-                    // Si no es un número, comprobamos si la última operación
-                    // introducida es un paréntesis de cierre
-                    if (historial.length() > 0 && historial.charAt(historial.length() - 1) == ')') {
-
-                        // Si es así podemos poner el tanto por ciento
-                        salida = true;
-                    }
-                }
-                break;
-            }
-            // Si el botón de número negativos
-            case "neg":            
-            {
-                // Comprobamos que lo que hay en el cuadro de texto de resultados
-                // es un número
-                if(resultado.matches(NUMERO))
-                {
-                    salida = true;
-                }
-                break;
-            }
-        }
-
-        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
-        // de teclado
-        this.requestFocus();
-        
-        // Devolvemos el resultado
-        return salida;
     }
 
     /**

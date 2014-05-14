@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Clase para realizar las operaciones de una calculadora científica usando
@@ -31,19 +33,40 @@ import java.util.List;
  */
 public class ParserCalculadora {
 
+    // Variable para controlar la precisión de las divisiones
+    private static int precision;
+
+    /**
+     * Método para recuperar la precisión en las divisiones de la calculadora
+     *
+     * @return La pecisión en las divisiones de la calculadora
+     */
+    public static int getPrecision() {
+        return precision;
+    }
+
+    /**
+     * Método para asignar una precisión a las divisiones de la calculadora
+     *
+     * @param precision La precisión en las divisiones de la calculadora
+     */
+    public static void setPrecision(int precision) {
+        ParserCalculadora.precision = precision;
+    }
+
     /**
      * Método para analizar las operaciones a realizar y calcular el resultado
      *
      * @param cadena Cadena con las operaciones a realizar
      * @return Cadena con el resultado de las operaciones
      */
-    public static String parser(String cadena) {
+    public static Resultado parser(String cadena) {
+
+        // Variable para almacenar algún mensaje al usuario
+        String mensaje = "";
 
         // Variable para almacenar el resultado de salida
         BigDecimal numero1 = BigDecimal.ZERO;
-
-        // Variable para controlar la precisión de las divisiones
-        final int precision = 15;
 
         // Variables para controlar las posiciones de las operaciones buscadas
         int pos1;
@@ -66,296 +89,301 @@ public class ParserCalculadora {
         // Transformamos la cadena de caracteres a una lista para trabajar
         ArrayList valor = cadenaALista(cadena, operaciones);
 
-        // Iteraremos mientras haya operaciones en la lista
-        do {
+        try {
 
-            // Iteramos para cada operación del array de operaciones
-            for (String operacion : operaciones) {
+            // Iteraremos mientras haya operaciones en la lista
+            do {
 
-                // Iteramos mientras haya operaciones del tipo de la iteración
-                // en la lista
-                do {
+                // Iteramos para cada operación del array de operaciones
+                for (String operacion : operaciones) {
 
-                    // Comprobamos que la operación este en la lista
-                    if (valor.contains(operacion)) {
+                    // Iteramos mientras haya operaciones del tipo de la iteración
+                    // en la lista
+                    do {
 
-                        // Si lo está realizaremos busquedas específicas para
-                        // cada una de las operaciones
-                        switch (operacion) {
+                        // Comprobamos que la operación este en la lista
+                        if (valor.contains(operacion)) {
 
-                            case "N": {
-                                // Buscamos el índice de la primera operación en la lista
-                                pos1 = valor.indexOf(operacion);
+                            // Si lo está realizaremos busquedas específicas para
+                            // cada una de las operaciones
+                            switch (operacion) {
 
-                                // Igualamos la posición de corte anterior a la 
-                                // posición de la operación
-                                pos2 = pos1;
+                                case "N": {
+                                    // Buscamos el índice de la primera operación en la lista
+                                    pos1 = valor.indexOf(operacion);
 
-                                // Buscamos cualquiera que sea la siguiente operación de la lista
-                                // desde el índice de la primera operación y el final de la lista
-                                pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
+                                    // Igualamos la posición de corte anterior a la 
+                                    // posición de la operación
+                                    pos2 = pos1;
 
-                                numero1 = new BigDecimal(valor.get(pos3 - 1).toString());
-                                numero1 = numero1.multiply(new BigDecimal("-1"));
-                                break;
+                                    // Buscamos cualquiera que sea la siguiente operación de la lista
+                                    // desde el índice de la primera operación y el final de la lista
+                                    pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
 
-                            }
+                                    numero1 = new BigDecimal(valor.get(pos3 - 1).toString());
+                                    numero1 = numero1.multiply(new BigDecimal("-1"));
+                                    break;
 
-                            // Si la operación seleccionada es un paréntesis
-                            case "(": {
-
-                                // Localizamos la posición del último paréntesis
-                                // abierto que haya en la lista
-                                pos1 = valor.lastIndexOf(operacion);
-
-                                // El valor de la posición de corte anterior
-                                // será la del paréntesis
-                                pos2 = pos1;
-
-                                // La posición de corte posterior será la siguiente
-                                // operación del resto de la lista, donde buscaremos
-                                // el primer paréntesis cerrado
-                                pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
-
-                                // Dentro de los paréntesis puede haber 
-                                // cualquier conjunto de operaciones, para 
-                                // calcular el valor resultante del paréntesis
-                                // transformamos la lista de valores a una cadena
-                                // y la volvemos a pasar por el parser de forma
-                                // recursiva. Almacenamos el resultado
-                                numero1 = new BigDecimal(parser(listaACadena(valor.subList(pos2 + 1, pos3))));
-
-                                break;
-                            }
-                            case "A":
-                            case "l":
-                            case "L":
-                            case "!":
-                            case "Q": {
-
-                                // Buscamos el índice de la primera operación en la lista
-                                pos1 = valor.indexOf(operacion);
-
-                                // Igualamos la posición de corte anterior a la 
-                                // posición de la operación
-                                pos2 = pos1;
-
-                                // Buscamos cualquiera que sea la siguiente operación de la lista
-                                // desde el índice de la primera operación y el final de la lista
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                                // Comprobamos la operación
-                                switch (operacion) {
-
-                                    // Calculamos la operación necesaria usando
-                                    // el valor de la lista correspondiente
-                                    case "A":
-                                    {
-                                        numero1 = new BigDecimal(Math.abs(Double.valueOf(valor.get(pos3).toString())));
-                                        break;
-                                    }
-                                    case "!": {
-                                        numero1 = factorial(Double.valueOf(valor.get(pos3).toString()));
-                                        break;
-                                    }
-                                    case "Q": {
-                                        numero1 = new BigDecimal(Math.sqrt(Double.valueOf(valor.get(pos3).toString())));
-                                        break;
-                                    }
-                                    case "l": {
-                                        numero1 = new BigDecimal(Math.log(Double.valueOf(valor.get(pos3).toString())));
-                                        break;
-                                    }
-                                    case "L": {
-                                        numero1 = new BigDecimal(Math.log10(Double.valueOf(valor.get(pos3).toString())));
-                                        break;
-                                    }
-                                    case "s": {
-                                        numero1 = new BigDecimal(Math.pow((Double.valueOf(valor.get(pos3).toString())), 2));
-                                        break;
-                                    }
                                 }
 
-                                break;
-                            }
-                            case "T":
-                            case "C":
-                            case "S": {
+                                // Si la operación seleccionada es un paréntesis
+                                case "(": {
 
-                                // Buscamos el índice de la primera operación en la lista
-                                pos1 = valor.indexOf(operacion);
+                                    // Localizamos la posición del último paréntesis
+                                    // abierto que haya en la lista
+                                    pos1 = valor.lastIndexOf(operacion);
 
-                                // Igualamos la posición de corte anterior a la 
-                                // posición de la operación                                
-                                pos2 = pos1;
+                                    // El valor de la posición de corte anterior
+                                    // será la del paréntesis
+                                    pos2 = pos1;
 
-                                // Buscamos cualquiera que sea la siguiente operación de la lista
-                                // desde el índice de la primera operación y el final de la lista                                
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+                                    // La posición de corte posterior será la siguiente
+                                    // operación del resto de la lista, donde buscaremos
+                                    // el primer paréntesis cerrado
+                                    pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
 
-                                // Pasamos el número a calcular a un double para
-                                // realizar las operaciones
-                                double numero = Double.valueOf(valor.get(pos3).toString());
+                                    // Dentro de los paréntesis puede haber 
+                                    // cualquier conjunto de operaciones, para 
+                                    // calcular el valor resultante del paréntesis
+                                    // transformamos la lista de valores a una cadena
+                                    // y la volvemos a pasar por el parser de forma
+                                    // recursiva. Almacenamos el resultado
+                                    numero1 = new BigDecimal(parser(listaACadena(valor.subList(pos2 + 1, pos3))).resultado);
 
-                                // Comprobamos el tipo de operación y la realizamos
-                                // tras pasar el número a radianes
-                                switch (operacion) {
-                                    case "S": {
-                                        numero = Math.sin(Math.toRadians(numero));
-                                        break;
-                                    }
-                                    case "C": {
-                                        numero = Math.cos(Math.toRadians(numero));
-                                        break;
-                                    }
-                                    case "T": {
-                                        numero = Math.tan(Math.toRadians(numero));
-                                        break;
-                                    }
+                                    break;
                                 }
+                                case "A":
+                                case "l":
+                                case "L":
+                                case "!":
+                                case "Q": {
 
-                                // Almacenamos el resultado
-                                numero1 = new BigDecimal(numero);
+                                    // Buscamos el índice de la primera operación en la lista
+                                    pos1 = valor.indexOf(operacion);
 
-                                break;
+                                    // Igualamos la posición de corte anterior a la 
+                                    // posición de la operación
+                                    pos2 = pos1;
+
+                                    // Buscamos cualquiera que sea la siguiente operación de la lista
+                                    // desde el índice de la primera operación y el final de la lista
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Comprobamos la operación
+                                    switch (operacion) {
+
+                                        // Calculamos la operación necesaria usando
+                                        // el valor de la lista correspondiente
+                                        case "A": {
+                                            numero1 = new BigDecimal(Math.abs(Double.valueOf(valor.get(pos3).toString())));
+                                            break;
+                                        }
+                                        case "!": {
+                                            numero1 = factorial(Double.valueOf(valor.get(pos3).toString()));
+                                            break;
+                                        }
+                                        case "Q": {
+                                            numero1 = new BigDecimal(Math.sqrt(Double.valueOf(valor.get(pos3).toString())));
+                                            break;
+                                        }
+                                        case "l": {
+                                            numero1 = new BigDecimal(Math.log(Double.valueOf(valor.get(pos3).toString())));
+                                            break;
+                                        }
+                                        case "L": {
+                                            numero1 = new BigDecimal(Math.log10(Double.valueOf(valor.get(pos3).toString())));
+                                            break;
+                                        }
+                                        case "s": {
+                                            numero1 = new BigDecimal(Math.pow((Double.valueOf(valor.get(pos3).toString())), 2));
+                                            break;
+                                        }
+                                    }
+
+                                    break;
+                                }
+                                case "T":
+                                case "C":
+                                case "S": {
+
+                                    // Buscamos el índice de la primera operación en la lista
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Igualamos la posición de corte anterior a la 
+                                    // posición de la operación                                
+                                    pos2 = pos1;
+
+                                    // Buscamos cualquiera que sea la siguiente operación de la lista
+                                    // desde el índice de la primera operación y el final de la lista                                
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Pasamos el número a calcular a un double para
+                                    // realizar las operaciones
+                                    double numero = Double.valueOf(valor.get(pos3).toString());
+
+                                    // Comprobamos el tipo de operación y la realizamos
+                                    // tras pasar el número a radianes
+                                    switch (operacion) {
+                                        case "S": {
+                                            numero = Math.sin(Math.toRadians(numero));
+                                            break;
+                                        }
+                                        case "C": {
+                                            numero = Math.cos(Math.toRadians(numero));
+                                            break;
+                                        }
+                                        case "T": {
+                                            numero = Math.tan(Math.toRadians(numero));
+                                            break;
+                                        }
+                                    }
+
+                                    // Almacenamos el resultado
+                                    numero1 = new BigDecimal(numero);
+
+                                    break;
+                                }
+                                case "%": {
+                                    // Buscamos el índice de la operación
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Buscamos la operación anterior y nos 
+                                    // posicionamos en el siguiente elemento de la 
+                                    // lista
+                                    pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                    // Buscamos la operación posterior y nos posicionamos
+                                    // en el elemento anterior
+                                    pos3 = pos1;
+
+                                    // Convertimos los números de antes y despues de
+                                    // la operación a BigDecimal y operamos con ellos
+                                    numero1 = new BigDecimal(valor.get(pos2).toString());
+                                    numero1 = numero1.divide(new BigDecimal("100"), precision, RoundingMode.DOWN);
+
+                                    break;
+                                }
+                                case "+": {
+                                    // Buscamos el índice de la operación
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Buscamos la operación anterior y nos 
+                                    // posicionamos en el siguiente elemento de la 
+                                    // lista
+                                    pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                    // Buscamos la operación posterior y nos posicionamos
+                                    // en el elemento anterior
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Convertimos los números de antes y despues de
+                                    // la operación a BigDecimal y operamos con ellos
+                                    numero1 = new BigDecimal(valor.get(pos2).toString());
+                                    numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
+                                    break;
+                                }
+                                case "-": {
+                                    // Buscamos el índice de la operación
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Buscamos la operación anterior y nos 
+                                    // posicionamos en el siguiente elemento de la 
+                                    // lista                                
+                                    pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                    // Buscamos la operación posterior y nos posicionamos
+                                    // en el elemento anterior                                
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Convertimos los números de antes y despues de
+                                    // la operación a BigDecimal y operamos con ellos                                
+                                    numero1 = new BigDecimal(valor.get(pos2).toString());
+                                    numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
+                                    break;
+                                }
+                                case "*": {
+                                    // Buscamos el índice de la operación
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Buscamos la operación anterior y nos 
+                                    // posicionamos en el siguiente elemento de la 
+                                    // lista                                                                
+                                    pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                    // Buscamos la operación posterior y nos posicionamos
+                                    // en el elemento anterior                                                                
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Convertimos los números de antes y despues de
+                                    // la operación a BigDecimal y operamos con ellos                                
+                                    numero1 = new BigDecimal(valor.get(pos2).toString());
+                                    numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
+                                    break;
+                                }
+                                case "/": {
+                                    // Buscamos el índice de la operación
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Buscamos la operación anterior y nos 
+                                    // posicionamos en el siguiente elemento de la 
+                                    // lista                                                                                                
+                                    pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                    // Buscamos la operación posterior y nos posicionamos
+                                    // en el elemento anterior                                                                                                
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Convertimos los números de antes y despues de
+                                    // la operación a BigDecimal y operamos con ellos                                                                
+                                    numero1 = new BigDecimal(valor.get(pos2).toString());
+                                    numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), precision, RoundingMode.HALF_DOWN);
+                                    break;
+                                }
+                                case "^": {
+                                    // Buscamos el índice de la operación
+                                    pos1 = valor.indexOf(operacion);
+
+                                    // Buscamos la operación anterior y nos 
+                                    // posicionamos en el siguiente elemento de la 
+                                    // lista                                                                                                
+                                    pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+
+                                    // Buscamos la operación posterior y nos posicionamos
+                                    // en el elemento anterior                                                                                                
+                                    pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
+
+                                    // Convertimos los números de antes y despues de
+                                    // la operación a BigDecimal y operamos con ellos                                                                
+                                    numero1 = new BigDecimal(valor.get(pos2).toString());
+                                    numero1 = numero1.pow(Integer.parseInt(valor.get(pos3).toString()));
+                                    break;
+                                }
                             }
-                            case "%": {
-                                // Buscamos el índice de la operación
-                                pos1 = valor.indexOf(operacion);
 
-                                // Buscamos la operación anterior y nos 
-                                // posicionamos en el siguiente elemento de la 
-                                // lista
-                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
+                            // Quitamos los ceros sobrantes y almacenamos el número
+                            // posición de corte anterior
+                            valor.set(pos2, numero1.stripTrailingZeros().toString());
 
-                                // Buscamos la operación posterior y nos posicionamos
-                                // en el elemento anterior
-                                pos3 = pos1;
+                            // Limpiamos los valores de la lista entre la posición 
+                            // de corte anterior + 1 y la posición de corte posterior + 1
+                            // eliminando los valores de la lista que se han calculado
+                            // y guardando el resultado en la última posición tratada
+                            valor.subList(pos2 + 1, pos3 + 1).clear();
 
-                                // Convertimos los números de antes y despues de
-                                // la operación a BigDecimal y operamos con ellos
-                                numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.divide(new BigDecimal("100"), precision, RoundingMode.DOWN);
+                            // Ajustamos la lista si tuviese espacios vacios
+                            valor.trimToSize();
 
-                                break;
-                            }
-                            case "+": {
-                                // Buscamos el índice de la operación
-                                pos1 = valor.indexOf(operacion);
-
-                                // Buscamos la operación anterior y nos 
-                                // posicionamos en el siguiente elemento de la 
-                                // lista
-                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-
-                                // Buscamos la operación posterior y nos posicionamos
-                                // en el elemento anterior
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                                // Convertimos los números de antes y despues de
-                                // la operación a BigDecimal y operamos con ellos
-                                numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
-                                break;
-                            }
-                            case "-": {
-                                // Buscamos el índice de la operación
-                                pos1 = valor.indexOf(operacion);
-
-                                // Buscamos la operación anterior y nos 
-                                // posicionamos en el siguiente elemento de la 
-                                // lista                                
-                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-
-                                // Buscamos la operación posterior y nos posicionamos
-                                // en el elemento anterior                                
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                                // Convertimos los números de antes y despues de
-                                // la operación a BigDecimal y operamos con ellos                                
-                                numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
-                                break;
-                            }
-                            case "*": {
-                                // Buscamos el índice de la operación
-                                pos1 = valor.indexOf(operacion);
-
-                                // Buscamos la operación anterior y nos 
-                                // posicionamos en el siguiente elemento de la 
-                                // lista                                                                
-                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-
-                                // Buscamos la operación posterior y nos posicionamos
-                                // en el elemento anterior                                                                
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                                // Convertimos los números de antes y despues de
-                                // la operación a BigDecimal y operamos con ellos                                
-                                numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
-                                break;
-                            }
-                            case "/": {
-                                // Buscamos el índice de la operación
-                                pos1 = valor.indexOf(operacion);
-
-                                // Buscamos la operación anterior y nos 
-                                // posicionamos en el siguiente elemento de la 
-                                // lista                                                                                                
-                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-
-                                // Buscamos la operación posterior y nos posicionamos
-                                // en el elemento anterior                                                                                                
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                                // Convertimos los números de antes y despues de
-                                // la operación a BigDecimal y operamos con ellos                                                                
-                                numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), precision, RoundingMode.HALF_DOWN);
-                                break;
-                            }
-                            case "^": {
-                                // Buscamos el índice de la operación
-                                pos1 = valor.indexOf(operacion);
-
-                                // Buscamos la operación anterior y nos 
-                                // posicionamos en el siguiente elemento de la 
-                                // lista                                                                                                
-                                pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
-
-                                // Buscamos la operación posterior y nos posicionamos
-                                // en el elemento anterior                                                                                                
-                                pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
-
-                                // Convertimos los números de antes y despues de
-                                // la operación a BigDecimal y operamos con ellos                                                                
-                                numero1 = new BigDecimal(valor.get(pos2).toString());
-                                numero1 = numero1.pow(Integer.parseInt(valor.get(pos3).toString()));
-                                break;
-                            }                            
                         }
+                    } // Seguimos iterando encontremos la operación de la iteración
+                    // en la lista
+                    while (valor.contains(operacion));
+                }
+            } // Seguimos operando mientras haya operaciones
+            while (!Collections.disjoint(valor, Arrays.asList(operaciones)));
 
-                        // Quitamos los ceros sobrantes y almacenamos el número
-                        // posición de corte anterior
-                        valor.set(pos2, numero1.stripTrailingZeros().toString());
-
-                        // Limpiamos los valores de la lista entre la posición 
-                        // de corte anterior + 1 y la posición de corte posterior + 1
-                        // eliminando los valores de la lista que se han calculado
-                        // y guardando el resultado en la última posición tratada
-                        valor.subList(pos2 + 1, pos3 + 1).clear();
-
-                        // Ajustamos la lista si tuviese espacios vacios
-                        valor.trimToSize();
-
-                    }
-                } // Seguimos iterando encontremos la operación de la iteración
-                // en la lista
-                while (valor.contains(operacion));
-            }
-        } // Seguimos operando mientras haya operaciones
-        while (!Collections.disjoint(valor, Arrays.asList(operaciones)));
+        } catch (NumberFormatException | ArithmeticException e) {
+            mensaje = mensaje.concat(e.getMessage());
+        }
 
         // Dividimos el numero resultante entre 1 para ajustar la preción del
         // resultado
@@ -363,7 +391,7 @@ public class ParserCalculadora {
         numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.FLOOR);
 
         // Devolvemos el resultado
-        return numero1.stripTrailingZeros().toPlainString();
+        return new Resultado(numero1.stripTrailingZeros().toPlainString(), mensaje);
     }
 
     /**
@@ -383,15 +411,15 @@ public class ParserCalculadora {
 
         // Iteramos por la cadena
         for (int i = 0; i < cadena.length(); i++) {
-            
+
             // Comprobamos carácter a carácter si hay un símbolo menos
             if (cadena.charAt(i) == '-') {
-                
+
                 // Para que se trate de un símbolo de negativo, o bien es el 
                 // primero de la cadena de operaciones o esta precedido de una
                 // operación
                 if (i == 0 || Arrays.asList(signos).contains(String.valueOf(cadena.charAt(i - 1)))) {
-                    
+
                     // Definimos una variable que almacenará el tamaño de la cadena
                     // Si no se modifica y llegamos el final de la cadena en la
                     // siguiente iteración, es que es el último número de la
@@ -401,7 +429,7 @@ public class ParserCalculadora {
                     // Iteramos desde la posición del simbolo menos más uno hasta
                     // el fichal de la cadena, comprobando si hay alguna operación
                     for (int j = i + 1; j < cadena.length(); j++) {
-                        
+
                         // Si hay alguna operación almacenamos esta posición
                         // y dejamos de iterar, puesto que solo nos interesa
                         // la siguiente operación para delimintar el número
@@ -581,7 +609,7 @@ public class ParserCalculadora {
      * @param n Número al que calcular el factorial
      * @return Factorial del número introducido
      */
-    public static BigDecimal factorial(double n) {
+    private static BigDecimal factorial(double n) {
 
         // Inicializamos la variable de salida
         BigDecimal factorial = BigDecimal.ONE;
@@ -594,5 +622,86 @@ public class ParserCalculadora {
 
         // Devolvemos el resultado
         return factorial;
+    }
+
+    /**
+     * Método para comprobar si se se acepta la pulsación de un botón de
+     * operación en la calculadora, basado en las operaciones anteriores
+     *
+     * @param parent Objeto padre donde estén situados los botones de la
+     * calculadora
+     * @param resultado Valor de la etiqueta de resultado de la calculadora
+     * @param historial Valor de la etiqueta de historial de la calculadora
+     * @param operacion Tipo de operación a verificar
+     * @return Verdadero si se puede incluir la operación, falso si no se puede
+     */
+    public static boolean verificarOperacion(Object parent, String resultado, String historial, String operacion) {
+
+        // Definimos una constante para almacenar la expresión regular
+        // para verificar la entrada de números
+        final String NUMERO = "[-+]?\\d*\\.?\\d+";
+
+        // Definimos e inicializamos la variable de resultado
+        boolean salida = false;
+
+        // Limpiamos los espacios en blanco para facilitar la detección de 
+        // operaciones
+        resultado = resultado.replace(" ", "");
+
+        // Verificamos el tipo de operación
+        switch (operacion) {
+
+            // Si es una operación de suma
+            case "+":
+            // Si es una operación de resta
+            case "-":
+            // Si es una operación de multiplicación
+            case "*":
+            // Si es una operación de división
+            case "/":
+            // Si es una potencia
+            case "^":
+            // Si es una potencia de 2           
+            case "^2":
+            // Si es el tanto por ciento
+            case "%": {
+
+                // Comprobamos si el texto en el cuadro de resultado es un número                
+                if (resultado.matches(NUMERO)) {
+
+                    // Si lo es, se puede poner el tanto por ciento
+                    salida = true;
+                } else {
+
+                    // Si no es un número, comprobamos si la última operación
+                    // introducida es un paréntesis de cierre
+                    if (historial.length() > 0 && historial.charAt(historial.length() - 1) == ')') {
+
+                        // Si es así podemos poner el tanto por ciento
+                        salida = true;
+                    }
+                }
+                break;
+            }
+            // Si es e elevado a x
+            case "e^":
+            // Si el botón de número negativos            
+            case "neg": {
+                // Comprobamos que lo que hay en el cuadro de texto de resultados
+                // es un número
+                if (resultado.matches(NUMERO)) {
+                    salida = true;
+                }
+                break;
+            }
+        }
+
+        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
+        // de teclado
+        ((JFrame) parent).requestFocus();
+
+        // Devolvemos el resultado
+        return salida;
+
     }
 }
