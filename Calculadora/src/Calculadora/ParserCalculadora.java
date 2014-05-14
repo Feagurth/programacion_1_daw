@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * Clase para realizar las operaciones de una calculadora científica usando
@@ -60,7 +58,7 @@ public class ParserCalculadora {
      * @param cadena Cadena con las operaciones a realizar
      * @return Cadena con el resultado de las operaciones
      */
-    public static Resultado parser(String cadena) {
+    public static Solucion parser(String cadena) {
 
         // Variable para almacenar algún mensaje al usuario
         String mensaje = "";
@@ -148,7 +146,7 @@ public class ParserCalculadora {
                                     // transformamos la lista de valores a una cadena
                                     // y la volvemos a pasar por el parser de forma
                                     // recursiva. Almacenamos el resultado
-                                    numero1 = new BigDecimal(parser(listaACadena(valor.subList(pos2 + 1, pos3))).resultado);
+                                    numero1 = new BigDecimal(parser(listaACadena(valor.subList(pos2 + 1, pos3))).getResultado());
 
                                     break;
                                 }
@@ -200,6 +198,11 @@ public class ParserCalculadora {
                                         }
                                     }
 
+                                    // Redondeamos el resultado
+                                    if (!BigDecimal.ZERO.equals(numero1)) {
+                                        numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.HALF_DOWN);
+                                    }
+
                                     break;
                                 }
                                 case "T":
@@ -240,6 +243,11 @@ public class ParserCalculadora {
 
                                     // Almacenamos el resultado
                                     numero1 = new BigDecimal(numero);
+
+                                    // Redondeamos el resultado
+                                    if (!BigDecimal.ZERO.equals(numero1)) {
+                                        numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.HALF_DOWN);
+                                    }
 
                                     break;
                                 }
@@ -362,7 +370,7 @@ public class ParserCalculadora {
 
                             // Quitamos los ceros sobrantes y almacenamos el número
                             // posición de corte anterior
-                            valor.set(pos2, numero1.stripTrailingZeros().toString());
+                            valor.set(pos2, numero1.toString());
 
                             // Limpiamos los valores de la lista entre la posición 
                             // de corte anterior + 1 y la posición de corte posterior + 1
@@ -385,13 +393,23 @@ public class ParserCalculadora {
             mensaje = mensaje.concat(e.getMessage());
         }
 
-        // Dividimos el numero resultante entre 1 para ajustar la preción del
-        // resultado
+        // Almacenamos el resultado
         numero1 = new BigDecimal(valor.get(0).toString());
-        numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.FLOOR);
 
-        // Devolvemos el resultado
-        return new Resultado(numero1.stripTrailingZeros().toPlainString(), mensaje);
+        // Creamos un nuevo objeto salida
+        Solucion salida = new Solucion();
+
+        // Le asignamos el mensaje y el resultado
+        salida.setMensaje(mensaje);
+
+        if (!BigDecimal.ZERO.equals(numero1)) {
+            salida.setResultado(numero1.stripTrailingZeros().toPlainString());
+        } else {
+            salida.setResultado("0");
+        }
+
+        // Y devolvemos la solución
+        return salida;
     }
 
     /**
@@ -622,86 +640,5 @@ public class ParserCalculadora {
 
         // Devolvemos el resultado
         return factorial;
-    }
-
-    /**
-     * Método para comprobar si se se acepta la pulsación de un botón de
-     * operación en la calculadora, basado en las operaciones anteriores
-     *
-     * @param parent Objeto padre donde estén situados los botones de la
-     * calculadora
-     * @param resultado Valor de la etiqueta de resultado de la calculadora
-     * @param historial Valor de la etiqueta de historial de la calculadora
-     * @param operacion Tipo de operación a verificar
-     * @return Verdadero si se puede incluir la operación, falso si no se puede
-     */
-    public static boolean verificarOperacion(Object parent, String resultado, String historial, String operacion) {
-
-        // Definimos una constante para almacenar la expresión regular
-        // para verificar la entrada de números
-        final String NUMERO = "[-+]?\\d*\\.?\\d+";
-
-        // Definimos e inicializamos la variable de resultado
-        boolean salida = false;
-
-        // Limpiamos los espacios en blanco para facilitar la detección de 
-        // operaciones
-        resultado = resultado.replace(" ", "");
-
-        // Verificamos el tipo de operación
-        switch (operacion) {
-
-            // Si es una operación de suma
-            case "+":
-            // Si es una operación de resta
-            case "-":
-            // Si es una operación de multiplicación
-            case "*":
-            // Si es una operación de división
-            case "/":
-            // Si es una potencia
-            case "^":
-            // Si es una potencia de 2           
-            case "^2":
-            // Si es el tanto por ciento
-            case "%": {
-
-                // Comprobamos si el texto en el cuadro de resultado es un número                
-                if (resultado.matches(NUMERO)) {
-
-                    // Si lo es, se puede poner el tanto por ciento
-                    salida = true;
-                } else {
-
-                    // Si no es un número, comprobamos si la última operación
-                    // introducida es un paréntesis de cierre
-                    if (historial.length() > 0 && historial.charAt(historial.length() - 1) == ')') {
-
-                        // Si es así podemos poner el tanto por ciento
-                        salida = true;
-                    }
-                }
-                break;
-            }
-            // Si es e elevado a x
-            case "e^":
-            // Si el botón de número negativos            
-            case "neg": {
-                // Comprobamos que lo que hay en el cuadro de texto de resultados
-                // es un número
-                if (resultado.matches(NUMERO)) {
-                    salida = true;
-                }
-                break;
-            }
-        }
-
-        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
-        // de teclado
-        ((JFrame) parent).requestFocus();
-
-        // Devolvemos el resultado
-        return salida;
-
     }
 }
