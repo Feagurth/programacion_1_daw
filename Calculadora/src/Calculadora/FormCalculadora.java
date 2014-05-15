@@ -16,12 +16,15 @@
  */
 package Calculadora;
 
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
@@ -50,11 +53,12 @@ public class FormCalculadora extends javax.swing.JFrame {
         // Eliminamos el gestor de capas que haya predefinido
         this.setLayout(null);
 
-        // Creamos un objeto Icon a partir de la imagen guardada en el proyecto
-        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png"));
-
-        // Asignamos el icono creado al JFrame
-        this.setIconImage(icon);
+        // Asignamos un icono al JFrame
+        try {
+            this.setIconImage(ImageIO.read(new File("./resources/icon.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(FormCalculadora.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // Le permitimos que coja el fojo
         this.setFocusable(true);
@@ -87,7 +91,6 @@ public class FormCalculadora extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtHistorial = new javax.swing.JLabel();
@@ -132,17 +135,6 @@ public class FormCalculadora extends javax.swing.JFrame {
         btnMenos = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -903,7 +895,7 @@ public class FormCalculadora extends javax.swing.JFrame {
         if (nuevoNumero) {
             numeroPulsado("Pi");
         }
-        
+
         this.requestFocus();
 
     }//GEN-LAST:event_btnPiActionPerformed
@@ -918,7 +910,7 @@ public class FormCalculadora extends javax.swing.JFrame {
         if (nuevoNumero) {
             numeroPulsado("e");
         }
-        
+
         this.requestFocus();
     }//GEN-LAST:event_btnEActionPerformed
 
@@ -1031,7 +1023,7 @@ public class FormCalculadora extends javax.swing.JFrame {
         if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "e^")) {
             {
                 // Pasamos el valor del cuadro de texto resultado a un variable BigDecimal
-                BigDecimal valor = new BigDecimal(Math.E);
+                BigDecimal valor = BigDecimal.valueOf(Math.E);
 
                 // Multiplicamos su valor por -1
                 valor = valor.pow(Integer.parseInt(txtResultado.getText()));
@@ -1117,7 +1109,6 @@ public class FormCalculadora extends javax.swing.JFrame {
     private javax.swing.JButton btnXCuadrado;
     private javax.swing.JButton btnYElevadoX;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1147,7 +1138,6 @@ public class FormCalculadora extends javax.swing.JFrame {
         } else {
             // Si lo hay limpiamos y mostramos el mensaje
             txtResultado.setText("");
-            txtHistorial.setText("");
             nuevaOperacion = true;
             nuevoNumero = true;
             return resultado.getMensaje();
@@ -1412,6 +1402,8 @@ public class FormCalculadora extends javax.swing.JFrame {
                 }
                 break;
             }
+            default: {
+            }
         }
 
         // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
@@ -1482,11 +1474,10 @@ public class FormCalculadora extends javax.swing.JFrame {
         if (count != count2) {
             salida = false;
         }
-        
+
         // Comprobamos si el último caracter del historial es una de las siguienntes
-        String[] verificar = new String[]{"(", "+", "*", "*", "/", "^"};        
-        if(comprobarUltimaOperacion(historial, verificar))
-        {
+        String[] verificar = new String[]{"(", "+", "*", "*", "/", "^"};
+        if (comprobarUltimaOperacion(historial, verificar)) {
             // Si es así, no está bien formada
             salida = false;
         }
@@ -1500,6 +1491,11 @@ public class FormCalculadora extends javax.swing.JFrame {
      */
     public class ControlTeclado implements KeyListener {
 
+        /**
+         * Método para capturar eventos de teclado
+         *
+         * @param e Evento
+         */
         @Override
         public void keyTyped(KeyEvent e) {
 
@@ -1587,10 +1583,14 @@ public class FormCalculadora extends javax.swing.JFrame {
                     }
                     break;
                 }
-
             }
         }
 
+        /**
+         * Método para capturar eventos de teclado
+         *
+         * @param e Evento
+         */
         @Override
         public void keyReleased(KeyEvent e) {
 
