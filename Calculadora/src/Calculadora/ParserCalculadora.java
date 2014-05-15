@@ -146,7 +146,10 @@ public class ParserCalculadora {
                                     // transformamos la lista de valores a una cadena
                                     // y la volvemos a pasar por el parser de forma
                                     // recursiva. Almacenamos el resultado
-                                    numero1 = new BigDecimal(parser(listaACadena(valor.subList(pos2 + 1, pos3))).getResultado());
+                                    Solucion retorno = parser(listaACadena(valor.subList(pos2 + 1, pos3)));
+
+                                    numero1 = new BigDecimal(retorno.getResultado());
+                                    mensaje = retorno.getMensaje();
 
                                     break;
                                 }
@@ -197,8 +200,7 @@ public class ParserCalculadora {
                                             numero1 = new BigDecimal(Math.pow((Double.valueOf(valor.get(pos3).toString())), 2));
                                             break;
                                         }
-                                        case "I":
-                                        {
+                                        case "I": {
                                             numero1 = BigDecimal.ONE.divide(new BigDecimal(valor.get(pos3).toString()), precision, RoundingMode.HALF_DOWN);
                                             break;
                                         }
@@ -370,12 +372,12 @@ public class ParserCalculadora {
                                     // la operación a BigDecimal y operamos con ellos                                                                
                                     numero1 = new BigDecimal(valor.get(pos2).toString());
                                     numero1 = numero1.pow(Integer.parseInt(valor.get(pos3).toString()));
-                                    
+
                                     // Redondeamos el resultado
                                     if (!BigDecimal.ZERO.equals(numero1)) {
                                         numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.HALF_DOWN);
                                     }
-                                    
+
                                     break;
                                 }
                             }
@@ -401,18 +403,20 @@ public class ParserCalculadora {
             } // Seguimos operando mientras haya operaciones
             while (!Collections.disjoint(valor, Arrays.asList(operaciones)));
 
+            // Almacenamos el resultado
+            numero1 = new BigDecimal(valor.get(0).toString());
+
         } catch (NumberFormatException | ArithmeticException e) {
             mensaje = mensaje.concat(e.getMessage());
         }
-
-        // Almacenamos el resultado
-        numero1 = new BigDecimal(valor.get(0).toString());
 
         // Creamos un nuevo objeto salida
         Solucion salida = new Solucion();
 
         // Le asignamos el mensaje y el resultado
-        salida.setMensaje(mensaje);
+        if (!mensaje.equals("")){
+            salida.setMensaje(mensaje);
+        }
 
         if (!BigDecimal.ZERO.equals(numero1)) {
             salida.setResultado(numero1.stripTrailingZeros().toPlainString());
