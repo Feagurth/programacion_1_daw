@@ -73,7 +73,7 @@ public class ParserCalculadora {
 
         // Operaciones admitidas por el parseador
         // Las operaciones van ordenados por jerarquía de operaciones
-        String operaciones[] = {"N", "(", ")", "!", "A", "Q", "l", "L", "S", "C", "T", "^", "%", "*", "/", "+", "-"};
+        String operaciones[] = {"N", "(", ")", "!", "A", "Q", "l", "L", "S", "C", "T", "I", "^", "%", "*", "/", "+", "-"};
 
         // Eliminamos los espacios en blanco
         cadena = cadena.replace(" ", "");
@@ -150,6 +150,7 @@ public class ParserCalculadora {
 
                                     break;
                                 }
+                                case "I":
                                 case "A":
                                 case "l":
                                 case "L":
@@ -194,6 +195,11 @@ public class ParserCalculadora {
                                         }
                                         case "s": {
                                             numero1 = new BigDecimal(Math.pow((Double.valueOf(valor.get(pos3).toString())), 2));
+                                            break;
+                                        }
+                                        case "I":
+                                        {
+                                            numero1 = BigDecimal.ONE.divide(new BigDecimal(valor.get(pos3).toString()), precision, RoundingMode.HALF_DOWN);
                                             break;
                                         }
                                     }
@@ -364,6 +370,12 @@ public class ParserCalculadora {
                                     // la operación a BigDecimal y operamos con ellos                                                                
                                     numero1 = new BigDecimal(valor.get(pos2).toString());
                                     numero1 = numero1.pow(Integer.parseInt(valor.get(pos3).toString()));
+                                    
+                                    // Redondeamos el resultado
+                                    if (!BigDecimal.ZERO.equals(numero1)) {
+                                        numero1 = numero1.divide(BigDecimal.ONE, precision, RoundingMode.HALF_DOWN);
+                                    }
+                                    
                                     break;
                                 }
                             }
@@ -425,7 +437,7 @@ public class ParserCalculadora {
 
         // Creamos un array con los posibles valores de operaciones que existen 
         // en la calculadora a excepción del cierre de paréntesis
-        String signos[] = {"N", "(", "!", "A", "Q", "l", "L", "S", "C", "T", "^", "%", "*", "/", "+", "-"};
+        String signos[] = {"N", "(", "!", "A", "Q", "l", "L", "S", "C", "T", "I", "^", "%", "*", "/", "+", "-"};
 
         // Iteramos por la cadena
         for (int i = 0; i < cadena.length(); i++) {
@@ -616,6 +628,7 @@ public class ParserCalculadora {
         salida = salida.replace("Ln", "l");
         salida = salida.replace("Log", "L");
         salida = salida.replace("Abs", "A");
+        salida = salida.replace("Inv", "I");
 
         // Devolvemos el resultado
         return salida;

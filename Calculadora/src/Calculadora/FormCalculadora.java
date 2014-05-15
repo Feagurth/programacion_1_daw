@@ -33,8 +33,10 @@ public class FormCalculadora extends javax.swing.JFrame {
 
     // Variables de estado para comprobar si se introduce una nueva operación
     // o un nuevo número
-    private boolean nuevoNumero = false;
+    private boolean nuevoNumero = true;
     private boolean nuevaOperacion = false;
+
+    private final int PRECISION = 15;
 
     /**
      * Crea un nuevo formulario FormCalculadora
@@ -43,7 +45,7 @@ public class FormCalculadora extends javax.swing.JFrame {
         initComponents();
 
         // Asignamos una precisión específica a las divisiones de la calculadora
-        ParserCalculadora.setPrecision(15);
+        ParserCalculadora.setPrecision(PRECISION);
 
         // Eliminamos el gestor de capas que haya predefinido
         this.setLayout(null);
@@ -147,9 +149,11 @@ public class FormCalculadora extends javax.swing.JFrame {
 
         txtResultado.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         txtResultado.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        txtResultado.setAutoscrolls(true);
 
         txtHistorial.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtHistorial.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        txtHistorial.setAutoscrolls(true);
         txtHistorial.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         txtHistorial.setMinimumSize(new java.awt.Dimension(0, 550));
 
@@ -612,7 +616,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnFactorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorizarActionPerformed
-        operacionPulsada("Fact");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Fact")) {
+            operacionPulsada("Fact");
+        }
     }//GEN-LAST:event_btnFactorizarActionPerformed
 
     /**
@@ -621,7 +627,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnRaizCuadradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaizCuadradaActionPerformed
-        operacionPulsada("Sqrt");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Sqrt")) {
+            operacionPulsada("Sqrt");
+        }
     }//GEN-LAST:event_btnRaizCuadradaActionPerformed
 
     /**
@@ -630,7 +638,7 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPorcentajeActionPerformed
-        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "%")) {
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "%") && !nuevaOperacion) {
             operacionPulsada("%");
         }
     }//GEN-LAST:event_btnPorcentajeActionPerformed
@@ -643,7 +651,7 @@ public class FormCalculadora extends javax.swing.JFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // Reiniciamos las variables de estado y los cuadros de texto a su estado
         // original
-        nuevoNumero = false;
+        nuevoNumero = true;
         nuevaOperacion = true;
         txtHistorial.setText("");
         txtResultado.setText("");
@@ -846,18 +854,19 @@ public class FormCalculadora extends javax.swing.JFrame {
 
         if (!nuevaOperacion) {
 
-        //TODO: Realizar codigo comprobar que es una cadena de operaciones válidas (paréntesis cerrados y demás zarandajas)
-            // Concatenamos al historial el valor del campo resultado
-            txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
+            if (verficicarFormatoCalculo(txtHistorial.getText(), txtResultado.getText())) {
+                // Concatenamos al historial el valor del campo resultado
+                txtHistorial.setText(txtHistorial.getText() + txtResultado.getText());
 
-        // Enviamos el historial conteniendo la cadena de operaciones a la 
-            // función operar y asignamos el resultado a cuadro de texto resultado
-            txtResultado.setText(operar(txtHistorial.getText()));
+                // Enviamos el historial conteniendo la cadena de operaciones a la 
+                // función operar y asignamos el resultado a cuadro de texto resultado
+                txtResultado.setText(operar(txtHistorial.getText()));
 
-        // Lo siguiente que se introduzca en la calculadora será una nueva 
-            // operación o un nuevo número
-            nuevoNumero = true;
-            nuevaOperacion = true;
+                // Lo siguiente que se introduzca en la calculadora será una nueva 
+                // operación o un nuevo número
+                nuevoNumero = true;
+                nuevaOperacion = true;
+            }
         }
 
         // Pasamos el foco al JFrame
@@ -870,7 +879,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnParentesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParentesisActionPerformed
-        operacionPulsada("(");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "(")) {
+            operacionPulsada("(");
+        }
     }//GEN-LAST:event_btnParentesisActionPerformed
 
     /**
@@ -908,8 +919,6 @@ public class FormCalculadora extends javax.swing.JFrame {
         if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Sin")) {
             operacionPulsada("Sin");
         }
-
-
     }//GEN-LAST:event_btnSenoActionPerformed
 
     /**
@@ -918,7 +927,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnCosenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCosenoActionPerformed
-        operacionPulsada("Cos");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Cos")) {
+            operacionPulsada("Cos");
+        }
     }//GEN-LAST:event_btnCosenoActionPerformed
 
     /**
@@ -927,7 +938,10 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnTangenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTangenteActionPerformed
-        operacionPulsada("Tan");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Tan")) {
+            operacionPulsada("Tan");
+        }
+
     }//GEN-LAST:event_btnTangenteActionPerformed
 
     /**
@@ -936,7 +950,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnLogNeperianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogNeperianoActionPerformed
-        operacionPulsada("Ln");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Ln")) {
+            operacionPulsada("Ln");
+        }
     }//GEN-LAST:event_btnLogNeperianoActionPerformed
 
     /**
@@ -945,7 +961,9 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnLogaritmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogaritmoActionPerformed
-        operacionPulsada("Log");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Log")) {
+            operacionPulsada("Log");
+        }
     }//GEN-LAST:event_btnLogaritmoActionPerformed
 
     /**
@@ -965,20 +983,38 @@ public class FormCalculadora extends javax.swing.JFrame {
      * @param evt Evento
      */
     private void btnInversaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInversaActionPerformed
-        // TODO add your handling code here:
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Inv")) {
+            operacionPulsada("Inv");
+        }
     }//GEN-LAST:event_btnInversaActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de elevando al cuadrado
+     *
+     * @param evt Evento
+     */
     private void btnYElevadoXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYElevadoXActionPerformed
         if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "^")) {
             operacionPulsada("^");
         }
-
     }//GEN-LAST:event_btnYElevadoXActionPerformed
 
+    /**
+     * Método para la pulsación del botón de valor absoluto
+     *
+     * @param evt Evento
+     */
     private void btnValorAbsolutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValorAbsolutoActionPerformed
-        operacionPulsada("Abs");
+        if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "Abs")) {
+            operacionPulsada("Abs");
+        }
     }//GEN-LAST:event_btnValorAbsolutoActionPerformed
 
+    /**
+     * Método para la pulsación de e elevado a x
+     *
+     * @param evt Evento
+     */
     private void btnEElevadoXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEElevadoXActionPerformed
         if (verificarOperacion(this, txtResultado.getText(), txtHistorial.getText(), "e^")) {
             {
@@ -987,13 +1023,19 @@ public class FormCalculadora extends javax.swing.JFrame {
 
                 // Multiplicamos su valor por -1
                 valor = valor.pow(Integer.parseInt(txtResultado.getText()));
-                valor = valor.divide(BigDecimal.ONE, 15, RoundingMode.DOWN);
+                valor = valor.divide(BigDecimal.ONE, PRECISION, RoundingMode.DOWN);
+
+                if (!BigDecimal.ZERO.equals(valor)) {
+
+                    txtResultado.setText(valor.stripTrailingZeros().toPlainString());
+                } else {
+                    txtResultado.setText("0");
+                }
 
                 // Guardamos el resultado en el cuadro de texto correspondiente
                 txtResultado.setText(valor.toString());
             }
         }
-
     }//GEN-LAST:event_btnEElevadoXActionPerformed
 
     /**
@@ -1158,6 +1200,7 @@ public class FormCalculadora extends javax.swing.JFrame {
                 }
                 break;
             }
+            case "Inv":
             case "Abs":
             case "Sqr":
             case "Ln":
@@ -1246,7 +1289,200 @@ public class FormCalculadora extends javax.swing.JFrame {
     }
 
     /**
-     * Claes para capturar los eventos de teclado al pulsar teclas
+     * Método para comprobar si se se acepta la pulsación de un botón de
+     * operación en la calculadora, basado en las operaciones anteriores
+     *
+     * @param parent Objeto padre donde estén situados los botones de la
+     * calculadora
+     * @param resultado Valor de la etiqueta de resultado de la calculadora
+     * @param historial Valor de la etiqueta de historial de la calculadora
+     * @param operacion Tipo de operación a verificar
+     * @return Verdadero si se puede incluir la operación, falso si no se puede
+     */
+    private boolean verificarOperacion(Object parent, String resultado, String historial, String operacion) {
+
+        // Definimos una constante para almacenar la expresión regular
+        // para verificar la entrada de números
+        final String NUMERO = "[-+]?\\d*\\.?\\d+";
+
+        // Definimos e inicializamos la variable de resultado
+        boolean salida = false;
+
+        // Limpiamos los espacios en blanco para facilitar la detección de 
+        // operaciones
+        resultado = resultado.replace(" ", "");
+
+        // Verificamos el tipo de operación
+        switch (operacion) {
+
+            // Si es una operación de suma
+            case "+":
+            // Si es una operación de resta
+            case "-":
+            // Si es una operación de multiplicación
+            case "*":
+            // Si es una operación de división
+            case "/": {
+
+                // Comprobamos si el texto en el cuadro de resultado es un número                
+                if (resultado.matches(NUMERO)) {
+
+                    // Si lo es, se puede poner el tanto por ciento
+                    salida = true;
+                } else {
+
+                    // Si no es un número, comprobamos si la última operación
+                    // introducida es un paréntesis de cierre
+                    if (comprobarUltimaOperacion(historial, new String[]{")"})) {
+
+                        // Si es así podemos poner el tanto por ciento
+                        salida = true;
+                    }
+                }
+                break;
+            }
+            // Si es una potencia
+            case "^":
+            // Si es una potencia de 2           
+            case "^2":
+            // Si es el tanto por ciento
+            case "%": {
+                // Comprobamos si el texto en el cuadro de resultado es un número                
+                if (resultado.matches(NUMERO) && !nuevaOperacion) {
+
+                    // Si lo es, se puede poner el tanto por ciento
+                    salida = true;
+                } else {
+
+                    // Si no es un número, comprobamos si la última operación
+                    // introducida es un paréntesis de cierre
+                    if (comprobarUltimaOperacion(historial, new String[]{")"})) {
+
+                        // Si es así podemos poner el tanto por ciento
+                        salida = true;
+                    }
+                }
+                break;
+            }
+
+            case "Abs":
+            case "(":
+            case "Inv":
+            case "Log":
+            case "Ln":
+            case "Sqrt":
+            case "Fact":
+            case "Tan":
+            case "Cos":
+            case "Sin": {
+                if (nuevaOperacion) {
+                    salida = true;
+                } else if (resultado.equals("")) {
+                    salida = true;
+                }
+
+                String[] verificar = new String[]{"(", "+", "*", "*", "/", "^"};
+                if (comprobarUltimaOperacion(historial, verificar)) {
+                    salida = true;
+                }
+                break;
+            }
+            // Si es e elevado a x
+            case "e^":
+            // Si el botón de número negativos            
+            case "neg": {
+                // Comprobamos que lo que hay en el cuadro de texto de resultados
+                // es un número
+                if (resultado.matches(NUMERO) && !nuevaOperacion) {
+                    salida = true;
+                }
+                break;
+            }
+        }
+
+        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
+        // de teclado
+        ((JFrame) parent).requestFocus();
+
+        // Devolvemos el resultado
+        return salida;
+
+    }
+
+    /**
+     * Método para verificar si la cadena contiene como último valor una de las
+     * operaciones a verificar
+     *
+     * @param cadena Cadena con texto
+     * @param operaciones Operaciones a verificar
+     * @return Verdadero si contiene alguna operación, si no falso
+     */
+    private boolean comprobarUltimaOperacion(String cadena, String[] operaciones) {
+        boolean salida = false;
+
+        // Quitamos los espacios para facilitar la detección
+        cadena = cadena.replace(" ", "");
+
+        // Comprobamos si la cadena tiene algún caracter
+        if (cadena.length() > 0) {
+            // Iteramos por las operaciones a verificar
+            for (String operacion : operaciones) {
+
+                // Si el último caracter de la cadena es igual a alguna de 
+                // las operaciones cambiamos la variable de salida a verdadero
+                // y salimos del bucle
+                if (cadena.charAt(cadena.length() - 1) == operacion.charAt(0)) {
+                    salida = true;
+                    break;
+                }
+
+            }
+        }
+
+        // Devolvemos el resultado
+        return salida;
+
+    }
+
+    /**
+     * Método que nos permite verificar el formato de las instrucciones a
+     * calcular
+     *
+     * @param historial Texto del historial de la calculadora
+     * @param resultado Texto del resultaod de la calculadora
+     * @return Verdadero si es una operación realizable, false si no lo es
+     */
+    private boolean verficicarFormatoCalculo(String historial, String resultado) {
+
+        boolean salida = true;
+
+        historial = historial.concat(resultado);
+
+        // Contamos el número de paréntesis abiertos y cerrados que 
+        // tenemos en el historial
+        int count = historial.length() - historial.replace("(", "").length();
+        int count2 = historial.length() - historial.replace(")", "").length();
+
+        // Si tenemos cantidad distinta, es que no todos los paréntesis están
+        // cerrados
+        if (count != count2) {
+            salida = false;
+        }
+        
+        // Comprobamos si el último caracter del historial es una de las siguienntes
+        String[] verificar = new String[]{"(", "+", "*", "*", "/", "^"};        
+        if(comprobarUltimaOperacion(historial, verificar))
+        {
+            // Si es así, no está bien formada
+            salida = false;
+        }
+
+        // Devolvemos el resultado
+        return salida;
+    }
+
+    /**
+     * Clase para capturar los eventos de teclado al pulsar teclas
      */
     public class ControlTeclado implements KeyListener {
 
@@ -1345,132 +1581,6 @@ public class FormCalculadora extends javax.swing.JFrame {
         public void keyReleased(KeyEvent e) {
 
         }
-    }
-
-    /**
-     * Método para comprobar si se se acepta la pulsación de un botón de
-     * operación en la calculadora, basado en las operaciones anteriores
-     *
-     * @param parent Objeto padre donde estén situados los botones de la
-     * calculadora
-     * @param resultado Valor de la etiqueta de resultado de la calculadora
-     * @param historial Valor de la etiqueta de historial de la calculadora
-     * @param operacion Tipo de operación a verificar
-     * @return Verdadero si se puede incluir la operación, falso si no se puede
-     */
-    private boolean verificarOperacion(Object parent, String resultado, String historial, String operacion) {
-
-        // Definimos una constante para almacenar la expresión regular
-        // para verificar la entrada de números
-        final String NUMERO = "[-+]?\\d*\\.?\\d+";
-
-        // Definimos e inicializamos la variable de resultado
-        boolean salida = false;
-
-        // Limpiamos los espacios en blanco para facilitar la detección de 
-        // operaciones
-        resultado = resultado.replace(" ", "");
-
-        // Verificamos el tipo de operación
-        switch (operacion) {
-
-            // Si es una operación de suma
-            case "+":
-            // Si es una operación de resta
-            case "-":
-            // Si es una operación de multiplicación
-            case "*":
-            // Si es una operación de división
-            case "/":
-            // Si es una potencia
-            case "^":
-            // Si es una potencia de 2           
-            case "^2":
-            // Si es el tanto por ciento
-            case "%": {
-
-                // Comprobamos si el texto en el cuadro de resultado es un número                
-                if (resultado.matches(NUMERO)) {
-
-                    // Si lo es, se puede poner el tanto por ciento
-                    salida = true;
-                } else {
-
-                    // Si no es un número, comprobamos si la última operación
-                    // introducida es un paréntesis de cierre
-                    if (comprobarUltimaOperacion(historial, new String[]{")"})) {
-
-                        // Si es así podemos poner el tanto por ciento
-                        salida = true;
-                    }
-                }
-                break;
-            }
-            case "Sin": {
-                if (resultado.equals("")) {
-                    salida = true;
-                }
-
-                String[] verificar = new String[]{"(", "+", "*", "*", "/", "^"};
-                if (comprobarUltimaOperacion(historial, verificar)) {
-
-                }
-            }
-            // Si es e elevado a x
-            case "e^":
-            // Si el botón de número negativos            
-            case "neg": {
-                // Comprobamos que lo que hay en el cuadro de texto de resultados
-                // es un número
-                if (resultado.matches(NUMERO)) {
-                    salida = true;
-                }
-                break;
-            }
-        }
-
-        // Hacemos que el Jpanel tenga el foto para poder hacer saltar los eventos
-        // de teclado
-        ((JFrame) parent).requestFocus();
-
-        // Devolvemos el resultado
-        return salida;
-
-    }
-
-    /**
-     * Método para verificar si la cadena contiene como último valor una de las
-     * operaciones a verificar
-     *
-     * @param cadena Cadena con texto
-     * @param operaciones Operaciones a verificar
-     * @return Verdadero si contiene alguna operación, si no falso
-     */
-    private boolean comprobarUltimaOperacion(String cadena, String[] operaciones) {
-        boolean salida = false;
-
-        // Quitamos los espacios para facilitar la detección
-        cadena = cadena.replace(" ", "");
-
-        // Comprobamos si la cadena tiene algún caracter
-        if (cadena.length() > 0) {
-            // Iteramos por las operaciones a verificar
-            for (String operacion : operaciones) {
-
-                // Si el último caracter de la cadena es igual a alguna de 
-                // las operaciones cambiamos la variable de salida a verdadero
-                // y salimos del bucle
-                if (cadena.charAt(cadena.length() - 1) == operacion.charAt(0)) {
-                    salida = true;
-                    break;
-                }
-
-            }
-        }
-
-        // Devolvemos el resultado
-        return salida;
-
     }
 
 }
