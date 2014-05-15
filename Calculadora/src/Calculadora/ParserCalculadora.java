@@ -121,7 +121,6 @@ public class ParserCalculadora {
                                     numero1 = new BigDecimal(valor.get(pos3 - 1).toString());
                                     numero1 = numero1.multiply(new BigDecimal("-1"));
                                     break;
-
                                 }
 
                                 // Si la operación seleccionada es un paréntesis
