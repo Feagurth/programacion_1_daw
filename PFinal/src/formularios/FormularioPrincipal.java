@@ -36,6 +36,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btnAdd = new javax.swing.JButton();
         btnBrowse = new javax.swing.JButton();
+        btnInformes = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +51,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jToolBar1.setMinimumSize(new java.awt.Dimension(561, 319));
         jToolBar1.setPreferredSize(new java.awt.Dimension(561, 319));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book_add.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book_add.png"))); // NOI18N
         btnAdd.setText("Añadir");
         btnAdd.setFocusable(false);
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -62,7 +63,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnAdd);
 
-        btnBrowse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1399319676_library.png"))); // NOI18N
+        btnBrowse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/library.png"))); // NOI18N
         btnBrowse.setText("Biblioteca");
         btnBrowse.setFocusable(false);
         btnBrowse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -73,6 +74,13 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnBrowse);
+
+        btnInformes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/report.png"))); // NOI18N
+        btnInformes.setText("Informes");
+        btnInformes.setFocusable(false);
+        btnInformes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInformes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnInformes);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -96,7 +104,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
             .addComponent(jDesktopPane1)
         );
 
@@ -168,6 +176,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBrowse;
+    private javax.swing.JButton btnInformes;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

@@ -447,7 +447,7 @@ public class ParserCalculadora {
 
         // Verificamos que el resultado no sea cero
         if (!BigDecimal.ZERO.equals(numero1)) {
-            // Si nolo es, volcamos el resultado a al objeto de salida quitandole
+            // Si no lo es, volcamos el resultado a al objeto de salida quitandole
             // los ceros de más y pasandolo como cadena
             salida.setResultado(numero1.stripTrailingZeros().toPlainString());
         } else {

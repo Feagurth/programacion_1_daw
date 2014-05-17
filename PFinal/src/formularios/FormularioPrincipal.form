@@ -42,7 +42,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar1" max="32767" attributes="0"/>
+          <Component id="jToolBar1" pref="603" max="32767" attributes="0"/>
           <Component id="jDesktopPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -68,7 +68,7 @@
         <Component class="javax.swing.JButton" name="btnAdd">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/book_add.png"/>
+              <Image iconType="3" name="/images/book_add.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -82,7 +82,7 @@
         <Component class="javax.swing.JButton" name="btnBrowse">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/1399319676_library.png"/>
+              <Image iconType="3" name="/images/library.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Biblioteca"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -92,6 +92,17 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnInformes">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/report.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Informes"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
