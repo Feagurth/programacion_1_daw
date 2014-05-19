@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Trimestre.Tercero.Ejercicios;
+package RelacionesDeEjercicios.Relacion5;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -36,7 +36,7 @@ import javax.swing.JFrame;
  *
  * @author Luis Cabrerizo Gómez
  */
-public class EjercicioDeClase006 extends javax.swing.JFrame {
+public class Ejercicio007 extends javax.swing.JFrame {
 
     // Variables de estado para comprobar si se introduce una nueva operación
     // o un nuevo número
@@ -48,7 +48,7 @@ public class EjercicioDeClase006 extends javax.swing.JFrame {
     /**
      * Crea un nuevo formulario FormCalculadora
      */
-    public EjercicioDeClase006() {
+    public Ejercicio007() {
         initComponents();
 
         // Asignamos una precisión específica a las divisiones de la calculadora
@@ -61,7 +61,7 @@ public class EjercicioDeClase006 extends javax.swing.JFrame {
         try {
             this.setIconImage(ImageIO.read(new File("./resources/icon.png")));
         } catch (IOException ex) {
-            Logger.getLogger(EjercicioDeClase006.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ejercicio007.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Le permitimos que coja el fojo
@@ -1063,7 +1063,7 @@ public class EjercicioDeClase006 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EjercicioDeClase006.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ejercicio007.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1071,7 +1071,7 @@ public class EjercicioDeClase006 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new EjercicioDeClase006().setVisible(true);
+                new Ejercicio007().setVisible(true);
             }
         });
     }
