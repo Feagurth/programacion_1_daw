@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package formularios;
 
 import db.AccesoBaseDeDatos;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,14 +17,15 @@ import java.util.logging.Logger;
 public class FormularioAdd extends javax.swing.JInternalFrame {
 
     AccesoBaseDeDatos db;
-    
+
     /**
      * Creates new form FormularioAdd
      */
     public FormularioAdd() {
         initComponents();
+
         try {
-            db = new AccesoBaseDeDatos("root", "", "127.0.0.1:3306");
+            db = new AccesoBaseDeDatos("root", "", "127.0.0.1:3306", "libros");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -438,7 +437,7 @@ public class FormularioAdd extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarISBNActionPerformed
-        
+
     }//GEN-LAST:event_btnBuscarISBNActionPerformed
 
     private void btnBuscarISBN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarISBN1ActionPerformed
