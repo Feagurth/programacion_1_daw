@@ -5,10 +5,8 @@
  */
 package formularios;
 
-import db.AccesoBaseDeDatos;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import db.BaseDeDatos;
+import db.Resultado;
 
 /**
  *
@@ -16,19 +14,16 @@ import java.util.logging.Logger;
  */
 public class FormularioAdd extends javax.swing.JInternalFrame {
 
-    AccesoBaseDeDatos db;
-
+    BaseDeDatos baseDatos;
+    
     /**
      * Creates new form FormularioAdd
      */
     public FormularioAdd() {
         initComponents();
-
-        try {
-            db = new AccesoBaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        Resultado solucion = baseDatos.consultar(BaseDeDatos.TipoValidacion.SELECT_TODO_AUTORES);
+        
     }
 
     /**
@@ -445,7 +440,6 @@ public class FormularioAdd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarISBN1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
