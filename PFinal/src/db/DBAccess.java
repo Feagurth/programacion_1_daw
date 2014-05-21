@@ -122,7 +122,7 @@ class DBAccess {
             salida = 0;
             throw e;
         } finally {
-            instruccion.close();
+            instruccion.closeOnCompletion();
         }
 
         return salida;
@@ -139,7 +139,7 @@ class DBAccess {
             salida = null;
             throw e;
         } finally {
-            instruccion.close();
+            instruccion.closeOnCompletion();
         }
 
         return salida;

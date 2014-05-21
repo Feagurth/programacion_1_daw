@@ -5,6 +5,7 @@
  */
 package db;
 
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,33 +16,6 @@ import java.util.logging.Logger;
  */
 public class BaseDeDatos {
 
-    
-
-    /**
-     * Tipos de validaciones que se pueden llevar a cabo
-     */
-    public enum TipoValidacion {
-
-        /**
-         * Valor para cadena
-         */
-        SELECT_TODO_AUTORES("SELECT * FROM AUTORES"),
-        SELECT_TODO_ISBNAUTOR("SELECT * FROM ISBNAUTOR"),
-        SELECT_TODO_TITULOS("SELECT * FROM TITULOS"),
-        UPDATE_AUTORES("");
-        
-
-        private final String value;
-
-        public String getValue() {
-            return value;
-        }
-        
-        private TipoValidacion(String value) {
-            this.value = value;
-        }
-    }
-    
     DBAccess db;
 
     public BaseDeDatos(String usuario, String password, String db_path, String database) {
@@ -53,33 +27,173 @@ public class BaseDeDatos {
     }
 
     public Resultado actualizar(String sql) {
-        Resultado salida = new Resultado();
-        salida.setOperacionCorrecta(true);
-
+        Resultado salida;
         try {
-            salida.setOperacionCorrecta((db.update(sql) == 1));
+            salida = new Resultado((db.update(sql) == 1), "", null);
         } catch (SQLException e) {
-            salida.setMensaje(e.getMessage());
-            salida.setOperacionCorrecta(false);
+            salida = new Resultado(false, "", null);
         }
         return salida;
     }
-    
-    public Resultado consultar(TipoValidacion sentencia)
-    {
-        Resultado salida = new Resultado();
-        salida.setOperacionCorrecta(true);
-        
+
+    public Resultado actualizar(String[] columnas, String[] tablas, String[] condiciones, String[] valores) {
+
+        assert tablas != null;
+        assert valores != null;
+
+        String sql = "";
+
+        Resultado salida;
+
         try {
-            salida.setResultado(db.query(sentencia.getValue()));
-            
-        } catch (SQLException e) {
-            salida.setOperacionCorrecta(false);
-            salida.setMensaje(e.getMessage());
-            salida.setResultado(null);
+            // Comprobamos que el registro existe haciendo una select
+            salida = consultar(columnas, tablas, condiciones, null);
+
+            // Comprobamos si la operación se ha realizado correctamente
+            if (salida.isOperacionCorrecta()) {
+
+                ResultSetMetaData rsMetaData = salida.getResultado().getMetaData();
+
+                // Si existen resultados que concuerden con la consulta es una 
+                // actualización
+                if (salida.getResultado() != null){
+
+                    sql += "UPDATE";
+
+                    for (String tabla : tablas) {
+                        sql += " " + tabla + ", ";
+                    }
+
+                    sql = sql.substring(0, sql.length() - 2) + " SET ";
+
+                    int numberOfColumns = rsMetaData.getColumnCount();
+
+                    for (int j = 0; j < columnas.length; j++) {
+                        for (int i = 1; i <= numberOfColumns; i++) {
+                            if (rsMetaData.getColumnName(i).equals(columnas[j])) {
+                                switch (rsMetaData.getColumnType(i)) {
+                                    case 1: {
+                                        sql += columnas[j] + " = " + valores[j];
+                                        break;
+                                    }
+
+                                    case 12: {
+                                        sql += columnas[j] + " = '" + valores[j] + "'";
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (condiciones != null) {
+                        sql += " WHERE";
+                        for (String condicion : condiciones) {
+                            sql += " " + condicion + " AND";
+                        }
+
+                        sql = sql.substring(0, sql.length() - 4);
+                    }
+
+                    salida = new Resultado(db.update(sql) > 0, "", null);
+
+                } else {
+                    // Si no hay resultados es un insert
+
+                    sql += "INSERT INTO";
+
+                    for (String tabla : tablas) {
+                        sql += " " + tabla + ", ";
+                    }
+
+                    sql = sql.substring(0, sql.length() - 2) + " VALUES (";
+
+                    int numberOfColumns = rsMetaData.getColumnCount();
+
+                    for (int j = 0; j < columnas.length; j++) {
+                        for (int i = 1; i <= numberOfColumns; i++) {
+                            if (rsMetaData.getColumnName(i).equals(columnas[j])) {
+                                switch (rsMetaData.getColumnType(i)) {
+                                    case 1: {
+                                        sql += valores[j] + ", ";
+                                        break;
+                                    }
+
+                                    case 12: {
+                                        sql += "'" + valores[j] + "', ";
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    sql = sql.substring(0, sql.length() - 2);
+
+                    salida = new Resultado(db.update(sql) > 0, "", null);
+                }
+            } else {
+                salida = new Resultado(false, salida.getMensaje(), null);
+            }
+        } catch (SQLException ex) {
+            salida = new Resultado(false, ex.getMessage(), null);
         }
-        
-        return salida;    
+
+        return salida;
+    }
+
+    public Resultado consultar(String[] columnas, String[] tablas, String[] condiciones, String[] ordenacion) {
+        assert tablas != null;
+
+        Resultado salida;
+        String sql = "SELECT";
+
+        if (columnas == null) {
+            sql += " * ";
+        } else {
+            for (String columna : columnas) {
+                sql += " " + columna + ", ";
+            }
+
+            sql = sql.substring(0, sql.length() - 2);
+        }
+
+        sql += " FROM";
+
+        for (String tabla : tablas) {
+            sql += " " + tabla + ", ";
+        }
+
+        sql = sql.substring(0, sql.length() - 2);
+
+        if (condiciones != null) {
+            sql += " WHERE";
+
+            for (String condicion : condiciones) {
+                sql += " " + condicion + " AND";
+            }
+
+            sql = sql.substring(0, sql.length() - 4);
+        }
+
+        if (ordenacion != null) {
+            sql += " ORDER BY";
+
+            for (String orden : ordenacion) {
+                sql += " " + orden + " AND";
+            }
+
+            sql = sql.substring(0, sql.length() - 4);
+        }
+
+        try {
+            salida = new Resultado(true, "", db.query(sql));
+        } catch (SQLException ex) {
+            salida = new Resultado(false, ex.getMessage(), null);
+        }
+
+        return salida;
+
     }
 
 }

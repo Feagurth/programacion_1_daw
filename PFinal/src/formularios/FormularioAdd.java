@@ -7,6 +7,9 @@ package formularios;
 
 import db.BaseDeDatos;
 import db.Resultado;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,15 +18,108 @@ import db.Resultado;
 public class FormularioAdd extends javax.swing.JInternalFrame {
 
     BaseDeDatos baseDatos;
-    
+
     /**
      * Creates new form FormularioAdd
      */
     public FormularioAdd() {
         initComponents();
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-        Resultado solucion = baseDatos.consultar(BaseDeDatos.TipoValidacion.SELECT_TODO_AUTORES);
-        
+
+        Resultado solucion = baseDatos.consultar(
+                new String[]{"titulos.isbn", "titulos.titulo", "autores.primerNombre", "autores.apellidoPaterno"},
+                new String[]{"titulos", "autores", "isbnautor"},
+                new String[]{"autores.idAutor = isbnautor.idAutor", "titulos.isbn = isbnautor.isbn"},
+                new String[]{"titulos.isbn ASC"});
+
+        if (solucion.isOperacionCorrecta()) {
+            try {
+
+                while (solucion.getResultado().next()) {
+                    System.out.println(
+                            solucion.getResultado().getObject("isbn") + " - "
+                            + solucion.getResultado().getObject("titulo") + " - "
+                            + solucion.getResultado().getObject("primerNombre") + " "
+                            + solucion.getResultado().getObject("apellidopaterno"));
+
+                }
+
+                solucion.getResultado().close();
+            } catch (SQLException ex) {
+                Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        System.out.println("");
+        System.out.println("-----------------------------");
+        System.out.println("");
+
+        solucion = baseDatos.actualizar(
+                new String[]{"titulo"},
+                new String[]{"titulos"},
+                new String[]{"ISBN = 0131857576"},
+                new String[]{"Papafrita"});
+
+        if (solucion.isOperacionCorrecta()) {
+            solucion = baseDatos.consultar(
+                    new String[]{"titulos.isbn", "titulos.titulo", "autores.primerNombre", "autores.apellidoPaterno"},
+                    new String[]{"titulos", "autores", "isbnautor"},
+                    new String[]{"autores.idAutor = isbnautor.idAutor", "titulos.isbn = isbnautor.isbn"},
+                    new String[]{"titulos.isbn ASC"});
+
+            if (solucion.isOperacionCorrecta()) {
+                try {
+
+                    while (solucion.getResultado().next()) {
+                        System.out.println(
+                                solucion.getResultado().getObject("isbn") + " - "
+                                + solucion.getResultado().getObject("titulo") + " - "
+                                + solucion.getResultado().getObject("primerNombre") + " "
+                                + solucion.getResultado().getObject("apellidopaterno"));
+
+                    }
+
+                    solucion.getResultado().close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+
+        solucion = baseDatos.actualizar(
+                null,
+                new String[]{"Titulos"},
+                null,
+                new String[]{"9788434887138", "El pirata garrapata", "49", "SM", "2002"});
+
+        if (solucion.isOperacionCorrecta()) {
+            solucion = baseDatos.consultar(
+                    new String[]{"titulos.isbn", "titulos.titulo", "autores.primerNombre", "autores.apellidoPaterno"},
+                    new String[]{"titulos", "autores", "isbnautor"},
+                    new String[]{"autores.idAutor = isbnautor.idAutor", "titulos.isbn = isbnautor.isbn"},
+                    new String[]{"titulos.isbn ASC"});
+
+            if (solucion.isOperacionCorrecta()) {
+                try {
+
+                    while (solucion.getResultado().next()) {
+                        System.out.println(
+                                solucion.getResultado().getObject("isbn") + " - "
+                                + solucion.getResultado().getObject("titulo") + " - "
+                                + solucion.getResultado().getObject("primerNombre") + " "
+                                + solucion.getResultado().getObject("apellidopaterno"));
+
+                    }
+
+                    solucion.getResultado().close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
+
     }
 
     /**
