@@ -7,24 +7,19 @@ package formularios;
 
 import db.BaseDeDatos;
 import db.Libro;
-import db.Resultado;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Super
  */
-public class FormularioAdd extends javax.swing.JInternalFrame {
+public class FormularioAddLibro extends javax.swing.JInternalFrame {
 
     BaseDeDatos baseDatos;
 
     /**
      * Creates new form FormularioAdd
      */
-    public FormularioAdd() {
+    public FormularioAddLibro() {
         initComponents();
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
@@ -49,7 +44,7 @@ public class FormularioAdd extends javax.swing.JInternalFrame {
 
          solucion.getResultado().close();
          } catch (SQLException ex) {
-         Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(FormularioAddLibro.class.getName()).log(Level.SEVERE, null, ex);
          }
          }
 
@@ -84,7 +79,7 @@ public class FormularioAdd extends javax.swing.JInternalFrame {
 
          solucion.getResultado().close();
          } catch (SQLException ex) {
-         Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(FormularioAddLibro.class.getName()).log(Level.SEVERE, null, ex);
          }
 
          }
@@ -123,7 +118,7 @@ public class FormularioAdd extends javax.swing.JInternalFrame {
          idAutor = algo.getInt(1);
                 
          } catch (SQLException ex) {
-         Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(FormularioAddLibro.class.getName()).log(Level.SEVERE, null, ex);
          }
             
          solucion = baseDatos.actualizar(
@@ -153,7 +148,7 @@ public class FormularioAdd extends javax.swing.JInternalFrame {
 
          solucion.getResultado().close();
          } catch (SQLException ex) {
-         Logger.getLogger(FormularioAdd.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(FormularioAddLibro.class.getName()).log(Level.SEVERE, null, ex);
          }
 
          }

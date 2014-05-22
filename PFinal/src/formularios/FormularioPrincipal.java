@@ -21,7 +21,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     public FormularioPrincipal() {
         initComponents();
-        btnAddActionPerformed(null);
+        btnAutoresActionPerformed(null);
+        
     }
 
     /**
@@ -35,6 +36,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         btnAdd = new javax.swing.JButton();
+        btnAutores = new javax.swing.JButton();
         btnBrowse = new javax.swing.JButton();
         btnInformes = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -52,7 +54,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jToolBar1.setPreferredSize(new java.awt.Dimension(561, 319));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book_add.png"))); // NOI18N
-        btnAdd.setText("Añadir");
+        btnAdd.setText("Añadir Libro");
         btnAdd.setFocusable(false);
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -62,6 +64,18 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnAdd);
+
+        btnAutores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/writer.png"))); // NOI18N
+        btnAutores.setText("Autores");
+        btnAutores.setFocusable(false);
+        btnAutores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAutores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAutores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutoresActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnAutores);
 
         btnBrowse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/library.png"))); // NOI18N
         btnBrowse.setText("Biblioteca");
@@ -112,7 +126,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        FormularioAdd form = new FormularioAdd();
+        FormularioAddLibro form = new FormularioAddLibro();
         form.setVisible(rootPaneCheckingEnabled);
         form.pack();
 
@@ -142,6 +156,19 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }//GEN-LAST:event_btnBrowseActionPerformed
+
+    private void btnAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoresActionPerformed
+        FormularioAddAutor form = new FormularioAddAutor();
+        form.setVisible(rootPaneCheckingEnabled);        
+
+        form.pack();
+        jDesktopPane1.removeAll();
+        jDesktopPane1.add(form);
+        try {
+            form.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }       }//GEN-LAST:event_btnAutoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,6 +202,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
     private javax.swing.JButton btnInformes;
     private javax.swing.JDesktopPane jDesktopPane1;
