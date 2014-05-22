@@ -40,9 +40,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(524, 564));
-        setMinimumSize(new java.awt.Dimension(524, 564));
-        setPreferredSize(new java.awt.Dimension(524, 564));
+        setMaximumSize(new java.awt.Dimension(570, 632));
+        setMinimumSize(new java.awt.Dimension(570, 632));
+        setPreferredSize(new java.awt.Dimension(570, 632));
         setResizable(false);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);

@@ -5,10 +5,10 @@
  */
 package db;
 
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import utiles.Mensajes;
 
 /**
  *
@@ -22,21 +22,12 @@ public class BaseDeDatos {
         try {
             db = new DBAccess(usuario, password, db_path, database);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(BaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.mostrarMensaje(ex.getMessage(), "Error", Mensajes.TipoMensaje.ERROR);
+            System.exit(0);
         }
     }
 
-    public Resultado actualizar(String sql) {
-        Resultado salida;
-        try {
-            salida = new Resultado((db.update(sql) == 1), "", null);
-        } catch (SQLException e) {
-            salida = new Resultado(false, "", null);
-        }
-        return salida;
-    }
-
-    public Resultado actualizar(String[] columnas, String[] tablas, String[] condiciones, String[] valores) {
+    private Resultado actualizar(String[] columnas, String[] tablas, String[] condiciones, String[] valores) {
 
         assert tablas != null;
         assert valores != null;
@@ -46,18 +37,20 @@ public class BaseDeDatos {
         Resultado salida;
 
         try {
-            // Comprobamos que el registro existe haciendo una select
-            salida = consultar(columnas, tablas, condiciones, null);
 
-            // Comprobamos si la operación se ha realizado correctamente
-            if (salida.isOperacionCorrecta()) {
+            // Si se especifican columnas es una actualización, si no una insercción
+            if (columnas != null) {
 
-                ResultSetMetaData rsMetaData = salida.getResultado().getMetaData();
+                // Comprobamos que el registro existe haciendo una select
+                salida = consultar(columnas, tablas, condiciones, null);
 
-                // Si existen resultados que concuerden con la consulta es una 
-                // actualización
-                if (salida.getResultado() != null){
+                // Comprobamos si la operación se ha realizado correctamente
+                if (salida.isOperacionCorrecta()) {
 
+                    ResultSetMetaData rsMetaData = salida.getResultado().getMetaData();
+
+                    // Si existen resultados que concuerden con la consulta es una 
+                    // actualización
                     sql += "UPDATE";
 
                     for (String tabla : tablas) {
@@ -72,7 +65,8 @@ public class BaseDeDatos {
                         for (int i = 1; i <= numberOfColumns; i++) {
                             if (rsMetaData.getColumnName(i).equals(columnas[j])) {
                                 switch (rsMetaData.getColumnType(i)) {
-                                    case 1: {
+                                    case 1:
+                                    case 4: {
                                         sql += columnas[j] + " = " + valores[j];
                                         break;
                                     }
@@ -98,7 +92,19 @@ public class BaseDeDatos {
                     salida = new Resultado(db.update(sql) > 0, "", null);
 
                 } else {
-                    // Si no hay resultados es un insert
+                    salida = new Resultado(false, salida.getMensaje(), null);
+                }
+            } else {
+                // Si no hay columnas a actualizar es una insercción
+
+                // Realizamos una select a la tabla a insertar para poder traer 
+                // la estrucutra de columnas
+                salida = consultar((new String[]{"*"}), tablas, condiciones, null);
+
+                // Comprobamos si la operación se ha realizado correctamente
+                if (salida.isOperacionCorrecta()) {
+
+                    ResultSetMetaData rsMetaData = salida.getResultado().getMetaData();
 
                     sql += "INSERT INTO";
 
@@ -106,34 +112,31 @@ public class BaseDeDatos {
                         sql += " " + tabla + ", ";
                     }
 
-                    sql = sql.substring(0, sql.length() - 2) + " VALUES (";
+                    sql = sql.substring(0, sql.length() - 2) + " VALUES(";
 
                     int numberOfColumns = rsMetaData.getColumnCount();
 
-                    for (int j = 0; j < columnas.length; j++) {
-                        for (int i = 1; i <= numberOfColumns; i++) {
-                            if (rsMetaData.getColumnName(i).equals(columnas[j])) {
-                                switch (rsMetaData.getColumnType(i)) {
-                                    case 1: {
-                                        sql += valores[j] + ", ";
-                                        break;
-                                    }
+                    for (int i = 1; i <= numberOfColumns; i++) {
+                        switch (rsMetaData.getColumnType(i)) {
+                            case 1:
+                            case 4: {
+                                sql += valores[i - 1] + ", ";
+                                break;
+                            }
 
-                                    case 12: {
-                                        sql += "'" + valores[j] + "', ";
-                                        break;
-                                    }
-                                }
+                            case 12: {
+                                sql += "'" + valores[i - 1] + "', ";
+                                break;
                             }
                         }
                     }
 
-                    sql = sql.substring(0, sql.length() - 2);
+                    sql = sql.substring(0, sql.length() - 2) + ")";
 
                     salida = new Resultado(db.update(sql) > 0, "", null);
+                } else {
+                    salida = new Resultado(false, "", null);
                 }
-            } else {
-                salida = new Resultado(false, salida.getMensaje(), null);
             }
         } catch (SQLException ex) {
             salida = new Resultado(false, ex.getMessage(), null);
@@ -142,21 +145,18 @@ public class BaseDeDatos {
         return salida;
     }
 
-    public Resultado consultar(String[] columnas, String[] tablas, String[] condiciones, String[] ordenacion) {
+    private Resultado consultar(String[] columnas, String[] tablas, String[] condiciones, String[] ordenacion) {
         assert tablas != null;
+        assert columnas != null;
 
         Resultado salida;
         String sql = "SELECT";
 
-        if (columnas == null) {
-            sql += " * ";
-        } else {
-            for (String columna : columnas) {
-                sql += " " + columna + ", ";
-            }
-
-            sql = sql.substring(0, sql.length() - 2);
+        for (String columna : columnas) {
+            sql += " " + columna + ", ";
         }
+
+        sql = sql.substring(0, sql.length() - 2);
 
         sql += " FROM";
 
@@ -192,6 +192,87 @@ public class BaseDeDatos {
             salida = new Resultado(false, ex.getMessage(), null);
         }
 
+        return salida;
+
+    }
+
+    public Resultado actualizarLibro(Libro libro) {
+        Resultado salida;
+        int[] idAutores = new int[libro.getAutores().length];
+
+        try {
+            salida = consultar(
+                    new String[]{"isbn"},
+                    new String[]{"titulos"},
+                    new String[]{"isbn = '" + libro.getIsbn() + "'"},
+                    null);
+
+            if (salida.isOperacionCorrecta()) {
+                if (salida.getResultado().next()) {
+                    // Actualización
+                } else {
+                    // Insercción
+                    salida = actualizar(
+                            null,
+                            new String[]{"Titulos"},
+                            null,
+                            new String[]{libro.getIsbn(), libro.getTitulo(), String.valueOf(libro.getNumEdicion()), libro.getEditorial(), libro.getCopyright()});
+
+                    if (salida.isOperacionCorrecta()) {
+                        for (String autor : libro.getAutores()) {
+                            salida = consultar(
+                                    new String[]{"idAutor"},
+                                    new String[]{"Autores"},
+                                    new String[]{"primerNombre = '" + autor.split(" ")[0] + "'",
+                                        "apellidoPaterno = '" + autor.split(" ")[1] + "'"},
+                                    null);
+
+                            if (salida.isOperacionCorrecta()) {
+                                if (!salida.getResultado().next()) {
+                                    salida = actualizar(
+                                            null,
+                                            new String[]{"Autores"},
+                                            null,
+                                            new String[]{"0", autor.split(" ")[0], autor.split(" ")[1]});
+
+                                    if (salida.isOperacionCorrecta()) {
+                                        salida = consultar(
+                                                new String[]{"idAutor"},
+                                                new String[]{"Autores"},
+                                                new String[]{"primerNombre = '" + autor.split(" ")[0] + "'",
+                                                    "apellidoPaterno = '" + autor.split(" ")[1] + "'"},
+                                                null);
+
+                                        if (salida.isOperacionCorrecta() && salida.getResultado().next()) {
+                                            
+                                            ResultSet datos = salida.getResultado();
+                                            
+                                            idAutores[datos.getRow()-1] = datos.getInt(1);
+
+                                        } else {
+
+                                        }
+
+                                    } else {
+
+                                    }
+
+                                } else {
+
+                                }
+                            } else {
+                            }
+                        }
+                    } else {
+
+                    }
+
+                }
+            } else {
+            }
+        } catch (SQLException ex) {
+            salida = new Resultado(false, ex.getMessage(), null);
+        }
         return salida;
 
     }
