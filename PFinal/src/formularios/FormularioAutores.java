@@ -12,24 +12,36 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
+import utiles.Mensajes;
 
 /**
  *
  * @author Super
  */
-public class FormularioAddAutor extends javax.swing.JInternalFrame {
+public class FormularioAutores extends javax.swing.JInternalFrame {
 
     BaseDeDatos baseDatos;
+    int modo;
 
     /**
      * Creates new form FormularioAdd
      */
-    public FormularioAddAutor() {
+    public FormularioAutores() {
         initComponents();
         lblIdAutor.setVisible(false);
 
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
+        recargarGrid();
+
+        cmbCampo.setSelectedIndex(1);
+        cmbOrden.setSelectedIndex(0);
+        btnAceptar.setVisible(false);
+        btnCancelar.setVisible(false);
+
+    }
+
+    private void recargarGrid() {
         Resultado datos = baseDatos.consultar(
                 new String[]{"IdAutor", "primerNombre As Nombre", "apellidoPaterno As Apellido"},
                 new String[]{"Autores"},
@@ -41,16 +53,13 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
             tblAutores.removeColumn(tblAutores.getColumnModel().getColumn(0));
             tblAutores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             tblAutores.setColumnSelectionAllowed(false);
-
-            cmbCampo.setSelectedIndex(1);
-            cmbOrden.setSelectedIndex(0);
-            btnAceptar.setVisible(false);
-            btnCancelar.setVisible(false);
+            tblAutores.setRowSelectionAllowed(true);
+            txtNombre.setText("");
+            txtApellidos.setText("");
 
         } catch (SQLException ex) {
-            Logger.getLogger(FormularioAddAutor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormularioAutores.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -67,7 +76,12 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
         panelTabla = new javax.swing.JScrollPane();
-        tblAutores = new javax.swing.JTable();
+        tblAutores = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
+        ;
         lblNombre = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
         lblIdAutor = new javax.swing.JLabel();
@@ -92,6 +106,7 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
         txtApellidos.setEditable(false);
 
         tblAutores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tblAutores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblAutoresMouseClicked(evt);
@@ -162,10 +177,25 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
         });
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +228,7 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
                         .addComponent(lblIdAutor))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(panelOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(9, 12, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -290,7 +320,6 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
             } else {
                 orden += "apellidoPaterno DESC";
             }
-
         }
 
         Resultado datos = baseDatos.consultar(
@@ -303,9 +332,8 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
             tblAutores.setModel(BaseDeDatos.buildTableModel(datos.getResultado()));
             tblAutores.removeColumn(tblAutores.getColumnModel().getColumn(0));
         } catch (SQLException ex) {
-            Logger.getLogger(FormularioAddAutor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormularioAutores.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_cmbCampoItemStateChanged
 
     private void tblAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAutoresMouseClicked
@@ -319,39 +347,108 @@ public class FormularioAddAutor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblAutoresMouseClicked
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        btnAñadir.setVisible(false);
-        btnModificar.setVisible(false);
-        btnEliminar.setVisible(false);
-        btnAceptar.setVisible(true);
-        btnCancelar.setVisible(true);
-        cmbCampo.setEnabled(false);
-        cmbOrden.setEnabled(false);
-        tblAutores.setRowSelectionAllowed(false);
-
-        MouseListener[] listeners = tblAutores.getMouseListeners();
-        for (MouseListener l : listeners) {
-            tblAutores.removeMouseListener(l);
-        }
-
-
+        modoEdicion(true);
+        modo = 1;
+        txtNombre.setText("");
+        txtApellidos.setText("");
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        btnAñadir.setVisible(true);
-        btnModificar.setVisible(true);
-        btnEliminar.setVisible(true);
-        btnAceptar.setVisible(false);
-        btnCancelar.setVisible(false);
-        tblAutores.setEnabled(true);
-        cmbCampo.setEnabled(true);
-        cmbOrden.setEnabled(true);
-        tblAutores.setRowSelectionAllowed(true);
-
-
-        
-
-
+        modoEdicion(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        modoEdicion(true);
+        modo = 0;
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        if (tblAutores.getSelectedRowCount() != 0) {
+            if (Mensajes.pedirConfirmacion(String.format(
+                    "%s %s%n¿Desea eliminar este autor?",
+                    txtNombre.getText(),
+                    txtApellidos.getText()))) {
+                Resultado datos = baseDatos.eliminar(
+                        new String[]{"Autores"},
+                        new String[]{"idAutor = " + lblIdAutor.getText()});
+
+                if (datos.isOperacionCorrecta()) {
+                    Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                    recargarGrid();
+
+                } else {
+                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+        if (modo == 0) {
+            Resultado datos = baseDatos.actualizar(
+                    new String[]{"primerNombre", "apellidoPaterno"},
+                    new String[]{"Autores"},
+                    new String[]{"idAutor = " + lblIdAutor.getText()},
+                    new String[]{txtNombre.getText(), txtApellidos.getText()});
+
+            if (datos.isOperacionCorrecta()) {
+                Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                recargarGrid();
+
+            } else {
+                Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+            }
+        } else {
+            Resultado datos = baseDatos.actualizar(
+                    null,
+                    new String[]{"Autores"},
+                    null,
+                    new String[]{"0", txtNombre.getText(), txtApellidos.getText()});
+
+            if (datos.isOperacionCorrecta()) {
+                Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                recargarGrid();
+
+            } else {
+                Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+            }
+        }
+
+        modoEdicion(false);
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void modoEdicion(boolean modo) {
+        btnAñadir.setVisible(!modo);
+        btnModificar.setVisible(!modo);
+        btnEliminar.setVisible(!modo);
+        btnAceptar.setVisible(modo);
+        btnCancelar.setVisible(modo);
+        tblAutores.setEnabled(!modo);
+        cmbCampo.setEnabled(!modo);
+        cmbOrden.setEnabled(!modo);
+        tblAutores.setColumnSelectionAllowed(false);
+        tblAutores.setCellSelectionEnabled(false);
+        tblAutores.setRowSelectionAllowed(!modo);
+        txtApellidos.setEditable(modo);
+        txtNombre.setEditable(modo);
+
+        if (modo) {
+            MouseListener[] listeners = tblAutores.getMouseListeners();
+            for (MouseListener l : listeners) {
+                tblAutores.removeMouseListener(l);
+            }
+        } else {
+            tblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    tblAutoresMouseClicked(evt);
+                }
+            });
+            tblAutores.updateUI();
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

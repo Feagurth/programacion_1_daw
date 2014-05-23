@@ -67,7 +67,7 @@ class DBAccess {
             "USE libros;",
             "CREATE TABLE autores(idAutor int NOT NULL AUTO_INCREMENT PRIMARY KEY, primerNombre varchar(30) NOT NULL, apellidoPaterno varchar(30) NOT NULL);",
             "CREATE TABLE titulos(isbn varchar(20) NOT NULL PRIMARY KEY, titulo varchar(100) NOT NULL, numeroEdicion int NOT NULL, editorial varchar(50) NOT NULL, copyright varchar(4) NOT NULL);",
-            "CREATE TABLE isbnAutor(idAutor int NOT NULL, isbn varchar(20) NOT NULL, FOREIGN KEY (idAutor) REFERENCES autores(idAutor), FOREIGN KEY (isbn) References titulos(isbn));",
+            "CREATE TABLE isbnAutor(idAutor int NOT NULL, isbn varchar(20) NOT NULL, FOREIGN KEY (idAutor) REFERENCES autores(idAutor) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (isbn) References titulos(isbn) ON DELETE CASCADE ON UPDATE CASCADE);",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('Harvey','Deitel');",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('Paul','Deitel');",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('Andrew','Goldberg');",

@@ -21,7 +21,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     public FormularioPrincipal() {
         initComponents();
-        btnAutoresActionPerformed(null);
+        btnAddActionPerformed(null);
         
     }
 
@@ -42,9 +42,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(570, 632));
-        setMinimumSize(new java.awt.Dimension(570, 632));
-        setPreferredSize(new java.awt.Dimension(570, 632));
+        setMaximumSize(new java.awt.Dimension(570, 660));
+        setMinimumSize(new java.awt.Dimension(570, 660));
+        setPreferredSize(new java.awt.Dimension(570, 660));
         setResizable(false);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -100,7 +100,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 466, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +118,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
             .addComponent(jDesktopPane1)
         );
 
@@ -126,7 +126,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        FormularioAddLibro form = new FormularioAddLibro();
+        FormularioLibros form = new FormularioLibros();
         form.setVisible(rootPaneCheckingEnabled);
         form.pack();
 
@@ -158,7 +158,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBrowseActionPerformed
 
     private void btnAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoresActionPerformed
-        FormularioAddAutor form = new FormularioAddAutor();
+        FormularioAutores form = new FormularioAutores();
         form.setVisible(rootPaneCheckingEnabled);        
 
         form.pack();

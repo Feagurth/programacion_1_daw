@@ -8,7 +8,6 @@ package db;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import utiles.Mensajes;
@@ -30,7 +29,7 @@ public class BaseDeDatos {
         }
     }
 
-    private Resultado actualizar(String[] columnas, String[] tablas, String[] condiciones, String[] valores) {
+    public Resultado actualizar(String[] columnas, String[] tablas, String[] condiciones, String[] valores) {
 
         assert tablas != null;
         assert valores != null;
@@ -70,18 +69,20 @@ public class BaseDeDatos {
                                 switch (rsMetaData.getColumnType(i)) {
                                     case 1:
                                     case 4: {
-                                        sql += columnas[j] + " = " + valores[j];
+                                        sql += columnas[j] + " = " + valores[j] + ", ";
                                         break;
                                     }
 
                                     case 12: {
-                                        sql += columnas[j] + " = '" + valores[j] + "'";
+                                        sql += columnas[j] + " = '" + valores[j] + "', ";
                                         break;
                                     }
                                 }
                             }
                         }
                     }
+
+                    sql = sql.substring(0, sql.length() - 2);
 
                     if (condiciones != null) {
                         sql += " WHERE";
@@ -199,111 +200,60 @@ public class BaseDeDatos {
 
     }
 
-    public Resultado actualizarLibro(Libro libro) {
+    public Resultado eliminar(String[] tablas, String[] condiciones) {
+        assert condiciones != null;
+
         Resultado salida;
-        int[] idAutores = new int[libro.getAutores().length];
+        String sql = "";
+
+        sql += "DELETE FROM";
+
+        for (String tabla : tablas) {
+            sql += " " + tabla + ", ";
+        }
+
+        sql = sql.substring(0, sql.length() - 2);
+
+        sql += " WHERE";
+
+        for (String condicion : condiciones) {
+            sql += " " + condicion + " AND";
+        }
+
+        sql = sql.substring(0, sql.length() - 4);
 
         try {
-            salida = consultar(
-                    new String[]{"isbn"},
-                    new String[]{"titulos"},
-                    new String[]{"isbn = '" + libro.getIsbn() + "'"},
-                    null);
-
-            if (salida.isOperacionCorrecta()) {
-                if (salida.getResultado().next()) {
-                    // Actualización
-                } else {
-                    // Insercción
-                    salida = actualizar(
-                            null,
-                            new String[]{"Titulos"},
-                            null,
-                            new String[]{libro.getIsbn(), libro.getTitulo(), String.valueOf(libro.getNumEdicion()), libro.getEditorial(), libro.getCopyright()});
-
-                    if (salida.isOperacionCorrecta()) {
-                        for (String autor : libro.getAutores()) {
-                            salida = consultar(
-                                    new String[]{"idAutor"},
-                                    new String[]{"Autores"},
-                                    new String[]{"primerNombre = '" + autor.split(" ")[0] + "'",
-                                        "apellidoPaterno = '" + autor.split(" ")[1] + "'"},
-                                    null);
-
-                            if (salida.isOperacionCorrecta()) {
-                                if (!salida.getResultado().next()) {
-                                    salida = actualizar(
-                                            null,
-                                            new String[]{"Autores"},
-                                            null,
-                                            new String[]{"0", autor.split(" ")[0], autor.split(" ")[1]});
-
-                                    if (salida.isOperacionCorrecta()) {
-                                        salida = consultar(
-                                                new String[]{"idAutor"},
-                                                new String[]{"Autores"},
-                                                new String[]{"primerNombre = '" + autor.split(" ")[0] + "'",
-                                                    "apellidoPaterno = '" + autor.split(" ")[1] + "'"},
-                                                null);
-
-                                        if (salida.isOperacionCorrecta() && salida.getResultado().next()) {
-                                            
-                                            ResultSet datos = salida.getResultado();
-                                            
-                                            idAutores[datos.getRow()-1] = datos.getInt(1);
-
-                                  } else {
-
-                                        }
-
-                                    } else {
-
-                                    }
-
-                                } else {
-
-                                }
-                            } else {
-                            }
-                        }
-                    } else {
-
-                    }
-
-                }
-            } else {
-            }
+            salida = new Resultado(db.update(sql) > 0, "", null);
         } catch (SQLException ex) {
             salida = new Resultado(false, ex.getMessage(), null);
         }
+
         return salida;
-
-    }
-    
-public static DefaultTableModel buildTableModel(ResultSet rs)
-        throws SQLException {
-
-    ResultSetMetaData metaData = rs.getMetaData();
-
-    
-    // names of columns
-    Vector<String> columnNames = new Vector<>();
-    int columnCount = metaData.getColumnCount();
-    for (int column = 1; column <= columnCount; column++) {
-        columnNames.add(metaData.getColumnLabel(column));
     }
 
-    // data of the table
-    Vector<Vector<Object>> data = new Vector<>();
-    while (rs.next()) {
-        Vector<Object> vector = new Vector<>();
-        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-            vector.add(rs.getObject(columnIndex));
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+            throws SQLException {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        // names of columns
+        Vector<String> columnNames = new Vector<>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnLabel(column));
         }
-        data.add(vector);
+
+        // data of the table
+        Vector<Vector<Object>> data = new Vector<>();
+        while (rs.next()) {
+            Vector<Object> vector = new Vector<>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(rs.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        return new DefaultTableModel(data, columnNames);
+
     }
-
-    return new DefaultTableModel(data, columnNames);
-
-}    
 }
