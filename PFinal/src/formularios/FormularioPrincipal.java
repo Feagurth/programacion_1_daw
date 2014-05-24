@@ -21,7 +21,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     public FormularioPrincipal() {
         initComponents();
-        btnAddActionPerformed(null);
+        btnBrowseActionPerformed(null);
         
     }
 
@@ -42,16 +42,16 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(570, 660));
-        setMinimumSize(new java.awt.Dimension(570, 660));
-        setPreferredSize(new java.awt.Dimension(570, 660));
+        setMaximumSize(new java.awt.Dimension(580, 710));
+        setMinimumSize(new java.awt.Dimension(580, 710));
+        setPreferredSize(new java.awt.Dimension(580, 710));
         setResizable(false);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
-        jToolBar1.setMaximumSize(new java.awt.Dimension(561, 319));
-        jToolBar1.setMinimumSize(new java.awt.Dimension(561, 319));
-        jToolBar1.setPreferredSize(new java.awt.Dimension(561, 319));
+        jToolBar1.setMaximumSize(new java.awt.Dimension(661, 549));
+        jToolBar1.setMinimumSize(new java.awt.Dimension(661, 549));
+        jToolBar1.setPreferredSize(new java.awt.Dimension(661, 549));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book_add.png"))); // NOI18N
         btnAdd.setText("Añadir Libro");
@@ -96,17 +96,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnInformes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnInformes);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,11 +103,11 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
             .addComponent(jDesktopPane1)
         );
 
@@ -126,7 +115,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        FormularioLibros form = new FormularioLibros();
+        FormularioLibros form = new FormularioLibros(null);
         form.setVisible(rootPaneCheckingEnabled);
         form.pack();
 

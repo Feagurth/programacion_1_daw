@@ -22,37 +22,67 @@ package db;
  */
 public class Libro {
 
-    private final String isbn;
-    private final String titulo;
-    private final int numEdicion;
-    private final String editorial;
-    private final String copyright;
-    private final String[] autores;
+    private String isbn = "";
+    private String titulo = "";
+    private int numEdicion = 0;
+    private String editorial = "";
+    private String copyright = "";
+    private String[] autores = null;
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
     public int getNumEdicion() {
         return numEdicion;
+    }
+
+    public void setNumEdicion(int numEdicion) {
+        this.numEdicion = numEdicion;
     }
 
     public String getEditorial() {
         return editorial;
     }
 
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
     public String getCopyright() {
         return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     public String[] getAutores() {
         return autores;
     }
 
+    public void setAutores(String[] autores) {
+        this.autores = autores;
+    }
+
+
+
+    public Libro() {
+    }
+
+    
     public Libro(String isbn, String titulo, int numEdicion, String editorial, String copyright, String[] autores) {
         this.isbn = isbn;
         this.titulo = titulo;

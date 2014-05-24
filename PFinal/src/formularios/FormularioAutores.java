@@ -20,8 +20,8 @@ import utiles.Mensajes;
  */
 public class FormularioAutores extends javax.swing.JInternalFrame {
 
-    BaseDeDatos baseDatos;
-    int modo;
+    private final BaseDeDatos baseDatos;
+    private int modo;
 
     /**
      * Creates new form FormularioAdd
@@ -358,8 +358,11 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        modoEdicion(true);
-        modo = 0;
+        if (tblAutores.getSelectedRowCount() != 0) {
+            modoEdicion(true);
+            modo = 0;
+
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

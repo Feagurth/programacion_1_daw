@@ -17,146 +17,21 @@ import utiles.Mensajes;
  */
 public class FormularioLibros extends javax.swing.JInternalFrame {
 
-    private BaseDeDatos baseDatos;
+    private final BaseDeDatos baseDatos;
 
     /**
      * Creates new form FormularioAdd
      */
-    public FormularioLibros() {
+    public FormularioLibros(Libro libro) {
         initComponents();
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-
-        /*
-         Resultado solucion = baseDatos.consultar(
-         new String[]{"titulos.isbn", "titulos.titulo", "autores.primerNombre", "autores.apellidoPaterno"},
-         new String[]{"titulos", "autores", "isbnautor"},
-         new String[]{"autores.idAutor = isbnautor.idAutor", "titulos.isbn = isbnautor.isbn"},
-         new String[]{"titulos.isbn ASC"});
-
-         if (solucion.isOperacionCorrecta()) {
-         try {
-
-         while (solucion.getResultado().next()) {
-         System.out.println(
-         solucion.getResultado().getObject("isbn") + " - "
-         + solucion.getResultado().getObject("titulo") + " - "
-         + solucion.getResultado().getObject("primerNombre") + " "
-         + solucion.getResultado().getObject("apellidopaterno"));
-
-         }
-
-         solucion.getResultado().close();
-         } catch (SQLException ex) {
-         Logger.getLogger(FormularioLibros.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         }
-
-         System.out.println("");
-         System.out.println("-----------------------------");
-         System.out.println("");
-
-         solucion = baseDatos.actualizar(
-         new String[]{"titulo"},
-         new String[]{"titulos"},
-         new String[]{"ISBN = 0131857576"},
-         new String[]{"Papafrita"});
-
-         if (solucion.isOperacionCorrecta()) {
-         solucion = baseDatos.consultar(
-         new String[]{"titulos.isbn", "titulos.titulo", "autores.primerNombre", "autores.apellidoPaterno"},
-         new String[]{"titulos", "autores", "isbnautor"},
-         new String[]{"autores.idAutor = isbnautor.idAutor", "titulos.isbn = isbnautor.isbn"},
-         new String[]{"titulos.isbn ASC"});
-
-         if (solucion.isOperacionCorrecta()) {
-         try {
-
-         while (solucion.getResultado().next()) {
-         System.out.println(
-         solucion.getResultado().getObject("isbn") + " - "
-         + solucion.getResultado().getObject("titulo") + " - "
-         + solucion.getResultado().getObject("primerNombre") + " "
-         + solucion.getResultado().getObject("apellidopaterno"));
-
-         }
-
-         solucion.getResultado().close();
-         } catch (SQLException ex) {
-         Logger.getLogger(FormularioLibros.class.getName()).log(Level.SEVERE, null, ex);
-         }
-
-         }
-         }
-
-         System.out.println("");
-         System.out.println("-----------------------------");
-         System.out.println("");
-
-         solucion = baseDatos.actualizar(
-         null,
-         new String[]{"Titulos"},
-         null,
-         new String[]{"9788434887138", "El pirata garrapata", "49", "SM", "2002"});
-
-         if (solucion.isOperacionCorrecta()) {
-         solucion = baseDatos.actualizar(
-         null,
-         new String[]{"Autores"},
-         null,
-         new String[]{"0", "Juan", "Muñoz"});
-         }
         
-         if (solucion.isOperacionCorrecta()) {
-            
-         solucion = baseDatos.consultar(
-         new String[]{"idAutor"}, 
-         new String[]{"Autores"}, 
-         new String[]{"primerNombre = 'Juan'", "apellidoPaterno = 'Muñoz'"}, 
-         null);
-            
-         int idAutor = 0;
-         try {
-         ResultSet algo =  solucion.getResultado();
-         algo.first();
-         idAutor = algo.getInt(1);
+        if(libro != null)
+        {
+        
+        }
                 
-         } catch (SQLException ex) {
-         Logger.getLogger(FormularioLibros.class.getName()).log(Level.SEVERE, null, ex);
-         }
-            
-         solucion = baseDatos.actualizar(
-         null,
-         new String[]{"isbnautor"},
-         null,
-         new String[]{String.valueOf(idAutor), "9788434887138"});
-         }        
-         if (solucion.isOperacionCorrecta()) {
-         solucion = baseDatos.consultar(
-         new String[]{"titulos.isbn", "titulos.titulo", "autores.primerNombre", "autores.apellidoPaterno"},
-         new String[]{"titulos", "autores", "isbnautor"},
-         new String[]{"autores.idAutor = isbnautor.idAutor", "titulos.isbn = isbnautor.isbn"},
-         new String[]{"titulos.isbn ASC"});
 
-         if (solucion.isOperacionCorrecta()) {
-         try {
-
-         while (solucion.getResultado().next()) {
-         System.out.println(
-         solucion.getResultado().getObject("isbn") + " - "
-         + solucion.getResultado().getObject("titulo") + " - "
-         + solucion.getResultado().getObject("primerNombre") + " "
-         + solucion.getResultado().getObject("apellidopaterno"));
-
-         }
-
-         solucion.getResultado().close();
-         } catch (SQLException ex) {
-         Logger.getLogger(FormularioLibros.class.getName()).log(Level.SEVERE, null, ex);
-         }
-
-         }
-         }
-         */
     }
 
     /**
@@ -183,7 +58,6 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtEditorial = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtaResumen = new javax.swing.JTextArea();
@@ -192,13 +66,17 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         txtEdicion = new javax.swing.JTextField();
         lblEdicion = new javax.swing.JLabel();
         btnBrowseAutores = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         lblIdAutores = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(446, 532));
         setMinimumSize(new java.awt.Dimension(446, 532));
 
+        txtBuscarISBN.setEnabled(false);
+
         btnBuscarISBN.setText("Buscar ISBN");
+        btnBuscarISBN.setEnabled(false);
         btnBuscarISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarISBNActionPerformed(evt);
@@ -207,11 +85,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtISBN.setText("9788434887138");
-
         jLabel1.setText("ISBN");
-
-        txtTitulo.setText("El pirata garrapata");
 
         jLabel2.setText("Título");
 
@@ -219,32 +93,17 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Autor");
 
-        txtAnyo.setText("2002");
-
         jLabel4.setText("Año");
-
-        txtEditorial.setText("SM");
 
         jLabel5.setText("Editorial");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
 
+        TxtaResumen.setEditable(false);
         TxtaResumen.setColumns(20);
         TxtaResumen.setRows(5);
         TxtaResumen.setBorder(null);
+        TxtaResumen.setEnabled(false);
         jScrollPane1.setViewportView(TxtaResumen);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -258,9 +117,10 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
         );
 
-        lblGenero.setText("Género");
+        cmbGenero.setEnabled(false);
+        cmbGenero.setFocusable(false);
 
-        txtEdicion.setText("49");
+        lblGenero.setText("Género");
 
         lblEdicion.setText("Edición");
 
@@ -271,6 +131,10 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no_book.png"))); // NOI18N
+        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -280,8 +144,8 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblEdicion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -339,7 +203,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                             .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGenero))
                         .addGap(0, 38, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -470,9 +334,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

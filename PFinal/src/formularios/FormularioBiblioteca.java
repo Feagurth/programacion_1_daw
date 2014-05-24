@@ -5,17 +5,79 @@
  */
 package formularios;
 
+import db.BaseDeDatos;
+import db.Resultado;
+import java.awt.GridLayout;
+import java.sql.SQLException;
+import utiles.Mensajes;
+
 /**
  *
  * @author Super
  */
 public class FormularioBiblioteca extends javax.swing.JInternalFrame {
 
+    private final BaseDeDatos baseDatos;
+    private int paginacion = 1;
+    private int paginacionMaxima = 1;
+
     /**
      * Creates new form FormularioBiblioteca
      */
     public FormularioBiblioteca() {
         initComponents();
+
+        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+
+        Resultado datos = baseDatos.consultar(
+                new String[]{"Count(*) as Total"},
+                new String[]{"titulos"}, null, null);
+
+        try {
+            if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
+                paginacionMaxima = Math.round(datos.getResultado().getInt("Total") / 9f);
+            }
+        } catch (SQLException ex) {
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
+
+        refrescarLibros(paginacion, null);
+
+    }
+
+    private void refrescarLibros(int pagina, String[] filtro) {
+        try {
+
+            Resultado datos = baseDatos.consultar(
+                    new String[]{"*"},
+                    new String[]{"titulos"},
+                    filtro,
+                    null,
+                    new int[]{pagina - 1, 9});
+
+            if (datos.isOperacionCorrecta()) {
+
+                while (datos.getResultado().next()) {
+                    pnlMain.setLayout(new GridLayout(0, 3, 1, 0));
+                    pnlMain.add(new FormularioCaratula(datos.getResultado().getString("isbn")));
+                }
+
+                if (pagina == 1) {
+                    btnLeft.setVisible(false);
+                } else {
+                    btnLeft.setVisible(true);
+                }
+
+                if (pagina == paginacionMaxima) {
+                    btnRight.setVisible(false);
+                } else {
+                    btnRight.setVisible(true);
+                }
+
+            }
+        } catch (SQLException ex) {
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
     }
 
     /**
@@ -27,19 +89,29 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        frmFrame = new javax.swing.JPanel();
+        btnRight = new javax.swing.JButton();
+        btnLeft = new javax.swing.JButton();
+        pnlMain = new javax.swing.JPanel();
 
-        frmFrame.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next.png"))); // NOI18N
+        btnRight.setBorder(null);
+        btnRight.setBorderPainted(false);
+        btnRight.setContentAreaFilled(false);
 
-        javax.swing.GroupLayout frmFrameLayout = new javax.swing.GroupLayout(frmFrame);
-        frmFrame.setLayout(frmFrameLayout);
-        frmFrameLayout.setHorizontalGroup(
-            frmFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+        btnLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prev.png"))); // NOI18N
+        btnLeft.setBorder(null);
+        btnLeft.setBorderPainted(false);
+        btnLeft.setContentAreaFilled(false);
+
+        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        pnlMain.setLayout(pnlMainLayout);
+        pnlMainLayout.setHorizontalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 398, Short.MAX_VALUE)
         );
-        frmFrameLayout.setVerticalGroup(
-            frmFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+        pnlMainLayout.setVerticalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 457, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -48,22 +120,39 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(frmFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRight, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(frmFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRight, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Create the GUI and show it. For thread safety, this method should be
+     * invoked from the event dispatch thread.
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel frmFrame;
+    private javax.swing.JButton btnLeft;
+    private javax.swing.JButton btnRight;
+    private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
 }

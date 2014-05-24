@@ -149,7 +149,8 @@ public class BaseDeDatos {
         return salida;
     }
 
-    public Resultado consultar(String[] columnas, String[] tablas, String[] condiciones, String[] ordenacion) {
+    public Resultado consultar(String[] columnas, String[] tablas, String[] condiciones, String[] ordenacion, int[] limites) {
+
         assert tablas != null;
         assert columnas != null;
 
@@ -190,6 +191,17 @@ public class BaseDeDatos {
             sql = sql.substring(0, sql.length() - 4);
         }
 
+        if (limites != null) {
+            sql += " LIMIT";
+
+            for (int limite : limites) {
+                sql += " " + limite + ", ";
+            }
+
+            sql = sql.substring(0, sql.length() - 2);
+
+        }
+
         try {
             salida = new Resultado(true, "", db.query(sql));
         } catch (SQLException ex) {
@@ -197,6 +209,14 @@ public class BaseDeDatos {
         }
 
         return salida;
+
+    }
+
+    public Resultado consultar(String[] columnas, String[] tablas, String[] condiciones, String[] ordenacion) {
+        assert tablas != null;
+        assert columnas != null;
+
+        return consultar(columnas, tablas, condiciones, ordenacion, null);
 
     }
 

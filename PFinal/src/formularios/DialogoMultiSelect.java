@@ -52,7 +52,7 @@ public class DialogoMultiSelect extends javax.swing.JDialog {
 
     private void recargarGrid() {
         Resultado datos = baseDatos.consultar(
-                new String[]{"IdAutor", "concat(primerNombre, apellidoPaterno) As Nombre"},
+                new String[]{"IdAutor", "concat(primerNombre, ' ', apellidoPaterno) As Nombre"},
                 new String[]{"Autores"},
                 null,
                 new String[]{"Nombre ASC"});
