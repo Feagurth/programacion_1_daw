@@ -42,9 +42,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(580, 710));
-        setMinimumSize(new java.awt.Dimension(580, 710));
-        setPreferredSize(new java.awt.Dimension(580, 710));
+        setMaximumSize(new java.awt.Dimension(590, 710));
+        setMinimumSize(new java.awt.Dimension(590, 710));
+        setPreferredSize(new java.awt.Dimension(590, 710));
         setResizable(false);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -194,7 +194,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
     private javax.swing.JButton btnInformes;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

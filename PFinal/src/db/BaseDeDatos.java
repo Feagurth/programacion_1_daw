@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import utiles.Mensajes;
 
@@ -246,6 +248,74 @@ public class BaseDeDatos {
             salida = new Resultado(db.update(sql) > 0, "", null);
         } catch (SQLException ex) {
             salida = new Resultado(false, ex.getMessage(), null);
+        }
+
+        return salida;
+    }
+
+    public String consultaNombreAutor(String[] idAutor) {
+
+        String salida = "";
+
+        try {
+
+            for (String autor : idAutor) {
+
+                Resultado datos = consultar(
+                        new String[]{"Concat(primerNombre, ' ', apellidoPaterno) as Nombre"},
+                        new String[]{"autores"},
+                        new String[]{"idAutor = " + autor}, null);
+
+                if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
+                    salida += datos.getResultado().getString("Nombre") + ", ";
+                }
+            }
+
+            salida = salida.substring(0, salida.length() - 2);
+        } catch (SQLException ex) {
+            salida = "";
+        }
+
+        return salida;
+    }
+
+    public Resultado insertarLibro(Libro libro) {
+        Resultado salida;
+
+        salida = actualizar(
+                null,
+                new String[]{"titulos"},
+                null,
+                new String[]{
+                    libro.getIsbn(),
+                    libro.getTitulo(),
+                    String.valueOf(libro.getNumEdicion()),
+                    libro.getEditorial(),
+                    libro.getCopyright()});
+
+        if (salida.isOperacionCorrecta()) {
+
+            for (String idAutor : libro.getAutores()) {
+
+                salida = actualizar(
+                        null,
+                        new String[]{"isbnautor"},
+                        null,
+                        new String[]{idAutor, libro.getIsbn()});
+
+                if (!salida.isOperacionCorrecta()) {
+                    break;
+                }
+            }
+
+            if (!salida.isOperacionCorrecta()) {
+                salida = eliminar(new String[]{"titulos"}, new String[]{"isbn = " + libro.getIsbn()});
+                if (salida.isOperacionCorrecta()) {
+                    salida = new Resultado(false, "Error al insertar los autores del libro", null);
+                }
+            }
+        } else {
+            salida = new Resultado(false, "Error al insertar el libro", null);
         }
 
         return salida;

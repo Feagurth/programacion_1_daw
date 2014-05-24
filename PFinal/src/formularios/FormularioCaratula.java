@@ -21,9 +21,6 @@ import db.Libro;
 import db.Resultado;
 import java.beans.PropertyVetoException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JInternalFrame;
 import utiles.Mensajes;
 
 /**
@@ -77,20 +74,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
 
                     libro.setAutores(idAutor.split(","));
 
-                    for (String autor : idAutor.split(",")) {
-
-                        datos = baseDatos.consultar(
-                                new String[]{"Concat(primerNombre, ' ', apellidoPaterno) as Nombre"},
-                                new String[]{"autores"},
-                                new String[]{"idAutor = " + autor}, null);
-
-                        if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
-                            lblAutores.setText(lblAutores.getText() + datos.getResultado().getString("Nombre") + ", ");
-
-                        }
-                    }
-
-                    lblAutores.setText(lblAutores.getText().substring(0, lblAutores.getText().length() - 2));
+                    lblAutores.setText(baseDatos.consultaNombreAutor(idAutor.split(",")));
 
                 }
 
@@ -221,13 +205,18 @@ public class FormularioCaratula extends javax.swing.JPanel {
         form.setVisible(true);
         form.pack();
 
-        //this.getParent().getParent().        
-        //this.getTopLevelAncestor().add(form);
+        FormularioPrincipal frame = (FormularioPrincipal) this.getTopLevelAncestor();
+
+        form.setVisible(true);
+        form.pack();
+
+        frame.jDesktopPane1.removeAll();
+        frame.jDesktopPane1.add(form);
 
         try {
             form.setMaximum(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
     }
 

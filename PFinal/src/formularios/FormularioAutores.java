@@ -32,8 +32,6 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
 
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
-        recargarGrid();
-
         cmbCampo.setSelectedIndex(1);
         cmbOrden.setSelectedIndex(0);
         btnAceptar.setVisible(false);
@@ -42,21 +40,39 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     }
 
     private void recargarGrid() {
+
+        String orden = "";
+        String filtro = "";
+
+        if (cmbCampo.getSelectedIndex() == 0) {
+            if (cmbOrden.getSelectedIndex() == 0) {
+                orden += "primerNombre ASC";
+            } else {
+                orden += "primerNombre DESC";
+            }
+        } else {
+            if (cmbOrden.getSelectedIndex() == 0) {
+                orden += "apellidoPaterno ASC";
+            } else {
+                orden += "apellidoPaterno DESC";
+            }
+        }
+
+        if (cmbFiltro.getSelectedIndex() == 0) {
+            filtro += "primerNombre LIKE '" + txtFiltro.getText() + "%'";
+        } else {
+            filtro += "apellidoPaterno LIKE '" + txtFiltro.getText() + "%'";
+        }
+
         Resultado datos = baseDatos.consultar(
                 new String[]{"IdAutor", "primerNombre As Nombre", "apellidoPaterno As Apellido"},
                 new String[]{"Autores"},
-                null,
-                new String[]{"apellidoPaterno ASC"});
+                new String[]{filtro},
+                new String[]{orden});
 
         try {
             tblAutores.setModel(BaseDeDatos.buildTableModel(datos.getResultado()));
             tblAutores.removeColumn(tblAutores.getColumnModel().getColumn(0));
-            tblAutores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            tblAutores.setColumnSelectionAllowed(false);
-            tblAutores.setRowSelectionAllowed(true);
-            txtNombre.setText("");
-            txtApellidos.setText("");
-
         } catch (SQLException ex) {
             Logger.getLogger(FormularioAutores.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,10 +87,16 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        txtNombre = new javax.swing.JTextField();
-        txtApellidos = new javax.swing.JTextField();
+        panelOrden = new javax.swing.JPanel();
+        cmbCampo = new javax.swing.JComboBox();
+        cmbOrden = new javax.swing.JComboBox();
+        lblOrden = new javax.swing.JLabel();
+        lblCampo = new javax.swing.JLabel();
+        panelFiltro = new javax.swing.JPanel();
+        cmbFiltro = new javax.swing.JComboBox();
+        lblFiltro = new javax.swing.JLabel();
+        lblCampoFiltro = new javax.swing.JLabel();
+        txtFiltro = new javax.swing.JTextField();
         panelTabla = new javax.swing.JScrollPane();
         tblAutores = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -82,41 +104,19 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
             }
         };
         ;
-        lblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtApellidos = new javax.swing.JTextField();
         lblApellido = new javax.swing.JLabel();
-        lblIdAutor = new javax.swing.JLabel();
-        panelOrden = new javax.swing.JPanel();
-        cmbCampo = new javax.swing.JComboBox();
-        cmbOrden = new javax.swing.JComboBox();
-        lblOrden = new javax.swing.JLabel();
-        lblCampo = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         btnAñadir = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-
-        jLabel1.setText("jLabel1");
+        btnAceptar = new javax.swing.JButton();
+        lblIdAutor = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(446, 532));
         setMinimumSize(new java.awt.Dimension(446, 532));
-
-        txtNombre.setEditable(false);
-
-        txtApellidos.setEditable(false);
-
-        tblAutores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tblAutores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblAutoresMouseClicked(evt);
-            }
-        });
-        panelTabla.setViewportView(tblAutores);
-
-        lblNombre.setText("Nombre");
-
-        lblApellido.setText("Apellido");
 
         panelOrden.setBorder(javax.swing.BorderFactory.createTitledBorder("Orden"));
 
@@ -150,7 +150,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
                 .addGap(7, 7, 7)
                 .addComponent(lblCampo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbCampo, 0, 117, Short.MAX_VALUE)
+                .addComponent(cmbCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(24, 24, 24)
                 .addComponent(lblOrden)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -163,11 +163,77 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
                 .addGap(3, 3, 3)
                 .addGroup(panelOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(cmbCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOrden)
                     .addComponent(lblCampo))
                 .addContainerGap())
         );
+
+        panelFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
+
+        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "Apellido" }));
+        cmbFiltro.setMaximumSize(new java.awt.Dimension(88, 20));
+        cmbFiltro.setMinimumSize(new java.awt.Dimension(88, 20));
+        cmbFiltro.setPreferredSize(new java.awt.Dimension(88, 20));
+        cmbFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbFiltroItemStateChanged(evt);
+            }
+        });
+
+        lblFiltro.setText("Orden");
+
+        lblCampoFiltro.setText("Campo");
+
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelFiltroLayout = new javax.swing.GroupLayout(panelFiltro);
+        panelFiltro.setLayout(panelFiltroLayout);
+        panelFiltroLayout.setHorizontalGroup(
+            panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(lblCampoFiltro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbFiltro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblFiltro)
+                .addGap(18, 18, 18)
+                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelFiltroLayout.setVerticalGroup(
+            panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(cmbFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(lblFiltro)
+                    .addComponent(lblCampoFiltro)
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        tblAutores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tblAutores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAutoresMouseClicked(evt);
+            }
+        });
+        panelTabla.setViewportView(tblAutores);
+
+        txtNombre.setEditable(false);
+
+        txtApellidos.setEditable(false);
+
+        lblApellido.setText("Apellido");
+
+        lblNombre.setText("Nombre");
 
         btnAñadir.setText("Añadir");
         btnAñadir.addActionListener(new java.awt.event.ActionListener() {
@@ -190,13 +256,6 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
             }
         });
 
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
-
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,136 +263,96 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGap(9, 9, 9))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 21, Short.MAX_VALUE))
-                                    .addComponent(txtNombre))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)))
-                        .addComponent(lblIdAutor))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(panelOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 12, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(lblIdAutor))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre)
-                    .addComponent(lblApellido))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnAñadir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar)
-                    .addComponent(btnCancelar))
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(txtApellidos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdAutor)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
+                .addGap(12, 12, 12))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelTabla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelFiltro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblIdAutor)
+                .addGap(12, 12, 12)
+                .addComponent(panelOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(panelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombre)
+                    .addComponent(lblApellido))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAñadir)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbOrdenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbOrdenItemStateChanged
-        cmbCampoItemStateChanged(evt);
+        recargarGrid();
     }//GEN-LAST:event_cmbOrdenItemStateChanged
 
     private void cmbCampoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCampoItemStateChanged
-
-        String orden = "";
-
-        if (cmbCampo.getSelectedIndex() == 0) {
-            if (cmbOrden.getSelectedIndex() == 0) {
-                orden += "primerNombre ASC";
-            } else {
-                orden += "primerNombre DESC";
-            }
-        } else {
-            if (cmbOrden.getSelectedIndex() == 0) {
-                orden += "apellidoPaterno ASC";
-            } else {
-                orden += "apellidoPaterno DESC";
-            }
-        }
-
-        Resultado datos = baseDatos.consultar(
-                new String[]{"IdAutor", "primerNombre As Nombre", "apellidoPaterno As Apellido"},
-                new String[]{"Autores"},
-                null,
-                new String[]{orden});
-
-        try {
-            tblAutores.setModel(BaseDeDatos.buildTableModel(datos.getResultado()));
-            tblAutores.removeColumn(tblAutores.getColumnModel().getColumn(0));
-        } catch (SQLException ex) {
-            Logger.getLogger(FormularioAutores.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        recargarGrid();
     }//GEN-LAST:event_cmbCampoItemStateChanged
 
     private void tblAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAutoresMouseClicked
@@ -422,6 +441,14 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         modoEdicion(false);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void cmbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFiltroItemStateChanged
+        recargarGrid();
+    }//GEN-LAST:event_cmbFiltroItemStateChanged
+
+    private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
+        recargarGrid();
+    }//GEN-LAST:event_txtFiltroKeyReleased
+
     private void modoEdicion(boolean modo) {
         btnAñadir.setVisible(!modo);
         btnModificar.setVisible(!modo);
@@ -431,17 +458,21 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         tblAutores.setEnabled(!modo);
         cmbCampo.setEnabled(!modo);
         cmbOrden.setEnabled(!modo);
+        cmbFiltro.setEnabled(!modo);
         tblAutores.setColumnSelectionAllowed(false);
         tblAutores.setCellSelectionEnabled(false);
         tblAutores.setRowSelectionAllowed(!modo);
         txtApellidos.setEditable(modo);
         txtNombre.setEditable(modo);
-
+        txtFiltro.setEditable(!modo);
         if (modo) {
             MouseListener[] listeners = tblAutores.getMouseListeners();
             for (MouseListener l : listeners) {
                 tblAutores.removeMouseListener(l);
             }
+
+            txtNombre.requestFocus();
+
         } else {
             tblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
@@ -461,18 +492,21 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox cmbCampo;
+    private javax.swing.JComboBox cmbFiltro;
     private javax.swing.JComboBox cmbOrden;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCampo;
+    private javax.swing.JLabel lblCampoFiltro;
+    private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblIdAutor;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblOrden;
+    private javax.swing.JPanel panelFiltro;
     private javax.swing.JPanel panelOrden;
     private javax.swing.JScrollPane panelTabla;
     private javax.swing.JTable tblAutores;
     private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtFiltro;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

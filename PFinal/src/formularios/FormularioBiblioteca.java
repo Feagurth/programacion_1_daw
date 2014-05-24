@@ -29,13 +29,13 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
 
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
-        Resultado datos = baseDatos.consultar(
-                new String[]{"Count(*) as Total"},
-                new String[]{"titulos"}, null, null);
-
         try {
+            Resultado datos = baseDatos.consultar(
+                    new String[]{"Count(*) as Total"},
+                    new String[]{"titulos"}, null, null);
+
             if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
-                paginacionMaxima = Math.round(datos.getResultado().getInt("Total") / 9f);
+                paginacionMaxima = (datos.getResultado().getInt("Total") / 9) + 1;
             }
         } catch (SQLException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
