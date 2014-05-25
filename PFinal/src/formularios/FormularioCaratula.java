@@ -77,6 +77,8 @@ public class FormularioCaratula extends javax.swing.JPanel {
                     lblAutores.setText(baseDatos.consultaNombreAutor(idAutor.split(",")));
 
                 }
+                
+                datos.getResultado().close();
 
             }
         } catch (SQLException ex) {
@@ -112,6 +114,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 formMouseClicked(evt);
             }
         });
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCaratula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCaratula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no_book.png"))); // NOI18N
@@ -120,60 +123,38 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 lblCaratulaMouseClicked(evt);
             }
         });
+        add(lblCaratula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Titulo");
         lblTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblTitulo.setFocusable(false);
         lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setMaximumSize(new java.awt.Dimension(125, 15));
+        lblTitulo.setMinimumSize(new java.awt.Dimension(125, 15));
+        lblTitulo.setPreferredSize(new java.awt.Dimension(125, 15));
         lblTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblTituloMouseClicked(evt);
             }
         });
+        add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 120, 20));
 
         lblAutores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAutores.setText("Autores");
         lblAutores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblAutores.setMaximumSize(new java.awt.Dimension(125, 15));
+        lblAutores.setMinimumSize(new java.awt.Dimension(125, 15));
+        lblAutores.setPreferredSize(new java.awt.Dimension(125, 15));
         lblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAutoresMouseClicked(evt);
             }
         });
+        add(lblAutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 120, 20));
 
         lblISBN.setEnabled(false);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblISBN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblCaratula))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCaratula)
-                    .addComponent(lblISBN))
-                .addGap(5, 5, 5)
-                .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblAutores)
-                .addContainerGap())
-        );
+        add(lblISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblTituloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTituloMouseClicked

@@ -26,6 +26,7 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
      */
     public FormularioBiblioteca() {
         initComponents();
+        cmbTipoFiltro.setSelectedIndex(1);
 
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
@@ -35,27 +36,63 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                     new String[]{"titulos"}, null, null);
 
             if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
-                paginacionMaxima = (datos.getResultado().getInt("Total") / 9) + 1;
+                paginacionMaxima = (int) Math.ceil(datos.getResultado().getInt("Total") / 9f);
             }
+            
+            datos.getResultado().close();
+            
         } catch (SQLException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
 
-        refrescarLibros(paginacion, null);
+        refrescarLibros(paginacion);
 
     }
 
-    private void refrescarLibros(int pagina, String[] filtro) {
+    private String[] crearFiltro() {
+        String sql = "";
+
+        switch (cmbTipoFiltro.getSelectedIndex()) {
+            case 0:
+                sql = "ISBN LIKE '" + txtFiltro.getText() + "%'";
+                break;
+                
+            case 1:
+                sql = "TITULO LIKE '" + txtFiltro.getText() + "%'";
+                break;
+                
+            case 2: {
+                sql = "NUMEROEDICION LIKE '" + txtFiltro.getText() + "%'";
+                break;
+            }
+            case 3: {
+                sql = "EDITORIAL LIKE '" + txtFiltro.getText() + "%'";
+                break;
+            }
+            case 4: {
+                sql = "COPYRIGHT LIKE '" + txtFiltro.getText() + "%'";
+                break;
+            }
+
+        }
+        
+        return new String[]{sql};
+
+    }
+
+    private void refrescarLibros(int pagina) {
         try {
 
             Resultado datos = baseDatos.consultar(
                     new String[]{"*"},
                     new String[]{"titulos"},
-                    filtro,
+                    crearFiltro(),
                     null,
-                    new int[]{pagina - 1, 9});
+                    new int[]{(pagina - 1) * 9, 9});
 
             if (datos.isOperacionCorrecta()) {
+
+                pnlMain.removeAll();
 
                 while (datos.getResultado().next()) {
                     pnlMain.setLayout(new GridLayout(0, 3, 1, 0));
@@ -73,7 +110,10 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                 } else {
                     btnRight.setVisible(true);
                 }
-
+                
+                pnlMain.updateUI();
+                
+                datos.getResultado().close();
             }
         } catch (SQLException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
@@ -89,61 +129,116 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlMain = new javax.swing.JPanel();
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
-        pnlMain = new javax.swing.JPanel();
+        panelFiltro = new javax.swing.JPanel();
+        cmbTipoFiltro = new javax.swing.JComboBox();
+        txtFiltro = new javax.swing.JTextField();
+        lblTipoFiltro = new javax.swing.JLabel();
+        lblValorFiltro = new javax.swing.JLabel();
 
-        btnRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next.png"))); // NOI18N
-        btnRight.setBorder(null);
-        btnRight.setBorderPainted(false);
-        btnRight.setContentAreaFilled(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prev.png"))); // NOI18N
-        btnLeft.setBorder(null);
-        btnLeft.setBorderPainted(false);
-        btnLeft.setContentAreaFilled(false);
+        pnlMain.setMaximumSize(new java.awt.Dimension(398, 457));
+        pnlMain.setMinimumSize(new java.awt.Dimension(398, 457));
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 457, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        getContentPane().add(pnlMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 420, 590));
+
+        btnRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next.png"))); // NOI18N
+        btnRight.setBorder(null);
+        btnRight.setBorderPainted(false);
+        btnRight.setContentAreaFilled(false);
+        btnRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRightActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 700, -1, 24));
+
+        btnLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prev.png"))); // NOI18N
+        btnLeft.setBorder(null);
+        btnLeft.setBorderPainted(false);
+        btnLeft.setContentAreaFilled(false);
+        btnLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeftActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, -1, 24));
+
+        panelFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
+
+        cmbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Título", "Edición", "Editorial", "Año" }));
+
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyReleased(evt);
+            }
+        });
+
+        lblTipoFiltro.setText("Tipo");
+
+        lblValorFiltro.setText("Valor");
+
+        javax.swing.GroupLayout panelFiltroLayout = new javax.swing.GroupLayout(panelFiltro);
+        panelFiltro.setLayout(panelFiltroLayout);
+        panelFiltroLayout.setHorizontalGroup(
+            panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRight, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTipoFiltro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRight, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cmbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblValorFiltro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+        panelFiltroLayout.setVerticalGroup(
+            panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTipoFiltro)
+                    .addComponent(lblValorFiltro))
+                .addContainerGap())
+        );
+
+        getContentPane().add(panelFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 420, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
+        paginacion++;
+        refrescarLibros(paginacion);
+    }//GEN-LAST:event_btnRightActionPerformed
+
+    private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
+        paginacion--;
+        refrescarLibros(paginacion);
+    }//GEN-LAST:event_btnLeftActionPerformed
+
+    private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
+        paginacion = 1;
+        refrescarLibros(paginacion);
+
+    }//GEN-LAST:event_txtFiltroKeyReleased
 
     /**
      * Create the GUI and show it. For thread safety, this method should be
@@ -153,6 +248,11 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
+    private javax.swing.JComboBox cmbTipoFiltro;
+    private javax.swing.JLabel lblTipoFiltro;
+    private javax.swing.JLabel lblValorFiltro;
+    private javax.swing.JPanel panelFiltro;
     private javax.swing.JPanel pnlMain;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,9 +9,6 @@ import db.BaseDeDatos;
 import db.Resultado;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ListSelectionModel;
 import utiles.Mensajes;
 
 /**
@@ -19,7 +16,7 @@ import utiles.Mensajes;
  * @author Super
  */
 public class FormularioAutores extends javax.swing.JInternalFrame {
-
+    
     private final BaseDeDatos baseDatos;
     private int modo;
 
@@ -29,21 +26,21 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     public FormularioAutores() {
         initComponents();
         lblIdAutor.setVisible(false);
-
+        
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-
+        
         cmbCampo.setSelectedIndex(1);
         cmbOrden.setSelectedIndex(0);
         btnAceptar.setVisible(false);
         btnCancelar.setVisible(false);
-
+        
     }
-
+    
     private void recargarGrid() {
-
+        
         String orden = "";
         String filtro = "";
-
+        
         if (cmbCampo.getSelectedIndex() == 0) {
             if (cmbOrden.getSelectedIndex() == 0) {
                 orden += "primerNombre ASC";
@@ -57,24 +54,25 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
                 orden += "apellidoPaterno DESC";
             }
         }
-
+        
         if (cmbFiltro.getSelectedIndex() == 0) {
             filtro += "primerNombre LIKE '" + txtFiltro.getText() + "%'";
         } else {
             filtro += "apellidoPaterno LIKE '" + txtFiltro.getText() + "%'";
         }
-
+        
         Resultado datos = baseDatos.consultar(
                 new String[]{"IdAutor", "primerNombre As Nombre", "apellidoPaterno As Apellido"},
                 new String[]{"Autores"},
                 new String[]{filtro},
                 new String[]{orden});
-
+        
         try {
             tblAutores.setModel(BaseDeDatos.buildTableModel(datos.getResultado()));
             tblAutores.removeColumn(tblAutores.getColumnModel().getColumn(0));
+            datos.getResultado().close();
         } catch (SQLException ex) {
-            Logger.getLogger(FormularioAutores.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
     }
 
@@ -356,10 +354,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbCampoItemStateChanged
 
     private void tblAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAutoresMouseClicked
-        lblIdAutor.setText(String.valueOf(tblAutores.getModel().getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 0)));
-
-        System.out.println(lblIdAutor.getText());
-
+        lblIdAutor.setText(String.valueOf(tblAutores.getModel().getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 0)));        
         txtNombre.setText((String) tblAutores.getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 0));
         txtApellidos.setText((String) tblAutores.getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 1));
 
@@ -380,64 +375,83 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         if (tblAutores.getSelectedRowCount() != 0) {
             modoEdicion(true);
             modo = 0;
-
+            
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
+        
         if (tblAutores.getSelectedRowCount() != 0) {
             if (Mensajes.pedirConfirmacion(String.format(
                     "%s %s%n¿Desea eliminar este autor?",
                     txtNombre.getText(),
                     txtApellidos.getText()))) {
-                Resultado datos = baseDatos.eliminar(
-                        new String[]{"Autores"},
-                        new String[]{"idAutor = " + lblIdAutor.getText()});
-
-                if (datos.isOperacionCorrecta()) {
-                    Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
-                    recargarGrid();
-
-                } else {
-                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                
+                try {
+                    Resultado datos = baseDatos.eliminar(
+                            new String[]{"Autores"},
+                            new String[]{"idAutor = " + lblIdAutor.getText()});
+                    
+                    if (datos.isOperacionCorrecta()) {
+                        Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                        recargarGrid();
+                        datos.getResultado().close();
+                        
+                    } else {
+                        Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                    }
+                    datos.getResultado().close();
+                } catch (SQLException ex) {
+                    Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
                 }
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        
         if (modo == 0) {
-            Resultado datos = baseDatos.actualizar(
-                    new String[]{"primerNombre", "apellidoPaterno"},
-                    new String[]{"Autores"},
-                    new String[]{"idAutor = " + lblIdAutor.getText()},
-                    new String[]{txtNombre.getText(), txtApellidos.getText()});
-
-            if (datos.isOperacionCorrecta()) {
-                Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
-                recargarGrid();
-
-            } else {
-                Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+            try {
+                Resultado datos = baseDatos.actualizar(
+                        new String[]{"primerNombre", "apellidoPaterno"},
+                        new String[]{"Autores"},
+                        new String[]{"idAutor = " + lblIdAutor.getText()},
+                        new String[]{txtNombre.getText(), txtApellidos.getText()});
+                
+                if (datos.isOperacionCorrecta()) {
+                    Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                    recargarGrid();
+                    datos.getResultado().close();
+                    
+                } else {
+                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                }
+                
+            } catch (SQLException ex) {
+                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
             }
         } else {
-            Resultado datos = baseDatos.actualizar(
-                    null,
-                    new String[]{"Autores"},
-                    null,
-                    new String[]{"0", txtNombre.getText(), txtApellidos.getText()});
-
-            if (datos.isOperacionCorrecta()) {
-                Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
-                recargarGrid();
-
-            } else {
-                Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
-            }
+            try {
+                Resultado datos = baseDatos.actualizar(
+                        null,
+                        new String[]{"Autores"},
+                        null,
+                        new String[]{"0", txtNombre.getText(), txtApellidos.getText()});
+                
+                if (datos.isOperacionCorrecta()) {
+                    Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                    recargarGrid();
+                    
+                } else {
+                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                }
+                datos.getResultado().close();
+                
+            } catch (SQLException ex) {
+                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+            }            
         }
-
+        
         modoEdicion(false);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -448,7 +462,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
         recargarGrid();
     }//GEN-LAST:event_txtFiltroKeyReleased
-
+    
     private void modoEdicion(boolean modo) {
         btnAñadir.setVisible(!modo);
         btnModificar.setVisible(!modo);
@@ -470,9 +484,9 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
             for (MouseListener l : listeners) {
                 tblAutores.removeMouseListener(l);
             }
-
+            
             txtNombre.requestFocus();
-
+            
         } else {
             tblAutores.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override

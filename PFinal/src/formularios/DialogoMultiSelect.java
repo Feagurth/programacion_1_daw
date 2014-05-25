@@ -47,6 +47,11 @@ public class DialogoMultiSelect extends javax.swing.JDialog {
         initComponents();
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
+        tblValores.setColumnSelectionAllowed(false);
+        tblValores.setCellSelectionEnabled(false);
+        tblValores.setRowSelectionAllowed(true);
+        tblValores.setCellEditor(null);
+
         recargarGrid();
 
         if (idAutores != null) {
@@ -95,7 +100,11 @@ public class DialogoMultiSelect extends javax.swing.JDialog {
 
         btnOk = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblValores = new javax.swing.JTable();
+        tblValores = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -156,49 +165,6 @@ public class DialogoMultiSelect extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_btnOkActionPerformed
 
-//
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(DialogoMultiSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(DialogoMultiSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(DialogoMultiSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(DialogoMultiSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                DialogoMultiSelect dialog = new DialogoMultiSelect(new javax.swing.JFrame(), true, null);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;

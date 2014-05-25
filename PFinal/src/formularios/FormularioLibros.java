@@ -8,6 +8,7 @@ package formularios;
 import db.BaseDeDatos;
 import db.Libro;
 import db.Resultado;
+import java.sql.SQLException;
 import utiles.Mensajes;
 
 /**
@@ -404,17 +405,26 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         this.libro = new Libro(txtISBN.getText(), txtTitulo.getText(), Integer.parseInt(txtEdicion.getText()), txtEditorial.getText(), txtAnyo.getText(), lblIdAutores.getText().split(","));
 
         if (modo.equals("A")) {
-            Resultado datos = baseDatos.insertarLibro(libro);
 
-            if (datos.isOperacionCorrecta()) {
-                Mensajes.mostrarMensaje("El libro se ha insertado correctamente", Mensajes.TipoMensaje.INFORMACION);
+            try {
 
-            } else {
-                Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.INFORMACION);
-                this.libro = null;
+                Resultado datos = baseDatos.insertarLibro(libro);
+
+                if (datos.isOperacionCorrecta()) {
+                    Mensajes.mostrarMensaje("El libro se ha insertado correctamente", Mensajes.TipoMensaje.INFORMACION);
+
+                } else {
+                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.INFORMACION);
+                    this.libro = null;
+                }
+                rellenarCampos(libro);
+                activarEdicion(false);
+
+                datos.getResultado().close();
+
+            } catch (SQLException ex) {
+                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
             }
-            rellenarCampos(libro);
-            activarEdicion(false);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -462,16 +472,25 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         if (libro != null) {
             if (Mensajes.pedirConfirmacion(String.format("%s%n¿Desea borrar este libro?", libro.getTitulo()))) {
 
-                Resultado datos = baseDatos.eliminar(
-                        new String[]{"Titulos"},
-                        new String[]{"ISBN = " + libro.getIsbn()});
+                try {
+                    Resultado datos = baseDatos.eliminar(
+                            new String[]{"Titulos"},
+                            new String[]{"ISBN = " + libro.getIsbn()});
 
-                if (datos.isOperacionCorrecta()) {
-                    Mensajes.mostrarMensaje("El libro se ha borrado correctamente", Mensajes.TipoMensaje.INFORMACION);
-                    rellenarCampos(null);
-                } else {
-                    Mensajes.mostrarMensaje("Error al borrar el libro", Mensajes.TipoMensaje.ERROR);
+                    if (datos.isOperacionCorrecta()) {
+                        Mensajes.mostrarMensaje("El libro se ha borrado correctamente", Mensajes.TipoMensaje.INFORMACION);
+                        rellenarCampos(null);
+                    } else {
+                        Mensajes.mostrarMensaje("Error al borrar el libro", Mensajes.TipoMensaje.ERROR);
+                    }
+                    
+                    datos.getResultado().close();
                 }
+                catch(SQLException ex)
+                {
+                    Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+                }
+
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
