@@ -10,6 +10,7 @@ import db.Libro;
 import db.Resultado;
 import java.sql.SQLException;
 import utiles.Mensajes;
+import utiles.Validaciones;
 
 /**
  *
@@ -401,12 +402,43 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnBuscarISBNActionPerformed
 
+    private boolean validarDatos() {
+        boolean salida = true;
+
+        if (!Validaciones.validarDato(txtTitulo.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
+            salida = false;
+        }
+
+        if (!Validaciones.validarDato(txtISBN.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)) {
+            salida = false;
+        }
+
+        if (!Validaciones.validarDato(txtEditorial.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
+            salida = false;
+        }
+
+        if (!Validaciones.validarDato(txtEdicion.getText(), Validaciones.TipoValidacion.ENTERO_POSITIVO_NO_0)) {
+            salida = false;
+        }
+
+        if (!Validaciones.validarDato(txtAnyo.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS) || txtAnyo.getText().length() != 4) {
+            salida = false;
+        }
+
+        if (lblIdAutores.getText().equals("")) {
+            salida = false;
+        }
+
+        return salida;
+    }
+
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        this.libro = new Libro(txtISBN.getText(), txtTitulo.getText(), Integer.parseInt(txtEdicion.getText()), txtEditorial.getText(), txtAnyo.getText(), lblIdAutores.getText().split(","));
 
-        if (modo.equals("A")) {
+        if (validarDatos()) {
 
-            try {
+            this.libro = new Libro(txtISBN.getText(), txtTitulo.getText(), Integer.parseInt(txtEdicion.getText()), txtEditorial.getText(), txtAnyo.getText(), lblIdAutores.getText().split(","));
+
+            if (modo.equals("A")) {
 
                 Resultado datos = baseDatos.insertarLibro(libro);
 
@@ -414,17 +446,29 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     Mensajes.mostrarMensaje("El libro se ha insertado correctamente", Mensajes.TipoMensaje.INFORMACION);
 
                 } else {
-                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.INFORMACION);
+                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
                     this.libro = null;
                 }
                 rellenarCampos(libro);
                 activarEdicion(false);
 
-                datos.getResultado().close();
+            } else {
 
-            } catch (SQLException ex) {
-                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+                Resultado datos = baseDatos.actualizarLibro(libro);
+
+                if (datos.isOperacionCorrecta()) {
+                    Mensajes.mostrarMensaje("El libro se ha actualizado correctamente", Mensajes.TipoMensaje.INFORMACION);
+
+                } else {
+                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                    this.libro = null;
+                }
+                rellenarCampos(libro);
+                activarEdicion(false);
+
             }
+        } else {
+            Mensajes.mostrarMensaje("Debe introducir datos correctos para poder continuar", Mensajes.TipoMensaje.AVISO);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -483,11 +527,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     } else {
                         Mensajes.mostrarMensaje("Error al borrar el libro", Mensajes.TipoMensaje.ERROR);
                     }
-                    
+
                     datos.getResultado().close();
-                }
-                catch(SQLException ex)
-                {
+                } catch (SQLException ex) {
                     Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
                 }
 

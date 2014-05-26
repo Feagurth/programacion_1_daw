@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import utiles.Mensajes;
 
@@ -174,7 +172,14 @@ public class BaseDeDatos {
         sql = sql.substring(0, sql.length() - 2);
 
         if (condiciones != null) {
-            sql += " WHERE";
+
+            if (!sql.contains("GROUP")) {
+                sql += " WHERE";
+            }
+            else
+            {
+                sql+= " HAVING";
+            }
 
             for (String condicion : condiciones) {
                 sql += " " + condicion + " AND";
@@ -277,6 +282,58 @@ public class BaseDeDatos {
         }
 
         return salida;
+    }
+
+    public Resultado actualizarLibro(Libro libro) {
+        Resultado salida;
+
+        salida = actualizar(
+                new String[]{"isbn", "titulo", "numeroEdicion", "editorial", "copyright"},
+                new String[]{"titulos"},
+                new String[]{"isbn = " + libro.getIsbn()},
+                new String[]{
+                    libro.getIsbn(),
+                    libro.getTitulo(),
+                    String.valueOf(libro.getNumEdicion()),
+                    libro.getEditorial(),
+                    libro.getCopyright()});
+
+        if (salida.isOperacionCorrecta()) {
+            salida = eliminar(
+                    new String[]{"isbnautor"},
+                    new String[]{"isbn = " + libro.getIsbn()});
+
+            if (salida.isOperacionCorrecta()) {
+                for (String idAutor : libro.getAutores()) {
+                    salida = actualizar(
+                            null,
+                            new String[]{"isbnautor"},
+                            null,
+                            new String[]{idAutor, libro.getIsbn()});
+
+                    if (!salida.isOperacionCorrecta()) {
+                        salida = new Resultado(false, salida.getMensaje(), null);
+                        break;
+                    }
+                }
+
+                if (!salida.isOperacionCorrecta()) {
+                    salida = eliminar(new String[]{"titulos"}, new String[]{"isbn = " + libro.getIsbn()});
+                    if (salida.isOperacionCorrecta()) {
+                        salida = new Resultado(false, "Error al actualizar los autores del libro", null);
+                    }
+                }
+
+            } else {
+                salida = new Resultado(false, salida.getMensaje(), null);
+            }
+
+        } else {
+            salida = new Resultado(false, salida.getMensaje(), null);
+        }
+
+        return salida;
+
     }
 
     public Resultado insertarLibro(Libro libro) {

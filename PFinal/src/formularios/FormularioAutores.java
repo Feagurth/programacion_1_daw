@@ -10,6 +10,7 @@ import db.Resultado;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import utiles.Mensajes;
+import utiles.Validaciones;
 
 /**
  *
@@ -28,7 +29,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         lblIdAutor.setVisible(false);
         
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-        
+                
         cmbCampo.setSelectedIndex(1);
         cmbOrden.setSelectedIndex(0);
         btnAceptar.setVisible(false);
@@ -408,7 +409,28 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private boolean validarDatos()
+    {
+        boolean salida = true;
+    
+        if(!Validaciones.validarDato(txtNombre.getText(), Validaciones.TipoValidacion.CADENA))
+        {
+            salida = false;
+        }
+
+        if(!Validaciones.validarDato(txtApellidos.getText(), Validaciones.TipoValidacion.CADENA))
+        {
+            salida = false;
+        }
+        
+        return salida;
+    }
+    
+    
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        
+        if(validarDatos())
+        {
         
         if (modo == 0) {
             try {
@@ -453,6 +475,11 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         }
         
         modoEdicion(false);
+        }
+        else
+        {
+            Mensajes.mostrarMensaje("Debe introducir datos correctos para poder continuar", Mensajes.TipoMensaje.AVISO);
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cmbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFiltroItemStateChanged

@@ -3,12 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package formularios;
 
+import db.BaseDeDatos;
+import db.Resultado;
 import java.beans.PropertyVetoException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import utiles.Mensajes;
 
 /**
  *
@@ -22,7 +37,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     public FormularioPrincipal() {
         initComponents();
         btnBrowseActionPerformed(null);
-        
+
     }
 
     /**
@@ -94,6 +109,11 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnInformes.setFocusable(false);
         btnInformes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnInformes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInformes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformesActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnInformes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,20 +141,19 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         jDesktopPane1.removeAll();
         jDesktopPane1.add(form);
-        
+
         try {
             form.setMaximum(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
         FormularioBiblioteca form = new FormularioBiblioteca();
-        form.setVisible(rootPaneCheckingEnabled);        
+        form.setVisible(rootPaneCheckingEnabled);
 
         form.pack();
         jDesktopPane1.removeAll();
@@ -143,12 +162,12 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             form.setMaximum(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }//GEN-LAST:event_btnBrowseActionPerformed
 
     private void btnAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoresActionPerformed
         FormularioAutores form = new FormularioAutores();
-        form.setVisible(rootPaneCheckingEnabled);        
+        form.setVisible(rootPaneCheckingEnabled);
 
         form.pack();
         jDesktopPane1.removeAll();
@@ -158,6 +177,47 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }       }//GEN-LAST:event_btnAutoresActionPerformed
+
+    private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
+
+        /*
+        try {
+
+            BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+
+            Map<String, Object> parameters = new HashMap<>();
+            //parameters.put("filtro", "having autor like 'a%'");
+            
+            Resultado salida = baseDatos.consultar(
+                    new String[]{
+                        "DISTINCT Titulos.isbn AS ISBN", 
+                        "Titulos.titulo AS Titulo", 
+                        "GROUP_CONCAT(autores.primerNombre,' ',autores.apellidoPaterno SEPARATOR ', ') AS Autor", 
+                        "Titulos.numeroEdicion AS NumeroEdicion", 
+                        "Titulos.editorial AS Editorial", 
+                        "Titulos.copyright AS Copyright"}, 
+                    new String[]{"autores autores INNER JOIN isbnautor isbnautor ON autores.idAutor = isbnautor.idAutor INNER JOIN Titulos Titulos ON isbnautor.isbn = Titulos.isbn GROUP BY Titulos.isbn"}, 
+                    null,
+                    null);
+            
+            JRDataSource ds = new JRResultSetDataSource(salida.getResultado());
+            
+            
+            JasperReport report = JasperCompileManager.compileReport(FormularioPrincipal.class.getResourceAsStream("/informes/general.jrxml"));
+            JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
+
+            //Para visualizar el pdf directamente desde java
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
+*/
+        
+        DialogInformes informes = new DialogInformes(this, true);
+        
+        informes.setVisible(true);
+
+    }//GEN-LAST:event_btnInformesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,7 +254,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
     private javax.swing.JButton btnInformes;
-    javax.swing.JDesktopPane jDesktopPane1;
+    public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

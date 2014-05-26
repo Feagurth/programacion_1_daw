@@ -143,7 +143,5 @@ class DBAccess {
         }
 
         return salida;
-
-    }
-
+    }    
 }
