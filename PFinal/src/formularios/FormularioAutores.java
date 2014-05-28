@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package formularios;
 
@@ -13,23 +24,32 @@ import utiles.Mensajes;
 import utiles.Validaciones;
 
 /**
+ * Clase para el formulario de autores
  *
- * @author Super
+ * @author Luis Cabrerizo Gómez
  */
 public class FormularioAutores extends javax.swing.JInternalFrame {
 
+    // Variables de instancia
     private final BaseDeDatos baseDatos;
-    private int modo;
+    private String modo;
 
     /**
-     * Creates new form FormularioAdd
+     * Constructor de la clase
      */
     public FormularioAutores() {
+
+        // Iniciamos los componentes del formulario
         initComponents();
+
+        // Ocultamos la etiqueta donde guardaremos el identificador del autor
         lblIdAutor.setVisible(false);
 
+        // Creamos una nueva conexión a la base de datos
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
 
+        // Ajustamos las selecciones de los combos y hacemos invisibles los
+        // botones de aceptar y cancelar
         cmbCampo.setSelectedIndex(1);
         cmbOrden.setSelectedIndex(0);
         btnAceptar.setVisible(false);
@@ -37,11 +57,18 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
 
     }
 
+    /**
+     * Método que se encarga de rellenar la tabla con valores
+     */
     private void recargarGrid() {
 
+        // Inicializamos variables para el orden y el filtrado de los registros
+        // de la tabla
         String orden = "";
         String filtro = "";
 
+        // Comprobamos los valores seleccionados en los combos de ordenación
+        // y creamos la cadena de ordenación en consecuencia
         if (cmbCampo.getSelectedIndex() == 0) {
             if (cmbOrden.getSelectedIndex() == 0) {
                 orden += "primerNombre ASC";
@@ -56,12 +83,17 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
             }
         }
 
+        // Comprobamos los valores seleccionados por el combo de filtro
+        // y creamos la cadena de filtrado en consecuencia
         if (cmbFiltro.getSelectedIndex() == 0) {
             filtro += "primerNombre LIKE '" + txtFiltro.getText() + "%'";
         } else {
             filtro += "apellidoPaterno LIKE '" + txtFiltro.getText() + "%'";
         }
 
+        // Realiamos una consulta a la base de datos para que devuelva los valores
+        // necesarios para rellenar la tabla, pasandole el filtro y el ordenamiento
+        // creado
         Resultado datos = baseDatos.consultar(
                 new String[]{"IdAutor", "primerNombre As Nombre", "apellidoPaterno As Apellido"},
                 new String[]{"Autores"},
@@ -69,14 +101,20 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
                 new String[]{orden});
 
         try {
+
+            // Asignamos a la tabla el modelo de tabla generado a partir del resultado
             tblAutores.setModel(BaseDeDatos.buildTableModel(datos.getResultado()));
             tblAutores.removeColumn(tblAutores.getColumnModel().getColumn(0));
 
+            // Verificamos si el ResultSet se ha cerrado
             if (!datos.getResultado().isClosed()) {
+                // Si no se ha cerrado, lo cerramos manualmente
                 datos.getResultado().close();
             }
 
         } catch (SQLException ex) {
+            // Mostramos un mensaje de error si se ha producido una excepción al
+            // cerrar el ResultSet
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
     }
@@ -350,130 +388,243 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento para el cambio de valor en el combo de orden
+     *
+     * @param evt Evento
+     */
     private void cmbOrdenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbOrdenItemStateChanged
+        // Recargamos el grid
         recargarGrid();
     }//GEN-LAST:event_cmbOrdenItemStateChanged
 
+    /**
+     * Evento para el cambio de valor en el combo de campo
+     *
+     * @param evt Evento
+     */
     private void cmbCampoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCampoItemStateChanged
+        // Recargamos el grid
         recargarGrid();
     }//GEN-LAST:event_cmbCampoItemStateChanged
 
+    /**
+     * Evento para la pulsación del ratón en la tabla
+     *
+     * @param evt Evento
+     */
     private void tblAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAutoresMouseClicked
+
+        // Cargamos con los valores seleccionados los textos y etiquetas necesarios
         lblIdAutor.setText(String.valueOf(tblAutores.getModel().getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 0)));
         txtNombre.setText((String) tblAutores.getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 0));
         txtApellidos.setText((String) tblAutores.getValueAt(tblAutores.rowAtPoint(evt.getPoint()), 1));
 
     }//GEN-LAST:event_tblAutoresMouseClicked
 
+    /**
+     * Evento para la pulsación del botón de añadir
+     *
+     * @param evt Evento
+     */
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
+
+        // Activamos el modo edición
         modoEdicion(true);
-        modo = 1;
+
+        // Cambiamos a modo de añadir
+        this.modo = "A";
+
+        // Limpiamos los campos de nombre y apellidos
         txtNombre.setText("");
         txtApellidos.setText("");
     }//GEN-LAST:event_btnAñadirActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de cancelar
+     *
+     * @param evt Evento
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // Cancelamos el modo edición
         modoEdicion(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de modificar
+     *
+     * @param evt Evento
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        // Comprobamos que haya seleccionada una opción
         if (tblAutores.getSelectedRowCount() != 0) {
+
+            // Activamos el modo de edición
             modoEdicion(true);
-            modo = 0;
+
+            // Cambiamos a modo de modificación de datos
+            this.modo = "M";
 
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de eliminar
+     *
+     * @param evt Evento
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
+        // Comprobamos que haya un registro seleccionado de la tabla antes de 
+        // continuar
         if (tblAutores.getSelectedRowCount() != 0) {
+
+            // Mostramos un mensaje al usuario para pedir confirmación
             if (Mensajes.pedirConfirmacion(String.format(
                     "%s %s%n¿Desea eliminar este autor?",
                     txtNombre.getText(),
                     txtApellidos.getText()))) {
 
+                // Si el usuario confirma, lanzamos la consulta a la base de datos
+                // y almacenamos el resultado
                 Resultado datos = baseDatos.eliminar(
                         new String[]{"Autores"},
                         new String[]{"idAutor = " + lblIdAutor.getText()});
 
+                // Verificamos si la operación es correcta
                 if (datos.isOperacionCorrecta()) {
+
+                    // Si lo es mostramos un mensaje y recargamos el grid
                     Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
                     recargarGrid();
                 } else {
+                    // Si no es correcta, mostramos un mensaje con el error
                     Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
                 }
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Función que nos permite validar si los datos introducidos para una
+     * inserción o actualización son correctos
+     *
+     * @return Verdadero si son datos válidos, falso en caso contrario
+     */
     private boolean validarDatos() {
+        // Inicializamos la variable de salida a verdaero
         boolean salida = true;
 
-        if (!Validaciones.validarDato(txtNombre.getText(), Validaciones.TipoValidacion.CADENA)) {
+        // Verificamos que texto introcido en el nombre se corresponda con la validación
+        if (!Validaciones.validarDato(txtNombre.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
             salida = false;
         }
 
-        if (!Validaciones.validarDato(txtApellidos.getText(), Validaciones.TipoValidacion.CADENA)) {
+        // Verificamos que texto introcido en el apellido se corresponda con la validación
+        if (!Validaciones.validarDato(txtApellidos.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
             salida = false;
         }
 
+        // Devolvemos el resultado
         return salida;
     }
 
-
+    /**
+     * Evento para la pulsación del botón de aceptar
+     *
+     * @param evt Evento
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+        // Validamos los datos introducidos por el usuario
         if (validarDatos()) {
 
-            if (modo == 0) {
+            // Comprobamos si se esta modificando un registro o dando uno nuevo
+            // de alta
+            if (this.modo.equals("M")) {
 
+                // Realizamos la consulta con la base de datos para realizar
+                // la actualización de datos y almacenamos el resultado de la 
+                // operación en una variable
                 Resultado datos = baseDatos.actualizar(
                         new String[]{"primerNombre", "apellidoPaterno"},
                         new String[]{"Autores"},
                         new String[]{"idAutor = " + lblIdAutor.getText()},
                         new String[]{txtNombre.getText(), txtApellidos.getText()});
 
+                // Verificamos si la operación se ha realizado correctamente
                 if (datos.isOperacionCorrecta()) {
+
+                    // Si es así mostramos un mensaje de información y recargamos
+                    // el los valores de la tabla
                     Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
                     recargarGrid();
 
                 } else {
+                    // Si no es así mostramos un mensaje de error
                     Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
                 }
 
             } else {
 
+                // Si es una insercción, realizamos una consulta a la base de datos
+                // para insertar el registro, almacenando el resultado de la 
+                // operación en una variable
                 Resultado datos = baseDatos.actualizar(
                         null,
                         new String[]{"Autores"},
                         null,
                         new String[]{"0", txtNombre.getText(), txtApellidos.getText()});
 
+                // Verificamos si la operación se ha realizado correctamente
                 if (datos.isOperacionCorrecta()) {
+                    
+                    // Si es así, mostramos un mensaje y recargamos los datos
+                    // de la tabla
                     Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
                     recargarGrid();
 
                 } else {
+                    // Si no es así mostramos un mensaje de error
                     Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
                 }
-
             }
 
+            // Desactivamos el modo de edición
             modoEdicion(false);
         } else {
+            // Mostramos un mensaje para la modificación de datos erroneos
             Mensajes.mostrarMensaje("Debe introducir datos correctos para poder continuar", Mensajes.TipoMensaje.AVISO);
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    /**
+     * Evento para el cambio de valor del combo de Filtro
+     * @param evt Evento
+     */
     private void cmbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFiltroItemStateChanged
+        // Recargamos los datos de la tabla
         recargarGrid();
     }//GEN-LAST:event_cmbFiltroItemStateChanged
 
+    /**
+     * Evento para la pulsación de teclas en el cuadro de texto de filtro
+     * @param evt Evento     
+     */
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
+        // Recargamos los datos de la tabla
         recargarGrid();
     }//GEN-LAST:event_txtFiltroKeyReleased
 
+    /**
+     * Método para habilitar el modo de edición o deshabilitarlo
+     * @param modo Verdadero para activarlo, falso para desactivarlo
+     */
     private void modoEdicion(boolean modo) {
+        
+        // Los controles se activan, desactivan, muestran u ocultan dependiendo
+        // del valor del parámetro
         btnAñadir.setVisible(!modo);
         btnModificar.setVisible(!modo);
         btnEliminar.setVisible(!modo);
@@ -489,6 +640,10 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         txtApellidos.setEditable(modo);
         txtNombre.setEditable(modo);
         txtFiltro.setEditable(!modo);
+        
+        // Quitamos los listeners de la tabla para evitar 
+        // cambiar los valores durante el modo de edición
+        // y los añadimos de nuevo si se desactiva el modo edición
         if (modo) {
             MouseListener[] listeners = tblAutores.getMouseListeners();
             for (MouseListener l : listeners) {
