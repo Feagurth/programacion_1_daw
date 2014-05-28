@@ -16,7 +16,7 @@
  */
 package Utiles;
 
-import RelacionesDeEjercicios.Relacion5.Ejercicio007;
+import RelacionesDeEjercicios.Relacion5.Ejercicio008;
 
 /**
  * Clase para lanzar cada uno de los ejercicios del proyecto Para usarla
@@ -36,10 +36,10 @@ public class Lanzador {
      */
     public static void main(String[] args) {
 
-        Ejercicio007 ejercicio = new Ejercicio007();
+        Ejercicio008 ejercicio = new Ejercicio008();
 
-        //ejercicio.ejercicio();
-        ejercicio.setVisible(true);
+        ejercicio.ejercicio();
+        //ejercicio.setVisible(true);
 
 
 

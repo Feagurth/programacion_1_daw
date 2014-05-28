@@ -173,7 +173,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1618,7 +1618,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
      *
      * @author Luis Cabrerizo Gómez
      */
-    public static class ParserCalculadora {
+    private static class ParserCalculadora {
 
         // Variable para controlar la precisión de las divisiones
         private static int precision;
@@ -1662,7 +1662,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
             int pos2 = 0;
             int pos3 = 0;
 
-            // Operaciones admitidas por el parseador
+        // Operaciones admitidas por el parseador
             // Las operaciones van ordenados por jerarquía de operaciones
             String operaciones[] = {"N", "(", ")", "!", "A", "Q", "l", "L", "S", "C", "T", "I", "^", "%", "*", "/", "+", "-"};
 
@@ -1671,7 +1671,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
 
             cadena = transformarNegativos(cadena);
 
-            // Transformamos las representaciones de las las funciones a letras
+        // Transformamos las representaciones de las las funciones a letras
             // entendibles por el parseador
             cadena = transformarFunciones(cadena);
 
@@ -1686,14 +1686,14 @@ public class Ejercicio007 extends javax.swing.JFrame {
                     // Iteramos para cada operación del array de operaciones
                     for (String operacion : operaciones) {
 
-                        // Iteramos mientras haya operaciones del tipo de la iteración
+                    // Iteramos mientras haya operaciones del tipo de la iteración
                         // en la lista
                         do {
 
                             // Comprobamos que la operación este en la lista
                             if (valor.contains(operacion)) {
 
-                                // Si lo está realizaremos busquedas específicas para
+                            // Si lo está realizaremos busquedas específicas para
                                 // cada una de las operaciones
                                 switch (operacion) {
 
@@ -1701,37 +1701,36 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la primera operación en la lista
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Igualamos la posición de corte anterior a la 
+                                    // Igualamos la posición de corte anterior a la 
                                         // posición de la operación
                                         pos2 = pos1;
 
-                                        // Buscamos cualquiera que sea la siguiente operación de la lista
+                                    // Buscamos cualquiera que sea la siguiente operación de la lista
                                         // desde el índice de la primera operación y el final de la lista
                                         pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
 
                                         numero1 = new BigDecimal(valor.get(pos3 - 1).toString());
                                         numero1 = numero1.multiply(new BigDecimal("-1"));
                                         break;
-
                                     }
 
                                     // Si la operación seleccionada es un paréntesis
                                     case "(": {
 
-                                        // Localizamos la posición del último paréntesis
+                                    // Localizamos la posición del último paréntesis
                                         // abierto que haya en la lista
                                         pos1 = valor.lastIndexOf(operacion);
 
-                                        // El valor de la posición de corte anterior
+                                    // El valor de la posición de corte anterior
                                         // será la del paréntesis
                                         pos2 = pos1;
 
-                                        // La posición de corte posterior será la siguiente
+                                    // La posición de corte posterior será la siguiente
                                         // operación del resto de la lista, donde buscaremos
                                         // el primer paréntesis cerrado
                                         pos3 = pos1 + 1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), new String[]{")"}, true);
 
-                                        // Dentro de los paréntesis puede haber 
+                                    // Dentro de los paréntesis puede haber 
                                         // cualquier conjunto de operaciones, para 
                                         // calcular el valor resultante del paréntesis
                                         // transformamos la lista de valores a una cadena
@@ -1750,7 +1749,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                             // Modificamos el valor del resultado de la operación
                                             retorno.setResultado("0");
 
-                                            // Y devolvemos el valor, puesto que no
+                                        // Y devolvemos el valor, puesto que no
                                             // se puede operar más
                                             return retorno;
                                         }
@@ -1767,18 +1766,18 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la primera operación en la lista
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Igualamos la posición de corte anterior a la 
+                                    // Igualamos la posición de corte anterior a la 
                                         // posición de la operación
                                         pos2 = pos1;
 
-                                        // Buscamos cualquiera que sea la siguiente operación de la lista
+                                    // Buscamos cualquiera que sea la siguiente operación de la lista
                                         // desde el índice de la primera operación y el final de la lista
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
                                         // Comprobamos la operación
                                         switch (operacion) {
 
-                                            // Calculamos la operación necesaria usando
+                                        // Calculamos la operación necesaria usando
                                             // el valor de la lista correspondiente
                                             case "A": {
                                                 numero1 = new BigDecimal(Math.abs(Double.valueOf(valor.get(pos3).toString())));
@@ -1826,19 +1825,19 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la primera operación en la lista
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Igualamos la posición de corte anterior a la 
+                                    // Igualamos la posición de corte anterior a la 
                                         // posición de la operación                                
                                         pos2 = pos1;
 
-                                        // Buscamos cualquiera que sea la siguiente operación de la lista
+                                    // Buscamos cualquiera que sea la siguiente operación de la lista
                                         // desde el índice de la primera operación y el final de la lista                                
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                                        // Pasamos el número a calcular a un double para
+                                    // Pasamos el número a calcular a un double para
                                         // realizar las operaciones
                                         double numero = Double.valueOf(valor.get(pos3).toString());
 
-                                        // Comprobamos el tipo de operación y la realizamos
+                                    // Comprobamos el tipo de operación y la realizamos
                                         // tras pasar el número a radianes
                                         switch (operacion) {
                                             case "S": {
@@ -1871,16 +1870,16 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la operación
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Buscamos la operación anterior y nos 
+                                    // Buscamos la operación anterior y nos 
                                         // posicionamos en el siguiente elemento de la 
                                         // lista
                                         pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
 
-                                        // Buscamos la operación posterior y nos posicionamos
+                                    // Buscamos la operación posterior y nos posicionamos
                                         // en el elemento anterior
                                         pos3 = pos1;
 
-                                        // Convertimos los números de antes y despues de
+                                    // Convertimos los números de antes y despues de
                                         // la operación a BigDecimal y operamos con ellos
                                         numero1 = new BigDecimal(valor.get(pos2).toString());
                                         numero1 = numero1.divide(new BigDecimal("100"), precision, RoundingMode.HALF_DOWN).stripTrailingZeros();
@@ -1891,16 +1890,16 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la operación
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Buscamos la operación anterior y nos 
+                                    // Buscamos la operación anterior y nos 
                                         // posicionamos en el siguiente elemento de la 
                                         // lista
                                         pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
 
-                                        // Buscamos la operación posterior y nos posicionamos
+                                    // Buscamos la operación posterior y nos posicionamos
                                         // en el elemento anterior
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                                        // Convertimos los números de antes y despues de
+                                    // Convertimos los números de antes y despues de
                                         // la operación a BigDecimal y operamos con ellos
                                         numero1 = new BigDecimal(valor.get(pos2).toString());
                                         numero1 = numero1.add(new BigDecimal(valor.get(pos3).toString()));
@@ -1910,16 +1909,16 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la operación
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Buscamos la operación anterior y nos 
+                                    // Buscamos la operación anterior y nos 
                                         // posicionamos en el siguiente elemento de la 
                                         // lista                                
                                         pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
 
-                                        // Buscamos la operación posterior y nos posicionamos
+                                    // Buscamos la operación posterior y nos posicionamos
                                         // en el elemento anterior                                
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                                        // Convertimos los números de antes y despues de
+                                    // Convertimos los números de antes y despues de
                                         // la operación a BigDecimal y operamos con ellos                                
                                         numero1 = new BigDecimal(valor.get(pos2).toString());
                                         numero1 = numero1.subtract(new BigDecimal(valor.get(pos3).toString()));
@@ -1929,16 +1928,16 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la operación
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Buscamos la operación anterior y nos 
+                                    // Buscamos la operación anterior y nos 
                                         // posicionamos en el siguiente elemento de la 
                                         // lista                                                                
                                         pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
 
-                                        // Buscamos la operación posterior y nos posicionamos
+                                    // Buscamos la operación posterior y nos posicionamos
                                         // en el elemento anterior                                                                
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                                        // Convertimos los números de antes y despues de
+                                    // Convertimos los números de antes y despues de
                                         // la operación a BigDecimal y operamos con ellos                                
                                         numero1 = new BigDecimal(valor.get(pos2).toString());
                                         numero1 = numero1.multiply(new BigDecimal(valor.get(pos3).toString()));
@@ -1948,16 +1947,16 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la operación
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Buscamos la operación anterior y nos 
+                                    // Buscamos la operación anterior y nos 
                                         // posicionamos en el siguiente elemento de la 
                                         // lista                                                                                                
                                         pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
 
-                                        // Buscamos la operación posterior y nos posicionamos
+                                    // Buscamos la operación posterior y nos posicionamos
                                         // en el elemento anterior                                                                                                
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                                        // Convertimos los números de antes y despues de
+                                    // Convertimos los números de antes y despues de
                                         // la operación a BigDecimal y operamos con ellos                                                                
                                         numero1 = new BigDecimal(valor.get(pos2).toString());
                                         numero1 = numero1.divide(new BigDecimal(valor.get(pos3).toString()), precision, RoundingMode.HALF_DOWN).stripTrailingZeros();
@@ -1967,16 +1966,16 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                         // Buscamos el índice de la operación
                                         pos1 = valor.indexOf(operacion);
 
-                                        // Buscamos la operación anterior y nos 
+                                    // Buscamos la operación anterior y nos 
                                         // posicionamos en el siguiente elemento de la 
                                         // lista                                                                                                
                                         pos2 = buscarOperacion(valor.subList(0, pos1), operaciones, false) + 1;
 
-                                        // Buscamos la operación posterior y nos posicionamos
+                                    // Buscamos la operación posterior y nos posicionamos
                                         // en el elemento anterior                                                                                                
                                         pos3 = pos1 + buscarOperacion(valor.subList(pos1 + 1, valor.size()), operaciones, true);
 
-                                        // Convertimos los números de antes y despues de
+                                    // Convertimos los números de antes y despues de
                                         // la operación a BigDecimal y operamos con ellos                                                                
                                         numero1 = new BigDecimal(valor.get(pos2).toString());
                                         numero1 = numero1.pow(Integer.parseInt(valor.get(pos3).toString()));
@@ -1992,11 +1991,11 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                     }
                                 }
 
-                                // Quitamos los ceros sobrantes y almacenamos el número
+                            // Quitamos los ceros sobrantes y almacenamos el número
                                 // posición de corte anterior
                                 valor.set(pos2, numero1.toPlainString());
 
-                                // Limpiamos los valores de la lista entre la posición 
+                            // Limpiamos los valores de la lista entre la posición 
                                 // de corte anterior + 1 y la posición de corte posterior + 1
                                 // eliminando los valores de la lista que se han calculado
                                 // y guardando el resultado en la última posición tratada
@@ -2031,7 +2030,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
             // Inicializamos el mensaje a vacío
             salida.setMensaje("");
 
-            // Comprobamos si tenemos algúm mensaje de error, de ser así
+        // Comprobamos si tenemos algúm mensaje de error, de ser así
             // lo asignamos al objeto de salida
             if (mensaje != null && !mensaje.equals("")) {
                 salida.setMensaje(mensaje);
@@ -2039,7 +2038,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
 
             // Verificamos que el resultado no sea cero
             if (!BigDecimal.ZERO.equals(numero1)) {
-                // Si nolo es, volcamos el resultado a al objeto de salida quitandole
+            // Si no lo es, volcamos el resultado a al objeto de salida quitandole
                 // los ceros de más y pasandolo como cadena
                 salida.setResultado(numero1.stripTrailingZeros().toPlainString());
             } else {
@@ -2062,7 +2061,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
          */
         private static String transformarNegativos(String cadena) {
 
-            // Creamos un array con los posibles valores de operaciones que existen 
+        // Creamos un array con los posibles valores de operaciones que existen 
             // en la calculadora a excepción del cierre de paréntesis
             String signos[] = {"N", "(", "!", "A", "Q", "l", "L", "S", "C", "T", "I", "^", "%", "*", "/", "+", "-"};
 
@@ -2072,22 +2071,22 @@ public class Ejercicio007 extends javax.swing.JFrame {
                 // Comprobamos carácter a carácter si hay un símbolo menos
                 if (cadena.charAt(i) == '-') {
 
-                    // Para que se trate de un símbolo de negativo, o bien es el 
+                // Para que se trate de un símbolo de negativo, o bien es el 
                     // primero de la cadena de operaciones o esta precedido de una
                     // operación
                     if (i == 0 || Arrays.asList(signos).contains(String.valueOf(cadena.charAt(i - 1)))) {
 
-                        // Definimos una variable que almacenará el tamaño de la cadena
+                    // Definimos una variable que almacenará el tamaño de la cadena
                         // Si no se modifica y llegamos el final de la cadena en la
                         // siguiente iteración, es que es el último número de la
                         // cadena
                         int siguiente = cadena.length();
 
-                        // Iteramos desde la posición del simbolo menos más uno hasta
+                    // Iteramos desde la posición del simbolo menos más uno hasta
                         // el fichal de la cadena, comprobando si hay alguna operación
                         for (int j = i + 1; j < cadena.length(); j++) {
 
-                            // Si hay alguna operación almacenamos esta posición
+                        // Si hay alguna operación almacenamos esta posición
                             // y dejamos de iterar, puesto que solo nos interesa
                             // la siguiente operación para delimintar el número
                             if (Arrays.asList(signos).contains(String.valueOf(cadena.charAt(j)))) {
@@ -2095,7 +2094,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
                                 break;
                             }
                         }
-                        // Modificamos la cadena, englobando en número delimintado 
+                    // Modificamos la cadena, englobando en número delimintado 
                         // entre paréntesis y antecediendole una N para denotarlo
                         // al parseador como un número negativo
                         cadena = (cadena.substring(0, i) + "N(" + cadena.substring(i + 1, siguiente) + ")" + cadena.substring(siguiente, cadena.length()));
@@ -2149,7 +2148,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
                 // Si la lista de operaciones contiene el caracter de la iteración
                 if (Arrays.asList(operaciones).contains(c + "")) {
 
-                    // Comprobamos que la cadena que contiene la suceción de números
+                // Comprobamos que la cadena que contiene la suceción de números
                     // no sea vacía
                     if (!cadena.equals("")) {
                         // Si no lo es, la añadimos a la lista como un número completo
@@ -2163,13 +2162,13 @@ public class Ejercicio007 extends javax.swing.JFrame {
                     chars.add(c + "");
                 } else {
 
-                    // Si no es una operación es un número, y no estará completo 
+                // Si no es una operación es un número, y no estará completo 
                     // hasta que no haya una operación, por tanto lo concatenamos
                     cadena = cadena.concat(c + "");
                 }
             }
 
-            // Si la cadena es distinta de nulo, la añadimos al final
+        // Si la cadena es distinta de nulo, la añadimos al final
             // Por si fuese solo una serie de números
             if (!cadena.equals("")) {
                 chars.add(cadena);
@@ -2191,7 +2190,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
          */
         private static int buscarOperacion(List valores, String[] operaciones, boolean izqDer) {
 
-            // Iniciamos la variable de resultado. 
+        // Iniciamos la variable de resultado. 
             // Si la búsqueda es de izquierda a derecha, su valor inicial será
             // el tamaño de la lista, si no es así será cero
             int resultado = (izqDer ? valores.size() : 0);
@@ -2202,13 +2201,13 @@ public class Ejercicio007 extends javax.swing.JFrame {
                 // Varificamos el sentido de la búsqueda
                 if (!izqDer) {
 
-                    // Si el índice de la operación del bucle es menor que el valor
+                // Si el índice de la operación del bucle es menor que el valor
                     // almacenado en resultado, eso indica que está más a la derecha
                     // de la lista y seria posterior a la anterior que hubiesemos 
                     // guardado
                     if (resultado < valores.lastIndexOf(operacion)) {
 
-                        // Si esto es asi, guardamos su posición para devolverla al 
+                    // Si esto es asi, guardamos su posición para devolverla al 
                         // final de la función
                         resultado = valores.lastIndexOf(operacion);
                     }
@@ -2216,13 +2215,13 @@ public class Ejercicio007 extends javax.swing.JFrame {
                     // Comprobamos inicialmente que la operación está en la lista
                     if (valores.indexOf(operacion) != -1) {
 
-                        // De ser así, comprobamos si su indice es menor que el que 
+                    // De ser así, comprobamos si su indice es menor que el que 
                         // tenemos almacenado en la variable de resultado, lo cual 
                         // querría decir que la operación es anterior a la que 
                         // habíamos guardado
                         if (resultado > valores.indexOf(operacion)) {
 
-                            // Si esto es así, guardamos la posición para devolverla
+                        // Si esto es así, guardamos la posición para devolverla
                             // al final de la función
                             resultado = valores.indexOf(operacion);
                         }
@@ -2230,7 +2229,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
                 }
             }
 
-            // Si el resultado es cero, eso quiero decir que no había operación
+        // Si el resultado es cero, eso quiero decir que no había operación
             // en la lista y devolvemos un valor de -1, si tenemos un resultado
             // devolvemos el valor.
             return (resultado == 0 ? -1 : resultado);
@@ -2272,7 +2271,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
             // Inicializamos la variable de salida
             BigDecimal factorial = BigDecimal.ONE;
 
-            // Iteramos multiplicando el valor de la iteración por el acumulado del
+        // Iteramos multiplicando el valor de la iteración por el acumulado del
             // factorial hasta llegar al número de entrada
             for (int i = 1; i <= n; i++) {
                 factorial = factorial.multiply(BigDecimal.valueOf(i));
@@ -2288,7 +2287,7 @@ public class Ejercicio007 extends javax.swing.JFrame {
      *
      * @author Super
      */
-    public static class Solucion {
+    private static class Solucion {
 
         // Variable para el resultado
         private String resultado;
