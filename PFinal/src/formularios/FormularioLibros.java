@@ -515,22 +515,15 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (libro != null) {
             if (Mensajes.pedirConfirmacion(String.format("%s%n¿Desea borrar este libro?", libro.getTitulo()))) {
+                Resultado datos = baseDatos.eliminar(
+                        new String[]{"Titulos"},
+                        new String[]{"ISBN = " + libro.getIsbn()});
 
-                try {
-                    Resultado datos = baseDatos.eliminar(
-                            new String[]{"Titulos"},
-                            new String[]{"ISBN = " + libro.getIsbn()});
-
-                    if (datos.isOperacionCorrecta()) {
-                        Mensajes.mostrarMensaje("El libro se ha borrado correctamente", Mensajes.TipoMensaje.INFORMACION);
-                        rellenarCampos(null);
-                    } else {
-                        Mensajes.mostrarMensaje("Error al borrar el libro", Mensajes.TipoMensaje.ERROR);
-                    }
-
-                    datos.getResultado().close();
-                } catch (SQLException ex) {
-                    Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+                if (datos.isOperacionCorrecta()) {
+                    Mensajes.mostrarMensaje("El libro se ha borrado correctamente", Mensajes.TipoMensaje.INFORMACION);
+                    rellenarCampos(null);
+                } else {
+                    Mensajes.mostrarMensaje("Error al borrar el libro", Mensajes.TipoMensaje.ERROR);
                 }
 
             }

@@ -77,8 +77,10 @@ public class FormularioCaratula extends javax.swing.JPanel {
                     lblAutores.setText(baseDatos.consultaNombreAutor(idAutor.split(",")));
 
                 }
-                
-                datos.getResultado().close();
+
+                if (!datos.getResultado().isClosed()) {
+                    datos.getResultado().close();
+                }
 
             }
         } catch (SQLException ex) {

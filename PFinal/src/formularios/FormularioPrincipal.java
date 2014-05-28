@@ -5,25 +5,9 @@
  */
 package formularios;
 
-import db.BaseDeDatos;
-import db.Resultado;
 import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRResultSetDataSource;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-import utiles.Mensajes;
 
 /**
  *
@@ -180,7 +164,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
 
-        /*
+/*        
         try {
 
             BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
@@ -211,12 +195,12 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         } catch (JRException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
-*/
-        
+
+
         DialogInformes informes = new DialogInformes(this, true);
         
         informes.setVisible(true);
-
+*/
     }//GEN-LAST:event_btnInformesActionPerformed
 
     /**

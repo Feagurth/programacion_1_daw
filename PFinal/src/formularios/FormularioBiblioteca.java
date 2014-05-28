@@ -38,9 +38,11 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
             if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
                 paginacionMaxima = (int) Math.ceil(datos.getResultado().getInt("Total") / 9f);
             }
-            
-            datos.getResultado().close();
-            
+
+            if (!datos.getResultado().isClosed()) {
+                datos.getResultado().close();
+            }
+
         } catch (SQLException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
@@ -56,11 +58,11 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
             case 0:
                 sql = "ISBN LIKE '" + txtFiltro.getText() + "%'";
                 break;
-                
+
             case 1:
                 sql = "TITULO LIKE '" + txtFiltro.getText() + "%'";
                 break;
-                
+
             case 2: {
                 sql = "NUMEROEDICION LIKE '" + txtFiltro.getText() + "%'";
                 break;
@@ -75,7 +77,7 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
             }
 
         }
-        
+
         return new String[]{sql};
 
     }
@@ -110,10 +112,13 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                 } else {
                     btnRight.setVisible(true);
                 }
-                
+
                 pnlMain.updateUI();
-                
-                datos.getResultado().close();
+
+                if (!datos.getResultado().isClosed()) {
+                    datos.getResultado().close();
+                }
+
             }
         } catch (SQLException ex) {
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
