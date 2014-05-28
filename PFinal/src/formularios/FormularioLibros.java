@@ -1,20 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 Luis Cabrerizo Gómez
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package formularios;
 
 import db.BaseDeDatos;
 import db.Libro;
 import db.Resultado;
-import java.sql.SQLException;
 import utiles.Mensajes;
 import utiles.Validaciones;
 
 /**
+ * Clase para la creación del formulario de libros
  *
- * @author Super
+ * @author Luis Cabrerizo Gómez
  */
 public class FormularioLibros extends javax.swing.JInternalFrame {
 
@@ -23,30 +34,57 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private Libro libro;
 
     /**
-     * Creates new form FormularioAdd
+     * Constructor de la clase
      *
-     * @param libro
+     * @param libro Objeto libro con la información a mostrar del libro
      */
     public FormularioLibros(Libro libro) {
+
+        // Inicializamos los componentes que forman parte del formulario
         initComponents();
+
+        // Oculatamos la etiqueta de Ids de autores, donde almacenaremos los
+        // valores para su uso posterior
         lblIdAutores.setVisible(false);
 
+        // Guardamos el valor del parámetro en la variable de instancia
         this.libro = libro;
+
+        // Creamos una nueva conexión con la base de datos
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+
+        // Ocultamos los botones de aceptar y de cancelar
         btnAceptar.setVisible(false);
         btnCancelar.setVisible(false);
 
+        // Si el parámetro no es nulo rellenamos los campos con sus valores
+        // Solo se puede llamar a esta pantalla con valores desde la pantalla
+        // de biblioteca para mirar el resto de información del libro, por tanto
+        // inicialmente no activamos la edición
         if (libro != null) {
             rellenarCampos(libro);
             activarEdicion(false);
         } else {
+
+            // En caso de que no tenga valor el parámetro, se ha llamado a la
+            // pantalla desde el menú lateral, por tanto ponemos los campos
+            // vacios y activamos la edición en modo añadir
             rellenarCampos(null);
             activarEdicion(true);
         }
-
     }
 
+    /**
+     * Método que permite modificar los controles del formulario para poder
+     * editar valores o añadir registros
+     *
+     * @param edicion Verdadero para activar el modo edición, falso para
+     * desactivarlo
+     */
     private void activarEdicion(boolean edicion) {
+
+        // Modificamos la editabilidad y visibilidad de los controles 
+        // dependiendo del modo de edición que hayamos especificado
         txtAnyo.setEditable(edicion);
         txtEdicion.setEditable(edicion);
         txtEditorial.setEditable(edicion);
@@ -71,7 +109,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlPrincipal = new javax.swing.JPanel();
         txtBuscarISBN = new javax.swing.JTextField();
         btnBuscarISBN = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -104,6 +142,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         setMaximumSize(new java.awt.Dimension(446, 532));
         setMinimumSize(new java.awt.Dimension(446, 532));
+        setName("framePrincipal"); // NOI18N
 
         txtBuscarISBN.setEnabled(false);
 
@@ -326,27 +365,27 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(lblIdAutores)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAceptar)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(pnlPrincipalLayout.createSequentialGroup()
                                 .addComponent(btnAñadir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnModificar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(txtBuscarISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -354,11 +393,11 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     .addComponent(jSeparator1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarISBN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -366,14 +405,14 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIdAutores)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnModificar)
                         .addComponent(btnAñadir)
                         .addComponent(btnEliminar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar)))
         );
@@ -384,153 +423,281 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento para la pulsación del botón de buscar ISBN por internet
+     *
+     * @param evt Evento
+     */
     private void btnBuscarISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarISBNActionPerformed
 
     }//GEN-LAST:event_btnBuscarISBNActionPerformed
 
+    /**
+     * Método que nos permite validar la corrección de los datos introducidos en
+     * el formulario
+     *
+     * @return Verdadero si los datos son válidos, falso si no lo son
+     */
     private boolean validarDatos() {
         boolean salida = true;
 
+        // Comprobamos que el titulo se puedan introducir letras, números y algunos símbolos especiales
         if (!Validaciones.validarDato(txtTitulo.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
             salida = false;
         }
 
+        // Comprobamos que en el isbn solo se puedan introducir números
         if (!Validaciones.validarDato(txtISBN.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)) {
             salida = false;
         }
 
+        // Comprobamos que el editorial se puedan introducir letras, números y algunos símbolos especiales
         if (!Validaciones.validarDato(txtEditorial.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
             salida = false;
         }
 
+        // Comprobamos que el número de edición es un digito positivo distinto de 0
         if (!Validaciones.validarDato(txtEdicion.getText(), Validaciones.TipoValidacion.ENTERO_POSITIVO_NO_0)) {
             salida = false;
         }
 
+        // Comprobamos que el año es un número de tamaño 4
         if (!Validaciones.validarDato(txtAnyo.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS) || txtAnyo.getText().length() != 4) {
             salida = false;
         }
 
+        // Comprobamos que al menos hemos seleccionado un autor
+        // Para libros con autores anónimos, habrá que crear un autor específico
+        // para hacer referencia a este caso especial
         if (lblIdAutores.getText().equals("")) {
             salida = false;
         }
 
+        // Devolvemos el resultado de la validación
         return salida;
     }
 
+    /**
+     * Evento de pulsación del botón de aceptar
+     *
+     * @param evt Evento
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+        // Validamos que los datos introducidos por el usuario antes de continuar
         if (validarDatos()) {
 
-            this.libro = new Libro(txtISBN.getText(), txtTitulo.getText(), Integer.parseInt(txtEdicion.getText()), txtEditorial.getText(), txtAnyo.getText(), lblIdAutores.getText().split(","));
+            // Si son correctos, creamos nuevo objeto libro con los datos 
+            // introducidos y lo asignamos a la variable de instancia
+            this.libro = new Libro(txtISBN.getText(),
+                    txtTitulo.getText(),
+                    Integer.parseInt(txtEdicion.getText()),
+                    txtEditorial.getText(),
+                    txtAnyo.getText(),
+                    lblIdAutores.getText().split(","));
 
-            if (modo.equals("A")) {
+            // Si el modo del formulario es de añadir
+            if (this.modo.equals("A")) {
 
+                // Insertamos el libro en la base de datos, almacenando el resultado
+                // en una variable a tal efecto
                 Resultado datos = baseDatos.insertarLibro(libro);
 
+                // Comprobamos si la operación es correcta
                 if (datos.isOperacionCorrecta()) {
-                    Mensajes.mostrarMensaje("El libro se ha insertado correctamente", Mensajes.TipoMensaje.INFORMACION);
+
+                    // Si lo es, mostramos un mensaje
+                    Mensajes.mostrarMensaje("El libro se ha insertado correctamente",
+                            Mensajes.TipoMensaje.INFORMACION);
 
                 } else {
-                    Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
+                    // Si hay un error mostramos un mensaje a tal efecto y 
+                    // anulamos la variable de instancia
+                    Mensajes.mostrarMensaje(datos.getMensaje(),
+                            Mensajes.TipoMensaje.ERROR);
                     this.libro = null;
                 }
-                rellenarCampos(libro);
+
+                // Rellenamos los campos con los datos de la variable de instancia
+                // y desactivamos el modo de edición del formulario
+                rellenarCampos(this.libro);
                 activarEdicion(false);
 
             } else {
 
+                // Si el formulario no está en modo añadir, es una actualización.
+                // Actualizamos los datos del libro y guardamos el resultado
+                // en una variable                
                 Resultado datos = baseDatos.actualizarLibro(libro);
 
+                // Comprobamos si la operación se ha realizado correctamente
                 if (datos.isOperacionCorrecta()) {
+
+                    // Si es así, mostramos un mensaje al respecto
                     Mensajes.mostrarMensaje("El libro se ha actualizado correctamente", Mensajes.TipoMensaje.INFORMACION);
 
                 } else {
+                    // Si han sucedido errores, mostramos un mensaje y anulamos 
+                    // la variable de instancia
                     Mensajes.mostrarMensaje(datos.getMensaje(), Mensajes.TipoMensaje.ERROR);
                     this.libro = null;
                 }
-                rellenarCampos(libro);
+
+                // Rellenamos los campos con los valores de la variable de 
+                // instancia y desactivamos el modo de edición
+                rellenarCampos(this.libro);
                 activarEdicion(false);
 
             }
         } else {
+            // Si no son datos correctos, mostramos un mensaje al respecto
             Mensajes.mostrarMensaje("Debe introducir datos correctos para poder continuar", Mensajes.TipoMensaje.AVISO);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de exploración de autores
+     *
+     * @param evt Evento
+     */
     private void btnBrowseAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseAutoresActionPerformed
 
-        DialogoMultiSelect dialog = new DialogoMultiSelect(null, true, (libro != null ? libro.getAutores() : null));
+        // Creamos un objeto DialogMultiSelect pasándole los valores necesarios
+        // Paramos null como ventana padre, verdadero para que sea una ventana
+        // modal y los valores de autores si la varible de instancia no es nula
+        DialogoMultiSelect dialog = new DialogoMultiSelect(null, true, (this.libro != null ? libro.getAutores() : null));
+
+        // Hacemos que el formulario se posicione en relación al formulario
+        // de libros y lo hacemos visible
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
 
+        // Comprobamos si se han seleccionado autores en el formulario        
         if (dialog.getSeleccion().length > 0) {
-            String autores;
+
+            // Si se han seleccionado autores creamos una variable para
+            // concatenar los identificadores
             String ids = "";
 
+            // Iteramos por todos los registros seleccionados
             for (String idAutor : dialog.getSeleccion()) {
 
+                // Y concatenamos los identificadores, separándolos con una coma
                 ids += idAutor + ",";
             }
 
-            autores = baseDatos.consultaNombreAutor(dialog.getSeleccion());
-
+            // Quitamos la coma final tras las concatenación
             ids = ids.substring(0, ids.length() - 1);
 
+            // Asginamos las ids a la etiqueta oculta para tal efecto
             lblIdAutores.setText(ids);
-            txtAutor.setText(autores);
+
+            // Asignamos al cuadro de texto de autores los nombres de estos tras
+            // buscarlos en la base de datos
+            txtAutor.setText(baseDatos.consultaNombreAutor(dialog.getSeleccion()));
         }
 
 
     }//GEN-LAST:event_btnBrowseAutoresActionPerformed
 
+    /**
+     * Evento para la pulsación del boton de cancelar
+     *
+     * @param evt Evento
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        rellenarCampos(libro);
+
+        // Rellenamos los campos del formulario con los valores de la variable
+        // de instancia
+        rellenarCampos(this.libro);
+
+        // Desactivamos la edición en el formulario
         activarEdicion(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        // Comprobamos si la variable de instancia no es nula
+        // Si no es nula, tenemos valores y podemos modificarlos
         if (this.libro != null) {
-            modo = "M";
+
+            // Cambiamos el modo del formulario
+            this.modo = "M";
+
+            // Rellenamos los campos del formulario con los valores de la variable
+            // de instancia            
             rellenarCampos(libro);
+
+            // Activamos el modo de edición
             activarEdicion(true);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Evento para la pulsación del botón de eliminar
+     *
+     * @param evt Evento
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        // Comprobamos si la variable de instancia no es nula
+        // Si no es nula, tenemos valores y podemos eliminar el libro
         if (libro != null) {
-            if (Mensajes.pedirConfirmacion(String.format("%s%n¿Desea borrar este libro?", libro.getTitulo()))) {
+
+            // Mostramos un mensaje pidiendo confirmación al usuario
+            if (Mensajes.pedirConfirmacion(
+                    String.format("%s%n¿Desea borrar este libro?",
+                            libro.getTitulo()))) {
+
+                // Si el usuario confirma, eliminamos el libro y guardamos el 
+                // resultado de la consulta en una variable
                 Resultado datos = baseDatos.eliminar(
                         new String[]{"Titulos"},
                         new String[]{"ISBN = " + libro.getIsbn()});
 
+                // Verificamos si la operación es corracta
                 if (datos.isOperacionCorrecta()) {
-                    Mensajes.mostrarMensaje("El libro se ha borrado correctamente", Mensajes.TipoMensaje.INFORMACION);
+
+                    // Si es correcta, mostramos un mensaje a tal efecto y 
+                    // borramos los campos del formulario
+                    Mensajes.mostrarMensaje("El libro se ha borrado correctamente",
+                            Mensajes.TipoMensaje.INFORMACION);
+
                     rellenarCampos(null);
                 } else {
-                    Mensajes.mostrarMensaje("Error al borrar el libro", Mensajes.TipoMensaje.ERROR);
-                }
 
+                    // Si la operación no es correcta, mostramos un mensaje de 
+                    // error
+                    Mensajes.mostrarMensaje("Error al borrar el libro",
+                            Mensajes.TipoMensaje.ERROR);
+                }
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Método para rellenar los campos del formulario
+     *
+     * @param datosLibro Datos a mostrar en el formulario
+     */
     private void rellenarCampos(Libro datosLibro) {
+
+        // Si el parámetro es nulo, ponemos los campos en blanco
         if (datosLibro == null) {
             TxtaResumen.setText("");
             txtAnyo.setText("");
@@ -542,6 +709,8 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             lblIdAutores.setText("");
             cmbGenero.setSelectedIndex(-1);
         } else {
+
+            // Si el parámetro tiene valores, rellenamos los campos con ellos
             TxtaResumen.setText("");
             txtAnyo.setText(datosLibro.getCopyright());
             txtEdicion.setText(String.valueOf(datosLibro.getNumEdicion()));
@@ -552,22 +721,35 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
             String ids = "";
 
+            // Concatenamos los ids del autores
             for (String idAutor : datosLibro.getAutores()) {
                 ids += idAutor + ",";
             }
 
+            // Limpiamos la concatenación
             ids = ids.substring(0, ids.length() - 1);
 
+            // Asignamos los ids a la etiqueta oculta, y los nombres
+            // al cuadro de texto visible
             lblIdAutores.setText(ids);
             txtAutor.setText(baseDatos.consultaNombreAutor(datosLibro.getAutores()));
         }
     }
 
-
+    /**
+     * Evento para la pulsación del botón de añadir
+     * @param evt Evento
+     */
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
+        
+        // Limpiamos la variable de instancia
         this.libro = null;
-        modo = "A";
-        rellenarCampos(libro);
+        
+        // Cambiamos el modo del formulario
+        this.modo = "A";
+        
+        // Limpiamos los campos y activamos el modo de edición
+        rellenarCampos(libro);        
         activarEdicion(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
@@ -582,7 +764,6 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox cmbGenero;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -596,6 +777,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblIdAutores;
     private javax.swing.JLabel lblIsbn;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JTextField txtAnyo;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtBuscarISBN;
