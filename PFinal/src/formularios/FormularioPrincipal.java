@@ -223,7 +223,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
 
-        /*        
+/*
          try {
 
          BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
@@ -259,7 +259,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
          DialogInformes informes = new DialogInformes(this, true);
         
          informes.setVisible(true);
-         */
+*/
     }//GEN-LAST:event_btnInformesActionPerformed
 
     /**

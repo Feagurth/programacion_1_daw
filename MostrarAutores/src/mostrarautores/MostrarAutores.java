@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * 
  * @author Super
  */
 public class MostrarAutores {

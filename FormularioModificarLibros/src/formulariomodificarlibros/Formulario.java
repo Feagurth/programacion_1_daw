@@ -174,7 +174,7 @@ public class Formulario extends javax.swing.JFrame {
                 lblISBN.setText(registro.getObject(1).toString());
                 txtTitulo.setText(registro.getObject(2).toString());
                 txtNumEdicion.setText(registro.getObject(3).toString());
-                txtCopyRight.setText(registro.getObject(4).toString());
+                txtCopyRight.setText(registro.getObject(5).toString());
 
             }
 
@@ -184,7 +184,7 @@ public class Formulario extends javax.swing.JFrame {
             try {
                 registro.close();
                 instruccion.close();
-                instruccion.close();
+                conexion.close();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error de cierre de conexión", JOptionPane.ERROR_MESSAGE);
             }
@@ -274,6 +274,8 @@ public class Formulario extends javax.swing.JFrame {
 
     public Connection conexion() {
         Connection conexion = null;
+        
+        cargarDriver();
 
         try {
             conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/libros", "root", "");
