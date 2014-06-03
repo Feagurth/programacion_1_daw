@@ -223,6 +223,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
 
+        DialogInformes dialogo = new DialogInformes(this, true);
+        dialogo.setVisible(true);
+        
 /*
          try {
 
