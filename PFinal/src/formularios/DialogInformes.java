@@ -16,14 +16,14 @@
  */
 package formularios;
 
-import javax.swing.GroupLayout;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Luis Cabrerizo Gómez
  */
-public class DialogInformes extends javax.swing.JDialog {
+public final class DialogInformes extends javax.swing.JDialog {
 
     /**
      * Creates new form DialogInformes
@@ -35,55 +35,39 @@ public class DialogInformes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        crearCajaFiltro(tbAutores);
+        DialogInformes.crearCajaFiltro(tbAutores);
+        DialogInformes.crearCajaFiltro(tbTitulos);
         //crearCajaFiltro();
+
+        repaint();
+
     }
 
     public static void crearCajaFiltro(JPanel tab) {
 
         JPanel tmp = new PanelFiltro();
+        tab.add(tmp);
+        tab.repaint();
 
-        if (tab.getLayout() == null) {
-            javax.swing.GroupLayout tbLayout = new javax.swing.GroupLayout(tab);
-            tab.setLayout(tbLayout);
-            tbLayout.setHorizontalGroup(
-                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tbLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
-                            .addContainerGap())
-            );
-            tbLayout.setVerticalGroup(
-                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tbLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(426, Short.MAX_VALUE))
-            );
-        } else {
-            GroupLayout tbLayout = (GroupLayout) tab.getLayout();
-
-            tbLayout.setHorizontalGroup(
-                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tbLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
-                            .addContainerGap())
-            );
-            
-
-            
-            
-            tbLayout.setVerticalGroup(
-                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tbLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(426, Short.MAX_VALUE))
-            );
-
-        }
-
+        
+        /*        
+         javax.swing.GroupLayout tbLayout = new javax.swing.GroupLayout(tab);
+         tab.setLayout(tbLayout);
+         tbLayout.setHorizontalGroup(
+         tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(tbLayout.createSequentialGroup()
+         .addContainerGap()
+         .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
+         .addContainerGap())
+         );
+         tbLayout.setVerticalGroup(
+         tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(tbLayout.createSequentialGroup()
+         .addContainerGap()
+         .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+         .addContainerGap(426, Short.MAX_VALUE))
+         );
+         */
     }
 
     /**
@@ -104,33 +88,9 @@ public class DialogInformes extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout tbAutoresLayout = new javax.swing.GroupLayout(tbAutores);
-        tbAutores.setLayout(tbAutoresLayout);
-        tbAutoresLayout.setHorizontalGroup(
-            tbAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
-        );
-        tbAutoresLayout.setVerticalGroup(
-            tbAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
-        );
-
         jTabbedPane1.addTab("Autores", tbAutores);
 
         tbTitulos.setName("Titulos"); // NOI18N
-
-        javax.swing.GroupLayout tbTitulosLayout = new javax.swing.GroupLayout(tbTitulos);
-        tbTitulos.setLayout(tbTitulosLayout);
-        tbTitulosLayout.setHorizontalGroup(
-            tbTitulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
-        );
-        tbTitulosLayout.setVerticalGroup(
-            tbTitulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
-        );
-
         jTabbedPane1.addTab("Titulos", tbTitulos);
 
         btnCancelar.setText("Cancelar");
