@@ -14,8 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package formularios;
+
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -25,26 +27,65 @@ public class DialogInformes extends javax.swing.JDialog {
 
     /**
      * Creates new form DialogInformes
+     *
      * @param parent
      * @param modal
      */
     public DialogInformes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        crearCajaFiltro(tbAutores);
+        //crearCajaFiltro();
     }
 
-    private void crearCajaFiltro()
-    {
-        jPanel3 = new javax.swing.JPanel();
-        cmbFiltro = new javax.swing.JComboBox();
-        cmbTipoFiltro = new javax.swing.JComboBox();
-        cmbOrden = new javax.swing.JComboBox();
-        txtFiltro = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
-        btnAñadir = new javax.swing.JButton();
+    public static void crearCajaFiltro(JPanel tab) {
+
+        JPanel tmp = new PanelFiltro();
+
+        if (tab.getLayout() == null) {
+            javax.swing.GroupLayout tbLayout = new javax.swing.GroupLayout(tab);
+            tab.setLayout(tbLayout);
+            tbLayout.setHorizontalGroup(
+                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
+                            .addContainerGap())
+            );
+            tbLayout.setVerticalGroup(
+                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(426, Short.MAX_VALUE))
+            );
+        } else {
+            GroupLayout tbLayout = (GroupLayout) tab.getLayout();
+
+            tbLayout.setHorizontalGroup(
+                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
+                            .addContainerGap())
+            );
+            
+
+            
+            
+            tbLayout.setVerticalGroup(
+                    tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(426, Short.MAX_VALUE))
+            );
+
+        }
+
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,13 +98,6 @@ public class DialogInformes extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         tbAutores = new javax.swing.JPanel();
         tbTitulos = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        cmbFiltro = new javax.swing.JComboBox();
-        cmbTipoFiltro = new javax.swing.JComboBox();
-        cmbOrden = new javax.swing.JComboBox();
-        txtFiltro = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
-        btnAñadir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
 
@@ -86,74 +120,15 @@ public class DialogInformes extends javax.swing.JDialog {
 
         tbTitulos.setName("Titulos"); // NOI18N
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setMaximumSize(new java.awt.Dimension(840, 48));
-        jPanel3.setMinimumSize(new java.awt.Dimension(840, 48));
-
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Titulo", "Autor", "NumeroEdicion", "Editorial", "Copyright" }));
-
-        cmbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Acaba", "Comienza", "Contiene" }));
-
-        cmbOrden.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ascendente", "Descendente" }));
-
-        btnEliminar.setText("-");
-
-        btnAñadir.setText("+");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAñadir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(cmbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAñadir)
-                            .addComponent(btnEliminar))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout tbTitulosLayout = new javax.swing.GroupLayout(tbTitulos);
         tbTitulos.setLayout(tbTitulosLayout);
         tbTitulosLayout.setHorizontalGroup(
             tbTitulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tbTitulosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 631, Short.MAX_VALUE)
         );
         tbTitulosLayout.setVerticalGroup(
             tbTitulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tbTitulosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(426, Short.MAX_VALUE))
+            .addGap(0, 490, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Titulos", tbTitulos);
@@ -239,16 +214,9 @@ public class DialogInformes extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnAñadir;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JComboBox cmbFiltro;
-    private javax.swing.JComboBox cmbOrden;
-    private javax.swing.JComboBox cmbTipoFiltro;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel tbAutores;
     private javax.swing.JPanel tbTitulos;
-    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
