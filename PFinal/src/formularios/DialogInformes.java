@@ -33,7 +33,7 @@ public class DialogInformes extends javax.swing.JDialog {
         initComponents();
     }
 
-    private void crearCajaFiltro(int numero)
+    private void crearCajaFiltro()
     {
         jPanel3 = new javax.swing.JPanel();
         cmbFiltro = new javax.swing.JComboBox();
