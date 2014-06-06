@@ -16,7 +16,6 @@
  */
 package formularios;
 
-import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -35,21 +34,35 @@ public final class DialogInformes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        DialogInformes.crearCajaFiltro(tbAutores);
-        DialogInformes.crearCajaFiltro(tbTitulos);
+        this.crearCajaFiltro(tbAutores);
+        this.crearCajaFiltro(tbTitulos);
         //crearCajaFiltro();
 
+        pack();
         repaint();
 
     }
 
-    public static void crearCajaFiltro(JPanel tab) {
+    public void crearCajaFiltro(JPanel tab) {
 
         JPanel tmp = new PanelFiltro();
+
         tab.add(tmp);
+        
+        tab.updateUI();
+        
         tab.repaint();
 
+        this.pack();
         
+        this.repaint();
+
+        
+
+        
+        
+        
+
         /*        
          javax.swing.GroupLayout tbLayout = new javax.swing.GroupLayout(tab);
          tab.setLayout(tbLayout);
@@ -78,6 +91,7 @@ public final class DialogInformes extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         tbAutores = new javax.swing.JPanel();
@@ -86,45 +100,45 @@ public final class DialogInformes extends javax.swing.JDialog {
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setName("principal"); // NOI18N
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane1.setAutoscrolls(true);
+
+        tbAutores.setAutoscrolls(true);
         jTabbedPane1.addTab("Autores", tbAutores);
 
+        tbTitulos.setAutoscrolls(true);
         tbTitulos.setName("Titulos"); // NOI18N
         jTabbedPane1.addTab("Titulos", tbTitulos);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 571;
+        gridBagConstraints.ipady = 38;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 0, 0);
+        getContentPane().add(jTabbedPane1, gridBagConstraints);
+
         btnCancelar.setText("Cancelar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 5, 11, 11);
+        getContentPane().add(btnCancelar, gridBagConstraints);
 
         btnAceptar.setText("Aceptar");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar)
-                    .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 498, 11, 0);
+        getContentPane().add(btnAceptar, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

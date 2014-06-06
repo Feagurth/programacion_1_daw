@@ -30,7 +30,7 @@ public class PanelFiltro extends javax.swing.JPanel {
      */
     public PanelFiltro() {
         initComponents();
-        
+
         this.setVisible(true);
     }
 
@@ -122,7 +122,9 @@ public class PanelFiltro extends javax.swing.JPanel {
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         
-        DialogInformes.crearCajaFiltro((JPanel) this.getParent());
+        DialogInformes form = new DialogInformes(null, true);
+
+        form.crearCajaFiltro((JPanel) this.getParent());
     }//GEN-LAST:event_btnAñadirActionPerformed
 
 

@@ -36,7 +36,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         initComponents();
 
         //TODO: Quitar cuando se acabe el desarrollo de la aplicación
-        btnBrowseActionPerformed(null);
 
     }
 
