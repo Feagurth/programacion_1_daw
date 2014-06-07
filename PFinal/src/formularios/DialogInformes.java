@@ -16,6 +16,10 @@
  */
 package formularios;
 
+import java.awt.Component;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -23,6 +27,36 @@ import javax.swing.JPanel;
  * @author Luis Cabrerizo Gómez
  */
 public final class DialogInformes extends javax.swing.JDialog {
+
+    private static int contadorAutores = 0;
+    private static int contadorTitulos = 0;
+
+    private static final int MAX_FILTROS_AUTORES = 4;
+    private static final int MAX_FILTROS_TITULOS = 4;
+
+    public static int getMAX_FILTROS_AUTORES() {
+        return MAX_FILTROS_AUTORES;
+    }
+
+    public static int getMAX_FILTROS_TITULOS() {
+        return MAX_FILTROS_TITULOS;
+    }
+
+    public static int getContadorAutores() {
+        return contadorAutores;
+    }
+
+    public static void setContadorAutores(int contadorAutores) {
+        DialogInformes.contadorAutores = contadorAutores;
+    }
+
+    public static int getContadorTitulos() {
+        return contadorTitulos;
+    }
+
+    public static void setContadorTitulos(int contadorTitulos) {
+        DialogInformes.contadorTitulos = contadorTitulos;
+    }
 
     /**
      * Creates new form DialogInformes
@@ -34,55 +68,91 @@ public final class DialogInformes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        this.crearCajaFiltro(tbAutores);
-        this.crearCajaFiltro(tbTitulos);
-        //crearCajaFiltro();
-
-        pack();
-        repaint();
+        DialogInformes.crearCajaFiltro(tbAutores);
+        DialogInformes.crearCajaFiltro(tbTitulos);
 
     }
 
-    public void crearCajaFiltro(JPanel tab) {
+    public static void eliminarCajaFiltro(PanelFiltro panel) {
+        if (panel.getParent().equals(tbAutores)) {
+            contadorAutores--;
+            tbAutores.remove(panel);
 
-        JPanel tmp = new PanelFiltro();
+            tbAutores.updateUI();
+            tbAutores.repaint();
+            
+            habilitarControles(tbAutores);
+        } else {
+            contadorTitulos--;
+            tbTitulos.remove(panel);
+
+            tbTitulos.updateUI();
+            tbTitulos.repaint();
+            
+            habilitarControles(tbTitulos);
+
+        }
+
+    }
+
+    public static void crearCajaFiltro(JPanel tab) {
+
+        JPanel tmp;
+
+        if (tab.equals(tbTitulos)) {
+            tmp = new PanelFiltro(contadorTitulos, tbTitulos);
+            contadorTitulos++;
+        } else {
+            tmp = new PanelFiltro(contadorAutores, tbAutores);
+            contadorAutores++;
+        }
 
         tab.add(tmp);
-        
+
         tab.updateUI();
-        
+
         tab.repaint();
 
-        this.pack();
-        
-        this.repaint();
+        habilitarControles(tab);
 
-        
-
-        
-        
-        
-
-        /*        
-         javax.swing.GroupLayout tbLayout = new javax.swing.GroupLayout(tab);
-         tab.setLayout(tbLayout);
-         tbLayout.setHorizontalGroup(
-         tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(tbLayout.createSequentialGroup()
-         .addContainerGap()
-         .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
-         .addContainerGap())
-         );
-         tbLayout.setVerticalGroup(
-         tbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(tbLayout.createSequentialGroup()
-         .addContainerGap()
-         .addComponent(tmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-         .addContainerGap(426, Short.MAX_VALUE))
-         );
-         */
     }
 
+    private static void habilitarControles(JPanel tab) {
+        int valorMaximo;
+        int valorActual;
+        int contador = 1;
+
+        if (tab.equals(tbTitulos)) {
+            valorMaximo = MAX_FILTROS_TITULOS;
+            valorActual = contadorTitulos;
+
+        } else {
+            valorMaximo = MAX_FILTROS_AUTORES;
+            valorActual = contadorAutores;
+        }
+
+        for (Component panel : tab.getComponents()) {
+
+            if (contador < valorActual) {
+                ((PanelFiltro) panel).habilitaNuevo(false);
+            } else {
+                if (((PanelFiltro) panel).getValor() == valorMaximo) {
+                    ((PanelFiltro) panel).habilitaNuevo(false);
+                } else {
+                    ((PanelFiltro) panel).habilitaNuevo(true);
+                }
+            }
+
+            if (((PanelFiltro) panel).getValor() == 0) {
+                ((PanelFiltro) panel).habilitaEliminar(false);
+            } else {
+                ((PanelFiltro) panel).habilitaEliminar(true);
+            }
+            
+            contador++;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +161,6 @@ public final class DialogInformes extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         tbAutores = new javax.swing.JPanel();
@@ -100,48 +169,89 @@ public final class DialogInformes extends javax.swing.JDialog {
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(627, 324));
+        setMinimumSize(new java.awt.Dimension(627, 324));
         setName("principal"); // NOI18N
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        setResizable(false);
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTabbedPane1.setAutoscrolls(true);
 
-        tbAutores.setAutoscrolls(true);
+        tbAutores.setMaximumSize(new java.awt.Dimension(400, 10));
+        tbAutores.setMinimumSize(new java.awt.Dimension(400, 10));
+        tbAutores.setName("Autores"); // NOI18N
+        tbAutores.setPreferredSize(new java.awt.Dimension(400, 10));
         jTabbedPane1.addTab("Autores", tbAutores);
 
-        tbTitulos.setAutoscrolls(true);
+        tbTitulos.setMaximumSize(new java.awt.Dimension(400, 10));
+        tbTitulos.setMinimumSize(new java.awt.Dimension(400, 10));
         tbTitulos.setName("Titulos"); // NOI18N
+        tbTitulos.setPreferredSize(new java.awt.Dimension(400, 10));
         jTabbedPane1.addTab("Titulos", tbTitulos);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 571;
-        gridBagConstraints.ipady = 38;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 0, 0);
-        getContentPane().add(jTabbedPane1, gridBagConstraints);
-
         btnCancelar.setText("Cancelar");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 5, 11, 11);
-        getContentPane().add(btnCancelar, gridBagConstraints);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setText("Aceptar");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 498, 11, 0);
-        getContentPane().add(btnAceptar, gridBagConstraints);
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnAceptar))
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if(tbAutores.isShowing())
+        {
+            for (Component component : tbAutores.getComponents()) {
+                System.out.println(Arrays.toString(((PanelFiltro)component).getFiltros()));
+            }
+        }
+        else
+        {
+            for (Component component : tbTitulos.getComponents()) {
+                System.out.println(Arrays.toString(((PanelFiltro)component).getFiltros()));
+            }        
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,7 +300,8 @@ public final class DialogInformes extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JPanel tbAutores;
-    private javax.swing.JPanel tbTitulos;
+    private static javax.swing.JPanel tbAutores;
+    private static javax.swing.JPanel tbTitulos;
     // End of variables declaration//GEN-END:variables
+
 }

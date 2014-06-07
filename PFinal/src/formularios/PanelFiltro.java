@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package formularios;
 
 import javax.swing.JPanel;
@@ -25,13 +24,97 @@ import javax.swing.JPanel;
  */
 public class PanelFiltro extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelFiltro
-     */
-    public PanelFiltro() {
+    int valor;
+
+    public int getValor() {
+        return valor;
+    }
+
+    public PanelFiltro(int valor, JPanel panel) {
+
+        this.valor = valor;
+
         initComponents();
 
         this.setVisible(true);
+
+    }
+
+    public void habilitaNuevo(boolean valor) {
+        btnAñadir.setEnabled(valor);
+    }
+
+    public void habilitaEliminar(boolean valor) {
+        btnEliminar.setEnabled(valor);
+    }
+
+    public String[] getFiltros() {
+        String[] salida = new String[2];
+
+        if (!txtFiltro.getText().equals("")) {
+            switch (cmbFiltro.getSelectedIndex()) {
+                case 0: {
+                    salida[0] = "ISBN LIKE ";
+                    salida[1] = "ISBN ";
+
+                    break;
+                }
+                case 1: {
+                    salida[0] = "TITULO LIKE ";
+                    salida[1] = "TITULO ";
+                    break;
+                }
+                case 2: {
+                    salida[0] = "AUTOR LIKE ";
+                    salida[1] = "AUTOR ";
+                    break;
+                }
+                case 3: {
+                    salida[0] = "NUMEROEDICION LIKE ";
+                    salida[1] = "NUMEROEDICION ";
+                    break;
+                }
+                case 4: {
+                    salida[0] = "EDITORIAL LIKE ";
+                    salida[1] = "EDITORIAL ";
+                    break;
+                }
+                case 5: {
+                    salida[0] = "COPYRIGHT LIKE ";
+                    salida[1] = "COPYRIGHT ";
+                    break;
+                }
+            }
+
+            switch (cmbTipoFiltro.getSelectedIndex()) {
+                case 0: {
+                    salida[0] += "'%" + txtFiltro.getText() + "'";
+                    break;
+                }
+
+                case 1: {
+                    salida[0] += "'" + txtFiltro.getText() + "%'";
+                    break;
+                }
+                case 2: {
+                    salida[0] += "'%" + txtFiltro.getText() + "%'";
+                    break;
+                }
+            }
+
+            switch (cmbOrden.getSelectedIndex()) {
+                case 0: {
+                    salida[1] += "ASC";
+                    break;
+                }
+                case 1: {
+                    salida[1] += "DESC";
+                    break;
+                }
+
+            }
+        }
+        return salida;
     }
 
     /**
@@ -43,7 +126,7 @@ public class PanelFiltro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
         cmbFiltro = new javax.swing.JComboBox();
         cmbTipoFiltro = new javax.swing.JComboBox();
         cmbOrden = new javax.swing.JComboBox();
@@ -51,9 +134,9 @@ public class PanelFiltro extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         btnAñadir = new javax.swing.JButton();
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setMaximumSize(new java.awt.Dimension(840, 48));
-        jPanel3.setMinimumSize(new java.awt.Dimension(840, 48));
+        panelPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelPrincipal.setMaximumSize(new java.awt.Dimension(840, 48));
+        panelPrincipal.setMinimumSize(new java.awt.Dimension(840, 48));
 
         cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Titulo", "Autor", "NumeroEdicion", "Editorial", "Copyright" }));
 
@@ -62,6 +145,11 @@ public class PanelFiltro extends javax.swing.JPanel {
         cmbOrden.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ascendente", "Descendente" }));
 
         btnEliminar.setText("-");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnAñadir.setText("+");
         btnAñadir.addActionListener(new java.awt.event.ActionListener() {
@@ -70,11 +158,11 @@ public class PanelFiltro extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -89,14 +177,14 @@ public class PanelFiltro extends javax.swing.JPanel {
                 .addComponent(btnEliminar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cmbOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnAñadir)
@@ -109,23 +197,24 @@ public class PanelFiltro extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        
-        DialogInformes form = new DialogInformes(null, true);
-
-        form.crearCajaFiltro((JPanel) this.getParent());
+        DialogInformes.crearCajaFiltro((JPanel) this.getParent());
     }//GEN-LAST:event_btnAñadirActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        DialogInformes.eliminarCajaFiltro(this);
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -134,7 +223,7 @@ public class PanelFiltro extends javax.swing.JPanel {
     private javax.swing.JComboBox cmbFiltro;
     private javax.swing.JComboBox cmbOrden;
     private javax.swing.JComboBox cmbTipoFiltro;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
