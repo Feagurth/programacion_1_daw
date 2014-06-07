@@ -294,24 +294,41 @@ public class BaseDeDatos {
         // Comprobamos si hay condiciones en los parámetros
         if (condiciones != null) {
 
-            // Comprobamos si la cadena sql contiene una agrupación
-            if (!sql.contains("GROUP")) {
-
-                // Si no la tiene concatenamos WHERE
-                sql += " WHERE";
-            } else {
-
-                // Si la tiene concatenamos HAVING
-                sql += " HAVING";
-            }
+            String apoyo = "";
 
             // Iteramos por las condiciones concatenando sus valores
             for (String condicion : condiciones) {
-                sql += " " + condicion + " AND";
+
+                // Comprobamos que la condición no sea un caracter vacio
+                // proviniente de los filtros de los informes
+                if (!condicion.equals("")) {
+                    apoyo += " " + condicion + " AND";
+                }
+
             }
 
-            // Limpiamos los cuatro últimos caracteres de la concatenación
-            sql = sql.substring(0, sql.length() - 4);
+            // Si tenemos valores para filtrar, las concatenamos a la sql
+            if (!apoyo.equals("")) {
+                
+                // Comprobamos si la cadena sql contiene una agrupación
+                if (!sql.contains("GROUP")) {
+
+                    // Si no la tiene concatenamos WHERE
+                    sql += " WHERE";
+                } else {
+
+                    // Si la tiene concatenamos HAVING
+                    sql += " HAVING";
+                }
+
+                // Agregamos las condiciones
+                sql += apoyo;
+
+                // Limpiamos los cuatro últimos caracteres de la concatenación
+                sql = sql.substring(0, sql.length() - 4);
+
+            }
+
         }
 
         // Comprobamos si hay ordenación entre los parámetros
@@ -322,11 +339,11 @@ public class BaseDeDatos {
 
             // Iteramos por las ordenaciones concatenando sus valores
             for (String orden : ordenacion) {
-                sql += " " + orden + " AND";
+                sql += " " + orden + ", ";
             }
 
             // Limpiamos los cuatro últimos caracteres de la concatenación
-            sql = sql.substring(0, sql.length() - 4);
+            sql = sql.substring(0, sql.length() - 2);
         }
 
         // Comprobamos si los parámetros especifican límites
@@ -608,18 +625,16 @@ public class BaseDeDatos {
 
             // Verificamos si hay errores
             if (!salida.isOperacionCorrecta()) {
-                
+
                 // Si los hay borramos los registros almacenados de autores
                 salida = eliminar(new String[]{"titulos"}, new String[]{"isbn = " + libro.getIsbn()});
-                
+
                 // Verificamos si hay errores
                 if (salida.isOperacionCorrecta()) {
-                    
+
                     // Creamos un objeto Resultado con un mensaje de error
                     salida = new Resultado(false, "Error al insertar los autores del libro", null);
-                }
-                else
-                {
+                } else {
                     // Creamos un objeto Resultado con un mensaje de error
                     salida = new Resultado(false, "Error al insertar los autores del libro", null);
                 }

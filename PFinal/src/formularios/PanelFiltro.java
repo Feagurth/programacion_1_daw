@@ -16,6 +16,7 @@
  */
 package formularios;
 
+import formularios.PanelFiltro.TipoPanelFiltro;
 import javax.swing.JPanel;
 
 /**
@@ -26,12 +27,61 @@ import javax.swing.JPanel;
 public class PanelFiltro extends javax.swing.JPanel {
 
     /**
-     * Constructor de la clase PanelFiltro
+     * Enumerador para los tipos de filtros
      */
-    public PanelFiltro() {
+    public enum TipoPanelFiltro {
+
+        /**
+         * Valor para el filtro de títulos
+         */
+        TITULOS(0),
+        /**
+         * Valor para el filtro de autores
+         */
+        AUTORES(1);
+
+        private final int valor;
+
+        /**
+         * Constructor del enumerador
+         *
+         * @param valor Valor del enumerador
+         */
+        private TipoPanelFiltro(int valor) {
+            this.valor = valor;
+        }
+    }
+
+    private final TipoPanelFiltro modo;
+
+    /**
+     * Constructor de la clase PanelFiltro
+     *
+     * @param modo Modo del filtro
+     */
+    public PanelFiltro(TipoPanelFiltro modo) {
+
+        // Asignamos el modo
+        this.modo = modo;
 
         // Inicializamos los componentes gráficos de la clase
         initComponents();
+
+        // Comprobamos en que modo se debe cargar el filtro y llenamos el combo
+        //  de filtros con los datos correspondientes
+        if (this.modo == TipoPanelFiltro.TITULOS) {
+            cmbFiltro.removeAllItems();
+            cmbFiltro.addItem("ISBN");
+            cmbFiltro.addItem("Titulo");
+            cmbFiltro.addItem("Autor");
+            cmbFiltro.addItem("NumeroEdicion");
+            cmbFiltro.addItem("Editorial");
+            cmbFiltro.addItem("Copyright");
+        } else {
+            cmbFiltro.removeAllItems();
+            cmbFiltro.addItem("Nombre");
+            cmbFiltro.addItem("Apellidos");
+        }
 
         // Hacemos el formulario visible
         this.setVisible(true);
@@ -66,38 +116,60 @@ public class PanelFiltro extends javax.swing.JPanel {
 
         // Creamos la variable de salida
         String[] salida = new String[2];
+        salida[0] = "";
+        salida[1] = "";
 
         // Comprobamos si el campo texto no es vacío, si no lo es, tenemos filtro
         // de búsqueda
         if (!txtFiltro.getText().equals("")) {
 
-            // Comprobamos que valor de filtro usaremos y vamos creando la
-            // cadena de salida en consecuencia
-            switch (cmbFiltro.getSelectedIndex()) {
-                case 0: {
-                    salida[0] = "ISBN LIKE ";
-                    break;
+            // Comprobamos si el panel de filtro es para títulos o para autores
+            if (this.modo == TipoPanelFiltro.TITULOS) {
+
+                // Comprobamos que valor de filtro usaremos y vamos creando la
+                // cadena de salida en consecuencia
+                switch (cmbFiltro.getSelectedIndex()) {
+                    case 0: {
+                        salida[0] = "ISBN LIKE ";
+                        break;
+                    }
+                    case 1: {
+                        salida[0] = "TITULO LIKE ";
+                        break;
+                    }
+                    case 2: {
+                        salida[0] = "AUTOR LIKE ";
+                        break;
+                    }
+                    case 3: {
+                        salida[0] = "NUMEROEDICION LIKE ";
+                        break;
+                    }
+                    case 4: {
+                        salida[0] = "EDITORIAL LIKE ";
+                        break;
+                    }
+                    case 5: {
+                        salida[0] = "COPYRIGHT LIKE ";
+                        break;
+                    }
                 }
-                case 1: {
-                    salida[0] = "TITULO LIKE ";
-                    break;
+
+            } else {
+                // Comprobamos que valor de filtro usaremos y vamos creando la
+                // cadena de salida en consecuencia
+                switch (cmbFiltro.getSelectedIndex()) {
+                    case 0: {
+                        salida[0] = "NOMBRE LIKE ";
+                        break;
+                    }
+                    case 1: {
+                        salida[0] = "APELLIDOS LIKE ";
+                        break;
+                    }
+
                 }
-                case 2: {
-                    salida[0] = "AUTOR LIKE ";
-                    break;
-                }
-                case 3: {
-                    salida[0] = "NUMEROEDICION LIKE ";
-                    break;
-                }
-                case 4: {
-                    salida[0] = "EDITORIAL LIKE ";
-                    break;
-                }
-                case 5: {
-                    salida[0] = "COPYRIGHT LIKE ";
-                    break;
-                }
+
             }
 
             // Comprobamos el tipo de filtro que usaremos y seguimos creando
@@ -121,33 +193,50 @@ public class PanelFiltro extends javax.swing.JPanel {
             salida[0] = "";
         }
 
-        // Comprobamos el tipo de filtro seleccionado para crear la cadena de
-        // ordenación
-        switch (cmbFiltro.getSelectedIndex()) {
-            case 0: {
-                salida[1] = "ISBN ";
+        // Comprobamos el tipo de filtro
+        if (this.modo == TipoPanelFiltro.TITULOS) {
+            // Comprobamos el tipo de filtro seleccionado para crear la cadena 
+            // de ordenación
+            switch (cmbFiltro.getSelectedIndex()) {
+                case 0: {
+                    salida[1] = "ISBN ";
 
-                break;
+                    break;
+                }
+                case 1: {
+                    salida[1] = "TITULO ";
+                    break;
+                }
+                case 2: {
+                    salida[1] = "AUTOR ";
+                    break;
+                }
+                case 3: {
+                    salida[1] = "NUMEROEDICION ";
+                    break;
+                }
+                case 4: {
+                    salida[1] = "EDITORIAL ";
+                    break;
+                }
+                case 5: {
+                    salida[1] = "COPYRIGHT ";
+                    break;
+                }
             }
-            case 1: {
-                salida[1] = "TITULO ";
-                break;
-            }
-            case 2: {
-                salida[1] = "AUTOR ";
-                break;
-            }
-            case 3: {
-                salida[1] = "NUMEROEDICION ";
-                break;
-            }
-            case 4: {
-                salida[1] = "EDITORIAL ";
-                break;
-            }
-            case 5: {
-                salida[1] = "COPYRIGHT ";
-                break;
+        } else {
+            // Comprobamos el tipo de filtro seleccionado para crear la cadena
+            // de ordenación
+            switch (cmbFiltro.getSelectedIndex()) {
+                case 0: {
+                    salida[1] = "NOMBRE ";
+
+                    break;
+                }
+                case 1: {
+                    salida[1] = "APELLIDOS ";
+                    break;
+                }
             }
         }
 
@@ -190,7 +279,7 @@ public class PanelFiltro extends javax.swing.JPanel {
         panelPrincipal.setMaximumSize(new java.awt.Dimension(840, 48));
         panelPrincipal.setMinimumSize(new java.awt.Dimension(840, 48));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Titulo", "Autor", "NumeroEdicion", "Editorial", "Copyright" }));
+        cmbFiltro.setMaximumSize(new java.awt.Dimension(99, 24));
 
         cmbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Acaba", "Comienza", "Contiene" }));
 
@@ -216,7 +305,7 @@ public class PanelFiltro extends javax.swing.JPanel {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,7 +338,7 @@ public class PanelFiltro extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 606, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

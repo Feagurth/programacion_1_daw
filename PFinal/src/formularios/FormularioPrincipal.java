@@ -34,9 +34,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         // Inicializamos los componentes gráficos del formulario
         initComponents();
-
-        //TODO: Quitar cuando se acabe el desarrollo de la aplicación
-
     }
 
     /**
@@ -258,9 +255,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
          }
 
 
-         DialogInformes informes = new DialogInformes(this, true);
-        
-         informes.setVisible(true);
 */
     }//GEN-LAST:event_btnInformesActionPerformed
 

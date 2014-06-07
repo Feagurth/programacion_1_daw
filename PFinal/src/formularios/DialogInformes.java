@@ -16,9 +16,21 @@
  */
 package formularios;
 
+import db.BaseDeDatos;
+import db.Resultado;
 import java.awt.Component;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JPanel;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import utiles.Mensajes;
 
 /**
  * Clase para lanzar informes a través de filtros creados dinámicamente
@@ -160,14 +172,14 @@ public final class DialogInformes extends javax.swing.JDialog {
 
             // Creamos el objeto y le pasamos como identificador el número
             // de filtro
-            tmp = new PanelFiltro();
+            tmp = new PanelFiltro(PanelFiltro.TipoPanelFiltro.TITULOS);
 
             // Incrementamos el número de filtros
             contadorTitulos++;
         } else {
             // Creamos el objeto y le pasamos como identificador el número
             // de filtro            
-            tmp = new PanelFiltro();
+            tmp = new PanelFiltro(PanelFiltro.TipoPanelFiltro.AUTORES);
 
             // Incrementamos el número de filtros
             contadorAutores++;
@@ -313,7 +325,7 @@ public final class DialogInformes extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAceptar)
@@ -353,16 +365,144 @@ public final class DialogInformes extends javax.swing.JDialog {
      * @param evt Evento
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        if (tbAutores.isShowing()) {
-            for (Component component : tbAutores.getComponents()) {
-                System.out.println(Arrays.toString(((PanelFiltro) component).getFiltros()));
+
+        // Declaramos dos variables para almacenar los filtros y la ordenación
+        String filtro = "";
+        String orden = "";
+
+        // Comprobamos en que pestaña nos encontramos
+        if (tbTitulos.isShowing()) {
+
+            // Iteramos por los componentes de la pestaña que está visible
+            // recuperando los filtros y la ordenación de cada panel
+            for (Component panelFiltro : tbTitulos.getComponents()) {
+                filtro += ((PanelFiltro) panelFiltro).getFiltros()[0] + ";";
+                orden += ((PanelFiltro) panelFiltro).getFiltros()[1] + ";";
             }
+
+            // Lanzamos el informe correspondiente, pasándole los filtros y 
+            // ordenación
+            lanzarInforme(PanelFiltro.TipoPanelFiltro.TITULOS, filtro.split(";"), orden.split(";"));
         } else {
-            for (Component component : tbTitulos.getComponents()) {
-                System.out.println(Arrays.toString(((PanelFiltro) component).getFiltros()));
+            // Iteramos por los componentes de la pestaña que está visible
+            // recuperando los filtros y la ordenación de cada panel
+            for (Component panelFiltro : tbAutores.getComponents()) {
+                filtro += ((PanelFiltro) panelFiltro).getFiltros()[0] + ";";
+                orden += ((PanelFiltro) panelFiltro).getFiltros()[1] + ";";
             }
+
+            // Lanzamos el informe correspondiente, pasándole los filtros y 
+            // ordenación
+            lanzarInforme(PanelFiltro.TipoPanelFiltro.AUTORES, filtro.split(";"), orden.split(";"));
+
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void lanzarInforme(PanelFiltro.TipoPanelFiltro tipoInforme, String[] filtro, String[] orden) {
+
+        try {
+
+            // Definimos una variable para almacenar el nombre del infomre a lanzar
+            String informe;
+
+            // Definimos una variable tipo Resultado para almacenar el resultado
+            // de la consulta
+            Resultado salida;
+
+            // Creamos una conexión con la base de datos
+            BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+
+            // Definimos una variable para almacenar los filtros usados y 
+            // mostrarlos en el informe
+            String parametroFiltro = "Filtro: ";
+
+            // Vamos creando la cadena a partir de los filtros
+            for (String cadena : filtro) {
+                if (!cadena.equals("")) {
+                    parametroFiltro += cadena + "; ";
+                }
+            }
+
+            // Ajustamos el textoa mostrar si no hay filtro
+            if(parametroFiltro.equals("Filtro: "))
+            {
+                parametroFiltro = "Filtro: Ninguno";
+            }
+            
+            // Y de las ordenes pasadas al informe
+            parametroFiltro += "\nOrden: ";
+
+            for (String cadena : orden) {
+                if (!cadena.equals("")) {
+                    parametroFiltro += cadena + "; ";
+                }
+            }
+
+            // Finalmente creamos un HasMap donde ponemos la variable
+            // con una denominación que se usará en el informe para relacionar
+            // la información 
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("filtro", parametroFiltro);
+
+            // Comprobamos el tipo de informe que se ha solicitado
+            if (tipoInforme == PanelFiltro.TipoPanelFiltro.TITULOS) {
+
+                // Asignamos el nombre del fichero del informe a mostrar
+                informe = "Titulos.jrxml";
+
+                // Realizamos la consulta específica para el informe de títulos
+                // con los filtros y la ordenación correspondiente
+                salida = baseDatos.consultar(
+                        new String[]{
+                            "DISTINCT Titulos.isbn AS ISBN",
+                            "Titulos.titulo AS Titulo",
+                            "GROUP_CONCAT(autores.primerNombre,' ',autores.apellidoPaterno SEPARATOR ', ') AS Autor",
+                            "Titulos.numeroEdicion AS NumeroEdicion",
+                            "Titulos.editorial AS Editorial",
+                            "Titulos.copyright AS Copyright"},
+                        new String[]{"autores autores INNER JOIN isbnautor isbnautor ON autores.idAutor = isbnautor.idAutor INNER JOIN Titulos Titulos ON isbnautor.isbn = Titulos.isbn GROUP BY Titulos.isbn"},
+                        filtro,
+                        orden);
+            } else {
+
+                // Asignamos el nombre del fichero del informe a mostrar
+                informe = "Autores.jrxml";
+
+                // Realizamos la consulta específica para el informe de autores
+                // con los filtros y la ordenación correspondiente
+                salida = baseDatos.consultar(
+                        new String[]{
+                            "primerNombre As Nombre",
+                            "apellidoPaterno As Apellidos",},
+                        new String[]{"autores"},
+                        filtro,
+                        orden);
+
+            }
+
+            // Ocultamos la ventana de lanzamiento de informes
+            // y reseteamos los valores de las variables contadores de filtros
+            this.setVisible(false);
+            DialogInformes.setContadorAutores(0);
+            DialogInformes.setContadorTitulos(0);
+
+            // Creamos un DataSource y le asignamos el resultado de la consulta
+            JRDataSource ds = new JRResultSetDataSource(salida.getResultado());
+
+            // Creamos el informe correspondiente
+            JasperReport report = JasperCompileManager.compileReport(FormularioPrincipal.class.getResourceAsStream("/informes/" + informe));
+
+            // Llenamos el informe con datos y generamos un informe de impresión
+            JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
+
+            //Mostramos el informe directamente
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            // Mostramos un mensaje de error si se produce una excepción
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
+
+    }
 
     /**
      * @param args the command line arguments

@@ -44,18 +44,14 @@ GROUP BY
 				<textElement textAlignment="Center">
 					<font size="15"/>
 				</textElement>
-				<text><![CDATA[Informe de libros]]></text>
+				<text><![CDATA[Informe de Títulos]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
-			<staticText>
-				<reportElement x="4" y="7" width="39" height="20" uuid="75a4f379-1d6f-49a1-bc08-2b5bae498816"/>
-				<text><![CDATA[Filtro:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="43" y="7" width="512" height="20" uuid="a49edf5c-53b3-4c5e-ac48-dabe4774ae77"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="4" y="7" width="551" height="20" uuid="a49edf5c-53b3-4c5e-ac48-dabe4774ae77"/>
 				<textFieldExpression><![CDATA[$P{filtro}]]></textFieldExpression>
 			</textField>
 		</band>
