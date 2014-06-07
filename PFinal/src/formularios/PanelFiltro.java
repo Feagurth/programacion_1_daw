@@ -19,73 +19,89 @@ package formularios;
 import javax.swing.JPanel;
 
 /**
+ * Clase para generar un filtro para la base de datos
  *
  * @author Luis Cabrerizo Gómez
  */
 public class PanelFiltro extends javax.swing.JPanel {
 
-    int valor;
+    /**
+     * Constructor de la clase PanelFiltro
+     */
+    public PanelFiltro() {
 
-    public int getValor() {
-        return valor;
-    }
-
-    public PanelFiltro(int valor, JPanel panel) {
-
-        this.valor = valor;
-
+        // Inicializamos los componentes gráficos de la clase
         initComponents();
 
+        // Hacemos el formulario visible
         this.setVisible(true);
-
     }
 
+    /**
+     * Método para habilitar o deshabilitar el botón de agregar nuevo filtro
+     *
+     * @param valor Verdadero para habilitarlo, falso para deshabilitarlo
+     */
     public void habilitaNuevo(boolean valor) {
         btnAñadir.setEnabled(valor);
     }
 
+    /**
+     * Método para habilitar o deshabilitar el botón de eliminar un filtro
+     *
+     * @param valor Verdadero para habilitarlo, falso para deshabilitarlo
+     */
     public void habilitaEliminar(boolean valor) {
         btnEliminar.setEnabled(valor);
     }
 
+    /**
+     * Método para recuperar el valor de los filtros de búsqueda y ordenación
+     *
+     * @return Un array de cadenas conteniendo el filtro de búsqueda y de
+     * ordenación. La primera posición guardará el filtro de búsqueda y la
+     * segunda posición el filtro de ordenación
+     */
     public String[] getFiltros() {
+
+        // Creamos la variable de salida
         String[] salida = new String[2];
 
+        // Comprobamos si el campo texto no es vacío, si no lo es, tenemos filtro
+        // de búsqueda
         if (!txtFiltro.getText().equals("")) {
+
+            // Comprobamos que valor de filtro usaremos y vamos creando la
+            // cadena de salida en consecuencia
             switch (cmbFiltro.getSelectedIndex()) {
                 case 0: {
                     salida[0] = "ISBN LIKE ";
-                    salida[1] = "ISBN ";
-
                     break;
                 }
                 case 1: {
                     salida[0] = "TITULO LIKE ";
-                    salida[1] = "TITULO ";
                     break;
                 }
                 case 2: {
                     salida[0] = "AUTOR LIKE ";
-                    salida[1] = "AUTOR ";
                     break;
                 }
                 case 3: {
                     salida[0] = "NUMEROEDICION LIKE ";
-                    salida[1] = "NUMEROEDICION ";
                     break;
                 }
                 case 4: {
                     salida[0] = "EDITORIAL LIKE ";
-                    salida[1] = "EDITORIAL ";
                     break;
                 }
                 case 5: {
                     salida[0] = "COPYRIGHT LIKE ";
-                    salida[1] = "COPYRIGHT ";
                     break;
                 }
             }
 
+            // Comprobamos el tipo de filtro que usaremos y seguimos creando
+            // la cadena
             switch (cmbTipoFiltro.getSelectedIndex()) {
                 case 0: {
                     salida[0] += "'%" + txtFiltro.getText() + "'";
@@ -101,19 +117,55 @@ public class PanelFiltro extends javax.swing.JPanel {
                     break;
                 }
             }
+        } else {
+            salida[0] = "";
+        }
 
-            switch (cmbOrden.getSelectedIndex()) {
-                case 0: {
-                    salida[1] += "ASC";
-                    break;
-                }
-                case 1: {
-                    salida[1] += "DESC";
-                    break;
-                }
+        // Comprobamos el tipo de filtro seleccionado para crear la cadena de
+        // ordenación
+        switch (cmbFiltro.getSelectedIndex()) {
+            case 0: {
+                salida[1] = "ISBN ";
 
+                break;
+            }
+            case 1: {
+                salida[1] = "TITULO ";
+                break;
+            }
+            case 2: {
+                salida[1] = "AUTOR ";
+                break;
+            }
+            case 3: {
+                salida[1] = "NUMEROEDICION ";
+                break;
+            }
+            case 4: {
+                salida[1] = "EDITORIAL ";
+                break;
+            }
+            case 5: {
+                salida[1] = "COPYRIGHT ";
+                break;
             }
         }
+
+        // Comprobamos que tipo de ordenación se usará y se continúa creando
+        // la cadena
+        switch (cmbOrden.getSelectedIndex()) {
+            case 0: {
+                salida[1] += "ASC";
+                break;
+            }
+            case 1: {
+                salida[1] += "DESC";
+                break;
+            }
+
+        }
+
+        // Devolvemos el resultado
         return salida;
     }
 
@@ -208,11 +260,23 @@ public class PanelFiltro extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método para crear un nueva caja de filtro
+     *
+     * @param evt Evento
+     */
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
+        // Llamamos al método crearCajaFiltro de DialogInformes
         DialogInformes.crearCajaFiltro((JPanel) this.getParent());
     }//GEN-LAST:event_btnAñadirActionPerformed
 
+    /**
+     * Método para eliminar una caja de filtro
+     *
+     * @param evt Evento
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Llamamos al método eliminarCaja de DialogInformes
         DialogInformes.eliminarCajaFiltro(this);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
