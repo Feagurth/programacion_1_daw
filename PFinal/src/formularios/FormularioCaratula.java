@@ -93,7 +93,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 // y la que ocultaremos en la etiqueta de ids
                 if (datos.isOperacionCorrecta()) {
                     while (datos.getResultado().next()) {
-                        idAutor += datos.getResultado().getString("idAutor") + ",";
+                        idAutor = idAutor.concat(datos.getResultado().getString("idAutor")).concat(",");
                     }
 
                     idAutor = idAutor.substring(0, idAutor.length() - 1);

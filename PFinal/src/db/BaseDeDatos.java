@@ -97,7 +97,7 @@ public class BaseDeDatos {
                     // Iteramos por el array de tablas del parámetro concatenandolas
                     // a la cadena sql
                     for (String tabla : tablas) {
-                        sql += " " + tabla + ", ";
+                        sql = sql.concat(" ").concat(tabla).concat(", ");
                     }
 
                     // Quitamos los dos últimos caracteres para eliminar la coma
@@ -131,12 +131,12 @@ public class BaseDeDatos {
                                 switch (rsMetaData.getColumnType(i)) {
                                     case 1:
                                     case 4: {
-                                        sql += columnas[j] + " = " + valores[j] + ", ";
+                                        sql = sql.concat(columnas[j]).concat(" = ").concat(valores[j]).concat(", ");
                                         break;
                                     }
 
                                     case 12: {
-                                        sql += columnas[j] + " = '" + valores[j] + "', ";
+                                        sql = sql.concat(columnas[j]).concat(" = '").concat(valores[j]).concat("', ");
                                         break;
                                     }
                                 }
@@ -155,7 +155,7 @@ public class BaseDeDatos {
 
                         // E iteramos por el array de condiciones concatenandolas
                         for (String condicion : condiciones) {
-                            sql += " " + condicion + " AND";
+                            sql = sql.concat(" ").concat(condicion).concat(" AND");
                         }
 
                         // Limpiamos los últimos 4 caracteres
@@ -191,7 +191,7 @@ public class BaseDeDatos {
                     // Iteramos por el vector de tablas de los parámetros y 
                     // concatenamos los valores que contiene
                     for (String tabla : tablas) {
-                        sql += " " + tabla + ", ";
+                        sql = sql.concat(" ").concat(tabla).concat(", ");
                     }
 
                     // Limpiamos los dos últimos carácteres y concatenamos VALUES(
@@ -213,13 +213,16 @@ public class BaseDeDatos {
                         switch (rsMetaData.getColumnType(i)) {
                             case 1:
                             case 4: {
-                                sql += valores[i - 1] + ", ";
+
+                                sql = sql.concat(valores[i - 1]).concat(", ");
                                 break;
                             }
 
                             case 12: {
-                                sql += "'" + valores[i - 1] + "', ";
+                                sql = sql.concat("'").concat(valores[i - 1]).concat("', ");
                                 break;
+                            }
+                            default: {
                             }
                         }
                     }
@@ -274,7 +277,7 @@ public class BaseDeDatos {
 
         // Iteramos por las columnas concatenando sus valores
         for (String columna : columnas) {
-            sql += " " + columna + ", ";
+            sql = sql.concat(" ").concat(columna).concat(", ");
         }
 
         // Limpiamos los dos últimos caracteres de la concatenación
@@ -285,7 +288,7 @@ public class BaseDeDatos {
 
         // Iteramos por las tablas concatenando sus valores
         for (String tabla : tablas) {
-            sql += " " + tabla + ", ";
+            sql = sql.concat(" ").concat(tabla).concat(", ");
         }
 
         // Limpiamos los dos últimos caracteres de la concatenación
@@ -302,14 +305,14 @@ public class BaseDeDatos {
                 // Comprobamos que la condición no sea un caracter vacio
                 // proviniente de los filtros de los informes
                 if (!condicion.equals("")) {
-                    apoyo += " " + condicion + " AND";
+                    apoyo = apoyo.concat(" ").concat(condicion).concat(" AND");
                 }
 
             }
 
             // Si tenemos valores para filtrar, las concatenamos a la sql
             if (!apoyo.equals("")) {
-                
+
                 // Comprobamos si la cadena sql contiene una agrupación
                 if (!sql.contains("GROUP")) {
 
@@ -339,7 +342,7 @@ public class BaseDeDatos {
 
             // Iteramos por las ordenaciones concatenando sus valores
             for (String orden : ordenacion) {
-                sql += " " + orden + ", ";
+                sql = sql.concat(" ").concat(orden).concat(", ");
             }
 
             // Limpiamos los cuatro últimos caracteres de la concatenación
@@ -354,7 +357,7 @@ public class BaseDeDatos {
 
             // Iteramos por las limites concatenando sus valores
             for (int limite : limites) {
-                sql += " " + limite + ", ";
+                sql = sql.concat(" ").concat(String.valueOf(limite)).concat(", ");
             }
 
             // Limpiamos los dos últimos caracteres de la concatenación
@@ -414,7 +417,7 @@ public class BaseDeDatos {
 
         // Iteramos por las tablas concatenando sus valores
         for (String tabla : tablas) {
-            sql += " " + tabla + ", ";
+            sql = sql.concat(" ").concat(tabla).concat(", ");
         }
 
         // Limpiamos los dos últimos caracteres de la concatenación
@@ -425,7 +428,7 @@ public class BaseDeDatos {
 
         // Iteramos por las condiciones concatenando sus valores
         for (String condicion : condiciones) {
-            sql += " " + condicion + " AND";
+            sql = sql.concat(" ").concat(condicion).concat(" AND");
         }
 
         // Limpiamos los cuatro últimos caracteres de la concatenación
@@ -474,7 +477,7 @@ public class BaseDeDatos {
 
                     // Si es así, concatenamos el resultado a la variable de 
                     // salida
-                    salida += datos.getResultado().getString("Nombre") + ", ";
+                    salida = salida.concat(datos.getResultado().getString("Nombre")).concat(", ");
                 }
 
                 // Comprobamos si el ResultSet de la consulta está cerrado

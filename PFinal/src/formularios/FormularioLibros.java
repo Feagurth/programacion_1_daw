@@ -126,7 +126,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         lblEditorial = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TxtaResumen = new javax.swing.JTextArea();
+        txtaResumen = new javax.swing.JTextArea();
         cmbGenero = new javax.swing.JComboBox();
         lblGenero = new javax.swing.JLabel();
         txtEdicion = new javax.swing.JTextField();
@@ -198,12 +198,12 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
 
-        TxtaResumen.setEditable(false);
-        TxtaResumen.setColumns(20);
-        TxtaResumen.setRows(5);
-        TxtaResumen.setBorder(null);
-        TxtaResumen.setEnabled(false);
-        jScrollPane1.setViewportView(TxtaResumen);
+        txtaResumen.setEditable(false);
+        txtaResumen.setColumns(20);
+        txtaResumen.setRows(5);
+        txtaResumen.setBorder(null);
+        txtaResumen.setEnabled(false);
+        jScrollPane1.setViewportView(txtaResumen);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -598,7 +598,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             for (String idAutor : dialog.getSeleccion()) {
 
                 // Y concatenamos los identificadores, separándolos con una coma
-                ids += idAutor + ",";
+                ids = ids.concat(idAutor).concat(",");
             }
 
             // Quitamos la coma final tras las concatenación
@@ -699,7 +699,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         // Si el parámetro es nulo, ponemos los campos en blanco
         if (datosLibro == null) {
-            TxtaResumen.setText("");
+            txtaResumen.setText("");
             txtAnyo.setText("");
             txtAutor.setText("");
             txtEdicion.setText("");
@@ -711,7 +711,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         } else {
 
             // Si el parámetro tiene valores, rellenamos los campos con ellos
-            TxtaResumen.setText("");
+            txtaResumen.setText("");
             txtAnyo.setText(datosLibro.getCopyright());
             txtEdicion.setText(String.valueOf(datosLibro.getNumEdicion()));
             txtEditorial.setText(datosLibro.getEditorial());
@@ -723,7 +723,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
             // Concatenamos los ids del autores
             for (String idAutor : datosLibro.getAutores()) {
-                ids += idAutor + ",";
+                ids = ids.concat(idAutor).concat(",");
             }
 
             // Limpiamos la concatenación
@@ -755,7 +755,6 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea TxtaResumen;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAñadir;
     private javax.swing.JButton btnBrowseAutores;
@@ -785,5 +784,6 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtISBN;
     private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextArea txtaResumen;
     // End of variables declaration//GEN-END:variables
 }

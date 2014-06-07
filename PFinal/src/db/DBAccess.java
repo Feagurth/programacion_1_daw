@@ -30,7 +30,7 @@ import java.sql.Statement;
 class DBAccess {
 
     // Constante con el nombre del driver
-    private final String SQL_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String SQL_DRIVER = "com.mysql.jdbc.Driver";
 
     // Variables y objetos globales
     private static String usuario;

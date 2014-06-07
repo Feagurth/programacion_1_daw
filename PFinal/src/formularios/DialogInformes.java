@@ -376,8 +376,8 @@ public final class DialogInformes extends javax.swing.JDialog {
             // Iteramos por los componentes de la pestaña que está visible
             // recuperando los filtros y la ordenación de cada panel
             for (Component panelFiltro : tbTitulos.getComponents()) {
-                filtro += ((PanelFiltro) panelFiltro).getFiltros()[0] + ";";
-                orden += ((PanelFiltro) panelFiltro).getFiltros()[1] + ";";
+                filtro = filtro.concat(((PanelFiltro) panelFiltro).getFiltros()[0]).concat(";");
+                orden = orden.concat(((PanelFiltro) panelFiltro).getFiltros()[1]).concat(";");
             }
 
             // Lanzamos el informe correspondiente, pasándole los filtros y 
@@ -387,8 +387,8 @@ public final class DialogInformes extends javax.swing.JDialog {
             // Iteramos por los componentes de la pestaña que está visible
             // recuperando los filtros y la ordenación de cada panel
             for (Component panelFiltro : tbAutores.getComponents()) {
-                filtro += ((PanelFiltro) panelFiltro).getFiltros()[0] + ";";
-                orden += ((PanelFiltro) panelFiltro).getFiltros()[1] + ";";
+                filtro = filtro.concat(((PanelFiltro) panelFiltro).getFiltros()[0]).concat(";");
+                orden = orden.concat(((PanelFiltro) panelFiltro).getFiltros()[1]).concat(";");
             }
 
             // Lanzamos el informe correspondiente, pasándole los filtros y 
@@ -419,22 +419,21 @@ public final class DialogInformes extends javax.swing.JDialog {
             // Vamos creando la cadena a partir de los filtros
             for (String cadena : filtro) {
                 if (!cadena.equals("")) {
-                    parametroFiltro += cadena + "; ";
+                    parametroFiltro = parametroFiltro.concat(cadena).concat("; ");
                 }
             }
 
             // Ajustamos el textoa mostrar si no hay filtro
-            if(parametroFiltro.equals("Filtro: "))
-            {
+            if (parametroFiltro.equals("Filtro: ")) {
                 parametroFiltro = "Filtro: Ninguno";
             }
-            
+
             // Y de las ordenes pasadas al informe
             parametroFiltro += "\nOrden: ";
 
             for (String cadena : orden) {
                 if (!cadena.equals("")) {
-                    parametroFiltro += cadena + "; ";
+                    parametroFiltro = parametroFiltro.concat(cadena).concat("; ");
                 }
             }
 
@@ -520,13 +519,7 @@ public final class DialogInformes extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogInformes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogInformes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogInformes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DialogInformes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

@@ -153,6 +153,8 @@ public class PanelFiltro extends javax.swing.JPanel {
                         salida[0] = "COPYRIGHT LIKE ";
                         break;
                     }
+                    default: {
+                    }
                 }
 
             } else {
@@ -167,6 +169,8 @@ public class PanelFiltro extends javax.swing.JPanel {
                         salida[0] = "APELLIDOS LIKE ";
                         break;
                     }
+                    default: {
+                    }
 
                 }
 
@@ -179,7 +183,6 @@ public class PanelFiltro extends javax.swing.JPanel {
                     salida[0] += "'%" + txtFiltro.getText() + "'";
                     break;
                 }
-
                 case 1: {
                     salida[0] += "'" + txtFiltro.getText() + "%'";
                     break;
@@ -187,6 +190,8 @@ public class PanelFiltro extends javax.swing.JPanel {
                 case 2: {
                     salida[0] += "'%" + txtFiltro.getText() + "%'";
                     break;
+                }
+                default: {
                 }
             }
         } else {
@@ -223,6 +228,9 @@ public class PanelFiltro extends javax.swing.JPanel {
                     salida[1] = "COPYRIGHT ";
                     break;
                 }
+                default: {
+                }
+
             }
         } else {
             // Comprobamos el tipo de filtro seleccionado para crear la cadena
@@ -237,6 +245,9 @@ public class PanelFiltro extends javax.swing.JPanel {
                     salida[1] = "APELLIDOS ";
                     break;
                 }
+                default: {
+                }
+
             }
         }
 
@@ -250,6 +261,8 @@ public class PanelFiltro extends javax.swing.JPanel {
             case 1: {
                 salida[1] += "DESC";
                 break;
+            }
+            default: {
             }
 
         }
