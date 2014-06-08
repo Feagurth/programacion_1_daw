@@ -21,7 +21,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase para mostrar la ventana principal de la aplicación
+ * Clase para mostrar la ventana principal de la aplicación 
+ * Librerías externas usadas: 
+ * 
+ * Acceso a base de datos SQL
+ * mysql-connector-java-5.1.30-bin 
+ * 
+ * Absolute Layout
+ * AbsoluteLayout 
+ * 
+ * Informes
+ * jasperreports-5.5.2
+ * jasperreports-javaflow-5.5.2 
+ * commons-beanutils-1.8.0
+ * commons-collections-3.2.1 
+ * commons-digester-2.1 
+ * commons-javaflow-20060411
+ * iText-2.1.7.js2 
+ * poi-3.7-20101029 
+ * commons-logging-1.1.1 
+ * groovy-all-2.0.1
+ *
+ * Google Gson
+ * google-gson-2.2.4
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -215,14 +237,15 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
     /**
      * Evento para la pulsación del botón de informes
+     *
      * @param evt Eventos
      */
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
 
         DialogInformes dialogo = new DialogInformes(this, true);
         dialogo.setVisible(true);
-        
-/*
+
+        /*
          try {
 
          BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
@@ -255,7 +278,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
          }
 
 
-*/
+         */
     }//GEN-LAST:event_btnInformesActionPerformed
 
     /**

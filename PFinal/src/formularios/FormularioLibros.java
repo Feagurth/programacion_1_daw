@@ -19,6 +19,9 @@ package formularios;
 import db.BaseDeDatos;
 import db.Libro;
 import db.Resultado;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import googlebooks.GoogleBooks;
 import utiles.Mensajes;
 import utiles.Validaciones;
 
@@ -91,6 +94,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         txtISBN.setEditable(edicion);
         txtTitulo.setEditable(edicion);
         btnBrowseAutores.setEnabled(edicion);
+
+        txtBuscarISBN.setEnabled(edicion);
+        btnBuscarISBN.setEnabled(edicion);
 
         btnAñadir.setVisible(!edicion);
         btnModificar.setVisible(!edicion);
@@ -444,6 +450,40 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      */
     private void btnBuscarISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarISBNActionPerformed
 
+        // Creamos un nuevo objeto Libro para almacenar los resultados
+        Libro libroISBN;
+
+        try {
+            // Comprobamos que hay texto introducido en el cuado de búsqueda
+            // de ISBN
+            if (!txtBuscarISBN.getText().equals("")) {
+                // Verificamos que el texto introducido son números
+                // y que son 13 caracteres
+                if (Validaciones.validarDato(txtBuscarISBN.getText(), Validaciones.TipoValidacion.NUMERO)
+                        && txtBuscarISBN.getText().length() == 13) {
+
+                    // Realizamos la consulta y almacenamos el resultado
+                    libroISBN = GoogleBooks.query(txtBuscarISBN.getText());
+
+                    if (libroISBN != null) {
+                        rellenarCampos(libroISBN);
+                    }
+
+                } else {
+                    // Avisamos que el usuario debe introducir un ISBN de 13 caracteres
+                    Mensajes.mostrarMensaje("Debe introducir un ISBN de 13 caracteres", Mensajes.TipoMensaje.AVISO);
+                }
+            } else {
+                // Avisamos que el usuario debe introducir un ISBN
+                Mensajes.mostrarMensaje("Debe introducir un ISBN", Mensajes.TipoMensaje.AVISO);
+            }
+        } catch (UnsupportedEncodingException ex) {
+            // Mostramos un mensaje de error en caso de haber una excepción
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        } catch (IOException ex) {
+            // Mostramos un mensaje de error en caso de haber una excepción
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
     }//GEN-LAST:event_btnBuscarISBNActionPerformed
 
     /**
@@ -722,34 +762,37 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             String ids = "";
 
             // Concatenamos los ids del autores
-            for (String idAutor : datosLibro.getAutores()) {
-                ids = ids.concat(idAutor).concat(",");
+            if (datosLibro.getAutores() != null) {
+                for (String idAutor : datosLibro.getAutores()) {
+                    ids = ids.concat(idAutor).concat(",");
+                }
+
+                // Limpiamos la concatenación
+                ids = ids.substring(0, ids.length() - 1);
+
+                // Asignamos los ids a la etiqueta oculta, y los nombres
+                // al cuadro de texto visible
+                lblIdAutores.setText(ids);
+                txtAutor.setText(baseDatos.consultaNombreAutor(datosLibro.getAutores()));
             }
-
-            // Limpiamos la concatenación
-            ids = ids.substring(0, ids.length() - 1);
-
-            // Asignamos los ids a la etiqueta oculta, y los nombres
-            // al cuadro de texto visible
-            lblIdAutores.setText(ids);
-            txtAutor.setText(baseDatos.consultaNombreAutor(datosLibro.getAutores()));
         }
     }
 
     /**
      * Evento para la pulsación del botón de añadir
+     *
      * @param evt Evento
      */
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        
+
         // Limpiamos la variable de instancia
         this.libro = null;
-        
+
         // Cambiamos el modo del formulario
         this.modo = "A";
-        
+
         // Limpiamos los campos y activamos el modo de edición
-        rellenarCampos(libro);        
+        rellenarCampos(libro);
         activarEdicion(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
