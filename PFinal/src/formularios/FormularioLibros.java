@@ -150,6 +150,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(446, 532));
         setName("framePrincipal"); // NOI18N
 
+        txtBuscarISBN.setText("0789910276");
         txtBuscarISBN.setEnabled(false);
 
         btnBuscarISBN.setText("Buscar ISBN");
@@ -460,7 +461,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 // Verificamos que el texto introducido son números
                 // y que son 13 caracteres
                 if (Validaciones.validarDato(txtBuscarISBN.getText(), Validaciones.TipoValidacion.NUMERO)
-                        && txtBuscarISBN.getText().length() == 13) {
+                        && (txtBuscarISBN.getText().length() == 13 || txtBuscarISBN.getText().length() == 10)) {
 
                     // Realizamos la consulta y almacenamos el resultado
                     libroISBN = GoogleBooks.query(txtBuscarISBN.getText());
@@ -471,7 +472,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
                 } else {
                     // Avisamos que el usuario debe introducir un ISBN de 13 caracteres
-                    Mensajes.mostrarMensaje("Debe introducir un ISBN de 13 caracteres", Mensajes.TipoMensaje.AVISO);
+                    Mensajes.mostrarMensaje("Debe introducir un ISBN", Mensajes.TipoMensaje.AVISO);
                 }
             } else {
                 // Avisamos que el usuario debe introducir un ISBN
