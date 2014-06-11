@@ -86,6 +86,7 @@ public class GoogleBooks {
             // un autor que no esté en la base de datos
             
             
+            
             String autores = "";
             for (String autor : item.getVolumeInfo().getAuthors()) {
                 autores = autores.concat(autor).concat("-_-");

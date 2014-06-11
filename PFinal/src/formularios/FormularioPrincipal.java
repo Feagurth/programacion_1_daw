@@ -72,19 +72,21 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnAutores = new javax.swing.JButton();
         btnBrowse = new javax.swing.JButton();
         btnInformes = new javax.swing.JButton();
+        btnInformes1 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(590, 810));
-        setMinimumSize(new java.awt.Dimension(590, 810));
-        setPreferredSize(new java.awt.Dimension(590, 810));
+        setMaximumSize(new java.awt.Dimension(622, 831));
+        setMinimumSize(new java.awt.Dimension(622, 831));
+        setPreferredSize(new java.awt.Dimension(622, 831));
         setResizable(false);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar1.setRollover(true);
-        jToolBar1.setMaximumSize(new java.awt.Dimension(661, 549));
-        jToolBar1.setMinimumSize(new java.awt.Dimension(661, 549));
-        jToolBar1.setPreferredSize(new java.awt.Dimension(661, 549));
+        jToolBar1.setAutoscrolls(true);
+        jToolBar1.setMaximumSize(new java.awt.Dimension(661, 831));
+        jToolBar1.setMinimumSize(new java.awt.Dimension(661, 831));
+        jToolBar1.setPreferredSize(new java.awt.Dimension(661, 831));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book_add.png"))); // NOI18N
         btnAdd.setText("Añadir Libro");
@@ -134,6 +136,18 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnInformes);
 
+        btnInformes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
+        btnInformes1.setText("Configuración");
+        btnInformes1.setFocusable(false);
+        btnInformes1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInformes1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInformes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformes1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnInformes1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,12 +155,15 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
-            .addComponent(jDesktopPane1)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,6 +298,15 @@ public class FormularioPrincipal extends javax.swing.JFrame {
          */
     }//GEN-LAST:event_btnInformesActionPerformed
 
+    private void btnInformes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformes1ActionPerformed
+        String[] Autores = new String[]{"Manolo", "Antonio"};
+        
+        DialogInsertarAutores dialog = new DialogInsertarAutores(this, true, Autores);
+        dialog.setVisible(true);
+        
+       
+    }//GEN-LAST:event_btnInformes1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,6 +344,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
     private javax.swing.JButton btnInformes;
+    private javax.swing.JButton btnInformes1;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
