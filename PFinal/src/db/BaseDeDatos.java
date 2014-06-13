@@ -698,4 +698,30 @@ public class BaseDeDatos {
         return new DefaultTableModel(data, columnNames);
 
     }
+
+    /**
+     * Método para buscar el id de un autor a través de su nombre y apellidos
+     * @param autor Nombre y apellidos del autor
+     * @return 0 si no hay ningún autor con ese nombre y apellidos en la base de datos
+     * y su id si lo hay
+     * @throws SQLException Excepción para errores de consulta SQL
+     */
+    public int buscarIdAutor(String autor) throws SQLException {
+        int salida = 0;
+        Resultado datos;
+
+        datos = consultar(
+                new String[]{"idAutor"},
+                new String[]{"Autores"},
+                new String[]{"CONCAT(primerNombre, ' ', apellidoPaterno) = '".concat(autor).concat("'")},
+                null);
+
+        if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
+            salida = (int) datos.getResultado().getObject("idAutor");
+        }
+
+        datos.getResultado().close();
+        
+        return salida;
+    }
 }

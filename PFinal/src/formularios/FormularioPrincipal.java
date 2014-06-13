@@ -72,7 +72,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnAutores = new javax.swing.JButton();
         btnBrowse = new javax.swing.JButton();
         btnInformes = new javax.swing.JButton();
-        btnInformes1 = new javax.swing.JButton();
+        btnConfiguracion = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -136,17 +136,17 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnInformes);
 
-        btnInformes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
-        btnInformes1.setText("Configuración");
-        btnInformes1.setFocusable(false);
-        btnInformes1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnInformes1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnInformes1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
+        btnConfiguracion.setText("Configuración");
+        btnConfiguracion.setFocusable(false);
+        btnConfiguracion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConfiguracion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInformes1ActionPerformed(evt);
+                btnConfiguracionActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnInformes1);
+        jToolBar1.add(btnConfiguracion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,53 +259,15 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
 
+        // Creamos un objeto DialogInformes desde donde se podrá especificar
+        // los filtros de lanzamiento de informes y lo mostramos
         DialogInformes dialogo = new DialogInformes(this, true);
         dialogo.setVisible(true);
 
-        /*
-         try {
-
-         BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-
-         Map<String, Object> parameters = new HashMap<>();
-         //parameters.put("filtro", "having autor like 'a%'");
-            
-         Resultado salida = baseDatos.consultar(
-         new String[]{
-         "DISTINCT Titulos.isbn AS ISBN", 
-         "Titulos.titulo AS Titulo", 
-         "GROUP_CONCAT(autores.primerNombre,' ',autores.apellidoPaterno SEPARATOR ', ') AS Autor", 
-         "Titulos.numeroEdicion AS NumeroEdicion", 
-         "Titulos.editorial AS Editorial", 
-         "Titulos.copyright AS Copyright"}, 
-         new String[]{"autores autores INNER JOIN isbnautor isbnautor ON autores.idAutor = isbnautor.idAutor INNER JOIN Titulos Titulos ON isbnautor.isbn = Titulos.isbn GROUP BY Titulos.isbn"}, 
-         null,
-         null);
-            
-         JRDataSource ds = new JRResultSetDataSource(salida.getResultado());
-            
-            
-         JasperReport report = JasperCompileManager.compileReport(FormularioPrincipal.class.getResourceAsStream("/informes/general.jrxml"));
-         JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
-
-         //Para visualizar el pdf directamente desde java
-         JasperViewer.viewReport(print, false);
-         } catch (JRException ex) {
-         Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
-         }
-
-
-         */
     }//GEN-LAST:event_btnInformesActionPerformed
 
-    private void btnInformes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformes1ActionPerformed
-        String[] Autores = new String[]{"Manolo", "Antonio"};
-        
-        DialogInsertarAutores dialog = new DialogInsertarAutores(this, true, Autores);
-        dialog.setVisible(true);
-        
-       
-    }//GEN-LAST:event_btnInformes1ActionPerformed
+    private void btnConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracionActionPerformed
+    }//GEN-LAST:event_btnConfiguracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,8 +305,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
+    private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnInformes;
-    private javax.swing.JButton btnInformes1;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

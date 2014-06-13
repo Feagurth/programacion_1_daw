@@ -21,10 +21,14 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLEncoder;
 import com.google.gson.Gson;
+import db.BaseDeDatos;
 import db.Libro;
+import db.Resultado;
+import formularios.DialogInsertarAutores;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
 
 /**
  * Clase pare realizar consultas a Google Books usando GSon
@@ -43,8 +47,9 @@ public class GoogleBooks {
      * @throws UnsupportedEncodingException Excepción por codificación no
      * soportada
      * @throws IOException Excepción por error de entrada/salida
+     * @throws SQLException Excepción por error en consulta SQL
      */
-    public static Libro query(String isbn) throws MalformedURLException, UnsupportedEncodingException, IOException {
+    public static Libro query(String isbn) throws MalformedURLException, UnsupportedEncodingException, IOException, SQLException {
 
         // Creamos un nuevo objeto libro donde almacenar la información
         // recuperada para devolverla
@@ -79,24 +84,88 @@ public class GoogleBooks {
             libro.setCopyright(item.getVolumeInfo().getPublishedDate());
             libro.setEditorial(item.getVolumeInfo().getPublisher());
             libro.setIsbn(isbn);
-            
-            // TODO: Modificar pare realizar una búsqueda de autores en la
-            // base de datos y reemplalzar el nombre por el id correspondiente
-            // Queda pendiente pensar que hacer en el caso de que devuelva
-            // un autor que no esté en la base de datos
-            
-            
-            
-            String autores = "";
+
+            // Creamos una conexión a la base de datos
+            BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+
+            // Inicializamos dos variables para controlar los autores que ya están
+            // en la base de datos y los que no
+            String conocidos = "";
+            String desconocidos = "";
+            int id;
+
+            // Iteramos por todos los autores que tenga el libro
             for (String autor : item.getVolumeInfo().getAuthors()) {
-                autores = autores.concat(autor).concat("-_-");
+
+                // Buscamos el id del autor
+                id = baseDatos.buscarIdAutor(autor);
+
+                // Comprobamos si tiene id
+                if (id != 0) {
+
+                    // Si lo tiene, ya está en la base de datos, concatenamos su
+                    // id a la cadena de conocidos
+                    conocidos = conocidos.concat(String.valueOf(id)).concat(";");
+
+                } else {
+
+                    // Si no tiene id, es un autor desconocido. concatenamos el 
+                    // nombre del mismo en la cadena de desconocido
+                    desconocidos = desconocidos.concat(autor).concat(";");
+                }
             }
-            
-            libro.setAutores(autores.split("-_-"));            
-            
+
+            // Si hay autores desconocidos
+            if (!desconocidos.equals("")) {
+
+                // Creamos un objeto DialogInsertarAutores y le pasamos los autores desocnocidos
+                DialogInsertarAutores dialogAutores = new DialogInsertarAutores(null, true, desconocidos.split(";"));
+
+                // Hacemos el objeto visible
+                dialogAutores.setVisible(true);
+
+                // Comprobamos si se han seleccionado autores para insertar en la
+                // base de datos
+                if (dialogAutores.getAutores() != null) {
+
+                    // Iteramos por los autores a insertar
+                    for (String autor : dialogAutores.getAutores()) {
+
+                        // Concatenamos un 0 y unos caracteres de corte
+                        // para pasar el id del autor nuevo como 0
+                        autor = "0-_-".concat(autor);
+
+                        // Insertamos y guardamos el resultado
+                        Resultado salida = baseDatos.actualizar(
+                                null,
+                                new String[]{"Autores"},
+                                null,
+                                autor.split("-_-"));
+
+                        // Comprobamos si la operación es correcta
+                        if (salida.isOperacionCorrecta()) {
+
+                            // Si lo es, reestructuramos la variable donde guardamos la cadena
+                            // de inserción para que muestre solo el nombre y el apellido del autor
+                            autor = autor.substring(4, autor.length()).replace("-_-", " ");
+
+                            // Buscamos el id del mismo en la base de datos
+                            id = baseDatos.buscarIdAutor(autor);
+
+                            // Lo concatenamos a la cadena de autores conocidos
+                            conocidos = conocidos.concat(String.valueOf(id)).concat(";");
+                        }
+                    }
+                }
+            }
+
+            // Coramos los id's de los autores y los asignamos al objeto Libro
+            libro.setAutores(conocidos.split(";"));
+
         }
 
         // Devolvemos el resultado
         return libro;
     }
+
 }

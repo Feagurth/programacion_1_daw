@@ -17,8 +17,8 @@
 package formularios;
 
 /**
- * Clase para contener el nombre y apellidos de un autor a insertar en la
- * base de datos a través de una búsqueda en Google Books
+ * Clase para contener el nombre y apellidos de un autor a insertar en la base
+ * de datos a través de una búsqueda en Google Books
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -64,7 +64,7 @@ public class PanelAutores extends javax.swing.JPanel {
      * @return El nombre del autor
      */
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     /**
@@ -73,7 +73,7 @@ public class PanelAutores extends javax.swing.JPanel {
      * @return Los apellidos del autor
      */
     public String getApellidos() {
-        return apellidos;
+        return this.apellidos;
     }
 
     /**
@@ -82,7 +82,7 @@ public class PanelAutores extends javax.swing.JPanel {
      * @return El valor del check de verificación de inserción
      */
     public boolean isActivo() {
-        return activo;
+        return this.activo;
     }
 
     /**
@@ -103,6 +103,12 @@ public class PanelAutores extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(393, 48));
         setPreferredSize(new java.awt.Dimension(393, 48));
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,6 +123,19 @@ public class PanelAutores extends javax.swing.JPanel {
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        chkGrabar.setSelected(true);
+        chkGrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkGrabarActionPerformed(evt);
+            }
+        });
+
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -145,6 +164,31 @@ public class PanelAutores extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Evento de pulsación del botón de activado
+     *
+     * @param evt Evento
+     */
+    private void chkGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkGrabarActionPerformed
+        this.activo = chkGrabar.isSelected();
+    }//GEN-LAST:event_chkGrabarActionPerformed
+
+    /**
+     * Evento para el soltado de tecla en el control
+     * @param evt Evento
+     */
+    private void txtApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyReleased
+        this.apellidos = txtApellidos.getText();
+    }//GEN-LAST:event_txtApellidosKeyReleased
+
+    /**
+     * Evento para el soltado de tecla en el control
+     * @param evt Evento
+     */
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        this.nombre = txtNombre.getText();
+    }//GEN-LAST:event_txtNombreKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

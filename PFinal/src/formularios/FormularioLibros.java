@@ -22,6 +22,10 @@ import db.Resultado;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import googlebooks.GoogleBooks;
+import java.net.MalformedURLException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utiles.Mensajes;
 import utiles.Validaciones;
 
@@ -150,7 +154,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(446, 532));
         setName("framePrincipal"); // NOI18N
 
-        txtBuscarISBN.setText("0789910276");
+        txtBuscarISBN.setText("9788477225447");
         txtBuscarISBN.setEnabled(false);
 
         btnBuscarISBN.setText("Buscar ISBN");
@@ -484,6 +488,8 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         } catch (IOException ex) {
             // Mostramos un mensaje de error en caso de haber una excepción
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormularioLibros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarISBNActionPerformed
 

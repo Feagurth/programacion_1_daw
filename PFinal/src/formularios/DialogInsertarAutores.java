@@ -16,6 +16,7 @@
  */
 package formularios;
 
+import java.awt.Component;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
@@ -31,6 +32,15 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
     String[] Autores;
 
     /**
+     * Método que nos permite recuperar los autores asignados al objeto
+     *
+     * @return Los autores asignados al objeto
+     */
+    public String[] getAutores() {
+        return Autores;
+    }
+
+    /**
      * Constructor de la clase
      *
      * @param parent Padre de la ventana
@@ -43,6 +53,7 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
 
     /**
      * Constructor de la clase
+     *
      * @param parent Padre de la ventana
      * @param modal Valor para especificar si la ventana es modal
      * @param Autores Autores a mostrar
@@ -66,12 +77,20 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
         // Definimos un nuevo objeto PanelAutores
         PanelAutores panel;
 
+        String nombre;
+        String apellidos;
+
         // Iteramos por los autores a mostrar
         for (String autor : Autores) {
-            
+
+            // Calculamos y extraemos el nombre y el apellido del autor
+            // usando como referencia el último espacio en blanco
+            apellidos = autor.substring(autor.lastIndexOf(" ") + 1, autor.length());
+            nombre = autor.substring(0, autor.lastIndexOf(" "));
+
             // Creamos el objeto PanelAutores con los valores
             // del nombre y los apellidos
-            panel = new PanelAutores(autor, autor, false);
+            panel = new PanelAutores(nombre, apellidos, true);
 
             // Lo añadimos al panel creado anteriormente
             principal.add(panel);
@@ -106,6 +125,8 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
 
         panelScroll = new javax.swing.JScrollPane();
         btnAceptar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insertar Autores");
@@ -113,6 +134,22 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
         panelScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(4);
+        jTextArea1.setText("Los siguientes autores no se han encontrado en la base de datos                   ¿Desea insertarlos y asociarlos al libro buscado?");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setEnabled(false);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,22 +160,73 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelScroll)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 342, Short.MAX_VALUE)
-                        .addComponent(btnAceptar)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAceptar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Método para recoger los valores de los campos de texto al pulsar el bótn
+     * de aceptar
+     *
+     * @param evt Evento
+     */
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+        // Inicializamos una variable de salida
+        String salida = "";
+
+        // Creamos un objeto JPanel que será una referencia al JPanel que 
+        // contiene los controles de modificación de nombre y que a su vez
+        // está contenido por el componente JScrollBar
+        JPanel panel = (JPanel) panelScroll.getViewport().getComponents()[0];
+
+        // Itermaos por todos los componentes del panel
+        for (Component component : panel.getComponents()) {
+
+            // Comprobamos si los PanelAutores están activos
+            if (((PanelAutores) component).isActivo()) {
+
+                // Si lo está, concatenamos a la cadena de salida el nombre y 
+                // el apellido delimitando por carácteres específicos
+                // que luego servirán para volver a cotar la cadena
+                salida = salida.concat(((PanelAutores) component).getNombre()).concat("-_-").concat(((PanelAutores) component).getApellidos()).concat("_-_");
+            }
+
+        }
+
+        // Quitamos el resto
+        salida = salida.substring(0, salida.length() - 3);
+
+        // Y asignamos los resultados a la variable de clase correspondiente
+        if (!salida.equals("")) {
+            this.Autores = salida.split("_-_");
+        } else {
+            this.Autores = null;
+        }
+
+        // Trasferimos el flujo del programa retroactivamente
+        this.transferFocusBackward();
+
+        // Hacemos invisible el formulario
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +273,8 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JScrollPane panelScroll;
     // End of variables declaration//GEN-END:variables
 }
