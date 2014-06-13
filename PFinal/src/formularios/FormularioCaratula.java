@@ -76,6 +76,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 libro.setCopyright(datos.getResultado().getString("copyright"));
                 libro.setEditorial(datos.getResultado().getString("editorial"));
                 libro.setNumEdicion(datos.getResultado().getInt("numeroEdicion"));
+                libro.setResumen(datos.getResultado().getString("resumen"));
 
                 // Asignamos el título a la etiqueta correspondiente
                 lblTitulo.setText(libro.getTitulo());

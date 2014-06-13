@@ -29,6 +29,7 @@ public class Libro {
     private String editorial = "";
     private String copyright = "";
     private String[] autores = null;
+    private String resumen = "";
 
     /**
      * Función para recuperar el valor del isbn
@@ -139,6 +140,25 @@ public class Libro {
     }
 
     /**
+     * Método para asignar el resumen a un libro
+     * @return El resumen del libro
+     */
+    public String getResumen() {
+        return resumen;
+    }
+
+    /**
+     * Método para asignar un resumen a un libro
+     * @param resumen El resumen del libro
+     */
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
+
+    
+    
+    
+    /**
      * Constructor de la clase
      */
     public Libro() {
@@ -153,14 +173,16 @@ public class Libro {
      * @param editorial Editorial del libro
      * @param copyright Año de copyright del libro
      * @param autores Ids de los autores de los libros
+     * @param resumen El resumen del libro
      */
-    public Libro(String isbn, String titulo, int numEdicion, String editorial, String copyright, String[] autores) {
+    public Libro(String isbn, String titulo, int numEdicion, String editorial, String copyright, String[] autores, String resumen) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.numEdicion = numEdicion;
         this.editorial = editorial;
         this.copyright = copyright;
         this.autores = autores;
+        this.resumen = resumen;
     }
 
 }

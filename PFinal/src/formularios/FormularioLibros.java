@@ -22,7 +22,6 @@ import db.Resultado;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import googlebooks.GoogleBooks;
-import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,6 +97,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         txtISBN.setEditable(edicion);
         txtTitulo.setEditable(edicion);
         btnBrowseAutores.setEnabled(edicion);
+        txtaResumen.setEnabled(edicion);
 
         txtBuscarISBN.setEnabled(edicion);
         btnBuscarISBN.setEnabled(edicion);
@@ -154,7 +154,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(446, 532));
         setName("framePrincipal"); // NOI18N
 
-        txtBuscarISBN.setText("9788477225447");
+        txtBuscarISBN.setText("9788445075739");
         txtBuscarISBN.setEnabled(false);
 
         btnBuscarISBN.setText("Buscar ISBN");
@@ -209,9 +209,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
 
-        txtaResumen.setEditable(false);
-        txtaResumen.setColumns(20);
-        txtaResumen.setRows(5);
+        txtaResumen.setColumns(5);
+        txtaResumen.setLineWrap(true);
+        txtaResumen.setWrapStyleWord(true);
         txtaResumen.setBorder(null);
         txtaResumen.setEnabled(false);
         jScrollPane1.setViewportView(txtaResumen);
@@ -220,7 +220,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,45 +497,84 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      * Método que nos permite validar la corrección de los datos introducidos en
      * el formulario
      *
-     * @return Verdadero si los datos son válidos, falso si no lo son
+     * @return Una cadena vacía si todo es correcto y mensajes para mostrar al
+     * usuario en caso contrario
      */
-    private boolean validarDatos() {
-        boolean salida = true;
+    private String validarDatos() {
+
+        String errores = "";
 
         // Comprobamos que el titulo se puedan introducir letras, números y algunos símbolos especiales
         if (!Validaciones.validarDato(txtTitulo.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
-            salida = false;
+            errores = errores.concat("Titulo: Carácteres erróneos;");
         }
 
-        // Comprobamos que en el isbn solo se puedan introducir números
-        if (!Validaciones.validarDato(txtISBN.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)) {
-            salida = false;
-        }
-
-        // Comprobamos que el editorial se puedan introducir letras, números y algunos símbolos especiales
-        if (!Validaciones.validarDato(txtEditorial.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
-            salida = false;
-        }
-
-        // Comprobamos que el número de edición es un digito positivo distinto de 0
-        if (!Validaciones.validarDato(txtEdicion.getText(), Validaciones.TipoValidacion.ENTERO_POSITIVO_NO_0)) {
-            salida = false;
-        }
-
-        // Comprobamos que el año es un número de tamaño 4
-        if (!Validaciones.validarDato(txtAnyo.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS) || txtAnyo.getText().length() != 4) {
-            salida = false;
+        // Comprobamos que el título no exceda el tamaño asignado para el campo
+        // en la base de datos
+        if (txtTitulo.getText().length() > 100) {
+            errores = errores.concat("Título: Introduzca un máximo de 100 carácteres;");
         }
 
         // Comprobamos que al menos hemos seleccionado un autor
         // Para libros con autores anónimos, habrá que crear un autor específico
         // para hacer referencia a este caso especial
         if (lblIdAutores.getText().equals("")) {
-            salida = false;
+            errores = errores.concat("Autor: Seleccione al menos un autor para el libro;");
+        }
+
+        // Comprobamos que en el isbn solo se puedan introducir números
+        if (!Validaciones.validarDato(txtISBN.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)) {
+            errores = errores.concat("ISBN: valor inválido;");
+        }
+
+        // Comprobamos que el año es un número
+        if (!Validaciones.validarDato(txtAnyo.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)) {
+            errores = errores.concat("Año: Introduzca un número positivo;");
+        }
+
+        // Comprobamos que el año del copyright no exceda el tamaño asignado 
+        // para el campo en la base de datos
+        if (txtAnyo.getText().length() != 4) {
+            errores = errores.concat("Año: Introduzca 4 dígitos;");
+        }
+
+        // Comprobamos que el editorial se puedan introducir letras, números y algunos símbolos especiales
+        if (!Validaciones.validarDato(txtEditorial.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
+            errores = errores.concat("Editorial: Carácteres erróneos;");
+        }
+
+        // Comprobamos que la editorial no exceda el tamaño asignado para el campo
+        // en la base de datos
+        if (txtEditorial.getText().length() > 50) {
+            errores = errores.concat("Editorial: Introduzca un máximo de 50 carácteres;");
+        }
+
+        // Comprobamos que el número de edición es un digito positivo distinto de 0
+        if (!Validaciones.validarDato(txtEdicion.getText(), Validaciones.TipoValidacion.ENTERO_POSITIVO_NO_0)) {
+            errores = errores.concat("Edición: Introduzca un número positivo;");
+        }
+
+        // Comprobamos que la edición no exceda el tamaño asignado para el campo
+        // en la base de datos
+        if (txtEdicion.getText().length() > 11) {
+            errores = errores.concat("Edición: Introduzca un máximo de 11 carácteres;");
+        }
+
+        // Comprobamos que el resumen se puedan introducir letras, números y algunos símbolos especiales
+        if (!txtaResumen.getText().equals("")) {
+            if (!Validaciones.validarDato(txtaResumen.getText(), Validaciones.TipoValidacion.CADENA_NUMEROS_SIMBOLOS)) {
+                errores = errores.concat("Resumen: Carácteres erróneos;");
+            }
+        }
+
+        // Comprobamos que el resumen no exceda el tamaño asignado 
+        // para el campo en la base de datos
+        if (txtaResumen.getText().length() > 1000) {
+            errores = errores.concat("Resumen: Introduzca un máximo de 1000 carácteres;");
         }
 
         // Devolvemos el resultado de la validación
-        return salida;
+        return errores.replace(";", "%n");
     }
 
     /**
@@ -545,8 +584,12 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
-        // Validamos que los datos introducidos por el usuario antes de continuar
-        if (validarDatos()) {
+        // Verificamos los datos introducidos y guardamos la respuesta
+        // en una variable
+        String errores = validarDatos();
+
+        // Comprobamos la variable por si contiene errores
+        if (errores.equals("")) {
 
             // Si son correctos, creamos nuevo objeto libro con los datos 
             // introducidos y lo asignamos a la variable de instancia
@@ -555,7 +598,8 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     Integer.parseInt(txtEdicion.getText()),
                     txtEditorial.getText(),
                     txtAnyo.getText(),
-                    lblIdAutores.getText().split(","));
+                    lblIdAutores.getText().split(","),
+                    txtaResumen.getText());
 
             // Si el modo del formulario es de añadir
             if (this.modo.equals("A")) {
@@ -612,7 +656,10 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             }
         } else {
             // Si no son datos correctos, mostramos un mensaje al respecto
-            Mensajes.mostrarMensaje("Debe introducir datos correctos para poder continuar", Mensajes.TipoMensaje.AVISO);
+            errores = "%s%n".concat(errores);
+            Mensajes.mostrarMensaje(String.format(
+                    errores, "Introduzca valores correctos para continuar"),
+                    Mensajes.TipoMensaje.AVISO);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -755,6 +802,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             txtTitulo.setText("");
             lblIdAutores.setText("");
             cmbGenero.setSelectedIndex(-1);
+            txtaResumen.setText("");
         } else {
 
             // Si el parámetro tiene valores, rellenamos los campos con ellos
@@ -765,6 +813,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             txtISBN.setText(datosLibro.getIsbn());
             txtTitulo.setText(datosLibro.getTitulo());
             cmbGenero.setSelectedIndex(-1);
+            txtaResumen.setText(datosLibro.getResumen());
 
             String ids = "";
 

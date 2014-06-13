@@ -84,6 +84,8 @@ public class GoogleBooks {
             libro.setCopyright(item.getVolumeInfo().getPublishedDate());
             libro.setEditorial(item.getVolumeInfo().getPublisher());
             libro.setIsbn(isbn);
+            libro.setResumen(item.getVolumeInfo().getDescription());
+            
 
             // Creamos una conexión a la base de datos
             BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");

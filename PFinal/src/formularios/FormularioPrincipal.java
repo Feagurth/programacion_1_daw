@@ -76,9 +76,9 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(622, 831));
-        setMinimumSize(new java.awt.Dimension(622, 831));
-        setPreferredSize(new java.awt.Dimension(622, 831));
+        setMaximumSize(new java.awt.Dimension(592, 831));
+        setMinimumSize(new java.awt.Dimension(592, 831));
+        setPreferredSize(new java.awt.Dimension(592, 831));
         setResizable(false);
 
         jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -155,7 +155,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

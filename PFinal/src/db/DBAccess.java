@@ -130,40 +130,44 @@ class DBAccess {
         int resultado = 0;
 
         // Creamos un array de cadenas con las sentencias que se van a ajecutar
-        String[] sql = {"DROP DATABASE IF EXISTS libros;",
+        String[] sql = {
             "CREATE DATABASE libros;",
             "USE libros;",
             "CREATE TABLE autores(idAutor int NOT NULL AUTO_INCREMENT PRIMARY KEY, primerNombre varchar(30) NOT NULL, apellidoPaterno varchar(30) NOT NULL);",
-            "CREATE TABLE titulos(isbn varchar(20) NOT NULL PRIMARY KEY, titulo varchar(100) NOT NULL, numeroEdicion int NOT NULL, editorial varchar(50) NOT NULL, copyright varchar(4) NOT NULL);",
+            "CREATE TABLE titulos(isbn varchar(20) NOT NULL PRIMARY KEY, titulo varchar(100) NOT NULL, numeroEdicion int NOT NULL, editorial varchar(50) NOT NULL, copyright varchar(4) NOT NULL, resumen varchar(1000));",
             "CREATE TABLE isbnAutor(idAutor int NOT NULL, isbn varchar(20) NOT NULL, FOREIGN KEY (idAutor) REFERENCES autores(idAutor) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (isbn) References titulos(isbn) ON DELETE CASCADE ON UPDATE CASCADE);",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('Harvey','Deitel');",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('Paul','Deitel');",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('Andrew','Goldberg');",
             "INSERT INTO autores (primerNombre,apellidoPaterno) VALUES ('David','Choffnes');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0131869000','Visual Basic 2005 How to Program',3, 'Minotauro', '2006');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0131869000','Visual Basic 2005 How to Program',3, 'Minotauro', '2006', 'Learn Visual Basic.NET hands-on, through thousands of lines of live code in hundreds of complete working programs, explained with exceptional clarity by the renowned programming trainers of Deitel & Associates. An accompanying CD-ROM contains all of the book''s source code, up-to-date Visual Studio 2005 development tools, plus links to the Web''s best Visual Basic.NET demos and resources.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0131869000');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0131869000');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0131525239','Visual C# 2005 How to Program',2,'Minotauro', '2006');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0131525239','Visual C# 2005 How to Program',2,'Minotauro', '2006', 'Learn how to build winning C# applications, start to finish, using the Deitels'' proven methodology and signature Live-Code(tm) Approach! This new edition includes extensive use of Visual Studio 2005''s new visual programming tools that tremendously reduce the amount of code programmers need to write in ADO.NET and ASP.NET applications. With these new tools, programmers can develop powerful ADO.NET and ASP.NET applications quickly and easily. You''ll start with an introduction to C# and Visual C# 2005 Express. After examining methods and arrays, the Deitels present an in-depth introduction to object-oriented programming. They introduce powerful exception handling techniques for building mission critical software; followed by in-depth coverage of C#-based GUI development. Coverage also includes: multithreading; strings, characters; regular expressions; graphics; files and streams; and more.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0131525239');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0131525239');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0132222205','Java How to Program',7,'Minotauro', '2007');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0132222205','Java How to Program',7,'Minotauro', '2007', 'The Deitels'' groundbreaking How to Program series offers unparalleled breadth and depth of object-oriented programming concepts and intermediate-level topics for further study. The Seventh Edition has been extensively fine-tuned and is completely up-to-date with Sun Microsystems, Inc.''s latest Java release Java Standard Edition 6 (\\\\\\\"Mustang\\\\\\\") and several Java Enterprise Edition 5 topics. Contains an extensive OOD/UML 2 case study on developing an automated teller machine. Takes a new tools-based approach to Web application development that uses Netbeans 5.5 and Java Studio Creator 2 to create and consume Web Services. Features new AJAX-enabled, Web applications built with JavaServer Faces (JSF), Java Studio Creator 2 and the Java Blueprints AJAX Components. Includes new topics throughout, such as JDBC 4, SwingWorker for multithreaded GUIs, GroupLayout, Java Desktop Integration Components (JDIC), and much more.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0132222205');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0132222205');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0131857576','C++ How to Program',5,'Minotauro', '2005');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0131857576','C++ How to Program',5,'Minotauro', '2005', 'Deitels'' ''C++ How to Program'', fifth edition, has hundreds of hands-on exercises, roughly 250 complete programs written and documented for easy learning, and exceptional insight into good programming practices, maximizing performance, avoiding errors, debugging, and testing.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0131857576');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0131857576');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0132404168','C How to Program',5,'Alfaguara', '2007');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0132404168','C How to Program',5,'Alfaguara', '2007', 'The Deitels'' groundbreaking \\\\\\\"How to Program\\\\\\\" series offers unparalleled breadth and depth of programming concepts and intermediate-level topics for further study. The books in this series feature hundreds of complete, working programs with thousands of lines of code. Includes strong treatment of structured algorithm and program development in ANSI/ISO C with 150 working C programs. New chapters added for C99 and game programming with the Allegro C Library. Includes rich, 300-page treatment of object-oriented programming in C++. Presents each new concept in the context of a complete, working program, immediately followed by one or more windows showing the program''s input/output dialog. Enhances the \\\\\\\"Live-Code Approach\\\\\\\" with syntax coloring.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0132404168');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0132404168');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0131450913','Internet & World Wide Web How to Program',3,'Alfaguara', '2004');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0131450913','Internet & World Wide Web How to Program',3,'Alfaguara', '2004', 'This comprehensive book with accompanying CD-ROM teaches the fundamentals needed to program on the Internet. Readers will be well-prepared to build real-world, industrial-strength, Web-based applications.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0131450913');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0131450913');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (3,'0131450913');",
-            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright) VALUES ('0131828274','Operating Systems',3,'Alfaguara', '2004');",
+            "INSERT INTO titulos (isbn,titulo,numeroEdicion, editorial, copyright, resumen) VALUES ('0131828274','Operating Systems',3,'Alfaguara', '2004', 'The third edition of Operating Systemshas been entirely updated to reflect current core operating system concepts and design considerations. To complement the discussion of operating system concepts, the book features two in-depth case studies on Linux and Windows XP. The case studies follow the outline of the book, so readers working through the chapter material can refer to each case study to see how a particular topic is handled in either Linux or Windows XP. Using Java code to illustrate key points, Operating Systemsintroduces processes, concurrent programming, deadlock and indefinite postponement, mutual exclusion, physical and virtual memory, file systems, disk performance, distributed systems, security and more. New to this edition are a chapter on multithreading and extensive treatments of distributed computing, multiprocessing, performance, and computer security. An ideal up-to-date book for beginner operating systems readers.');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (1,'0131828274');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (2,'0131828274');",
             "INSERT INTO isbnAutor (idAutor,isbn) VALUES (4,'0131828274');"};
 
+        // Creamos una conexión a la base de datos ocn los valores que tenemos
+        // las variables de instancia        
+        conexion = DriverManager.getConnection(DBAccess.db_path, DBAccess.usuario, DBAccess.password);
+        
         // Iteramos por el array de sentecias
         for (String cadena : sql) {
             try {

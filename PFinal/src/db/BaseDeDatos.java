@@ -63,7 +63,7 @@ public class BaseDeDatos {
      * @param tablas Tablas en las que se van a actualizar los valores
      * @param condiciones Condiciones sobre las cuales se van a actualizar los
      * valores
-     * @param valores Valores a actualizar o inertar
+     * @param valores Valores a actualizar o insertar
      * @return Devuelve un objeto Resultado con los datos relevantes de la
      * operación
      */
@@ -136,7 +136,7 @@ public class BaseDeDatos {
                                     }
 
                                     case 12: {
-                                        sql = sql.concat(columnas[j]).concat(" = '").concat(valores[j]).concat("', ");
+                                        sql = sql.concat(columnas[j]).concat(" = '").concat(valores[j].replace("'", "''")).concat("', ");
                                         break;
                                     }
                                 }
@@ -219,7 +219,7 @@ public class BaseDeDatos {
                             }
 
                             case 12: {
-                                sql = sql.concat("'").concat(valores[i - 1]).concat("', ");
+                                sql = sql.concat("'").concat(valores[i - 1].replace("'", "''")).concat("', ");
                                 break;
                             }
                             default: {
@@ -511,7 +511,7 @@ public class BaseDeDatos {
         // Lanzamos una consulta de actualización con los valores
         // pasados coom parámetro
         salida = actualizar(
-                new String[]{"isbn", "titulo", "numeroEdicion", "editorial", "copyright"},
+                new String[]{"isbn", "titulo", "numeroEdicion", "editorial", "copyright", "resumen"},
                 new String[]{"titulos"},
                 new String[]{"isbn = " + libro.getIsbn()},
                 new String[]{
@@ -519,7 +519,8 @@ public class BaseDeDatos {
                     libro.getTitulo(),
                     String.valueOf(libro.getNumEdicion()),
                     libro.getEditorial(),
-                    libro.getCopyright()});
+                    libro.getCopyright(), 
+                    libro.getResumen()});
 
         // Comprobamos si la operación se ha realizado correctamente
         if (salida.isOperacionCorrecta()) {
@@ -603,7 +604,8 @@ public class BaseDeDatos {
                     libro.getTitulo(),
                     String.valueOf(libro.getNumEdicion()),
                     libro.getEditorial(),
-                    libro.getCopyright()});
+                    libro.getCopyright(), 
+                    libro.getResumen()});
 
         // Comprobamos si la operación se ha realizado correctamente
         if (salida.isOperacionCorrecta()) {

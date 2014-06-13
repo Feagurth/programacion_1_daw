@@ -29,7 +29,7 @@ import javax.swing.JPanel;
  */
 public class DialogInsertarAutores extends javax.swing.JDialog {
 
-    String[] Autores;
+    String[] autores;
 
     /**
      * Método que nos permite recuperar los autores asignados al objeto
@@ -37,7 +37,7 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
      * @return Los autores asignados al objeto
      */
     public String[] getAutores() {
-        return Autores;
+        return autores;
     }
 
     /**
@@ -56,13 +56,13 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
      *
      * @param parent Padre de la ventana
      * @param modal Valor para especificar si la ventana es modal
-     * @param Autores Autores a mostrar
+     * @param Autores autores a mostrar
      */
     public DialogInsertarAutores(Frame parent, boolean modal, String[] Autores) {
         super(parent, modal);
         initComponents();
 
-        this.Autores = Autores;
+        this.autores = Autores;
 
         // Especificamos que la ventana se mostrará en una posición relativa
         // a su ventana padre
@@ -215,9 +215,9 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
 
         // Y asignamos los resultados a la variable de clase correspondiente
         if (!salida.equals("")) {
-            this.Autores = salida.split("_-_");
+            this.autores = salida.split("_-_");
         } else {
-            this.Autores = null;
+            this.autores = null;
         }
 
         // Trasferimos el flujo del programa retroactivamente
@@ -244,13 +244,7 @@ public class DialogInsertarAutores extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertarAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertarAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertarAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DialogInsertarAutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

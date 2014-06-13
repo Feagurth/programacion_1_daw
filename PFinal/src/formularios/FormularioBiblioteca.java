@@ -119,6 +119,8 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                 sql = "COPYRIGHT LIKE '" + txtFiltro.getText() + "%'";
                 break;
             }
+            default:
+            {}
         }
 
         // Devolvemos el filtro creado
