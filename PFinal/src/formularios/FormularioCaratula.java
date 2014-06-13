@@ -80,6 +80,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
 
                 // Asignamos el título a la etiqueta correspondiente
                 lblTitulo.setText(libro.getTitulo());
+                lblTitulo.setToolTipText(libro.getTitulo());
 
                 // Consultamos los autores relacionados con el libro
                 datos = baseDatos.consultar(
@@ -102,8 +103,47 @@ public class FormularioCaratula extends javax.swing.JPanel {
                     libro.setAutores(idAutor.split(","));
 
                     lblAutores.setText(baseDatos.consultaNombreAutor(idAutor.split(",")));
+                    lblAutores.setToolTipText(lblAutores.getText());
 
                 }
+
+                // Creamos una variable para almacenar el tooltip de la carátula
+                // que contendrá un resumen de los datos
+                String tooltip = "";
+
+                // Comprobamos si tenemos los valores para cada campo
+                // y vamos creando el tooltip
+                if (!libro.getIsbn().equals("")) {
+                    tooltip = tooltip.concat(String.format("ISBN: %s<br>", libro.getIsbn()));
+                }
+
+                if (!libro.getTitulo().equals("")) {
+                    tooltip = tooltip.concat(String.format("Título: %s<br>", libro.getTitulo()));
+                }
+
+                if (!lblAutores.getText().equals("")) {
+                    tooltip = tooltip.concat(String.format("Autor/es: %s<br>", lblAutores.getText()));
+                }
+
+                if (!libro.getEditorial().equals("")) {
+                    tooltip = tooltip.concat(String.format("Editorial: %s<br>", libro.getEditorial()));
+                }
+
+                if (!libro.getCopyright().equals("")) {
+                    tooltip = tooltip.concat(String.format("Año: %s<br>", libro.getCopyright()));
+                }
+
+                if (!String.valueOf(libro.getNumEdicion()).equals("")) {
+                    tooltip = tooltip.concat(String.format("Edición: %s<br>", String.valueOf(libro.getNumEdicion())));
+                }
+
+                // Concatenamos etiquetas html entre el tooltip para poder
+                // realizar retornos de carro con los carácteres <br> incluidos
+                // en la cadena del tooltip
+                tooltip = "<html>".concat(tooltip).concat("</html>");
+                
+                // Asginanos el tooltip a la carátula
+                lblCaratula.setToolTipText(tooltip);
 
                 // Finalmente comprobamos si la ResultSet está cerrado
                 if (!datos.getResultado().isClosed()) {
@@ -158,6 +198,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
         });
         add(lblCaratula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        lblTitulo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Titulo");
         lblTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -173,6 +214,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
         });
         add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 120, 20));
 
+        lblAutores.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblAutores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAutores.setText("Autores");
         lblAutores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

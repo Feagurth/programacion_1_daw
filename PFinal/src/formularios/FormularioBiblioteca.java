@@ -44,11 +44,11 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
         // Inicializamos los componentes del formulario
         initComponents();
 
-        // Cambiamos el tipo de filtro predefinido en el combo
-        cmbTipoFiltro.setSelectedIndex(1);
-
         // Creamos una nueva conexión con la base de datos
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        
+        // Cambiamos el tipo de filtro predefinido en el combo
+        cmbTipoFiltro.setSelectedIndex(1);
 
         try {
 
@@ -142,7 +142,7 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                     new String[]{"isbn"},
                     new String[]{"titulos"},
                     crearFiltro(),
-                    null,
+                    crearOrden(),
                     new int[]{(pagina - 1) * 9, 9});
 
             // Comprobamos si la operación es correcta
@@ -256,6 +256,11 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
         panelFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
 
         cmbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Título", "Edición", "Editorial", "Año" }));
+        cmbTipoFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoFiltroItemStateChanged(evt);
+            }
+        });
 
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -343,6 +348,10 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtFiltroKeyReleased
 
+    private void cmbTipoFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoFiltroItemStateChanged
+        refrescarLibros(paginacion);
+    }//GEN-LAST:event_cmbTipoFiltroItemStateChanged
+
     /**
      * Create the GUI and show it. For thread safety, this method should be
      * invoked from the event dispatch thread.
@@ -358,4 +367,45 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Método que nos permite generar un orden para la consulta de libros
+     * basado en la selección del comboBox del formulario
+     * @return Un array con la ordenación
+     */
+    private String[] crearOrden() {
+        // Inicializamos una nueva variable
+        String sql = "";
+
+        // Comprobamos el tipo de filtro que especifica el combo y creamos
+        // la condición especificada en función de su valor
+        switch (cmbTipoFiltro.getSelectedIndex()) {
+            case 0:
+                sql = "ISBN ASC";
+                break;
+
+            case 1:
+                sql = "TITULO ASC";
+                break;
+
+            case 2: {
+                sql = "NUMEROEDICION ASC";
+                break;
+            }
+            case 3: {
+                sql = "EDITORIAL ASC";
+                break;
+            }
+            case 4: {
+                sql = "COPYRIGHT ASC";
+                break;
+            }
+            default:
+            {}
+        }
+
+        // Devolvemos el filtro creado
+        return new String[]{sql};
+        
+    }
 }
