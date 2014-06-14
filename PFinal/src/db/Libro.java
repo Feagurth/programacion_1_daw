@@ -30,6 +30,7 @@ public class Libro {
     private String copyright = "";
     private String[] autores = null;
     private String resumen = "";
+    private String imagen = "";
 
     /**
      * Función para recuperar el valor del isbn
@@ -141,6 +142,7 @@ public class Libro {
 
     /**
      * Método para asignar el resumen a un libro
+     *
      * @return El resumen del libro
      */
     public String getResumen() {
@@ -149,15 +151,31 @@ public class Libro {
 
     /**
      * Método para asignar un resumen a un libro
+     *
      * @param resumen El resumen del libro
      */
     public void setResumen(String resumen) {
         this.resumen = resumen;
     }
 
-    
-    
-    
+    /**
+     * Método pare recuperar la imagen del libro
+     *
+     * @return La imagen del libro
+     */
+    public String getImagen() {
+        return imagen;
+    }
+
+    /**
+     * Método para asignar la imagen del libro
+     *
+     * @param imagen La imagen del libro
+     */
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     /**
      * Constructor de la clase
      */
@@ -174,8 +192,9 @@ public class Libro {
      * @param copyright Año de copyright del libro
      * @param autores Ids de los autores de los libros
      * @param resumen El resumen del libro
+     * @param imagen Cadena de bytes que conforman la imagen
      */
-    public Libro(String isbn, String titulo, int numEdicion, String editorial, String copyright, String[] autores, String resumen) {
+    public Libro(String isbn, String titulo, int numEdicion, String editorial, String copyright, String[] autores, String resumen, String imagen) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.numEdicion = numEdicion;
@@ -183,6 +202,7 @@ public class Libro {
         this.copyright = copyright;
         this.autores = autores;
         this.resumen = resumen;
+        this.imagen = imagen;
     }
 
 }

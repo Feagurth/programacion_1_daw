@@ -511,7 +511,7 @@ public class BaseDeDatos {
         // Lanzamos una consulta de actualización con los valores
         // pasados coom parámetro
         salida = actualizar(
-                new String[]{"isbn", "titulo", "numeroEdicion", "editorial", "copyright", "resumen"},
+                new String[]{"isbn", "titulo", "numeroEdicion", "editorial", "copyright", "resumen", "caratula"},
                 new String[]{"titulos"},
                 new String[]{"isbn = " + libro.getIsbn()},
                 new String[]{
@@ -519,8 +519,9 @@ public class BaseDeDatos {
                     libro.getTitulo(),
                     String.valueOf(libro.getNumEdicion()),
                     libro.getEditorial(),
-                    libro.getCopyright(), 
-                    libro.getResumen()});
+                    libro.getCopyright(),
+                    libro.getResumen(),
+                    libro.getImagen()});
 
         // Comprobamos si la operación se ha realizado correctamente
         if (salida.isOperacionCorrecta()) {
@@ -604,8 +605,9 @@ public class BaseDeDatos {
                     libro.getTitulo(),
                     String.valueOf(libro.getNumEdicion()),
                     libro.getEditorial(),
-                    libro.getCopyright(), 
-                    libro.getResumen()});
+                    libro.getCopyright(),
+                    libro.getResumen(),
+                    libro.getImagen()});
 
         // Comprobamos si la operación se ha realizado correctamente
         if (salida.isOperacionCorrecta()) {
@@ -638,15 +640,15 @@ public class BaseDeDatos {
                 if (salida.isOperacionCorrecta()) {
 
                     // Creamos un objeto Resultado con un mensaje de error
-                    salida = new Resultado(false, "Error al insertar los autores del libro", null);
+                    salida = new Resultado(false, salida.getMensaje(), null);
                 } else {
                     // Creamos un objeto Resultado con un mensaje de error
-                    salida = new Resultado(false, "Error al insertar los autores del libro", null);
+                    salida = new Resultado(false, salida.getMensaje(), null);
                 }
             }
         } else {
             // Creamos un objeto Resultado con un mensaje de error
-            salida = new Resultado(false, "Error al insertar el libro", null);
+            salida = new Resultado(false, salida.getMensaje(), null);
         }
 
         // Devolvemos el resultado
@@ -703,9 +705,10 @@ public class BaseDeDatos {
 
     /**
      * Método para buscar el id de un autor a través de su nombre y apellidos
+     *
      * @param autor Nombre y apellidos del autor
-     * @return 0 si no hay ningún autor con ese nombre y apellidos en la base de datos
-     * y su id si lo hay
+     * @return 0 si no hay ningún autor con ese nombre y apellidos en la base de
+     * datos y su id si lo hay
      * @throws SQLException Excepción para errores de consulta SQL
      */
     public int buscarIdAutor(String autor) throws SQLException {
@@ -723,7 +726,7 @@ public class BaseDeDatos {
         }
 
         datos.getResultado().close();
-        
+
         return salida;
     }
 }

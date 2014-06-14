@@ -19,9 +19,13 @@ package formularios;
 import db.BaseDeDatos;
 import db.Libro;
 import db.Resultado;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import utiles.Mensajes;
+import utiles.Utiles;
 
 /**
  * Clase para mostrar los libros con una carátula, el titulo y autores
@@ -77,6 +81,25 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 libro.setEditorial(datos.getResultado().getString("editorial"));
                 libro.setNumEdicion(datos.getResultado().getInt("numeroEdicion"));
                 libro.setResumen(datos.getResultado().getString("resumen"));
+
+                // Verificamos que los datos de la carátula no vienen vacios
+                if (datos.getResultado().getString("caratula") != null && !datos.getResultado().getString("caratula").equals("")) {
+
+                    // Asginamos los datos de la carátura al libro
+                    libro.setImagen(datos.getResultado().getString("caratula"));
+
+                    // Decodificamos el texto en base 64 que contiene la imagen
+                    // y creamos una imagen con el
+                    BufferedImage imagen = Utiles.stringBase64ToImage(libro.getImagen());
+
+                    // La redimensionamos para que se ajuste al tamaño de la 
+                    // etiqueta                    
+                    imagen = Utiles.scaleImage(imagen, BufferedImage.TYPE_INT_RGB, 125, 144);
+
+                    // Y finalmente la asignamos
+                    lblCaratula.setIcon(new ImageIcon(imagen));
+
+                }
 
                 // Asignamos el título a la etiqueta correspondiente
                 lblTitulo.setText(libro.getTitulo());
@@ -141,7 +164,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 // realizar retornos de carro con los carácteres <br> incluidos
                 // en la cadena del tooltip
                 tooltip = "<html>".concat(tooltip).concat("</html>");
-                
+
                 // Asginanos el tooltip a la carátula
                 lblCaratula.setToolTipText(tooltip);
 
@@ -152,9 +175,9 @@ public class FormularioCaratula extends javax.swing.JPanel {
                     datos.getResultado().close();
                 }
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             // Mostramos un mensaje de error si se produce alguna excepción al 
-            // cerrar el ResultSet
+            // cerrar el ResultSet o al cargar la imágen de la carátula
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
     }
@@ -187,7 +210,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 formMouseClicked(evt);
             }
         });
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         lblCaratula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCaratula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no_book.png"))); // NOI18N
@@ -196,7 +219,8 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 lblCaratulaMouseClicked(evt);
             }
         });
-        add(lblCaratula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        add(lblCaratula);
+        lblCaratula.setBounds(10, 10, 125, 154);
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -212,7 +236,8 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 lblTituloMouseClicked(evt);
             }
         });
-        add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 120, 20));
+        add(lblTitulo);
+        lblTitulo.setBounds(10, 160, 120, 20);
 
         lblAutores.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblAutores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -226,10 +251,12 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 lblAutoresMouseClicked(evt);
             }
         });
-        add(lblAutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 120, 20));
+        add(lblAutores);
+        lblAutores.setBounds(10, 180, 120, 20);
 
         lblISBN.setEnabled(false);
-        add(lblISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(lblISBN);
+        lblISBN.setBounds(0, 0, 0, 0);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

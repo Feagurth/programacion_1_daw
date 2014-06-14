@@ -19,13 +19,20 @@ package formularios;
 import db.BaseDeDatos;
 import db.Libro;
 import db.Resultado;
+import googlebooks.GoogleBooks;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import googlebooks.GoogleBooks;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import utiles.Mensajes;
+import utiles.Utiles;
 import utiles.Validaciones;
 
 /**
@@ -52,6 +59,10 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         // Oculatamos la etiqueta de Ids de autores, donde almacenaremos los
         // valores para su uso posterior
         lblIdAutores.setVisible(false);
+
+        // Ocultamos la etiqueta donde almacenaremos la representación
+        // de la carátula en bytes
+        lblBytesCaratula.setVisible(false);
 
         // Guardamos el valor del parámetro en la variable de instancia
         this.libro = libro;
@@ -149,7 +160,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnAñadir = new javax.swing.JButton();
+        lblBytesCaratula = new javax.swing.JLabel();
 
+        setToolTipText("Haga doble click para seleccionar una caráula");
         setMaximumSize(new java.awt.Dimension(446, 532));
         setMinimumSize(new java.awt.Dimension(446, 532));
         setName("framePrincipal"); // NOI18N
@@ -166,46 +179,57 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtISBN.setEditable(false);
         txtISBN.setAutoscrolls(false);
         txtISBN.setMaximumSize(new java.awt.Dimension(162, 25));
         txtISBN.setMinimumSize(new java.awt.Dimension(162, 25));
         txtISBN.setPreferredSize(new java.awt.Dimension(162, 25));
+        jPanel2.add(txtISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 84, -1, -1));
 
         lblIsbn.setText("ISBN");
+        jPanel2.add(lblIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 89, 47, -1));
 
         txtTitulo.setEditable(false);
         txtTitulo.setAutoscrolls(false);
         txtTitulo.setMaximumSize(new java.awt.Dimension(162, 25));
         txtTitulo.setMinimumSize(new java.awt.Dimension(162, 25));
         txtTitulo.setPreferredSize(new java.awt.Dimension(162, 25));
+        jPanel2.add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 20, -1, 27));
 
         lblTitulo.setText("Título");
+        jPanel2.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 26, 49, -1));
 
         txtAutor.setEditable(false);
         txtAutor.setAutoscrolls(false);
         txtAutor.setMaximumSize(new java.awt.Dimension(127, 25));
         txtAutor.setMinimumSize(new java.awt.Dimension(127, 25));
         txtAutor.setPreferredSize(new java.awt.Dimension(127, 25));
+        jPanel2.add(txtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 53, -1, -1));
 
         lblAutor.setText("Autor");
+        jPanel2.add(lblAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 58, 45, -1));
 
         txtAnyo.setEditable(false);
         txtAnyo.setAutoscrolls(false);
         txtAnyo.setMaximumSize(new java.awt.Dimension(162, 25));
         txtAnyo.setMinimumSize(new java.awt.Dimension(162, 25));
         txtAnyo.setPreferredSize(new java.awt.Dimension(162, 25));
+        jPanel2.add(txtAnyo, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 115, -1, -1));
 
         lblAnyo.setText("Año");
+        jPanel2.add(lblAnyo, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 120, 49, -1));
 
         txtEditorial.setEditable(false);
         txtEditorial.setAutoscrolls(false);
         txtEditorial.setMaximumSize(new java.awt.Dimension(162, 25));
         txtEditorial.setMinimumSize(new java.awt.Dimension(162, 25));
         txtEditorial.setPreferredSize(new java.awt.Dimension(162, 25));
+        jPanel2.add(txtEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 146, -1, -1));
 
         lblEditorial.setText("Editorial");
+        jPanel2.add(lblEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 151, 49, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen"));
 
@@ -227,21 +251,27 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
         );
 
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 239, -1, -1));
+
         cmbGenero.setEnabled(false);
         cmbGenero.setFocusable(false);
         cmbGenero.setMaximumSize(new java.awt.Dimension(162, 25));
         cmbGenero.setMinimumSize(new java.awt.Dimension(162, 25));
         cmbGenero.setPreferredSize(new java.awt.Dimension(162, 25));
+        jPanel2.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 208, -1, -1));
 
         lblGenero.setText("Género");
+        jPanel2.add(lblGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 213, 49, -1));
 
         txtEdicion.setEditable(false);
         txtEdicion.setAutoscrolls(false);
         txtEdicion.setMaximumSize(new java.awt.Dimension(162, 25));
         txtEdicion.setMinimumSize(new java.awt.Dimension(162, 25));
         txtEdicion.setPreferredSize(new java.awt.Dimension(162, 25));
+        jPanel2.add(txtEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 177, -1, -1));
 
         lblEdicion.setText("Edición");
+        jPanel2.add(lblEdicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 182, 49, -1));
 
         btnBrowseAutores.setText("...");
         btnBrowseAutores.setEnabled(false);
@@ -250,85 +280,17 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 btnBrowseAutoresActionPerformed(evt);
             }
         });
+        jPanel2.add(btnBrowseAutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(358, 53, 29, -1));
 
         lblCaratula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCaratula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no_book.png"))); // NOI18N
         lblCaratula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblCaratula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEdicion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAnyo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIsbn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtISBN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtAnyo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEdicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnBrowseAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                            .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCaratula, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTitulo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAutor)
-                            .addComponent(btnBrowseAutores))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIsbn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtAnyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAnyo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEditorial))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEdicion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGenero))))
-                .addGap(6, 6, 6)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblCaratula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCaratulaMouseClicked(evt);
+            }
+        });
+        jPanel2.add(lblCaratula, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, 144, 219));
 
         btnAceptar.setText("    Aceptar   ");
         btnAceptar.setOpaque(false);
@@ -376,6 +338,12 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             }
         });
 
+        lblBytesCaratula.setEnabled(false);
+        lblBytesCaratula.setFocusable(false);
+        lblBytesCaratula.setInheritsPopupMenu(false);
+        lblBytesCaratula.setRequestFocusEnabled(false);
+        lblBytesCaratula.setVerifyInputWhenFocusTarget(false);
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
@@ -384,7 +352,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addComponent(lblIdAutores)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdAutores)
+                            .addComponent(lblBytesCaratula))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnAceptar)
@@ -424,7 +394,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                         .addComponent(btnEliminar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAceptar)
+                    .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAceptar)
+                        .addComponent(lblBytesCaratula))
                     .addComponent(btnCancelar)))
         );
 
@@ -599,7 +571,8 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     txtEditorial.getText(),
                     txtAnyo.getText(),
                     lblIdAutores.getText().split(","),
-                    txtaResumen.getText());
+                    txtaResumen.getText(),
+                    lblBytesCaratula.getText());
 
             // Si el modo del formulario es de añadir
             if (this.modo.equals("A")) {
@@ -803,6 +776,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             lblIdAutores.setText("");
             cmbGenero.setSelectedIndex(-1);
             txtaResumen.setText("");
+            lblBytesCaratula.setText("");
         } else {
 
             // Si el parámetro tiene valores, rellenamos los campos con ellos
@@ -831,6 +805,30 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 lblIdAutores.setText(ids);
                 txtAutor.setText(baseDatos.consultaNombreAutor(datosLibro.getAutores()));
             }
+
+            // Comprobamos que el libro trae datos de carátula
+            if (datosLibro.getImagen() != null && !datosLibro.getImagen().equals("")) {
+
+                try {
+                    // Transformamos la cadena en base 64 de la carátula
+                    // a una imagen
+                    BufferedImage imagen = Utiles.stringBase64ToImage(libro.getImagen());
+
+                    // Redimensionamos la imágen para que se ajuste a la etiqueta
+                    // de la carátula sin modificar su tamaño
+                    imagen = Utiles.scaleImage(imagen, BufferedImage.TYPE_INT_RGB, 144, 219);
+
+                    // Finalmente asignamos la imagen a la etiqueta
+                    lblCaratula.setIcon(new ImageIcon(imagen));
+
+                    // Y asignamos la cadena en base64 a la etiqueta correspondiente
+                    lblBytesCaratula.setText(datosLibro.getImagen());
+                } catch (IOException ex) {
+                    // Si se produce un error, anulamos la caráula y mostramos un mensaje
+                    lblCaratula.setIcon(null);
+                    Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+                }
+            }
         }
     }
 
@@ -852,6 +850,65 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         activarEdicion(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
+    /**
+     * Evento para la pulsación del ratón en la carátula
+     *
+     * @param evt Evento
+     */
+    private void lblCaratulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCaratulaMouseClicked
+        // Comprobamos si es un doble click buscando el número de clicks
+        // en el evento
+        if (evt.getClickCount() == 2) {
+
+            try {
+                // Creamos un objeto JFileChooser
+                JFileChooser fc = new JFileChooser();
+
+                // Le asignamos un título a la ventana de selección
+                fc.setDialogTitle("Seleccione una imágen...");
+
+                // Especificamos el filtro de ficheros a seleccionar
+                FileNameExtensionFilter filter
+                        = new FileNameExtensionFilter("Imágenes JPG ", "jpg");
+
+                // Aplicamos el filtro a la ventana de selección
+                fc.setFileFilter(filter);
+
+                // Mostramos la ventana de selección y guardamos el código de 
+                // resultado de la seleccion
+                int returnVal = fc.showDialog(this, "Aceptar");
+
+                // Comprobamos si se ha pulsado el botón de aceptar
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    // Cargamos el fichero a un objeto File
+                    File file = fc.getSelectedFile();
+
+                    // Guardamos la imágen a un objeto Image
+                    BufferedImage image = ImageIO.read(file);
+
+                    // Redimensionamos la imagen para que se ajuste al tamaño de la etiqueta
+                    // sin modificar su tamaño
+                    image = Utiles.scaleImage(image, BufferedImage.TYPE_INT_RGB, 144, 219);
+
+                    // Y lo cargamos en el label de la carátula convierténdolo
+                    // en ImageIcon
+                    lblCaratula.setIcon(new ImageIcon(image));
+
+                    // Asignamos el fichero seleccionado a como una cadena en base 64
+                    // a una etiqueta oculta
+                    lblBytesCaratula.setText(Utiles.fileToBase64String(fc.getSelectedFile()));
+
+                }
+
+            } catch (IOException ex) {
+
+                // Si se produce un error, mostramos el mesaje al usuario
+                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+            }
+
+        }
+    }//GEN-LAST:event_lblCaratulaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -868,6 +925,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAnyo;
     private javax.swing.JLabel lblAutor;
+    private javax.swing.JLabel lblBytesCaratula;
     private javax.swing.JLabel lblCaratula;
     private javax.swing.JLabel lblEdicion;
     private javax.swing.JLabel lblEditorial;

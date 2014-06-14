@@ -72,7 +72,7 @@ public class Validaciones {
 
     private static final String CADENA_SOLO_NUMEROS = "^[0-9]+$";
 
-    private static final String CADENA_NUMEROS_SIMBOLOS = "^[a-zA-ZñÑ0-9 -<>/_.,:;(){}$áÁéÉíÍóÓúÚ]+";
+    private static final String CADENA_NUMEROS_SIMBOLOS = "^[a-zA-ZñÑ0-9 +-–<>/_.,:;(){}$áÁéÉíÍóÓúÚ¿?\"“”'@#$%&ç#1¡!]+";
 
     private static final String CADENA_SOLO_LETRAS_NUMEROS = "^[a-zA-ZñÑ0-9]+$";
 
