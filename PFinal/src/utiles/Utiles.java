@@ -18,13 +18,18 @@ package utiles;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import org.apache.commons.codec.binary.Base64;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import javax.imageio.ImageIO;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -109,6 +114,63 @@ public class Utiles {
 
         //Devolvemos la imagen
         return newImage;
+    }
+
+    /**
+     * Método para descargar un fichero desde una url y asociarlo a un objeto
+     * file
+     *
+     * @param url url desde la que descargar el fichero
+     * @return Un objeto file con el fichero descargado
+     * @throws IOException Excepción en caso de errores al grabar el fichero
+     */
+    public static File downloadFile(URL url) throws IOException {
+
+        // Creamos una conexión y la abrimos con la url proporcionada como 
+        // parámetro
+        URLConnection urlConn = url.openConnection();
+
+        // Le ponemos como propiedad a la conexión una conexión desde un
+        // navegador, en este caso Mozilla sobre un PowerPc para
+        // que los servidores accedidos piensen que se hace desde un
+        // navegador web y obviar en la medida de lo posible
+        // restricciones, en este caso de Google Books
+        urlConn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.21; Mac_PowerPC)");
+
+        // Conectamos y creamos un flujo de entrada con la conexión
+        urlConn.connect();
+        InputStream urlStream = urlConn.getInputStream();
+
+        // Definimos un flujo de salida de datos
+        OutputStream outputStream = null;
+
+        try {
+            // Definimos el flujo de salida sobre un fichero en local
+            // sobre el que volcaremos los datos del flujo de entrada
+            outputStream = new FileOutputStream(new File("cover.jpg"));
+
+            int read;
+            byte[] bytes = new byte[1024];
+
+            // Leemos del flujo de entrada hasta que se vacíe
+            // y vamos escribiendo los datos en el flujo de salida
+            while ((read = urlStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+
+        } finally {
+            // Para finalizar cerramos los dos flujos de datos
+            if (urlStream != null) {
+                urlStream.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+
+        // Devolvemos un objeto File creado a partir del fichero que acabamos 
+        // de crear
+        return new File("cover.jpg");
     }
 
 }

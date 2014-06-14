@@ -167,7 +167,6 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(446, 532));
         setName("framePrincipal"); // NOI18N
 
-        txtBuscarISBN.setText("9788445075739");
         txtBuscarISBN.setEnabled(false);
 
         btnBuscarISBN.setText("Buscar ISBN");
@@ -457,11 +456,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         } catch (UnsupportedEncodingException ex) {
             // Mostramos un mensaje de error en caso de haber una excepción
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
-        } catch (IOException ex) {
+        } catch (IOException | SQLException ex) {
             // Mostramos un mensaje de error en caso de haber una excepción
             Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormularioLibros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarISBNActionPerformed
 
@@ -812,7 +809,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 try {
                     // Transformamos la cadena en base 64 de la carátula
                     // a una imagen
-                    BufferedImage imagen = Utiles.stringBase64ToImage(libro.getImagen());
+                    BufferedImage imagen = Utiles.stringBase64ToImage(datosLibro.getImagen());
 
                     // Redimensionamos la imágen para que se ajuste a la etiqueta
                     // de la carátula sin modificar su tamaño

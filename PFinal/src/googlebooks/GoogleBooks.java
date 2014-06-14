@@ -25,10 +25,13 @@ import db.BaseDeDatos;
 import db.Libro;
 import db.Resultado;
 import formularios.DialogInsertarAutores;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
+import utiles.Utiles;
 
 /**
  * Clase pare realizar consultas a Google Books usando GSon
@@ -85,7 +88,6 @@ public class GoogleBooks {
             libro.setEditorial(item.getVolumeInfo().getPublisher());
             libro.setIsbn(isbn);
             libro.setResumen(item.getVolumeInfo().getDescription());
-            
 
             // Creamos una conexión a la base de datos
             BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
@@ -161,8 +163,19 @@ public class GoogleBooks {
                 }
             }
 
-            // Coramos los id's de los autores y los asignamos al objeto Libro
+            // Cortamos los id's de los autores y los asignamos al objeto Libro
             libro.setAutores(conocidos.split(";"));
+
+            // Comprobamos que traemos datos de imágenes
+            if (item.getVolumeInfo().getImageLinks() != null && !item.getVolumeInfo().getImageLinks().getSmallThumbnail().equals("")) {
+
+                File file = Utiles.downloadFile(new URL(item.getVolumeInfo().getImageLinks().getThumbnail()));
+
+                // Asignamos el fichero seleccionado a como una cadena en base 64
+                // a una etiqueta oculta
+                libro.setImagen(Utiles.fileToBase64String(file));
+
+            }
 
         }
 

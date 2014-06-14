@@ -247,5 +247,4 @@ public class Item {
         this.accessInfo = accessInfo;
         return this;
     }
-
 }
