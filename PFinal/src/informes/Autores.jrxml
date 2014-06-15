@@ -43,7 +43,7 @@ GROUP BY
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="46" splitType="Stretch">
+		<band height="43" splitType="Stretch">
 			<line>
 				<reportElement x="4" y="2" width="551" height="1" uuid="9cc83a7c-78a0-48bc-8015-92bf791e8e5d"/>
 			</line>
@@ -68,16 +68,13 @@ GROUP BY
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="283" y="16" width="53" height="20" uuid="18705d40-3167-4e26-afd1-7fee74916598"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="336" y="16" width="40" height="20" uuid="f4e60d5a-001d-43ad-af35-98a92c114883"/>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<reportElement x="429" y="16" width="126" height="20" uuid="18705d40-3167-4e26-afd1-7fee74916598"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "+ $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement x="4" y="16" width="100" height="20" uuid="d9cea31a-59f7-401f-9a61-46f02e3731f3"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<reportElement x="4" y="16" width="93" height="20" uuid="d9cea31a-59f7-401f-9a61-46f02e3731f3"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

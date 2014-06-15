@@ -458,7 +458,8 @@ public final class DialogInformes extends javax.swing.JDialog {
                             "GROUP_CONCAT(autores.primerNombre,' ',autores.apellidoPaterno SEPARATOR ', ') AS Autor",
                             "Titulos.numeroEdicion AS NumeroEdicion",
                             "Titulos.editorial AS Editorial",
-                            "Titulos.copyright AS Copyright"},
+                            "Titulos.copyright AS Copyright",
+                            "Titulos.caratula AS Caratula"},
                         new String[]{"autores autores INNER JOIN isbnautor isbnautor ON autores.idAutor = isbnautor.idAutor INNER JOIN Titulos Titulos ON isbnautor.isbn = Titulos.isbn GROUP BY Titulos.isbn"},
                         filtro,
                         orden);

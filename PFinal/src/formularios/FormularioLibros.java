@@ -26,10 +26,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -42,7 +39,7 @@ import utiles.Validaciones;
  *
  * @author Luis Cabrerizo Gómez
  */
-enum modoEdicion {
+enum ModoEdicion {
 
     /**
      * Valor para el modo de añadir del formulario
@@ -66,7 +63,7 @@ enum modoEdicion {
 public class FormularioLibros extends javax.swing.JInternalFrame {
     
     private final BaseDeDatos baseDatos;
-    private modoEdicion modo = modoEdicion.LECTURA;
+    private ModoEdicion modo = ModoEdicion.LECTURA;
     private Libro libro;
 
     /**
@@ -104,7 +101,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         if (libro != null) {
             rellenarCampos(libro);
             activarEdicion(false);
-            this.modo = modoEdicion.LECTURA;
+            this.modo = ModoEdicion.LECTURA;
         } else {
 
             // En caso de que no tenga valor el parámetro, se ha llamado a la
@@ -112,7 +109,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             // vacios y activamos la edición en modo añadir
             rellenarCampos(null);
             activarEdicion(true);
-            this.modo = modoEdicion.AÑADIR;
+            this.modo = ModoEdicion.AÑADIR;
         }
     }
 
@@ -597,7 +594,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     lblBytesCaratula.getText());
 
             // Si el modo del formulario es de añadir
-            if (modo == modoEdicion.AÑADIR) {
+            if (modo == ModoEdicion.AÑADIR) {
 
                 // Insertamos el libro en la base de datos, almacenando el resultado
                 // en una variable a tal efecto
@@ -622,7 +619,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 // y desactivamos el modo de edición del formulario
                 rellenarCampos(this.libro);
                 activarEdicion(false);
-                modo = modoEdicion.LECTURA;
+                modo = ModoEdicion.LECTURA;
 
                 // Eliminamos el valor del campo de búsqueda de ISBN
                 txtBuscarISBN.setText("");
@@ -651,7 +648,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 // instancia y desactivamos el modo de edición
                 rellenarCampos(this.libro);
                 activarEdicion(false);
-                modo = modoEdicion.LECTURA;
+                modo = ModoEdicion.LECTURA;
 
                 // Eliminamos el valor del campo de búsqueda de ISBN
                 txtBuscarISBN.setText("");
@@ -727,7 +724,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         activarEdicion(false);
 
         // Cambiamos el modo de edición a lectura
-        this.modo = modoEdicion.LECTURA;
+        this.modo = ModoEdicion.LECTURA;
 
         // Eliminamos el valor del campo de búsqueda de ISBN
         txtBuscarISBN.setText("");
@@ -740,7 +737,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         if (this.libro != null) {
 
             // Cambiamos el modo del formulario
-            this.modo = modoEdicion.MODIFICAR;
+            this.modo = ModoEdicion.MODIFICAR;
 
             // Rellenamos los campos del formulario con los valores de la variable
             // de instancia            
@@ -886,7 +883,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         this.libro = null;
 
         // Cambiamos el modo del formulario
-        this.modo = modoEdicion.AÑADIR;
+        this.modo = ModoEdicion.AÑADIR;
 
         // Limpiamos los campos y activamos el modo de edición
         rellenarCampos(libro);
@@ -901,7 +898,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     private void lblCaratulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCaratulaMouseClicked
 
         // Comprobamos que el formulario está en modo edición o añadir
-        if (modo != modoEdicion.LECTURA) {
+        if (modo != ModoEdicion.LECTURA) {
             // Comprobamos si es un doble click buscando el número de clicks
             // en el evento
             if (evt.getClickCount() == 2) {
