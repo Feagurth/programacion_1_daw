@@ -17,8 +17,7 @@
 package formularios;
 
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import utiles.Mensajes;
 
 /**
  * Clase para mostrar la ventana principal de la aplicación 
@@ -44,6 +43,9 @@ import java.util.logging.Logger;
  *
  * Google Gson
  * google-gson-2.2.4
+ * 
+ * Apache Commons Codec 1.9 API
+ * commons-codec-1.9-bin
  *
  * @author Luis Cabrerizo Gómez
  */
@@ -56,6 +58,12 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
         // Inicializamos los componentes gráficos del formulario
         initComponents();
+        
+        // Ponemos un título a la ventana
+        this.setTitle("Mi biblioteca");
+        
+        // Cargamos el formulario de la biblioteca
+        btnBrowseActionPerformed(null);
     }
 
     /**
@@ -193,7 +201,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             // Maximizamos el formulario           
             form.setMaximum(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
 
 
@@ -222,7 +230,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             // Maximizamos el formulario           
             form.setMaximum(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
     }//GEN-LAST:event_btnBrowseActionPerformed
 
@@ -249,7 +257,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             // Maximizamos el formulario           
             form.setMaximum(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(FormularioPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }       }//GEN-LAST:event_btnAutoresActionPerformed
 
     /**

@@ -275,8 +275,11 @@ public class FormularioCaratula extends javax.swing.JPanel {
      * @param evt Evento
      */
     private void lblAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAutoresMouseClicked
-        // Llamamos al método pulsado
-        pulsado();
+        // Comprobamos que se ha hecho doble click
+        if (evt.getClickCount() == 2) {
+            // Llamamos al método pulsado
+            pulsado();
+        }
     }//GEN-LAST:event_lblAutoresMouseClicked
 
     /**
@@ -285,8 +288,11 @@ public class FormularioCaratula extends javax.swing.JPanel {
      * @param evt Evento
      */
     private void lblCaratulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCaratulaMouseClicked
-        // Llamamos al método pulsado
-        pulsado();
+        // Comprobamos que se ha hecho doble click
+        if (evt.getClickCount() == 2) {
+            // Llamamos al método pulsado
+            pulsado();
+        }
     }//GEN-LAST:event_lblCaratulaMouseClicked
 
     /**
@@ -295,8 +301,11 @@ public class FormularioCaratula extends javax.swing.JPanel {
      * @param evt Evento
      */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // Llamamos al método pulsado
-        pulsado();
+        // Comprobamos que se ha hecho doble click
+        if (evt.getClickCount() == 2) {
+            // Llamamos al método pulsado
+            pulsado();
+        }
     }//GEN-LAST:event_formMouseClicked
 
 

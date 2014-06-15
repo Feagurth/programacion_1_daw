@@ -25,8 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -36,6 +34,27 @@ import utiles.Utiles;
 import utiles.Validaciones;
 
 /**
+ * Enumerador para los distintos modos de edición del formulario
+ *
+ * @author Luis Cabrerizo Gómez
+ */
+enum modoEdicion {
+
+    /**
+     * Valor para el modo de añadir del formulario
+     */
+    AÑADIR,
+    /**
+     * Valor para el modo de modificación del formulario
+     */
+    MODIFICAR,
+    /**
+     * Valor para el modo de lectura del formulario
+     */
+    LECTURA
+};
+
+/**
  * Clase para la creación del formulario de libros
  *
  * @author Luis Cabrerizo Gómez
@@ -43,7 +62,7 @@ import utiles.Validaciones;
 public class FormularioLibros extends javax.swing.JInternalFrame {
 
     private final BaseDeDatos baseDatos;
-    private String modo = "A";
+    private modoEdicion modo = modoEdicion.LECTURA;
     private Libro libro;
 
     /**
@@ -81,6 +100,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         if (libro != null) {
             rellenarCampos(libro);
             activarEdicion(false);
+            this.modo = modoEdicion.LECTURA;
         } else {
 
             // En caso de que no tenga valor el parámetro, se ha llamado a la
@@ -88,6 +108,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             // vacios y activamos la edición en modo añadir
             rellenarCampos(null);
             activarEdicion(true);
+            this.modo = modoEdicion.AÑADIR;
         }
     }
 
@@ -243,14 +264,14 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 239, -1, -1));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 380, 180));
 
         cmbGenero.setEnabled(false);
         cmbGenero.setFocusable(false);
@@ -383,8 +404,8 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIdAutores)
                     .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -572,7 +593,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     lblBytesCaratula.getText());
 
             // Si el modo del formulario es de añadir
-            if (this.modo.equals("A")) {
+            if (modo == modoEdicion.AÑADIR) {
 
                 // Insertamos el libro en la base de datos, almacenando el resultado
                 // en una variable a tal efecto
@@ -597,6 +618,10 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 // y desactivamos el modo de edición del formulario
                 rellenarCampos(this.libro);
                 activarEdicion(false);
+                modo = modoEdicion.LECTURA;
+
+                // Eliminamos el valor del campo de búsqueda de ISBN
+                txtBuscarISBN.setText("");
 
             } else {
 
@@ -622,6 +647,10 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 // instancia y desactivamos el modo de edición
                 rellenarCampos(this.libro);
                 activarEdicion(false);
+                modo = modoEdicion.LECTURA;
+
+                // Eliminamos el valor del campo de búsqueda de ISBN
+                txtBuscarISBN.setText("");
 
             }
         } else {
@@ -680,7 +709,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBrowseAutoresActionPerformed
 
     /**
-     * Evento para la pulsación del boton de cancelar
+     * Evento para la pulsación del botón de cancelar
      *
      * @param evt Evento
      */
@@ -692,6 +721,12 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
         // Desactivamos la edición en el formulario
         activarEdicion(false);
+
+        // Cambiamos el modo de edición a lectura
+        this.modo = modoEdicion.LECTURA;
+
+        // Eliminamos el valor del campo de búsqueda de ISBN
+        txtBuscarISBN.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -701,7 +736,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         if (this.libro != null) {
 
             // Cambiamos el modo del formulario
-            this.modo = "M";
+            this.modo = modoEdicion.MODIFICAR;
 
             // Rellenamos los campos del formulario con los valores de la variable
             // de instancia            
@@ -840,7 +875,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         this.libro = null;
 
         // Cambiamos el modo del formulario
-        this.modo = "A";
+        this.modo = modoEdicion.AÑADIR;
 
         // Limpiamos los campos y activamos el modo de edición
         rellenarCampos(libro);
@@ -853,56 +888,59 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      * @param evt Evento
      */
     private void lblCaratulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCaratulaMouseClicked
-        // Comprobamos si es un doble click buscando el número de clicks
-        // en el evento
-        if (evt.getClickCount() == 2) {
 
-            try {
-                // Creamos un objeto JFileChooser
-                JFileChooser fc = new JFileChooser();
+        // Comprobamos que el formulario está en modo edición o añadir
+        if (modo != modoEdicion.LECTURA) {
+            // Comprobamos si es un doble click buscando el número de clicks
+            // en el evento
+            if (evt.getClickCount() == 2) {
 
-                // Le asignamos un título a la ventana de selección
-                fc.setDialogTitle("Seleccione una imágen...");
+                try {
+                    // Creamos un objeto JFileChooser
+                    JFileChooser fc = new JFileChooser();
 
-                // Especificamos el filtro de ficheros a seleccionar
-                FileNameExtensionFilter filter
-                        = new FileNameExtensionFilter("Imágenes JPG ", "jpg");
+                    // Le asignamos un título a la ventana de selección
+                    fc.setDialogTitle("Seleccione una imágen...");
 
-                // Aplicamos el filtro a la ventana de selección
-                fc.setFileFilter(filter);
+                    // Especificamos el filtro de ficheros a seleccionar
+                    FileNameExtensionFilter filter
+                            = new FileNameExtensionFilter("Imágenes JPG ", "jpg");
 
-                // Mostramos la ventana de selección y guardamos el código de 
-                // resultado de la seleccion
-                int returnVal = fc.showDialog(this, "Aceptar");
+                    // Aplicamos el filtro a la ventana de selección
+                    fc.setFileFilter(filter);
 
-                // Comprobamos si se ha pulsado el botón de aceptar
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    // Cargamos el fichero a un objeto File
-                    File file = fc.getSelectedFile();
+                    // Mostramos la ventana de selección y guardamos el código de 
+                    // resultado de la seleccion
+                    int returnVal = fc.showDialog(this, "Aceptar");
 
-                    // Guardamos la imágen a un objeto Image
-                    BufferedImage image = ImageIO.read(file);
+                    // Comprobamos si se ha pulsado el botón de aceptar
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        // Cargamos el fichero a un objeto File
+                        File file = fc.getSelectedFile();
 
-                    // Redimensionamos la imagen para que se ajuste al tamaño de la etiqueta
-                    // sin modificar su tamaño
-                    image = Utiles.scaleImage(image, BufferedImage.TYPE_INT_RGB, 144, 219);
+                        // Guardamos la imágen a un objeto Image
+                        BufferedImage image = ImageIO.read(file);
 
-                    // Y lo cargamos en el label de la carátula convierténdolo
-                    // en ImageIcon
-                    lblCaratula.setIcon(new ImageIcon(image));
+                        // Redimensionamos la imagen para que se ajuste al tamaño de la etiqueta
+                        // sin modificar su tamaño
+                        image = Utiles.scaleImage(image, BufferedImage.TYPE_INT_RGB, 144, 219);
 
-                    // Asignamos el fichero seleccionado a como una cadena en base 64
-                    // a una etiqueta oculta
-                    lblBytesCaratula.setText(Utiles.fileToBase64String(fc.getSelectedFile()));
+                        // Y lo cargamos en el label de la carátula convierténdolo
+                        // en ImageIcon
+                        lblCaratula.setIcon(new ImageIcon(image));
 
+                        // Asignamos el fichero seleccionado a como una cadena en base 64
+                        // a una etiqueta oculta
+                        lblBytesCaratula.setText(Utiles.fileToBase64String(fc.getSelectedFile()));
+
+                    }
+
+                } catch (IOException ex) {
+
+                    // Si se produce un error, mostramos el mesaje al usuario
+                    Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
                 }
-
-            } catch (IOException ex) {
-
-                // Si se produce un error, mostramos el mesaje al usuario
-                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
             }
-
         }
     }//GEN-LAST:event_lblCaratulaMouseClicked
 
