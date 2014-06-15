@@ -18,6 +18,7 @@ package utiles;
 
 /**
  * Clase para validar datos
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Validaciones {
@@ -77,8 +78,15 @@ public class Validaciones {
     private static final String CADENA_SOLO_LETRAS_NUMEROS = "^[a-zA-ZñÑ0-9]+$";
 
     private static final String NUMERO = "[-+]?\\d*\\.?\\d+";
-    
+
     private static final String ISBN = "((?=\\d{1,5}\\d{1,7}\\2?\\d{1,6}\\2?\\d)(?:\\d\\2*){9}[\\dX])|(97(?:8|9)(?=\\d{1,5}\\2?\\d{1,7}\\2?\\d{1,6}\\2?\\d)(?:\\d\\2*){9}\\d)";
+
+    private static final String IP = "^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\."
+            + "(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\."
+            + "(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\."
+            + "(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$";
+
+    private static final String CADENA_SOLO_LETRAS = "^[a-zA-ZñÑ]+$";
 
     /**
      * Tipos de validaciones que se pueden llevar a cabo
@@ -180,7 +188,15 @@ public class Validaciones {
         /**
          * Valor para ISBN
          */
-        ISBN(23);
+        ISBN(23),
+        /**
+         * Valor para IPs
+         */
+        IP(24),
+        /**
+         * Valor para cadenas de letras sin espacios
+         */
+        CADENA_SOLO_LETRAS(25);
 
         private final int value;
 
@@ -248,6 +264,10 @@ public class Validaciones {
                 return dato.matches(NUMERO);
             case ISBN:
                 return dato.matches(ISBN);
+            case IP:
+                return dato.matches(IP);
+            case CADENA_SOLO_LETRAS:
+                return dato.matches(CADENA_SOLO_LETRAS);
             default:
                 return false;
         }

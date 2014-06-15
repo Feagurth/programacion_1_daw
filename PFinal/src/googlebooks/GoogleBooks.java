@@ -21,9 +21,9 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLEncoder;
 import com.google.gson.Gson;
-import db.BaseDeDatos;
-import db.Libro;
-import db.Resultado;
+import datos.BaseDeDatos;
+import datos.Libro;
+import datos.Resultado;
 import formularios.DialogInsertarAutores;
 import java.io.File;
 import java.io.IOException;
@@ -160,10 +160,14 @@ public class GoogleBooks {
                         }
                     }
                 }
+
             }
 
-            // Cortamos los id's de los autores y los asignamos al objeto Libro
-            libro.setAutores(conocidos.split(";"));
+            // Comprobamos que hay autores
+            if (!conocidos.equals("")) {
+                // Cortamos los id's de los autores y los asignamos al objeto Libro
+                libro.setAutores(conocidos.split(";"));
+            }
 
             // Comprobamos que traemos datos de imágenes
             if (item.getVolumeInfo().getImageLinks() != null && !item.getVolumeInfo().getImageLinks().getSmallThumbnail().equals("")) {

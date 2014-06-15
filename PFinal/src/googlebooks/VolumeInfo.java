@@ -56,7 +56,7 @@ public class VolumeInfo {
     private String infoLink;
 
     private String canonicalVolumeLink;
-    
+
     private String description;
 
     /**
@@ -512,7 +512,7 @@ public class VolumeInfo {
         this.canonicalVolumeLink = canonicalVolumeLink;
         return this;
     }
-    
+
     /**
      * Método que nos permite recuperar el enlace a la canónica del libro
      *
@@ -532,8 +532,8 @@ public class VolumeInfo {
     }
 
     /**
-     * Método que nos permite asignar la descripción del libro y
-     * devolver el objeto VolumeInfo correspondiente
+     * Método que nos permite asignar la descripción del libro y devolver el
+     * objeto VolumeInfo correspondiente
      *
      * @param description Descripción del libro
      * @return El objeto VolumeInfo correspondiente
@@ -541,6 +541,6 @@ public class VolumeInfo {
     public VolumeInfo withDescription(String description) {
         this.description = description;
         return this;
-    }    
+    }
 
 }

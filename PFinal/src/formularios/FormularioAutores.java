@@ -16,8 +16,8 @@
  */
 package formularios;
 
-import db.BaseDeDatos;
-import db.Resultado;
+import datos.BaseDeDatos;
+import datos.Resultado;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import utiles.Mensajes;
@@ -579,7 +579,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
 
                 // Verificamos si la operación se ha realizado correctamente
                 if (datos.isOperacionCorrecta()) {
-                    
+
                     // Si es así, mostramos un mensaje y recargamos los datos
                     // de la tabla
                     Mensajes.mostrarMensaje("Operación realizada correctamente", Mensajes.TipoMensaje.INFORMACION);
@@ -601,6 +601,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
 
     /**
      * Evento para el cambio de valor del combo de Filtro
+     *
      * @param evt Evento
      */
     private void cmbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFiltroItemStateChanged
@@ -610,7 +611,8 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
 
     /**
      * Evento para la pulsación de teclas en el cuadro de texto de filtro
-     * @param evt Evento     
+     *
+     * @param evt Evento
      */
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
         // Recargamos los datos de la tabla
@@ -619,10 +621,11 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
 
     /**
      * Método para habilitar el modo de edición o deshabilitarlo
+     *
      * @param modo Verdadero para activarlo, falso para desactivarlo
      */
     private void modoEdicion(boolean modo) {
-        
+
         // Los controles se activan, desactivan, muestran u ocultan dependiendo
         // del valor del parámetro
         btnAñadir.setVisible(!modo);
@@ -640,7 +643,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         txtApellidos.setEditable(modo);
         txtNombre.setEditable(modo);
         txtFiltro.setEditable(!modo);
-        
+
         // Quitamos los listeners de la tabla para evitar 
         // cambiar los valores durante el modo de edición
         // y los añadimos de nuevo si se desactiva el modo edición

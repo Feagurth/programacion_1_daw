@@ -17,34 +17,36 @@
 package formularios;
 
 import java.beans.PropertyVetoException;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import utiles.Mensajes;
 
 /**
- * Clase para mostrar la ventana principal de la aplicación 
- * Librerías externas usadas: 
- * 
- * Acceso a base de datos SQL
- * mysql-connector-java-5.1.30-bin 
- * 
- * Absolute Layout
- * AbsoluteLayout 
- * 
- * Informes
- * jasperreports-5.5.2
- * jasperreports-javaflow-5.5.2 
- * commons-beanutils-1.8.0
+ * Clase para mostrar la ventana principal de la aplicación Librerías externas
+ * usadas:
+ *
+ * Acceso a base de datos SQL 
+ * mysql-connector-java-5.1.30-bin
+ *
+ * Absolute Layout 
+ * AbsoluteLayout
+ *
+ * Informes 
+ * jasperreports-5.5.2 
+ * jasperreports-javaflow-5.5.2
+ * commons-beanutils-1.8.0 
  * commons-collections-3.2.1 
- * commons-digester-2.1 
- * commons-javaflow-20060411
+ * commons-digester-2.1
+ * commons-javaflow-20060411 
  * iText-2.1.7.js2 
- * poi-3.7-20101029 
+ * poi-3.7-20101029
  * commons-logging-1.1.1 
  * groovy-all-2.0.1
  *
- * Google Gson
+ * Google Gson 
  * google-gson-2.2.4
- * 
- * Apache Commons Codec 1.9 API
+ *
+ * Apache Commons Codec 1.9 API 
  * commons-codec-1.9-bin
  *
  * @author Luis Cabrerizo Gómez
@@ -56,14 +58,21 @@ public class FormularioPrincipal extends javax.swing.JFrame {
      */
     public FormularioPrincipal() {
 
-        // Inicializamos los componentes gráficos del formulario
-        initComponents();
-        
-        // Ponemos un título a la ventana
-        this.setTitle("Mi biblioteca");
-        
-        // Cargamos el formulario de la biblioteca
-        btnBrowseActionPerformed(null);
+        try {
+            // Inicializamos los componentes gráficos del formulario
+            initComponents();
+
+            // Ponemos un título a la ventana
+            this.setTitle("Mi biblioteca");
+
+            // Ponemos el icono a la ventana
+            this.setIconImage(ImageIO.read(ClassLoader.getSystemResource("images/icon.png")));
+
+            // Cargamos el formulario de la biblioteca
+            btnBrowseActionPerformed(null);
+        } catch (IOException ex) {
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
     }
 
     /**
@@ -80,7 +89,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnAutores = new javax.swing.JButton();
         btnBrowse = new javax.swing.JButton();
         btnInformes = new javax.swing.JButton();
-        btnConfiguracion = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -143,18 +151,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnInformes);
-
-        btnConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
-        btnConfiguracion.setText("Configuración");
-        btnConfiguracion.setFocusable(false);
-        btnConfiguracion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnConfiguracion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfiguracionActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btnConfiguracion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,9 +270,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnInformesActionPerformed
 
-    private void btnConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracionActionPerformed
-    }//GEN-LAST:event_btnConfiguracionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -313,7 +306,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
-    private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnInformes;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;

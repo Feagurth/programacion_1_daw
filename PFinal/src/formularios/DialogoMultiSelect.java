@@ -16,8 +16,8 @@
  */
 package formularios;
 
-import db.BaseDeDatos;
-import db.Resultado;
+import datos.BaseDeDatos;
+import datos.Resultado;
 import java.sql.SQLException;
 import javax.swing.ListSelectionModel;
 import utiles.Mensajes;

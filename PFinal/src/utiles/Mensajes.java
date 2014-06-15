@@ -390,7 +390,6 @@ public class Mensajes {
         // como parte de sus valores de configuración
         JOptionPane.showMessageDialog(null, panel, titulo, parseTipoMensaje(tipoMensaje));
 
-
         // Finalmente devolvemos el valor modificado en el evento de los radio
         // buttons
         return result;

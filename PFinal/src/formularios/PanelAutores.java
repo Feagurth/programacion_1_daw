@@ -176,6 +176,7 @@ public class PanelAutores extends javax.swing.JPanel {
 
     /**
      * Evento para el soltado de tecla en el control
+     *
      * @param evt Evento
      */
     private void txtApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyReleased
@@ -184,6 +185,7 @@ public class PanelAutores extends javax.swing.JPanel {
 
     /**
      * Evento para el soltado de tecla en el control
+     *
      * @param evt Evento
      */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased

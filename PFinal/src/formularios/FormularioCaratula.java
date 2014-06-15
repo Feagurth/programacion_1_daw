@@ -16,9 +16,9 @@
  */
 package formularios;
 
-import db.BaseDeDatos;
-import db.Libro;
-import db.Resultado;
+import datos.BaseDeDatos;
+import datos.Libro;
+import datos.Resultado;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;

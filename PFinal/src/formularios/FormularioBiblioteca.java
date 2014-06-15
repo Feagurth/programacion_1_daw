@@ -16,8 +16,8 @@
  */
 package formularios;
 
-import db.BaseDeDatos;
-import db.Resultado;
+import datos.BaseDeDatos;
+import datos.Resultado;
 import java.awt.GridLayout;
 import java.sql.SQLException;
 import utiles.Mensajes;
@@ -46,7 +46,7 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
 
         // Creamos una nueva conexión con la base de datos
         baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
-        
+
         // Cambiamos el tipo de filtro predefinido en el combo
         cmbTipoFiltro.setSelectedIndex(1);
 
@@ -119,8 +119,8 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                 sql = "COPYRIGHT LIKE '" + txtFiltro.getText() + "%'";
                 break;
             }
-            default:
-            {}
+            default: {
+            }
         }
 
         // Devolvemos el filtro creado
@@ -131,6 +131,7 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
     /**
      * Método para mostrar la información en el formulario en base a la página
      * de paginación en la que nos encontremos
+     *
      * @param pagina Número de página
      */
     private void refrescarLibros(int pagina) {
@@ -150,14 +151,14 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
 
                 // Limpiamos el panel
                 pnlMain.removeAll();
-                
+
                 // Ajustamos el layout del panel a uno tipo grid de 3 objetos de
                 // por columa y filas sin determinar
                 pnlMain.setLayout(new GridLayout(0, 3, 1, 1));
-                
+
                 // Mientras haya datos añadimos al panel objetos FormularioCaratula
                 // al que pasaremos el isbn correspondiente
-                while (datos.getResultado().next()) {                    
+                while (datos.getResultado().next()) {
                     pnlMain.add(new FormularioCaratula(datos.getResultado().getString("isbn")));
                 }
 
@@ -171,7 +172,6 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
 
                 // Si la paginación es igual a la paginación máxima, ocultamos 
                 // el botón de incrementar paginación, si no es así, lo mostramos
-                
                 if (pagina == paginacionMaxima) {
                     btnRight.setVisible(false);
                 } else {
@@ -369,8 +369,9 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Método que nos permite generar un orden para la consulta de libros
-     * basado en la selección del comboBox del formulario
+     * Método que nos permite generar un orden para la consulta de libros basado
+     * en la selección del comboBox del formulario
+     *
      * @return Un array con la ordenación
      */
     private String[] crearOrden() {
@@ -400,12 +401,12 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
                 sql = "COPYRIGHT ASC";
                 break;
             }
-            default:
-            {}
+            default: {
+            }
         }
 
         // Devolvemos el filtro creado
         return new String[]{sql};
-        
+
     }
 }
