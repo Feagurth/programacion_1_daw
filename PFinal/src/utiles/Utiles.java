@@ -172,5 +172,4 @@ public class Utiles {
         // de crear
         return new File("cover.jpg");
     }
-
 }

@@ -25,7 +25,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -60,7 +64,7 @@ enum modoEdicion {
  * @author Luis Cabrerizo Gómez
  */
 public class FormularioLibros extends javax.swing.JInternalFrame {
-
+    
     private final BaseDeDatos baseDatos;
     private modoEdicion modo = modoEdicion.LECTURA;
     private Libro libro;
@@ -130,14 +134,14 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         txtTitulo.setEditable(edicion);
         btnBrowseAutores.setEnabled(edicion);
         txtaResumen.setEnabled(edicion);
-
+        
         txtBuscarISBN.setEnabled(edicion);
         btnBuscarISBN.setEnabled(edicion);
-
+        
         btnAñadir.setVisible(!edicion);
         btnModificar.setVisible(!edicion);
         btnEliminar.setVisible(!edicion);
-
+        
         btnAceptar.setVisible(edicion);
         btnCancelar.setVisible(edicion);
     }
@@ -446,30 +450,27 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      * @param evt Evento
      */
     private void btnBuscarISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarISBNActionPerformed
-
-        // Creamos un nuevo objeto Libro para almacenar los resultados
-        Libro libroISBN;
-
+        
         try {
+
+            // Limpiamos espacios en blanco y guiones y pasamos a mayúsculas
+            txtBuscarISBN.setText(txtBuscarISBN.getText().replace(" ", "").replace("-", "").toUpperCase(Locale.getDefault()));
+
             // Comprobamos que hay texto introducido en el cuado de búsqueda
-            // de ISBN
-            if (!txtBuscarISBN.getText().equals("")) {
-                // Verificamos que el texto introducido son números
-                // y que son 13 caracteres
-                if (Validaciones.validarDato(txtBuscarISBN.getText(), Validaciones.TipoValidacion.NUMERO)
-                        && (txtBuscarISBN.getText().length() == 13 || txtBuscarISBN.getText().length() == 10)) {
+            // de ISBN y que es un ISBN
+            if (!txtBuscarISBN.getText().equals("")
+                    && Validaciones.validarDato(txtBuscarISBN.getText(), Validaciones.TipoValidacion.ISBN)) {
 
-                    // Realizamos la consulta y almacenamos el resultado
-                    libroISBN = GoogleBooks.query(txtBuscarISBN.getText());
+                // Creamos un nuevo objeto Libro para almacenar los resultados
+                Libro libroISBN;
 
-                    if (libroISBN != null) {
-                        rellenarCampos(libroISBN);
-                    }
-
-                } else {
-                    // Avisamos que el usuario debe introducir un ISBN de 13 caracteres
-                    Mensajes.mostrarMensaje("Debe introducir un ISBN", Mensajes.TipoMensaje.AVISO);
+                // Realizamos la consulta y almacenamos el resultado
+                libroISBN = GoogleBooks.query(txtBuscarISBN.getText());
+                
+                if (libroISBN != null) {
+                    rellenarCampos(libroISBN);
                 }
+                
             } else {
                 // Avisamos que el usuario debe introducir un ISBN
                 Mensajes.mostrarMensaje("Debe introducir un ISBN", Mensajes.TipoMensaje.AVISO);
@@ -491,7 +492,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      * usuario en caso contrario
      */
     private String validarDatos() {
-
+        
         String errores = "";
 
         // Comprobamos que el titulo se puedan introducir letras, números y algunos símbolos especiales
@@ -513,7 +514,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         }
 
         // Comprobamos que en el isbn solo se puedan introducir números
-        if (!Validaciones.validarDato(txtISBN.getText(), Validaciones.TipoValidacion.CADENA_SOLO_NUMEROS)) {
+        if (!Validaciones.validarDato(txtISBN.getText(), Validaciones.TipoValidacion.ISBN)) {
             errores = errores.concat("ISBN: valor inválido;");
         }
 
@@ -574,6 +575,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
+        // Limpiamos espacios en blanco y guiones y pasamos a mayúsculas
+        txtISBN.setText(txtISBN.getText().replace(" ", "").replace("-", "").toUpperCase(Locale.getDefault()));
+
         // Verificamos los datos introducidos y guardamos la respuesta
         // en una variable
         String errores = validarDatos();
@@ -605,7 +609,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     // Si lo es, mostramos un mensaje
                     Mensajes.mostrarMensaje("El libro se ha insertado correctamente",
                             Mensajes.TipoMensaje.INFORMACION);
-
+                    
                 } else {
                     // Si hay un error mostramos un mensaje a tal efecto y 
                     // anulamos la variable de instancia
@@ -622,7 +626,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
                 // Eliminamos el valor del campo de búsqueda de ISBN
                 txtBuscarISBN.setText("");
-
+                
             } else {
 
                 // Si el formulario no está en modo añadir, es una actualización.
@@ -635,7 +639,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
                     // Si es así, mostramos un mensaje al respecto
                     Mensajes.mostrarMensaje("El libro se ha actualizado correctamente", Mensajes.TipoMensaje.INFORMACION);
-
+                    
                 } else {
                     // Si han sucedido errores, mostramos un mensaje y anulamos 
                     // la variable de instancia
@@ -651,7 +655,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
                 // Eliminamos el valor del campo de búsqueda de ISBN
                 txtBuscarISBN.setText("");
-
+                
             }
         } else {
             // Si no son datos correctos, mostramos un mensaje al respecto
@@ -704,7 +708,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             // buscarlos en la base de datos
             txtAutor.setText(baseDatos.consultaNombreAutor(dialog.getSeleccion()));
         }
-
+        
 
     }//GEN-LAST:event_btnBrowseAutoresActionPerformed
 
@@ -767,7 +771,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                 // resultado de la consulta en una variable
                 Resultado datos = baseDatos.eliminar(
                         new String[]{"Titulos"},
-                        new String[]{"ISBN = " + libro.getIsbn()});
+                        new String[]{"ISBN = '" + libro.getIsbn() + "'"});
 
                 // Verificamos si la operación es corracta
                 if (datos.isOperacionCorrecta()) {
@@ -776,13 +780,13 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                     // borramos los campos del formulario
                     Mensajes.mostrarMensaje("El libro se ha borrado correctamente",
                             Mensajes.TipoMensaje.INFORMACION);
-
+                    
                     rellenarCampos(null);
                 } else {
 
                     // Si la operación no es correcta, mostramos un mensaje de 
                     // error
-                    Mensajes.mostrarMensaje("Error al borrar el libro",
+                    Mensajes.mostrarMensaje(datos.getMensaje(),
                             Mensajes.TipoMensaje.ERROR);
                 }
             }
@@ -809,6 +813,13 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             cmbGenero.setSelectedIndex(-1);
             txtaResumen.setText("");
             lblBytesCaratula.setText("");
+            
+            try {
+                lblCaratula.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResourceAsStream("images/no_book.png"))));
+            } catch (IOException ex) {
+                Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+            }
+            
         } else {
 
             // Si el parámetro tiene valores, rellenamos los campos con ellos
@@ -820,7 +831,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             txtTitulo.setText(datosLibro.getTitulo());
             cmbGenero.setSelectedIndex(-1);
             txtaResumen.setText(datosLibro.getResumen());
-
+            
             String ids = "";
 
             // Concatenamos los ids del autores
@@ -840,7 +851,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
 
             // Comprobamos que el libro trae datos de carátula
             if (datosLibro.getImagen() != null && !datosLibro.getImagen().equals("")) {
-
+                
                 try {
                     // Transformamos la cadena en base 64 de la carátula
                     // a una imagen
@@ -894,7 +905,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
             // Comprobamos si es un doble click buscando el número de clicks
             // en el evento
             if (evt.getClickCount() == 2) {
-
+                
                 try {
                     // Creamos un objeto JFileChooser
                     JFileChooser fc = new JFileChooser();
@@ -932,9 +943,9 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
                         // Asignamos el fichero seleccionado a como una cadena en base 64
                         // a una etiqueta oculta
                         lblBytesCaratula.setText(Utiles.fileToBase64String(fc.getSelectedFile()));
-
+                        
                     }
-
+                    
                 } catch (IOException ex) {
 
                     // Si se produce un error, mostramos el mesaje al usuario

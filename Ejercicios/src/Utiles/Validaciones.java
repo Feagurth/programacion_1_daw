@@ -18,6 +18,7 @@ package Utiles;
 
 /**
  * Clase para validar datos
+ *
  * @author Luis Cabrerizo Gómez
  */
 public class Validaciones {
@@ -72,11 +73,13 @@ public class Validaciones {
 
     private static final String CADENA_SOLO_NUMEROS = "^[0-9]+$";
 
-    private static final String CADENA_NUMEROS_SIMBOLOS = "^[a-zA-ZñÑ0-9 +-–<>/_.,:;(){}$áÁéÉíÍóÓúÚ¿?\"“”']+";
+    private static final String CADENA_NUMEROS_SIMBOLOS = "^[a-zA-ZñÑ0-9 +-–<>/_.,:;(){}$áÁéÉíÍóÓúÚ¿?\"“”'@#$%&ç#1¡!]+";
 
     private static final String CADENA_SOLO_LETRAS_NUMEROS = "^[a-zA-ZñÑ0-9]+$";
 
     private static final String NUMERO = "[-+]?\\d*\\.?\\d+";
+
+    private static final String ISBN = "((97(?:8|9)(?=\\d{1,5}\\2?\\d{1,7}\\2?\\d{1,6}\\2?\\d)(?:\\d\\2*){9}\\d)|(?=\\d{1,5}\\d{1,7}\\2?\\d{1,6}\\2?\\d)(?:\\d\\2*){9}[\\dX])";
 
     /**
      * Tipos de validaciones que se pueden llevar a cabo
@@ -174,7 +177,11 @@ public class Validaciones {
         /**
          * Valor para cadena de números
          */
-        NUMERO(22);
+        NUMERO(22),
+        /**
+         * Valor para ISBN
+         */
+        ISBN(23);
 
         private final int value;
 
@@ -240,6 +247,8 @@ public class Validaciones {
                 return dato.matches(CADENA_SOLO_LETRAS_NUMEROS);
             case NUMERO:
                 return dato.matches(NUMERO);
+            case ISBN:
+                return dato.matches(ISBN);
             default:
                 return false;
         }
