@@ -60,7 +60,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
         libro.setIsbn(this.isbn);
 
         // Creamos una nueva conexión con la base de datos
-        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        baseDatos = new BaseDeDatos();
 
         try {
 

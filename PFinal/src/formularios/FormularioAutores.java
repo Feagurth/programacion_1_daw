@@ -46,7 +46,7 @@ public class FormularioAutores extends javax.swing.JInternalFrame {
         lblIdAutor.setVisible(false);
 
         // Creamos una nueva conexión a la base de datos
-        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        baseDatos = new BaseDeDatos();
 
         // Ajustamos las selecciones de los combos y hacemos invisibles los
         // botones de aceptar y cancelar

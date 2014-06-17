@@ -88,7 +88,7 @@ public class FormularioLibros extends javax.swing.JInternalFrame {
         this.libro = libro;
 
         // Creamos una nueva conexión con la base de datos
-        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        baseDatos = new BaseDeDatos();
 
         // Ocultamos los botones de aceptar y de cancelar
         btnAceptar.setVisible(false);

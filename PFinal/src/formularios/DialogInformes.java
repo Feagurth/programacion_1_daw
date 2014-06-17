@@ -410,7 +410,7 @@ public final class DialogInformes extends javax.swing.JDialog {
             Resultado salida;
 
             // Creamos una conexión con la base de datos
-            BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+            BaseDeDatos baseDatos = new BaseDeDatos();
 
             // Definimos una variable para almacenar los filtros usados y 
             // mostrarlos en el informe

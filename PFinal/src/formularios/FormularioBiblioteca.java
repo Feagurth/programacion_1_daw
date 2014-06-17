@@ -45,7 +45,7 @@ public class FormularioBiblioteca extends javax.swing.JInternalFrame {
         initComponents();
 
         // Creamos una nueva conexión con la base de datos
-        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        baseDatos = new BaseDeDatos();
 
         // Cambiamos el tipo de filtro predefinido en el combo
         cmbTipoFiltro.setSelectedIndex(1);

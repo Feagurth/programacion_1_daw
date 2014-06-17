@@ -89,7 +89,7 @@ public class GoogleBooks {
             libro.setResumen(item.getVolumeInfo().getDescription());
 
             // Creamos una conexión a la base de datos
-            BaseDeDatos baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+            BaseDeDatos baseDatos = new BaseDeDatos();
 
             // Inicializamos dos variables para controlar los autores que ya están
             // en la base de datos y los que no

@@ -16,6 +16,7 @@
  */
 package datos;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -33,19 +34,17 @@ public class BaseDeDatos {
     DBAccess db;
 
     /**
-     * Constructor de la clase
-     *
-     * @param usuario Usuario de acceso a la base de datos
-     * @param password Contraseña de acceso a la base de datos
-     * @param db_path Ruta de la base de datos
-     * @param database Nombre de la base de datos a la que se conectará
+     * Constructor de la clase Los parámetros de la configuración son leídos
+     * desde la clase Configuración donde se gestionan los valores de conexión
+     * de la base de datos
      */
-    public BaseDeDatos(String usuario, String password, String db_path, String database) {
+    public BaseDeDatos() {
         try {
+            Configuracion config = Configuracion.getConfiguracion();
 
             // Creamos un nuevo objecto DBAccess con los parámetros del método
-            db = new DBAccess(usuario, password, db_path, database);
-        } catch (ClassNotFoundException | SQLException ex) {
+            db = new DBAccess(config.getUsuario(), config.getPassword(), config.getDireccion(), config.getNombre());
+        } catch (ClassNotFoundException | SQLException | IOException ex) {
 
             // Si se produce una excepción, mostramos el mensaje de error y
             // salimos del programa, puesto que no tenedremos acceso a la base

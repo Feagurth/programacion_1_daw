@@ -16,6 +16,7 @@
  */
 package formularios;
 
+import datos.Configuracion;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -25,34 +26,25 @@ import utiles.Mensajes;
  * Clase para mostrar la ventana principal de la aplicación Librerías externas
  * usadas:
  *
- * Acceso a base de datos SQL 
- * mysql-connector-java-5.1.30-bin
+ * Acceso a base de datos SQL mysql-connector-java-5.1.30-bin
  *
- * Absolute Layout 
- * AbsoluteLayout
+ * Absolute Layout AbsoluteLayout
  *
- * Informes 
- * jasperreports-5.5.2 
- * jasperreports-javaflow-5.5.2
- * commons-beanutils-1.8.0 
- * commons-collections-3.2.1 
- * commons-digester-2.1
- * commons-javaflow-20060411 
- * iText-2.1.7.js2 
- * poi-3.7-20101029
- * commons-logging-1.1.1 
- * groovy-all-2.0.1
+ * Informes jasperreports-5.5.2 jasperreports-javaflow-5.5.2
+ * commons-beanutils-1.8.0 commons-collections-3.2.1 commons-digester-2.1
+ * commons-javaflow-20060411 iText-2.1.7.js2 poi-3.7-20101029
+ * commons-logging-1.1.1 groovy-all-2.0.1
  *
- * Google Gson 
- * google-gson-2.2.4
+ * Google Gson google-gson-2.2.4
  *
- * Apache Commons Codec 1.9 API 
- * commons-codec-1.9-bin
+ * Apache Commons Codec 1.9 API commons-codec-1.9-bin
  *
  * @author Luis Cabrerizo Gómez
  */
 public class FormularioPrincipal extends javax.swing.JFrame {
 
+    Configuracion config;
+    
     /**
      * Constructor de la clase
      */
@@ -68,10 +60,20 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             // Ponemos el icono a la ventana
             this.setIconImage(ImageIO.read(ClassLoader.getSystemResource("images/icon.png")));
 
+            // Creamos una instancia de la configuración
+            config = Configuracion.getConfiguracion();
+            
+            // Y la cargamos desde el fichero
+            config.cargarConfiguracion();
+                        
             // Cargamos el formulario de la biblioteca
             btnBrowseActionPerformed(null);
+            
         } catch (IOException ex) {
-            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+            Mensajes.mostrarMensaje("No se ha detectado fichero de configuración\n"
+                    + "Introduzca la configuración a continuación", Mensajes.TipoMensaje.AVISO);
+            
+            btnConfigActionPerformed(null);
         }
     }
 
@@ -89,6 +91,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnAutores = new javax.swing.JButton();
         btnBrowse = new javax.swing.JButton();
         btnInformes = new javax.swing.JButton();
+        btnConfig = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -151,6 +154,18 @@ public class FormularioPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnInformes);
+
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
+        btnConfig.setText("Configuración");
+        btnConfig.setFocusable(false);
+        btnConfig.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConfig.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnConfig);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,6 +286,32 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInformesActionPerformed
 
     /**
+     * Evento para la pulsación del botón de configuración
+     *
+     * @param evt Evento
+     */
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+        // Creamos un nuevo objeto FormularioConfiguracion
+        FormularioConfiguracion form = new FormularioConfiguracion();
+
+        // Lo hacemos visible y ajustamos los controles
+        form.setVisible(true);
+        form.pack();
+
+        // Eliminamos todos los formularios anteriores que hubiesn en el
+        // panel padre y añadimos el que acabamos de crear
+        jDesktopPane1.removeAll();
+        jDesktopPane1.add(form);
+
+        try {
+            // Maximizamos el formulario           
+            form.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
+        }
+    }//GEN-LAST:event_btnConfigActionPerformed
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -306,6 +347,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnBrowse;
+    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnInformes;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar jToolBar1;

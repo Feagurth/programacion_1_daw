@@ -58,7 +58,7 @@ public class DialogoMultiSelect extends javax.swing.JDialog {
 
         // Creamos un objeto BaseDeDatos con el que comunicarnos con la base de 
         // datos
-        baseDatos = new BaseDeDatos("root", "", "127.0.0.1:3306", "libros");
+        baseDatos = new BaseDeDatos();
 
         // Especificamos el tipo de selección que queremos en la tabla, en este
         // caso solo está permitida la selección de filas completas
