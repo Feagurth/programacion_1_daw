@@ -21,7 +21,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import utiles.Encriptacion;
 
 /**
  * Clase singleton para almacenar y gestionar la configuración de la aplicación
@@ -30,13 +37,39 @@ import java.util.Properties;
  */
 public class Configuracion {
 
+    /**
+     * Enumerador de los tipos de configuración de guardado del fichero de
+     * configuración
+     */
+    public enum ModoGuardado {
+
+        /**
+         * Valor que hay que establecer si se quiere que el fichero sea
+         * encriptado
+         */
+        ENCRIPTADO,
+        /**
+         * Valor que hay que establecer si se quiere que el fichero se guarde en
+         * texto plano
+         */
+        NO_ENCRIPTADO
+    };
+
     private static Configuracion configuracion;
+
+    // Contraseña para encriptación de datos
+    private static final String defaultPassword = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, "
+            + "no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.";
 
     private String direccion;
     private String puerto;
     private String nombre;
     private String usuario;
     private String password;
+
+    // Variable que controla la encriptación del fichero de configuración
+    // Cambiar la variable a NO_ENCRIPTADO si se desea el fichero sin encriptar
+    private final ModoGuardado modo = ModoGuardado.ENCRIPTADO;
 
     /**
      * Constructor de la aplicación Diseñada sin parámetros para que no
@@ -179,10 +212,22 @@ public class Configuracion {
      *
      * @throws IOException Excepción por si hay errores de lectura con el
      * fichero de configuración
+     * @throws java.io.UnsupportedEncodingException Excepción por si no está
+     * soportada la codificación del texto
+     * @throws java.security.NoSuchAlgorithmException Excepción por si no existe
+     * el algoritmo de encriptación
+     * @throws java.security.InvalidKeyException Excepción por si la clave de
+     * encriptación no es válida
+     * @throws javax.crypto.NoSuchPaddingException Excepción por si el relleno
+     * de la encriptación no es correcto
+     * @throws javax.crypto.IllegalBlockSizeException Excepción por el tamaño
+     * del bloque de encriptación es incorrecto
+     * @throws javax.crypto.BadPaddingException Excepción por el relleno no es
+     * correcto
      */
-    public void cargarConfiguracion() throws IOException {
+    public void cargarConfiguracion() throws IOException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 
-        // Creamos un nuevo objeto Properties que usaremos para leer la 
+        // Creamos un nuevo objeto Properties que usaremos para leer la
         // configuración de la aplicación
         Properties prop = new Properties();
 
@@ -192,22 +237,49 @@ public class Configuracion {
         // Leemos las propiedades del fichero
         prop.load(input);
 
-        // Asignamos las propiedades a las variables de clase
-        this.direccion = prop.getProperty("direccion");
-        this.nombre = prop.getProperty("nombre");
-        this.puerto = prop.getProperty("puerto");
-        this.usuario = prop.getProperty("usuario");
-        this.password = prop.getProperty("password");
+        // Comprobamos si el texto está encriptado
+        if (modo == ModoGuardado.NO_ENCRIPTADO) {
+            // Asignamos las propiedades a las variables de clase sin decodificar
+            // desde el fichero de configuración            
+            this.direccion = prop.getProperty("direccion");
+            this.nombre = prop.getProperty("nombre");
+            this.puerto = prop.getProperty("puerto");
+            this.usuario = prop.getProperty("usuario");
+            this.password = prop.getProperty("password");
+        } else {
+            Encriptacion.setKey(defaultPassword);
+
+            // Asignamos las propiedades a las variables de clase decodificándolas
+            // desde el fichero de configuración            
+            this.direccion = Encriptacion.desencriptar(prop.getProperty("direccion"));
+            this.nombre = Encriptacion.desencriptar(prop.getProperty("nombre"));
+            this.puerto = Encriptacion.desencriptar(prop.getProperty("puerto"));
+            this.usuario = Encriptacion.desencriptar(prop.getProperty("usuario"));
+            this.password = Encriptacion.desencriptar(prop.getProperty("password"));
+
+        }
 
     }
 
     /**
      * Método para almacenar la configuración de la aplicación a un fichero
      *
-     * @throws IOException Excepción por si hay errores de escritura con el
+     * @throws IOException Excepción por si hay errores de lectura con el
      * fichero de configuración
+     * @throws java.io.UnsupportedEncodingException Excepción por si no está
+     * soportada la codificación del texto
+     * @throws java.security.NoSuchAlgorithmException Excepción por si no existe
+     * el algoritmo de encriptación
+     * @throws java.security.InvalidKeyException Excepción por si la clave de
+     * encriptación no es válida
+     * @throws javax.crypto.NoSuchPaddingException Excepción por si el relleno
+     * de la encriptación no es correcto
+     * @throws javax.crypto.IllegalBlockSizeException Excepción por el tamaño
+     * del bloque de encriptación es incorrecto
+     * @throws javax.crypto.BadPaddingException Excepción por el relleno no es
+     * correcto
      */
-    public void guardarConfiguracion() throws IOException {
+    public void guardarConfiguracion() throws IOException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 
         // Creamos un nuevo objeto Properties que usaremos para leer la 
         // configuración de la aplicación        
@@ -221,16 +293,30 @@ public class Configuracion {
             // Creamos un flujo de salida sobre un ficher
             output = new FileOutputStream("config.properties");
 
-            // Asignamos los valores a almacenar al objeto Properties
-            prop.setProperty("direccion", direccion);
-            prop.setProperty("nombre", nombre);
-            prop.setProperty("puerto", puerto);
-            prop.setProperty("usuario", usuario);
-            prop.setProperty("password", password);
+            if (modo == ModoGuardado.NO_ENCRIPTADO) {
+
+                // Asignamos los valores a almacenar al objeto Properties sin encriptar               
+                prop.setProperty("direccion", direccion);
+                prop.setProperty("nombre", nombre);
+                prop.setProperty("puerto", puerto);
+                prop.setProperty("usuario", usuario);
+                prop.setProperty("password", password);
+
+            } else {
+                // Espeficamos la clave de encriptación
+                Encriptacion.setKey(defaultPassword);
+
+                // Asignamos los valores a almacenar al objeto Properties encriptándolos
+                // previamente
+                prop.setProperty("direccion", Encriptacion.encriptar(direccion));
+                prop.setProperty("nombre", Encriptacion.encriptar(nombre));
+                prop.setProperty("puerto", Encriptacion.encriptar(puerto));
+                prop.setProperty("usuario", Encriptacion.encriptar(usuario));
+                prop.setProperty("password", Encriptacion.encriptar(password));
+            }
 
             // Grabamos el fichero en el direcctorio raíz de la aplicacion
             prop.store(output, null);
-
         } finally {
             // Si el objeto todavia existe, intentamos cerrarlo
             if (output != null) {

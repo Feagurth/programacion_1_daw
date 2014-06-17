@@ -19,6 +19,11 @@ package formularios;
 import datos.Configuracion;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.imageio.ImageIO;
 import utiles.Mensajes;
 
@@ -44,7 +49,7 @@ import utiles.Mensajes;
 public class FormularioPrincipal extends javax.swing.JFrame {
 
     Configuracion config;
-    
+
     /**
      * Constructor de la clase
      */
@@ -62,18 +67,24 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
             // Creamos una instancia de la configuración
             config = Configuracion.getConfiguracion();
-            
+
             // Y la cargamos desde el fichero
             config.cargarConfiguracion();
-                        
+
             // Cargamos el formulario de la biblioteca
             btnBrowseActionPerformed(null);
-            
+
         } catch (IOException ex) {
+            // Si no podemos leer el fichero es pq esta dañado o no existe
+            // en ese caso mostramos un mensaje y cargamos la pantalla de
+            // configuración
             Mensajes.mostrarMensaje("No se ha detectado fichero de configuración\n"
                     + "Introduzca la configuración a continuación", Mensajes.TipoMensaje.AVISO);
-            
+
             btnConfigActionPerformed(null);
+        } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
+            // Si se produce una excepción durante la desencriptación de los valores de configuración mostramos un mensaje de error
+            Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
         }
     }
 

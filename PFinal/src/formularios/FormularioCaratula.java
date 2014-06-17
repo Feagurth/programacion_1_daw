@@ -69,7 +69,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
             Resultado datos = baseDatos.consultar(
                     new String[]{"*"},
                     new String[]{"titulos"},
-                    new String[]{"isbn= " + this.isbn}, null);
+                    new String[]{"isbn= '".concat(this.isbn).concat("'")}, null);
 
             // Comprobamos que la operación es correcta y que trae datos
             if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
@@ -109,7 +109,7 @@ public class FormularioCaratula extends javax.swing.JPanel {
                 datos = baseDatos.consultar(
                         new String[]{"idAutor"},
                         new String[]{"isbnautor"},
-                        new String[]{"isbn = " + this.isbn}, null);
+                        new String[]{"isbn = '".concat(this.isbn).concat("'")}, null);
 
                 String idAutor = "";
 

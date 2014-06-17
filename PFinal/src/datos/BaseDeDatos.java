@@ -40,10 +40,11 @@ public class BaseDeDatos {
      */
     public BaseDeDatos() {
         try {
+            // Creamos una instancia de la configuración
             Configuracion config = Configuracion.getConfiguracion();
 
-            // Creamos un nuevo objecto DBAccess con los parámetros del método
-            db = new DBAccess(config.getUsuario(), config.getPassword(), config.getDireccion(), config.getNombre());
+            // Creamos un nuevo objecto DBAccess con los parámetros de la configuración
+            db = new DBAccess(config.getUsuario(), config.getPassword(), config.getDireccion().concat(":").concat(config.getPuerto()), config.getNombre());
         } catch (ClassNotFoundException | SQLException | IOException ex) {
 
             // Si se produce una excepción, mostramos el mensaje de error y
@@ -512,7 +513,7 @@ public class BaseDeDatos {
         salida = actualizar(
                 new String[]{"isbn", "titulo", "numeroEdicion", "editorial", "copyright", "resumen", "caratula"},
                 new String[]{"titulos"},
-                new String[]{"isbn = " + libro.getIsbn()},
+                new String[]{"isbn = '".concat(libro.getIsbn()).concat("'")},
                 new String[]{
                     libro.getIsbn(),
                     libro.getTitulo(),
@@ -530,7 +531,7 @@ public class BaseDeDatos {
             // no se han modificado
             salida = eliminar(
                     new String[]{"isbnautor"},
-                    new String[]{"isbn = " + libro.getIsbn()});
+                    new String[]{"isbn = '".concat(libro.getIsbn()).concat("'")});
 
             // Si la operacion se realiza correctamente, los registros están
             // borrados
@@ -714,18 +715,52 @@ public class BaseDeDatos {
         int salida = 0;
         Resultado datos;
 
+        // Realizamos una consulta a la base de datos buscando el nombre
+        // exacto del autor
         datos = consultar(
                 new String[]{"idAutor"},
                 new String[]{"Autores"},
                 new String[]{"CONCAT(primerNombre, ' ', apellidoPaterno) = '".concat(autor).concat("'")},
                 null);
 
+        // Si la operación es correcta y tenemos resultados los almacenamos en
+        // la variable de salida
         if (datos.isOperacionCorrecta() && datos.getResultado().next()) {
             salida = (int) datos.getResultado().getObject("idAutor");
         }
 
+        // Cerramos el ResultSet para cerrar la conexión
         datos.getResultado().close();
 
+        // Devolvemos el resultado
         return salida;
+    }
+
+    /**
+     * Función para comprobar el correcto acceso a la base de datos
+     *
+     * @param usuario Nombre de usuario con el que acceder al servidor de base
+     * de datos
+     * @param password Contraseña con la que acceder al servidor de base de
+     * datos
+     * @param direccion Dirección del servidor de base de datos
+     * @param puerto Puerto del servidor de base de datos
+     * @param nombre Nombre de la base de datos a la que acceder
+     * @return Verdadero si hay acceso y falso en caso contrario
+     */
+    public static boolean comprobarAcceso(String usuario, String password, String direccion, String puerto, String nombre) {
+        try {
+            // Creamos un objeto DBAccess con los parámetros pasados para comprobar
+            // si la configuración es correcta
+            DBAccess dbAcess = new DBAccess(usuario, password, direccion.concat(":".concat(puerto)), nombre);
+
+            // Si todo sale bien, devolvemos verdadero
+            return true;
+        } catch (ClassNotFoundException | SQLException ex) {
+
+            // Si se produce una excepción, no tenemos conexión con la base de
+            // datos y devolvemos falso            
+            return false;
+        }
     }
 }

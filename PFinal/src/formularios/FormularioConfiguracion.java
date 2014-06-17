@@ -16,8 +16,14 @@
  */
 package formularios;
 
+import datos.BaseDeDatos;
 import datos.Configuracion;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import utiles.Mensajes;
 import utiles.Validaciones;
 
@@ -154,7 +160,7 @@ public class FormularioConfiguracion extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnGuarda)))
                 .addContainerGap())
@@ -185,23 +191,34 @@ public class FormularioConfiguracion extends javax.swing.JInternalFrame {
         // Si la cadena de errores no tiene contenido, la validación es correcta
         if (errores.equals("")) {
             try {
-                // Creamos una instancia de configuración
-                Configuracion config = Configuracion.getConfiguracion();
+                // Comprobamos si podemos conectar a la base de datos
+                if (BaseDeDatos.comprobarAcceso(txtUsuario.getText(), new String(txtPassword.getPassword()), txtDirección.getText(), txtPuerto.getText(), txtNombre.getText())) {
 
-                // Asignamos sus valores a partir de los cuadros de texto
-                config.setDireccion(txtDirección.getText());
-                config.setNombre(txtNombre.getText());
-                config.setPuerto(txtPuerto.getText());
-                config.setUsuario(txtUsuario.getText());
-                config.setPassword(new String(txtPassword.getPassword()));
+                    // Creamos una instancia de configuración
+                    Configuracion config = Configuracion.getConfiguracion();
 
-                // Guardamos la configuración a fichero
-                config.guardarConfiguracion();
+                    // Asignamos sus valores a partir de los cuadros de texto
+                    config.setDireccion(txtDirección.getText());
+                    config.setNombre(txtNombre.getText());
+                    config.setPuerto(txtPuerto.getText());
+                    config.setUsuario(txtUsuario.getText());
+                    config.setPassword(new String(txtPassword.getPassword()));
 
-                // Si todo es correcto, mostramos un mensaje de ocnfiguración
-                Mensajes.mostrarMensaje("Configuración guardada correctamente", Mensajes.TipoMensaje.INFORMACION);
+                    // Si todo es correcto, guardamos la configuración a fichero
+                    config.guardarConfiguracion();
 
-            } catch (IOException ex) {
+                    // Y mostramos un mensaje de confirmación
+                    Mensajes.mostrarMensaje("Configuración guardada correctamente",
+                            Mensajes.TipoMensaje.INFORMACION);
+                } else {
+                    // Si no hay conexión con la base de datos, mostramos un mensaje
+                    Mensajes.mostrarMensaje("No hay conexión con la base de datos\n"
+                            + "Modifique los parámetros de configuración.",
+                            Mensajes.TipoMensaje.AVISO);
+
+                }
+
+            } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
                 // Si durante el proceso tenemos una excepción mostramos un mensaje de error
                 Mensajes.mostrarMensaje(ex.getMessage(), Mensajes.TipoMensaje.ERROR);
             }
@@ -265,7 +282,7 @@ public class FormularioConfiguracion extends javax.swing.JInternalFrame {
         // Verificamos si la contraseña está vacía
         if (!new String(txtPassword.getPassword()).equals("")) {
             // Si no lo está la validamos y si da error, concatenamos mensaje de error
-            if (Validaciones.validarDato(new String(txtPassword.getPassword()), Validaciones.TipoValidacion.CADENA_SOLO_LETRAS_NUMEROS)) {
+            if (!Validaciones.validarDato(new String(txtPassword.getPassword()), Validaciones.TipoValidacion.CADENA_SOLO_LETRAS_NUMEROS)) {
                 salida = salida.concat("Contraseña: Introduzca una contraseña válida");
             }
         }
